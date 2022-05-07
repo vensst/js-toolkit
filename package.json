@@ -1,0 +1,24 @@
+{
+  "name": "js-toolkit-fn",
+  "version": "1.0.8",
+  "description": "js常用工具类",
+  "keywords": [
+    "js工具类",
+    "js常用函数",
+    "js-toolkit-fn"
+  ],
+  "main": "./src/utils/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/huyafei/js-toolkit-fn.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/huyafei/js-toolkit-fn/issues"
+  },
+  "homepage": "https://github.com/huyafei/js-toolkit-fn#readme"
+}
