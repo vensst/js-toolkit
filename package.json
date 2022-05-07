@@ -1,11 +1,11 @@
 {
-  "name": "js-toolkit-fn",
-  "version": "1.0.8",
+  "name": "@vensst/js-toolkit",
+  "version": "1.0.0",
   "description": "js常用工具类",
   "keywords": [
     "js工具类",
     "js常用函数",
-    "js-toolkit-fn"
+    "js-toolkit"
   ],
   "main": "./src/utils/index.js",
   "scripts": {
@@ -13,12 +13,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/huyafei/js-toolkit-fn.git"
+    "url": "git+https://github.com/vensst/js-toolkit.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "vensst",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/huyafei/js-toolkit-fn/issues"
+    "url": "https://github.com/vensst/js-toolkit/issues"
   },
-  "homepage": "https://github.com/huyafei/js-toolkit-fn#readme"
+  "homepage": "https://github.com/vensst/js-toolkit#readme"
 }
