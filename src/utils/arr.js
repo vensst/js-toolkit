@@ -1,17 +1,18 @@
 /*
- * 查找
- * */
+  oArr：表示 Object[]类型数组 例如：[{name:"xxx"}]
+  arr： 表示普通数组 例如：[1,2]
+*/
 
 /**
- * 查找数组对象是否存在某元素 返回 -1或下标
- * @param arrObj {ArrayObject} 数组对象格式
- * @param attrName {String} 查找的元素属性名(key)
- * @param attrVal {Any} 查找的元素属性(key)值
- * @returns {number} -1或下标
+ * 查找对象数组是否存在某元素 返回 -1或下标，可使用 findIndex() 代替
+ * @param arr {Array<Object>}
+ * @param attrName {string} 查找的元素属性名
+ * @param attrVal {*} 查找的元素属性的值
+ * @returns {number} 1或下标
  */
-export const arrObjFindElem = function (arrObj, attrName, attrVal) {
-  for (let i = 0; i < arrObj.length; i++) {
-    if (arrObj[i][attrName] === attrVal) {
+export const oArrFindEle = function (arr, attrName, attrVal) {
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i][attrName] === attrVal) {
       return i;
     }
   }
@@ -19,104 +20,110 @@ export const arrObjFindElem = function (arrObj, attrName, attrVal) {
 };
 
 /**
- * 数组去重（IE可能不兼容）
- * @param arr {Array} 数组
- * @returns {any[]|*[]} 去重复后数组
+ * 对象数组去重
+ * @param arr {Array<Object>}
+ * @param attrName {string} 需要匹配去重的对象里属性名
+ * @returns {*}
  */
-export const arrRemoveRepet = function (arr) {
-  if ( Array.hasOwnProperty('from') ){
+export const oArrRemoveRepeat = function (arr, attrName) {
+  let hash = {};
+  return arr.reduce(function (item, next) {
+    hash[next[attrName]] ? '' : hash[next[attrName]] = true && item.push(next);
+    return item;
+  }, []);
+}
+
+/**
+ * 对象数组根据指定属性名称值返回逗号隔开字符串
+ * @param arr {Object[]}
+ * @param attrName {string}
+ * @param sym {string}  符号 默认 ','
+ * @returns {string}
+ */
+export const findEleTurnSymDelStrByOArr = function (arr, attrName,sym=',') {
+  let newArr = arr.map(item => item[attrName]);
+  return newArr.join(sym)
+}
+
+/**
+ * 数组去重
+ * @param arr {any[]} 数组
+ * @returns {any[]|*[]|*}
+ */
+export const arrRemoveRepeat = function (arr) {
+  if (Array.hasOwnProperty('from')) {
     return Array.from(new Set(arr));
-  }else {
+  } else {
     let r = [], NaNBol = true
-    for(let i=0; i < arr.length; i++) {
+    for (let i = 0; i < arr.length; i++) {
       if (arr[i] !== arr[i]) {
         if (NaNBol && r.indexOf(arr[i]) === -1) {
           r.push(arr[i])
           NaNBol = false
         }
-      }else{
-        if(r.indexOf(arr[i]) === -1) r.push(arr[i])
+      } else {
+        if (r.indexOf(arr[i]) === -1) r.push(arr[i])
       }
     }
     return r
   }
-
 };
 
-/*
- * @desc 数组对象去重
- * @param {ArrayObject} arrObj 数组对象
- * @param {String} name 需要去重的属性名
- * @return {ArrayObject} 去重复后数数组对象
- * */
-export const arrObjRemoveRepet=function (arrObj, name) {
-  let hash = {};
-  return arrObj.reduce(function (item, next) {
-    hash[next[name]] ? '' : hash[next[name]] = true && item.push(next);
-    return item;
-  }, []);
-};
-
-/*
- * @desc 合并数组，求两个数组(集合)的并集
- * @param {Array} a 数组
- * @param {Array} b 数组
- * @return {Array}
- * */
-export const arrUnion =function(a, b) {
-  var newArr = a.concat(b);
-  return this.arrRemoveRepet(newArr);
+/**
+ * 数组合并，求两个数组(集合)的并集
+ * @param a {any[]}
+ * @param b {any[]}
+ * @returns {*[]|*}
+ */
+export const arrMerge = function (a, b) {
+  let newArr = a.concat(b);
+  return this.arrRemoveRepeat(newArr);
 }
 
-/*
- * @desc 获取两个数组相同元素，求两个集合的交集
- * @param {Array} a 数组
- * @param {Array} b 数组
- * @return {Array}
- * */
-export const arrIntersect=function  (a, b) {
-  var _this = this;
-  a = this.arrRemoveRepet(a);
-  return this.map(a, function(o) {
-    return _this.contains(b, o) ? o : null;
+/**
+ * 判断一个元素是否在数组中
+ * @param arr {any[]}
+ * @param val {any}
+ * @returns {boolean}
+ */
+export const arrContains = function (arr, val) {
+  return arr.includes(val) != -1 ? true : false;
+}
+
+/**
+ * 获取两个数组相同元素，求两个数组(集合)的交集
+ * @param a {any[]}
+ * @param b {any[]}
+ * @returns {*}
+ */
+export const arrIntersect = function (a, b) {
+  let _this = this;
+  a = this.arrRemoveRepeat(a);
+  return this.map(a, function (o) {
+    return _this.arrContains(b, o) ? o : null;
   });
 }
 
-/*
- * @desc 删除数组其中一个元素
- * @param {Array} arr 数组
- * @param {Any} ele 元素名
- * @return {Array}
- * */
-export const arrRemoveEle =function(arr, ele) {
-  var index = arr.indexOf(ele);
-  if(index > -1) {
+/**
+ * 删除数组其中一个元素
+ * @param arr {Array<any>}
+ * @param ele {number}
+ * @returns {*}
+ */
+export const arrRemoveEle = function (arr, ele) {
+  let index = arr.indexOf(ele);
+  if (index > -1) {
     arr.splice(index, 1);
   }
   return arr;
 }
 
-/*
- * @desc 数组对象指定属性值返回逗号隔开字符串
- * @param {ArrayObject} arrObj 数组对象格式
- * @param {String} attrName 查找的元素属性名
- * @return {Sting} 字符串
- * */
-export function getArrObjAttrValStr (arrObj,attrName) {
-  let arr=[];
-  arrObj.map(o=>{
-    arr.push(o[attrName])
-  });
-  return arr.join(',')
-}
-
-/*
- * @desc 取最大值
- * @param {Array} arr 数组
- * @return any 最大值
- *
- * */
-export const getMax = function (arr) {
+/**
+ * 获取数组中最大值
+ * @param arr {number[]}
+ * @returns {number}
+ */
+export const arrMax = function (arr) {
   //1.
   // return Math.max(...arr)
   //2.
@@ -128,36 +135,33 @@ export const getMax = function (arr) {
   // }, 0)
 };
 
-/*
- * @desc 取最小值
- * @param {Array} arr 数组
- * @return any 最小值
- *
- * */
-export const getMin = function (arr) {
+/**
+ * 获取数组中取最小值
+ * @param arr {number[]}
+ * @returns {number}
+ */
+export const arrMin = function (arr) {
   return Math.min.apply(null, arr);
 }
 
-/*
- * @desc 求和
- * @param {Array} arr 数组
- * @return {Number} 总和
- *
- * */
-export const getSum = function (arr) {
-  arr.reduce(function (prev, cur) {
+/**
+ * 数组求和
+ * @param arr {number[]}
+ * @returns {number}
+ */
+export const arrSum = function (arr) {
+  return arr.reduce(function (prev, cur) {
     return prev + cur;
   }, 0)
 };
 
-/*
- * @desc 平均值
- * @param {Array} arr 数组
- * @return {Number} 总和
- *
- * */
-export const getAverage =function(arr) {
-  return this.getSum(arr)/arr.length
+/**
+ * 求数组中数值平均值
+ * @param arr {number[]}
+ * @returns {number}
+ */
+export const arrAverage = function (arr) {
+  return this.arrSum(arr) / arr.length
 }
 /*
  * @desc 数组/数组对象排序
@@ -182,23 +186,24 @@ export const getAverage =function(arr) {
  *   [1,2,3].some(item=>{return item>2})
  * */
 
-/*
- * @desc 数组检测数值出现次数
- * @param {Array} arr 数组
- * @param {Any} val 需要检测的数值
- * @return {Number} 次数
- * */
-export const countOccurrences = (arr, val) => arr.reduce((a, v) => (v === val ? a + 1 : a), 0);
+/**
+ * 数组检测数值出现次数
+ * @param arr {any[]}
+ * @param val {any}
+ * @returns {number}
+ */
+export const arrEleCount = (arr, val) => arr.reduce((a, v) => (v === val ? a + 1 : a), 0);
+
 /**
  * 树形数据过滤
  * @param data
  * @param keywords
  * @returns {*[]}
  */
-export const filterOfTreeData = function (data=[],keywords) {
+export const filterOfTreeData = function (data = [], keywords) {
   let arr = []
-  data.forEach((item)=>{
-    if(item["children"]&&item["children"].length){
+  data.forEach((item) => {
+    if (item["children"] && item["children"].length) {
       let children = filterOfTreeData(item["children"])
       let obj = {
         ...item,
@@ -206,11 +211,11 @@ export const filterOfTreeData = function (data=[],keywords) {
       }
       if (children && children.length) {
         arr.push(obj)
-      } else if(item.name.indexOf(keywords)>-1){
-        arr.push({ ...item })
+      } else if (item.name.indexOf(keywords) > -1) {
+        arr.push({...item})
       }
-    }else {
-      if(item.name.indexOf(keywords)>-1){
+    } else {
+      if (item.name.indexOf(keywords) > -1) {
         arr.push(item)
       }
     }
