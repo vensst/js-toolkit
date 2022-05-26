@@ -1,10 +1,10 @@
-/*
-*
-* @param  {setting}
-* */
+/**
+ * ajax 请求
+ * @param setting {Object}
+ */
 export const ajax = function (setting) {
   //设置参数的初始值
-  var opts = {
+  let opts = {
     method: (setting.method || "GET").toUpperCase(), //请求方式
     url: setting.url || "", // 请求地址
     async: setting.async || true, // 是否异步
@@ -18,15 +18,15 @@ export const ajax = function (setting) {
 
   // 参数格式化
   function params_format(obj) {
-    var str = ''
-    for (var i in obj) {
+    let str = ''
+    for (let i in obj) {
       str += i + '=' + obj[i] + '&'
     }
     return str.split('').slice(0, -1).join('')
   }
 
   // 创建ajax对象
-  var xhr = new XMLHttpRequest();
+  let xhr = new XMLHttpRequest();
 
   // 连接服务器open(方法GET/POST，请求地址， 异步传输)
   if (opts.method === 'GET') {
@@ -51,7 +51,7 @@ export const ajax = function (setting) {
     if (xhr.readyState === 4 && (xhr.status === 200 || xhr.status === 304)) {
       switch (opts.dataType) {
         case "json":
-          var json = JSON.parse(xhr.responseText);
+          let json = JSON.parse(xhr.responseText);
           opts.success(json);
           break;
         case "xml":
@@ -69,13 +69,12 @@ export const ajax = function (setting) {
   }
 }
 
-/*
-*
-* @param  {url}
-* @param  {setting}
-* @return {Promise}
-*
-* */
+/**
+ * fetch 请求
+ * @param url {string}
+ * @param setting {Object}
+ * @returns {Promise<unknown>}
+ */
 export const fetch = function (url, setting) {
   //设置参数的初始值
   let opts = {
@@ -92,8 +91,8 @@ export const fetch = function (url, setting) {
 
   // 参数格式化
   function params_format(obj) {
-    var str = ''
-    for (var i in obj) {
+    let str = ''
+    for (let i in obj) {
       str += `${i}=${obj[i]}&`
     }
     return str.split('').slice(0, -1).join('')
@@ -114,5 +113,4 @@ export const fetch = function (url, setting) {
       reject(e)
     })
   })
-
 }

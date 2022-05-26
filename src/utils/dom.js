@@ -1,5 +1,10 @@
+/**
+ *
+ * @param selector {string}
+ * @returns {HTMLElement|NodeListOf<*>|HTMLCollectionOf<Element>|*}
+ */
 export const $ = function (selector) {
-  var type = selector.substring(0, 1);
+  let type = selector.substring(0, 1);
   if (type === '#') {
     if (document.querySelecotor) return document.querySelector(selector)
     return document.getElementById(selector.substring(1))
@@ -12,49 +17,70 @@ export const $ = function (selector) {
   }
 }
 
-/*
-* @desc 检测类名 校验指定元素的类名
-* @param {String} ele
-* @param {String} name
-* @return {Boolean}
-* */
+/**
+ * 检测类名 校验指定元素的类名
+ * @param ele {Dom}
+ * @param name {string}
+ * @returns {RegExpMatchArray}
+ */
 export const hasClass = function (ele, name) {
   // return ele.classList.contains(name);
   return ele.className.match(new RegExp('(\\s|^)' + name + '(\\s|$)'));
 }
 
-/*添加类名*/
+/**
+ * 添加类名
+ * @param ele {Dom}
+ * @param name {string}
+ */
 export const addClass = function (ele, name) {
   if (!this.hasClass(ele, name)) ele.className += " " + name;
 }
 
-/*删除类名*/
+/**
+ * 删除类名
+ * @param ele {Dom}
+ * @param name {string}
+ */
 export const removeClass = function (ele, name) {
   if (this.hasClass(ele, name)) {
-    var reg = new RegExp('(\\s|^)' + name + '(\\s|$)');
+    let reg = new RegExp('(\\s|^)' + name + '(\\s|$)');
     ele.className = ele.className.replace(reg, '');
   }
 }
 
-/*替换类名*/
+/**
+ * 替换类名
+ * @param ele {Dom}
+ * @param newName {string}
+ * @param oldName {string}
+ */
 export const replaceClass = function (ele, newName, oldName) {
   this.removeClass(ele, oldName);
   this.addClass(ele, newName);
 }
 
-/*获取兄弟节点*/
+/**
+ * 获取兄弟节点
+ * @param ele {Dom}
+ * @returns {*[]}
+ */
 export const siblings = function (ele) {
-  console.log(ele.parentNode)
-  var chid = ele.parentNode.children, eleMatch = [];
-  for (var i = 0, len = chid.length; i < len; i++) {
-    if (chid[i] != ele) {
+  let chid = ele.parentNode.children, eleMatch = [];
+  for (let i = 0, len = chid.length; i < len; i++) {
+    if (chid[i] !== ele) {
       eleMatch.push(chid[i]);
     }
   }
   return eleMatch;
 }
 
-/*获取行间样式属性*/
+/**
+ * 获取行间样式属性
+ * @param obj {}
+ * @param name
+ * @returns {*}
+ */
 export const getByStyle = function (obj, name) {
   if (obj.currentStyle) {
     return obj.currentStyle[name];
@@ -63,16 +89,16 @@ export const getByStyle = function (obj, name) {
   }
 }
 
-/*
-* @desc 在指定元素之后插入新元素
-* @param {String} el 当前元素
-* @param {String} htmlString 插入元素
-* */
+/**
+ * 在指定元素之后插入新元素
+ * @param el {Dom}
+ * @param htmlString {string} 插入元素
+ */
 export const elInsertAfter = (el, htmlString) => el.insertAdjacentHTML('afterend', htmlString);
 
-/*
-* @desc 在指定元素之前插入新元素
-* @param {String} el 当前元素
-* @param {String} htmlString 插入元素
-* */
+/**
+ * 在指定元素之前插入新元素
+ * @param el {Dom} 当前元素
+ * @param htmlString {string} 插入元素
+ */
 const elInsertBefore = (el, htmlString) => el.insertAdjacentHTML('beforebegin', htmlString);

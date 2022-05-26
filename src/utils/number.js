@@ -1,26 +1,26 @@
 /**
- * @desc 根据区间，获取随机整数
- * @param {Number} min 最小值
- * @param {Number} max 最大值
- * @return {Number} random 随机数
- * */
-export const randomNum = function (min, max) {
+ * 根据区间，获取随机整数(包含最大值)
+ * @param min {number} min 最小值 default 0
+ * @param max {number} max 最大值 default 1
+ * @returns {number}
+ */
+export const randomNum = function (min = 0, max = 1) {
   let random = Math.floor(min + Math.random() * ((max + 1) - min));
   return random;
 }
 
 /**
- * @desc 将阿拉伯数字翻译成中文的大写数字
- * @param {Number} num
- * @return {Number}
- * */
+ * 将阿拉伯数字翻译成中文的大写数字
+ * @param num
+ * @returns {string}
+ */
 export const numberToChinese = function (num) {
-  var AA = new Array("零", "一", "二", "三", "四", "五", "六", "七", "八", "九", "十");
-  var BB = new Array("", "十", "百", "仟", "萬", "億", "点", "");
-  var a = ("" + num).replace(/(^0*)/g, "").split("."),
+  let AA = ["零", "一", "二", "三", "四", "五", "六", "七", "八", "九", "十"];
+  let BB = ["", "十", "百", "仟", "萬", "億", "点", ""];
+  let a = ("" + num).replace(/(^0*)/g, "").split("."),
     k = 0,
     re = "";
-  for (var i = a[0].length - 1; i >= 0; i--) {
+  for (let i = a[0].length - 1; i >= 0; i--) {
     switch (k) {
       case 0:
         re = BB[7] + re;
@@ -36,9 +36,9 @@ export const numberToChinese = function (num) {
         k = 0;
         break;
     }
-    if (k % 4 == 2 && a[0].charAt(i + 2) != 0 && a[0].charAt(i + 1) == 0)
+    if (k % 4 === 2 && a[0].charAt(i + 2) !== 0 && a[0].charAt(i + 1) === 0)
       re = AA[0] + re;
-    if (a[0].charAt(i) != 0)
+    if (a[0].charAt(i) !== 0)
       re = AA[a[0].charAt(i)] + BB[k % 4] + re;
     k++;
   }
@@ -57,35 +57,33 @@ export const numberToChinese = function (num) {
 }
 
 /**
- * @desc 将数字转换为大写金额
- * @param {Number} num
- * @return {Number}
- * */
+ * 将数字转换为大写金额
+ * @param Num
+ * @returns {string}
+ */
 export const changeToChinese = function (Num) {
   //判断如果传递进来的不是字符的话转换为字符
   if (typeof Num == "number") {
-    Num = new String(Num);
+    Num = String(Num);
   }
-  ;
+
   Num = Num.replace(/,/g, "") //替换tomoney()中的“,”
   Num = Num.replace(/ /g, "") //替换tomoney()中的空格
   Num = Num.replace(/￥/g, "") //替换掉可能出现的￥字符
   if (isNaN(Num)) { //验证输入的字符是否为数字
-    //alert("请检查小写金额是否正确");
     return "";
   }
-  ;
   //字符处理完毕后开始转换，采用前后两部分分别转换
-  var part = String(Num).split(".");
-  var newchar = "";
+  let part = String(Num).split(".");
+  let newchar = "";
   //小数点前进行转化
-  for (var i = part[0].length - 1; i >= 0; i--) {
+  for (let i = part[0].length - 1; i >= 0; i--) {
     if (part[0].length > 10) {
       return "";
       //若数量超过拾亿单位，提示
     }
-    var tmpnewchar = ""
-    var perchar = part[0].charAt(i);
+    let tmpnewchar = ""
+    let perchar = part[0].charAt(i);
     switch (perchar) {
       case "0":
         tmpnewchar = "零" + tmpnewchar;
@@ -123,25 +121,25 @@ export const changeToChinese = function (Num) {
         tmpnewchar = tmpnewchar + "元";
         break;
       case 1:
-        if (perchar != 0) tmpnewchar = tmpnewchar + "拾";
+        if (perchar !== 0) tmpnewchar = tmpnewchar + "拾";
         break;
       case 2:
-        if (perchar != 0) tmpnewchar = tmpnewchar + "佰";
+        if (perchar !== 0) tmpnewchar = tmpnewchar + "佰";
         break;
       case 3:
-        if (perchar != 0) tmpnewchar = tmpnewchar + "仟";
+        if (perchar !== 0) tmpnewchar = tmpnewchar + "仟";
         break;
       case 4:
         tmpnewchar = tmpnewchar + "万";
         break;
       case 5:
-        if (perchar != 0) tmpnewchar = tmpnewchar + "拾";
+        if (perchar !== 0) tmpnewchar = tmpnewchar + "拾";
         break;
       case 6:
-        if (perchar != 0) tmpnewchar = tmpnewchar + "佰";
+        if (perchar !== 0) tmpnewchar = tmpnewchar + "佰";
         break;
       case 7:
-        if (perchar != 0) tmpnewchar = tmpnewchar + "仟";
+        if (perchar !== 0) tmpnewchar = tmpnewchar + "仟";
         break;
       case 8:
         tmpnewchar = tmpnewchar + "亿";
@@ -150,17 +148,16 @@ export const changeToChinese = function (Num) {
         tmpnewchar = tmpnewchar + "拾";
         break;
     }
-    var newchar = tmpnewchar + newchar;
+    newchar = tmpnewchar + newchar;
   }
   //小数点之后进行转化
-  if (Num.indexOf(".") != -1) {
+  if (Num.indexOf(".") !== -1) {
     if (part[1].length > 2) {
-      // alert("小数点之后只能保留两位,系统将自动截断");
       part[1] = part[1].substr(0, 2)
     }
-    for (i = 0; i < part[1].length; i++) {
-      tmpnewchar = ""
-      perchar = part[1].charAt(i)
+    for (let i = 0; i < part[1].length; i++) {
+      let tmpnewchar = ""
+      let perchar = part[1].charAt(i)
       switch (perchar) {
         case "0":
           tmpnewchar = "零" + tmpnewchar;
@@ -193,8 +190,8 @@ export const changeToChinese = function (Num) {
           tmpnewchar = "玖" + tmpnewchar;
           break;
       }
-      if (i == 0) tmpnewchar = tmpnewchar + "角";
-      if (i == 1) tmpnewchar = tmpnewchar + "分";
+      if (i === 0) tmpnewchar = tmpnewchar + "角";
+      if (i === 1) tmpnewchar = tmpnewchar + "分";
       newchar = newchar + tmpnewchar;
     }
   }
@@ -219,8 +216,7 @@ export const changeToChinese = function (Num) {
  * @returns {*|string}
  */
 export function thousandSeparator(num) {
-  return num && (num
-    .toString().indexOf('.') != -1 ? num.toString().replace(/(\d)(?=(\d{3})+\.)/g, function ($1, $2) {
+  return num && (num.toString().indexOf('.') !== -1 ? num.toString().replace(/(\d)(?=(\d{3})+\.)/g, function ($1, $2) {
     return $2 + ",";
   }) : num.toString().replace(/(\d)(?=(\d{3})+\b)/g, function ($1, $2) {
     return $2 + ",";

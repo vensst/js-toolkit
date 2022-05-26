@@ -40,7 +40,7 @@ export const oArrRemoveRepeat = function (arr, attrName) {
  * @param sym {string}  符号 默认 ','
  * @returns {string}
  */
-export const findEleTurnSymDelStrByOArr = function (arr, attrName,sym=',') {
+export const findEleTurnSymDelStrByOArr = function (arr, attrName, sym = ',') {
   let newArr = arr.map(item => item[attrName]);
   return newArr.join(sym)
 }
