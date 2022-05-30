@@ -1,7 +1,7 @@
 const {merge} = require('webpack-merge');
 const webpack = require("webpack");
 const webpackBase = require('./webpack.base.conf.js');
-
+import HtmlWebpackPlugin from "html-webpack-plugin"
 module.exports = merge(webpackBase,{
   mode:"development",
   //https://webpack.docschina.org/configuration/devtool/#devtool
@@ -34,6 +34,9 @@ module.exports = merge(webpackBase,{
     // static: ['../dist'],
   },
   plugins:[
+    // new HtmlWebpackPlugin({
+    //
+    // }),
     //热更新
     new webpack.HotModuleReplacementPlugin(),
   ]

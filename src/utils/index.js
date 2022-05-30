@@ -7,3 +7,5 @@ export * from "./dom.js";
 export * from "./http.js";
 export * from "./file.js";
 export * from "./other.js";
+export * from "./storage.js"
+// export * as dayjs from 'dayjs'

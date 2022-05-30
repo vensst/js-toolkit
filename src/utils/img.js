@@ -23,3 +23,17 @@ export const scaleImg = function (imgWidth, imgHeight, containerWidth, container
   let  scale = imgWidth/imgHeight
   return { width: imgWidth, height: imgHeight,scale };
 }
+/*图片加载*/
+export const imgLoadAll = function (arr, callback) {
+  var arrImg = [];
+  for (var i = 0; i < arr.length; i++) {
+    var img = new Image();
+    img.src = arr[i];
+    img.onload = function () {
+      arrImg.push(this);
+      if (arrImg.length == arr.length) {
+        callback && callback();
+      }
+    }
+  }
+}

@@ -76,19 +76,19 @@ const blobTypeList = [
 
 /**
  * 根据文件名称（有文件类型） 查询对应blob type
- * @param name 名称
+ * @param name {string}名称
  * @returns {string|*|null} blob type
  */
-export const getBlobType=function (name){
-  let typeArr= blobTypeList.filter(item=>name.includes(item.name))
-  return typeArr.length?typeArr[0].type:null
+export const getBlobType = function (name) {
+  let typeArr = blobTypeList.filter(item => name.includes(item.name))
+  return typeArr.length ? typeArr[0].type : null
 }
 /**
  * 下载文件
- * @param name 文件名称（带类型）
+ * @param name {string} 文件名称（带类型）
  * @param blobFile ｛Blob｝ blob格式
  */
-export const downloadFile=function (name,blobFile){
+export const downloadFile = function (name, blobFile) {
   const link = document.createElement("a");
   let blob = new Blob([blobFile], {
     type: getBlobType(name),
