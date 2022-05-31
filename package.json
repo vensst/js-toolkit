@@ -37,6 +37,7 @@
     "webpack-dev-server": "^4.9.0"
   },
   "dependencies": {
-    "dayjs": "^1.11.2"
+    "dayjs": "^1.11.2",
+    "js-cookie": "^3.0.1"
   }
 }
