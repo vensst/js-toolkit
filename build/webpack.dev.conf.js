@@ -20,7 +20,7 @@ module.exports = merge(webpackBase,{
       //在浏览器显示编译错误信息
       overlay: true,
     },
-    compress: true,//giz压缩
+    // compress: true,//giz压缩
     //代理
     // proxy: {
     //   '/api': {

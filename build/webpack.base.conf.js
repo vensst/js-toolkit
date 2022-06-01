@@ -8,16 +8,18 @@ module.exports = {
     // publicPath: '/',
     filename: 'index.js',
     path: resolve(__dirname, '../lib'),
-    // 向外暴露的对象名称，用于通过对象调用的方式调用封装的函数
-    library: '_jtk',
-    // 可以让打包生成的库可以通过 esmodule/commonjs/requirejs 的语法引入 https://www.webpackjs.com/guides/author-libraries/
-    libraryTarget: 'umd',
+    // 向外暴露的对象名称，用于通过对象调用的方式调用封装的函数,说明：https://webpack.docschina.org/configuration/output/#outputlibrary
+    library: {
+      name: '_jtk',
+      type: 'umd',
+    },
     clean: true,// 每次打包先清除 lib 文件
     //assetModuleFilename: "img/[name].[hash:8].[ext]",
   },
-  optimization: {
-    usedExports: true,
-  },
+  // 优化
+  // optimization: {
+  //   usedExports: true,
+  // },
   //配置模块解析
   resolve: {
     // 别名

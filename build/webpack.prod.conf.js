@@ -2,7 +2,7 @@ const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const {merge} = require('webpack-merge');
 const webpackBase = require('./webpack.base.conf.js');
 //js压缩
-// const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = merge(webpackBase, {
   mode:"production",
@@ -20,7 +20,7 @@ module.exports = merge(webpackBase, {
   ],
   optimization: {
     minimizer: [
-      // new UglifyJSPlugin(),
+      new UglifyJSPlugin(),
     ],
   },
 });
