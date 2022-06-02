@@ -34,9 +34,7 @@ module.exports = merge(webpackBase,{
     // static: ['../dist'],
   },
   plugins:[
-    // new HtmlWebpackPlugin({
-    //
-    // }),
+
     //热更新
     new webpack.HotModuleReplacementPlugin(),
   ]

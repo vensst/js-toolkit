@@ -1,11 +1,12 @@
-const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const {merge} = require('webpack-merge');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin')
+//js压缩 webpack5自带
+const TerserWebpackPlugin = require('terser-webpack-plugin');
+
 const webpackBase = require('./webpack.base.conf.js');
-//js压缩
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = merge(webpackBase, {
-  mode:"production",
+  mode: "production",
   // devtool: 'source-map',
   // devtool: 'none',
   // 模块
@@ -19,8 +20,11 @@ module.exports = merge(webpackBase, {
     new CleanWebpackPlugin(),
   ],
   optimization: {
+    // minimize: true,
     minimizer: [
-      new UglifyJSPlugin(),
+      new TerserWebpackPlugin({
+        extractComments: false
+      }),
     ],
   },
 });
