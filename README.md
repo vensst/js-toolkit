@@ -7,12 +7,12 @@ npm install js-toolkit --save
 ```
 #### 引用
 ```
-import * as jtf "js-toolkit"
+import * as jstk "js-toolkit"
 
 ```
 ### 使用
 ```js
-jtf.randomNum(1,100)
+jstk.randomNum(1,100)
 
 ```
 ### 命名注释说明

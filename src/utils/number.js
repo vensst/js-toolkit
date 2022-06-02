@@ -196,7 +196,7 @@ export const changeToChinese = function (Num) {
     }
   }
   //替换所有无用汉字
-  while (newchar.search("零零") != -1)
+  while (newchar.search("零零") !== -1)
     newchar = newchar.replace("零零", "零");
   newchar = newchar.replace("零亿", "亿");
   newchar = newchar.replace("亿万", "亿");
@@ -204,7 +204,7 @@ export const changeToChinese = function (Num) {
   newchar = newchar.replace("零元", "元");
   newchar = newchar.replace("零角", "");
   newchar = newchar.replace("零分", "");
-  if (newchar.charAt(newchar.length - 1) == "元") {
+  if (newchar.charAt(newchar.length - 1) === "元") {
     newchar = newchar + "整"
   }
   return newchar;
