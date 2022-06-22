@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<link rel="stylesheet" href="./index.css">
+	<script src="../lib/index.js"></script>
+	<style>
+    #app-main {
+      height: 100%;
+      width: 100%;
+    }
+
+    .top {
+      height: 50px;
+      width: 100%;
+      background-color: #f00;
+    }
+
+    .left {
+      background-color: #1e6acb;
+      position: absolute;
+      left: 0;
+      top: 50px;
+      width: 200px;
+      height: calc(100% - 50px);
+    }
+
+    .right {
+      background-color: #f0bd14;
+      position: absolute;
+      left: 200px;
+      top: 50px;
+      width: calc(100% - 200px);
+      height: calc(100% - 50px);
+    }
+	</style>
+</head>
+<body style="position: relative">
+<div id="app-main" style="position:absolute;left:0;top:0;right:0;bottom:0;width: 1920px;height:1080px;">
+	<div class="top">
+		头部
+	</div>
+	<div class="left">
+		左侧
+	</div>
+	<div class="right">
+		右侧
+	</div>
+</div>
+<script>
+	let initResize = function () {
+    let opt = {
+      id: '#app-main',
+      width: 1920,
+      height: 1080,
+      mode: "aspectFit"
+    }
+    jstk.resizeViewScale(opt)
+    window.onresize = function () {
+      jstk.resizeViewScale(opt)
+    }
+
+	}
+  initResize()
+</script>
+</body>
+</html>

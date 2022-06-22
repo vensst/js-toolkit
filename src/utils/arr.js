@@ -2,13 +2,12 @@
   oArr：表示 Object[]类型数组 例如：[{name:"xxx"}]
   arr： 表示普通数组 例如：[1,2]
 */
-
 /**
  * 查找对象数组是否存在某元素 返回 -1或下标，可使用 findIndex() 代替
  * @param arr {Array<Object>}
  * @param attrName {string} 查找的元素属性名
  * @param attrVal {*} 查找的元素属性的值
- * @returns {number} 1或下标
+ * @returns {number} 下标或-1
  */
 export const oArrFindEle = function (arr, attrName, attrVal) {
   for (let i = 0; i < arr.length; i++) {
@@ -46,8 +45,8 @@ export const findEleTurnSymDelStrByOArr = function (arr, attrName, sym = ',') {
 }
 
 /**
- * 数组去重
- * @param arr {any[]} 数组
+ * 普通数组去重
+ * @param arr {Array<string|number>} 数组
  * @returns {any[]|*[]|*}
  */
 export const arrRemoveRepeat = function (arr) {
@@ -70,6 +69,85 @@ export const arrRemoveRepeat = function (arr) {
 };
 
 /**
+ * 判断一个元素是否在数组中
+ * @param arr {any[]}
+ * @param val {any}
+ * @returns {boolean}
+ */
+export const arrContains = function (arr, val) {
+  return arr.includes(val);
+}
+
+/**
+ * 自定义 each 函数
+ * @param  {any[]}
+ * @param  {Function} 回调函数
+ * @return {undefined}
+ */
+export const each = function (arr, fn) {
+  fn = fn || Function;
+  let a = [];
+  let args = Array.prototype.slice.call(arguments, 1);
+  for (let i = 0; i < arr.length; i++) {
+    let res = fn.apply(arr, [arr[i], i].concat(args));
+    if (res != null) a.push(res);
+  }
+}
+
+/**
+ * 自定义 map
+ * @param arr {any[]}
+ * @param fn {Function} 回调函数
+ * @param thisObj
+ * @returns {*[]}
+ */
+export const map = function (arr, fn, thisObj) {
+  let scope = thisObj || window;
+  let a = [];
+  for (let i = 0, j = arr.length; i < j; ++i) {
+    let res = fn.call(scope, arr[i], i, this);
+    if (res != null) a.push(res);
+  }
+  return a;
+}
+
+/**
+ * 排序
+ * @param arr {number[]} 数组
+ * @param type {number} 排序类型 1：从小到大 2：从大到小 3：随机
+ * @returns {*}
+ */
+export const sort = function (arr, type = 1) {
+  return arr.sort((a, b) => {
+    switch (type) {
+      case 1:
+        return a - b;
+      case 2:
+        return b - a;
+      case 3:
+        return Math.random() - 0.5;
+      default:
+        return arr;
+    }
+  })
+}
+
+/**
+ * 将类数组转换为数组的方法
+ * @param arr {any[]}
+ * @returns {*}
+ */
+export const formArray = function (arr) {
+  let _arr = [];
+  if (Array.isArray(arr)) {
+    _arr = arr;
+  } else {
+    _arr = Array.prototype.slice.call(arr);
+  }
+  return _arr;
+}
+
+/**
  * 数组合并，求两个数组(集合)的并集
  * @param a {any[]}
  * @param b {any[]}
@@ -78,16 +156,6 @@ export const arrRemoveRepeat = function (arr) {
 export const arrMerge = function (a, b) {
   let newArr = a.concat(b);
   return this.arrRemoveRepeat(newArr);
-}
-
-/**
- * 判断一个元素是否在数组中
- * @param arr {any[]}
- * @param val {any}
- * @returns {boolean}
- */
-export const arrContains = function (arr, val) {
-  return arr.includes(val) != -1 ? true : false;
 }
 
 /**
@@ -107,8 +175,8 @@ export const arrIntersect = function (a, b) {
 /**
  * 删除数组其中一个元素
  * @param arr {Array<any>}
- * @param ele {number}
- * @returns {*}
+ * @param ele {any}
+ * @returns {Array<any>}
  */
 export const arrRemoveEle = function (arr, ele) {
   let index = arr.indexOf(ele);
@@ -118,51 +186,6 @@ export const arrRemoveEle = function (arr, ele) {
   return arr;
 }
 
-/**
- * 获取数组中最大值
- * @param arr {number[]}
- * @returns {number}
- */
-export const arrMax = function (arr) {
-  //1.
-  // return Math.max(...arr)
-  //2.
-  // return Math.max.apply(this,arr)
-  return Math.max.apply(null, arr);
-  //3.prev:上一次的返回值 cur:当前值 curIndex:当前值索引 arr:当前数组
-  // return arr.reduce((prev, cur, curIndex, arr) => {
-  //   return Math.max(prev, cur);
-  // }, 0)
-};
-
-/**
- * 获取数组中取最小值
- * @param arr {number[]}
- * @returns {number}
- */
-export const arrMin = function (arr) {
-  return Math.min.apply(null, arr);
-}
-
-/**
- * 数组求和
- * @param arr {number[]}
- * @returns {number}
- */
-export const arrSum = function (arr) {
-  return arr.reduce(function (prev, cur) {
-    return prev + cur;
-  }, 0)
-};
-
-/**
- * 求数组中数值平均值
- * @param arr {number[]}
- * @returns {number}
- */
-export const arrAverage = function (arr) {
-  return this.arrSum(arr) / arr.length
-}
 /*
  * @desc 数组/数组对象排序
  *
@@ -203,13 +226,13 @@ export const arrEleCount = (arr, val) => arr.reduce((a, v) => (v === val ? a + 1
 export const filterOfTreeData = function (data = [], keywords) {
   let arr = []
   data.forEach((item) => {
-    if (item["children"] && item["children"].length) {
+    if (item["children"]?.length) {
       let children = filterOfTreeData(item["children"])
       let obj = {
         ...item,
         children
       }
-      if (children && children.length) {
+      if (children?.length) {
         arr.push(obj)
       } else if (item.name.indexOf(keywords) > -1) {
         arr.push({...item})

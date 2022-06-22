@@ -1,6 +1,6 @@
 /**
- *
- * @param selector {string}
+ * 查找dom元素
+ * @param selector {string} 选择器
  * @returns {HTMLElement|NodeListOf<*>|HTMLCollectionOf<Element>|*}
  */
 export const $ = function (selector) {
@@ -18,9 +18,9 @@ export const $ = function (selector) {
 }
 
 /**
- * 检测类名 校验指定元素的类名
- * @param ele {Dom}
- * @param name {string}
+ * 检测类名，校验指定元素的类名是否包含指定的类名
+ * @param ele {Dom} 元素
+ * @param name {string} 类名
  * @returns {RegExpMatchArray}
  */
 export const hasClass = function (ele, name) {
@@ -30,8 +30,8 @@ export const hasClass = function (ele, name) {
 
 /**
  * 添加类名
- * @param ele {Dom}
- * @param name {string}
+ * @param ele {Dom} 元素
+ * @param name {string} 类名
  */
 export const addClass = function (ele, name) {
   if (!this.hasClass(ele, name)) ele.className += " " + name;
@@ -39,8 +39,8 @@ export const addClass = function (ele, name) {
 
 /**
  * 删除类名
- * @param ele {Dom}
- * @param name {string}
+ * @param ele {Dom} 元素
+ * @param name {string} 类名
  */
 export const removeClass = function (ele, name) {
   if (this.hasClass(ele, name)) {
@@ -51,9 +51,9 @@ export const removeClass = function (ele, name) {
 
 /**
  * 替换类名
- * @param ele {Dom}
- * @param newName {string}
- * @param oldName {string}
+ * @param ele {Dom} 元素
+ * @param newName {string} 新类名
+ * @param oldName {string} 旧类名
  */
 export const replaceClass = function (ele, newName, oldName) {
   this.removeClass(ele, oldName);
@@ -62,8 +62,8 @@ export const replaceClass = function (ele, newName, oldName) {
 
 /**
  * 获取兄弟节点
- * @param ele {Dom}
- * @returns {*[]}
+ * @param ele {Dom} 元素
+ * @returns {*[]}  兄弟节点数组
  */
 export const siblings = function (ele) {
   let chid = ele.parentNode.children, eleMatch = [];
@@ -77,21 +77,21 @@ export const siblings = function (ele) {
 
 /**
  * 获取行间样式属性
- * @param obj {}
- * @param name
- * @returns {*}
+ * @param ele {Dom} 元素
+ * @param name {string} 属性名
+ * @returns {*} 属性值
  */
-export const getByStyle = function (obj, name) {
-  if (obj.currentStyle) {
-    return obj.currentStyle[name];
+export const getByStyle = function (ele, name) {
+  if (ele.currentStyle) {
+    return ele.currentStyle[name];
   } else {
-    return getComputedStyle(obj, false)[name];
+    return getComputedStyle(ele, false)[name];
   }
 }
 
 /**
  * 在指定元素之后插入新元素
- * @param el {Dom}
+ * @param el {Dom} 元素
  * @param htmlString {string} 插入元素
  */
 export const elInsertAfter = (el, htmlString) => el.insertAdjacentHTML('afterend', htmlString);
@@ -101,4 +101,4 @@ export const elInsertAfter = (el, htmlString) => el.insertAdjacentHTML('afterend
  * @param el {Dom} 当前元素
  * @param htmlString {string} 插入元素
  */
-const elInsertBefore = (el, htmlString) => el.insertAdjacentHTML('beforebegin', htmlString);
+export const elInsertBefore = (el, htmlString) => el.insertAdjacentHTML('beforebegin', htmlString);

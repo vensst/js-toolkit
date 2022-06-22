@@ -1,0 +1,180 @@
+/*通用属性*/
+html, body {
+  width: 100%;
+  height: 100%;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  /*font: 14px "microsoft yahei", Arial, Helvetica, sans-serif;*/
+  font-size: 14px;
+  font-family: "Microsoft YaHei", "simhei", "Tahoma", "Arial", "sans-serif";
+  background-color: #FFFFFF;
+  -webkit-text-size-adjust: 100%;
+}
+
+body, h1, h2, h3, h4, h5, h6, p, ul, li, ol, dl, dt, dd, th, td, img, textarea, input, select, button, pre, form, blockquote, fieldset {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+address, cite, code, em, th {
+  font-weight: normal;
+  font-style: normal;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:link {
+
+}
+
+a:visited {
+
+}
+
+a:hover, a:active, a:focus {
+  /*text-decoration: none;*/
+  /*文本下的一条线*/
+  text-decoration: underline;
+  /*穿过文本下的一条线*/
+  /*text-decoration:line-through;*/
+}
+
+a, input, button {
+  outline: none;
+}
+
+p {
+  /*换行*/
+  /*word-break: break-all;*/
+  /*不换行*/
+  /*word-break: normal;*/
+}
+
+img {
+  border: 0;
+  /*border: none;*/
+  vertical-align: middle
+}
+
+input, select {
+  vertical-align: middle;
+}
+
+ul, li, ol {
+  list-style: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+sup {
+  vertical-align: text-top;
+}
+
+sub {
+  vertical-align: text-bottom;
+}
+
+article, aside, details, figcaption, figure, footer, header, menu, nav, section {
+  display: block;
+}
+
+/*自定义通用class类*/
+.lf {
+  float: left;
+}
+
+.rt {
+  float: right;
+}
+
+/*  清除浮动方法一*/
+/*.clear{*/
+/*  clear: both;*/
+/*}*/
+/*  清除浮动方法二*/
+.clear:after {
+  content: ' ';
+  display: table;
+  clear: both;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.flex-r {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-c {
+  display: flex;
+  flex-direction: column;
+}
+
+.multi-omit {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.single-omit {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap
+}
+
+.text-align-center {
+  text-align: center;
+}
+
+.text-align-right {
+  text-align: right;
+}
+
+.text-align-left {
+  text-align: left;
+}
+
+.box-sizing {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+/*溢出滚动-兼容ios*/
+.overflow-y-scroll {
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+
+.overflow-x-scroll {
+  overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+
+/*溢出隐藏*/
+.overflow-y-hidden {
+  overflow-y: hidden;
+}
+
+.overflow-x-hidden {
+  overflow-x: hidden;
+}

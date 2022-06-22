@@ -1,9 +1,9 @@
 /**
  * 获取图片缩放比例和缩放后宽高
- * @param imgWidth 图片宽度
- * @param imgHeight 图片高度
- * @param containerWidth 容器宽度
- * @param containerHeight 容器高度
+ * @param imgWidth {number} 图片宽度
+ * @param imgHeight {number} 图片高度
+ * @param containerWidth {number} 容器宽度
+ * @param containerHeight {number} 容器高度
  * @returns {{width: number, scale: number, height: number}} 缩放后图片宽、高、缩放比例
  */
 export const scaleImg = function (imgWidth, imgHeight, containerWidth, containerHeight) {

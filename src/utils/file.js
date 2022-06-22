@@ -84,9 +84,10 @@ export const getBlobType = function (name) {
   return typeArr.length ? typeArr[0].type : null
 }
 /**
- * 下载文件
+ * 根据文件名称（带类型名称）和二进制数据流下载文件
  * @param name {string} 文件名称（带类型）
- * @param blobFile ｛Blob｝ blob格式
+ * @param blobFile ｛sring｝ blob格式
+ * @returns {boolean} 是否下载成功
  */
 export const downloadFile = function (name, blobFile) {
   const link = document.createElement("a");
@@ -98,4 +99,5 @@ export const downloadFile = function (name, blobFile) {
   link.download = `${name}`;
   link.click(); // 下载文件
   URL.revokeObjectURL(objectUrl);
+  return true;
 }

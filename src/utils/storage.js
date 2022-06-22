@@ -119,7 +119,7 @@ class VenStorage {
 // localStorage -----------------
 /**
  * 获取 localStorage
- * @param key
+ * @param key {string} 键
  * @returns {any}
  */
 export const getLocal = function (key) {
@@ -128,6 +128,8 @@ export const getLocal = function (key) {
 
 /**
  * 设置 localStorage
+ * @param key {string} 键
+ * @param val {any} 值
  */
 export const setLocal = function (key, val) {
   return new VenStorage().setLocal(key, val)
@@ -135,7 +137,7 @@ export const setLocal = function (key, val) {
 
 /**
  * 清除某个 localStorage
- * @param key
+ * @param key {string} 键
  */
 export const removeLocal = function (key) {
   return new VenStorage().removeLocal(key)
@@ -151,8 +153,8 @@ export const clearLocal = function () {
 // sessionStorage -------------
 /**
  * 获取 sessionStorage
- * @param key
- * @returns {any}
+ * @param key {string} 键
+ * @returns {any} 值
  */
 export const getSession = function (key) {
   return new VenStorage().getSession(key)
@@ -160,6 +162,8 @@ export const getSession = function (key) {
 
 /**
  * 设置 sessionStorage
+ * @param key {string} 键
+ * @param val {any} 值
  */
 export const setSession = function (key, val) {
   return new VenStorage().setSession(key, val)
@@ -167,7 +171,7 @@ export const setSession = function (key, val) {
 
 /**
  * 清除某个 sessionStorage
- * @param key
+ * @param key {string} 键
  */
 export const removeSession = function (key) {
   return new VenStorage().removeSession(key)
@@ -181,12 +185,13 @@ export const clearSession = function () {
 }
 
 /**
- *
- * @param name
- * @param value
- * @param expires
- * @param domain
- * @param path
+ * 设置 cookie
+ * @param name {string} 键
+ * @param value {any} 值
+ * @param options {Object} 配置
+ *  @param expires {number} 过期时间，单位：秒
+ *  @param domain {string} 域名
+ *  @param path {string} 路径
  */
 export const setCookie = function (name, value, options = {}) {
   return new VenStorage().setCookie(name, value, options)
@@ -194,16 +199,16 @@ export const setCookie = function (name, value, options = {}) {
 
 /**
  * 获取 cookie
- * @param name
- * @returns {string|string}
+ * @param name {string} 键
+ * @returns {string|string} 值
  */
 export const getCookie = function (name) {
   return new VenStorage().getCookie(name)
 }
 
 /**
- * 删除 cookie
- * @param name
+ * 删除某个 cookie
+ * @param name {string} 键
  */
 export const removeCookie = function (name) {
   return new VenStorage().removeCookie(name)

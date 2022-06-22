@@ -1,7 +1,9 @@
+
+
 /**
- * 根据区间，获取随机整数(包含最大值)
- * @param min {number} min 最小值 default 0
- * @param max {number} max 最大值 default 1
+ * 根据区间，获取随机整数(包含最大值、最大值)
+ * @param min {number} 最小值 默认：0
+ * @param max {number} 最大值 默认：1
  * @returns {number}
  */
 export const randomNum = function (min = 0, max = 1) {
@@ -10,11 +12,14 @@ export const randomNum = function (min = 0, max = 1) {
 }
 
 /**
- * 将阿拉伯数字翻译成中文的大写数字
- * @param num
+ * 将阿拉伯数字翻译成中文大写数字
+ * @param num {number|string} 数字
  * @returns {string}
  */
 export const numberToChinese = function (num) {
+  if (!/^\d*(\.\d*)?$/.test(num)) {
+   return "期望是一个 number/string 类型的阿拉伯数字"
+  }
   let AA = ["零", "一", "二", "三", "四", "五", "六", "七", "八", "九", "十"];
   let BB = ["", "十", "百", "仟", "萬", "億", "点", ""];
   let a = ("" + num).replace(/(^0*)/g, "").split("."),
@@ -46,10 +51,10 @@ export const numberToChinese = function (num) {
   if (a.length > 1) // 加上小数部分(如果有小数部分)
   {
     re += BB[6];
-    for (var i = 0; i < a[1].length; i++)
+    for (let i = 0; i < a[1].length; i++)
       re += AA[a[1].charAt(i)];
   }
-  if (re == '一十')
+  if (re === '一十')
     re = "十";
   if (re.match(/^一/) && re.length == 3)
     re = re.replace("一", "");
@@ -57,24 +62,24 @@ export const numberToChinese = function (num) {
 }
 
 /**
- * 将数字转换为大写金额
- * @param Num
+ * 将阿拉伯数字数字金额转为中文大写金额
+ * @param num {number|string} 数字金额
  * @returns {string}
  */
-export const changeToChinese = function (Num) {
+export const numberCurrencyToChinese = function (num) {
   //判断如果传递进来的不是字符的话转换为字符
-  if (typeof Num == "number") {
-    Num = String(Num);
+  if (typeof num == "number") {
+    num = String(num);
   }
 
-  Num = Num.replace(/,/g, "") //替换tomoney()中的“,”
-  Num = Num.replace(/ /g, "") //替换tomoney()中的空格
-  Num = Num.replace(/￥/g, "") //替换掉可能出现的￥字符
-  if (isNaN(Num)) { //验证输入的字符是否为数字
+  num = num.replace(/,/g, "") //替换tomoney()中的“,”
+  num = num.replace(/ /g, "") //替换tomoney()中的空格
+  num = num.replace(/¥/g, "") //替换掉可能出现的¥字符
+  if (isNaN(num)) { //验证输入的字符是否为数字
     return "";
   }
   //字符处理完毕后开始转换，采用前后两部分分别转换
-  let part = String(Num).split(".");
+  let part = String(num).split(".");
   let newchar = "";
   //小数点前进行转化
   for (let i = part[0].length - 1; i >= 0; i--) {
@@ -151,7 +156,7 @@ export const changeToChinese = function (Num) {
     newchar = tmpnewchar + newchar;
   }
   //小数点之后进行转化
-  if (Num.indexOf(".") !== -1) {
+  if (num.indexOf(".") !== -1) {
     if (part[1].length > 2) {
       part[1] = part[1].substr(0, 2)
     }
@@ -211,8 +216,8 @@ export const changeToChinese = function (Num) {
 }
 
 /**
- * @desc 数字千分位分割
- * @param num
+ * @desc 将数字千分位分割
+ * @param num {number|string} 数字
  * @returns {*|string}
  */
 export function thousandSeparator(num) {
@@ -222,3 +227,4 @@ export function thousandSeparator(num) {
     return $2 + ",";
   }));
 }
+

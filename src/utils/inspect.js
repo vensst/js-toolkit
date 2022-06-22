@@ -1,6 +1,16 @@
 /**
+ * 类型判断
+ * @param type {string} 类型 String,Number,Boolean,Object,Array,Function,Date,RegExp,Error,Symbol
+ * @param val {any} 值
+ * @return {boolean} 是否符合类型
+ */
+export const isType = function (type, val) {
+  return Object.prototype.toString.call(val) === `[object ${type}]`
+}
+
+/**
  * 判断是否字符串
- * @param o {any}
+ * @param o {any} 任意类型
  * @returns {boolean}
  */
 export const isString = function (o) {
@@ -9,7 +19,7 @@ export const isString = function (o) {
 
 /**
  * 判断是否数字
- * @param o {any}
+ * @param o {any} 任意类型
  * @returns {boolean}
  */
 export const isNumber = function (o) {
@@ -18,7 +28,7 @@ export const isNumber = function (o) {
 
 /**
  * 判断是否 boolean
- * @param o {any}
+ * @param o {any} 任意类型
  * @returns {boolean}
  */
 export const isBoolean = function (o) {
@@ -26,8 +36,8 @@ export const isBoolean = function (o) {
 }
 
 /**
- * 判断是否函数 {any}
- * @param o
+ * 判断是否函数
+ * @param o {any} 任意类型
  * @returns {boolean}
  */
 export const isFunction = function (o) {
@@ -36,7 +46,7 @@ export const isFunction = function (o) {
 
 /**
  * 判断是否为 null
- * @param o {any}
+ * @param o {any} 任意类型
  * @returns {boolean}
  */
 export const isNull = function (o) {
@@ -45,7 +55,7 @@ export const isNull = function (o) {
 
 /**
  * 判断是否 undefined
- * @param o {any}
+ * @param o {any} 任意类型
  * @returns {boolean}
  */
 export const isUndefined = function (o) {
@@ -54,7 +64,7 @@ export const isUndefined = function (o) {
 
 /**
  * 判断是否对象
- * @param o {any}
+ * @param o {any} 任意类型
  * @returns {boolean}
  */
 export const isObject = function (o) {
@@ -63,7 +73,7 @@ export const isObject = function (o) {
 
 /**
  * 判断是否数组
- * @param o {any}
+ * @param o {any} 任意类型
  * @returns {boolean}
  */
 export const isArray = function (o) {
@@ -72,7 +82,7 @@ export const isArray = function (o) {
 
 /**
  * 判断是否时间
- * @param o {any}
+ * @param o {any} 任意类型
  * @returns {boolean}
  */
 export const isDate = function (o) {
@@ -81,7 +91,7 @@ export const isDate = function (o) {
 
 /**
  * 判断是否正则
- * @param o {any}
+ * @param o {any} 任意类型
  * @returns {boolean}
  */
 export const isRegExp = function (o) {
@@ -90,7 +100,7 @@ export const isRegExp = function (o) {
 
 /**
  * 判断是否错误对象
- * @param o {any}
+ * @param o {any} 任意类型
  * @returns {boolean}
  */
 export const isError = function (o) {
@@ -99,7 +109,7 @@ export const isError = function (o) {
 
 /**
  * 判断是否 Symbol 函数
- * @param o {any}
+ * @param o {any} 任意类型
  * @returns {boolean}
  */
 export const isSymbol = function (o) {
@@ -108,7 +118,7 @@ export const isSymbol = function (o) {
 
 /**
  * 判断是否 Promise 对象
- * @param o {any}
+ * @param o {any} 任意类型
  * @returns {boolean}
  */
 export const isPromise = function (o) {
@@ -117,7 +127,7 @@ export const isPromise = function (o) {
 
 /**
  * 判断是否 Set 对象
- * @param o {any}
+ * @param o {any} 任意类型
  * @returns {boolean}
  */
 export const isSet = function (o) {
@@ -126,7 +136,7 @@ export const isSet = function (o) {
 
 /**
  * 判断是否为 false
- * @param o {any}
+ * @param o {any} 任意类型
  * @returns {boolean}
  */
 export const isFalse = function (o) {
@@ -136,7 +146,7 @@ export const isFalse = function (o) {
 
 /**
  * 判断是否为 true
- * @param o {any}
+ * @param o {any} 任意类型
  * @returns {boolean}
  */
 export const isTrue = function (o) {
@@ -266,9 +276,9 @@ export const checkPwdLv = function (str) {
 };
 
 /**
- * 检查手机号码，手机号码，身份证，密码，邮政编码，QQ号，邮箱，金额(小数点2位)，网址，IP，日期时间，数字，英文，中文，大写，小写，HTML标记格式是否正确
- * @param str {string}
- * @param type {string} 类型
+ * 检查手机号码，座机号码，身份证，密码，邮政编码，QQ号，邮箱，金额(小数点2位)，网址，IP，日期时间，数字，英文，中文，小写，大写，HTML标记格式是否正确
+ * @param str {string} 检查的字符串
+ * @param type {string} 类型 phone, tel, card, pwd, postal, QQ, email, money, URL, IP, date, number, english, chinese, lower, upper, HTML
  * @returns {boolean}
  */
 export const verifyFormatIsCorrect = function (str, type) {
@@ -314,12 +324,12 @@ export const verifyFormatIsCorrect = function (str, type) {
 
 /**
  * 严格的身份证校验
- * @param sId {string}
+ * @param sId {string} 身份证号码
  * @returns {boolean}
  */
 export const isCardID = function (sId) {
   if (!/(^\d{15}$)|(^\d{17}(\d|X|x)$)/.test(sId)) {
-    alert('你输入的身份证长度或格式错误')
+    console.error('你输入的身份证长度或格式错误')
     return false
   }
   //身份证城市
@@ -361,7 +371,7 @@ export const isCardID = function (sId) {
     91: "国外"
   };
   if (!aCity[parseInt(sId.substr(0, 2))]) {
-    alert('你的身份证地区非法')
+    console.error('你的身份证地区非法')
     return false
   }
 
@@ -369,7 +379,7 @@ export const isCardID = function (sId) {
   let sBirthday = (sId.substr(6, 4) + "-" + Number(sId.substr(10, 2)) + "-" + Number(sId.substr(12, 2))).replace(/-/g, "/"),
     d = new Date(sBirthday)
   if (sBirthday !== (d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate())) {
-    alert('身份证上的出生日期非法')
+    console.error('身份证上的出生日期非法')
     return false
   }
 
@@ -382,10 +392,27 @@ export const isCardID = function (sId) {
   }
   let last = codes[sum % 11]; //计算出来的最后一位身份证号码
   if (sId[sId.length - 1] !== last) {
-    alert('你输入的身份证号非法')
+    console.error('你输入的身份证号非法')
     return false
   }
 
   return true
 }
 
+/**
+ * 判断是否是PC浏览器
+ * @return {boolean} 是否是PC浏览器
+ */
+export const isPCBroswer = function () {
+  let userAgentInfo = navigator.userAgent;
+  console.log(userAgentInfo)
+  let Agents = ["Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod"];
+  let flag = true;
+  for (let v = 0; v < Agents.length; v++) {
+    if (userAgentInfo.indexOf(Agents[v]) > 0) {
+      flag = false;
+      break;
+    }
+  }
+  return flag;
+}

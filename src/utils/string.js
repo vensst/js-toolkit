@@ -1,18 +1,19 @@
 /**
  * 字符串脱敏
- * @param str {string} str 需要脱敏字符串
- * @param startLoc {number} startLoc 脱敏起始位置
- * @param endLoc {number} endLoc 脱敏结束位置
+ * @param str {string}  需要脱敏字符串
+ * @param startIndex {number}  脱敏起始位置
+ * @param endIndex {number}  脱敏结束位置
  * @returns {string} 已脱敏字符串 / ''
  */
-export const strHideCode = function (str, startLoc, endLoc) {
+
+export const strHideCode = function (str, startIndex, endIndex) {
   if (str) {
     const len = str.length;
-    const leftStr = str.substring(0, startLoc);
-    const rightStr = str.substring(endLoc, len);
+    const leftStr = str.substring(0, startIndex);
+    const rightStr = str.substring(endIndex, len);
     let new_str = '';
     try {
-      for (let i = 0; i < endLoc - startLoc; i++) {
+      for (let i = 0; i < endIndex - startIndex; i++) {
         new_str = new_str + '*';
       }
     } catch (error) {
@@ -26,7 +27,7 @@ export const strHideCode = function (str, startLoc, endLoc) {
 /**
  * 字符串去除空格
  * @param str {string} 需要去除空格的字符串
- * @param type {number} 类型, 1:所有空格  2:前后空格 (default)  3:前空格 4:后空格
+ * @param type {number} 类型, 1:所有空格  2:前后空格 (默认)  3:前空格 4:后空格
  * @returns {*} 已去除的字符串
  */
 export const strTrim = function (str, type = 2) {
@@ -47,7 +48,7 @@ export const strTrim = function (str, type = 2) {
 /**
  * 英文字母大小写转换
  * @param str {string}  需要转换的英文字符串
- * @param type {number} 类型, 1:首字母大写 (default) 2:首页母小写  3:大小写转换  4:全部大写  5:全部小写
+ * @param type {number} 类型, 1:首字母大写 (默认) 2:首页母小写  3:大小写转换  4:全部大写  5:全部小写
  * @returns {string|*}  已转换的英文字符串
  */
 export const strEnChangeCase = function (str, type = 1) {
@@ -77,27 +78,26 @@ export const strEnChangeCase = function (str, type = 1) {
   }
 }
 
-
 /**
- * 过滤 html代码(把 <> 转换)
+ * 过滤 html代码(把 <、> 和 & 转换)
  * @param str {string}
  * @returns {*}
  */
 export const strFilterHtmlTag = function (str) {
-  str = str.replace(/&/ig, "&amp;");
-  str = str.replace(/</ig, "&lt;");
-  str = str.replace(/>/ig, "&gt;");
-  str = str.replace(" ", " ");
+  str = str?.replace(/&/ig, "&amp;");
+  str = str?.replace(/</ig, "&lt;");
+  str = str?.replace(/>/ig, "&gt;");
+  str = str?.replace(" ", " ");
   return str;
 }
 
 /**
  * 生成随机码（创建随机验证码）
- * @param length 随机码长度
+ * @param length {number} 随机码长度
  * @param checkCode {string|number} 当前随机码（防止重复）
  * @returns {string}
  */
-export function createCode(length, checkCode) {
+export function createCode(length = 4, checkCode) {
   let code = "";
   const codeLength = parseInt(length);
   const codeChars = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];

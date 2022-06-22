@@ -6,8 +6,8 @@
  */
 
 /**
- * 正则表达式获取url地址栏参数
- * @param name
+ * 正则表达式获取 url 地址栏参数
+ * @param name {string} 参数名
  * @returns {string|null}
  */
 export const getUrlParam = function (name) {
@@ -18,9 +18,9 @@ export const getUrlParam = function (name) {
 }
 
 /**
- * 获取全部url参数,并转换成json对象
- * @param url {string|null}
- * @returns {Object}
+ *
+ * @param url {string|null} url地址
+ * @returns {Object} 参数对象
  */
 export const getUrlAllParams = function (url) {
   url = url == null ? window.location.href : url
@@ -39,9 +39,15 @@ export const getUrlAllParams = function (url) {
 
 /**
  * 删除 url 指定参数，返回url
- * @param url
- * @param name
- * @returns {string|*}
+ * @param url {string} url地址
+ * @param name  {string} 参数名
+ * @returns {string|*} 返回url
+ */
+/**
+ *
+ * @param url {string} url地址
+ * @param name {string} 参数名
+ * @returns {string|*} 返回url
  */
 export const delParamsUrl = function (url, name) {
   let baseUrl = url.split('?')[0] + '?';

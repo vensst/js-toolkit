@@ -1,6 +1,25 @@
 import {$} from "./dom";
 
 /**
+ * 深克隆
+ * @param data {*} 要克隆的数据
+ * @return {*} 返回克隆后的数据
+ */
+export const deepClone = function(data) {
+  if (data === null) return data
+  if (data instanceof Date) return new Date(data)
+  if (data instanceof RegExp) return new RegExp(data)
+  if (typeof data !== "object") return data
+  let newData = Array.isArray(data)?[]:{};
+  for (let key in data) {
+    if (data.hasOwnProperty(key)) {
+      // 实现一个递归拷贝
+      newData[key] = deepClone(data[key]);
+    }
+  }
+  return newData
+}
+/**
  * 获取十六进制随机颜色
  * @returns {string}
  */
@@ -278,18 +297,6 @@ export const utf8_decode = function (str_data) {
 }
 
 /**
- * 根据窗口大小自适应字体大小 用于大屏图表中的文案 例如：标题
- * @param val {number} 字体大小
- * @param initWidth {number} 初始宽度
- * @returns {number}
- */
-export const resizeFont = function (val, initWidth = 1920) {
-  let nowClientWidth = document.documentElement.clientWidth;
-  // 换算方法
-  return val * (nowClientWidth / initWidth);
-}
-
-/**
  * 版本对比
  * @param v1
  * @param v2
@@ -321,3 +328,73 @@ export const compareVersion = function (v1, v2) {
   }
   return 0;
 }
+
+/**
+ * 根据窗口大小自适应字体大小 用于大屏图表中的文案字体大小计算
+ * @param val {number} 初始字体大小 默认：16
+ * @param initWidth {number} 初始宽度 默认：1920
+ * @returns {number} 返回计算后字体大小
+ */
+export const resizeFontSize = function (val= 16, initWidth = 1920) {
+  let nowClientWidth = document.documentElement.clientWidth;
+  // 换算方法
+  return val * (nowClientWidth / initWidth);
+}
+
+/**
+ * 浏览器窗口变化页面缩放（数据可视化大屏用）
+ * 注意：需要在页面中添加<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+ *
+ * @param options {object} 参数 {id: 元素id, width : 标准/设计稿/实际宽度 默认：1920, height : 标准/设计稿/实际高度  默认：1080,mode: 缩放模式(scaleToFill：拉满全屏缩放 默认, aspectFit：等比缩放)}
+ */
+export const resizeViewScale = function (options) {
+  if (!options.id) return;
+  let opt = {
+    id: options.id,
+    width: options.width || 1920,
+    height: options.height || 1080,
+    mode: options.mode || "scaleToFill",
+  }
+  let ratioX = window.innerWidth / opt.width;
+  let ratioY = window.innerHeight / opt.height;
+  let ele = $(opt.id);
+  let transformValue = "";
+  if (opt.mode === "scaleToFill") {
+    transformValue = "scale(" + ratioX + "," + ratioY + ")";
+  }
+  if (opt.mode === "aspectFit") {
+    transformValue = "scale(" + ratioX + "," + ratioX + ")";
+  }
+  ele.style.transform = transformValue
+  ele.style.transformOrigin = "left top";
+  ele.style.backgroundSize = "100% 100%";
+
+
+  // $("body").css({'overflow':'hidden'})
+}
+
+// export const resize2 = function () {
+//   var fn = function() {
+//     var w = document.documentElement
+//         ? document.documentElement.clientWidth
+//         : document.body.clientWidth,
+//       r = 1255,
+//       b = Element.extend(document.body),
+//       classname = b.className;
+//     if (w < r) {
+//       //当窗体的宽度小于1255的时候执行相应的操作
+//     } else {
+//       //当窗体的宽度大于1255的时候执行相应的操作
+//     }
+//   };
+//   if (window.addEventListener) {
+//     window.addEventListener("resize", function() {
+//       fn();
+//     });
+//   } else if (window.attachEvent) {
+//     window.attachEvent("onresize", function() {
+//       fn();
+//     });
+//   }
+//   fn();
+// }

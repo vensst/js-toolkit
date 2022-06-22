@@ -1,6 +1,6 @@
 {
   "name": "@vensst/js-toolkit",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "js常用工具类",
   "keywords": [
     "js工具类",
@@ -37,6 +37,7 @@
   },
   "dependencies": {
     "dayjs": "^1.11.2",
-    "js-cookie": "^3.0.1"
+    "js-cookie": "^3.0.1",
+    "mathjs": "^10.6.1"
   }
 }
