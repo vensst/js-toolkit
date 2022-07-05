@@ -1,6 +1,6 @@
 {
   "name": "@vensst/js-toolkit",
-  "version": "1.0.5-beta.1",
+  "version": "1.0.5-beta.2",
   "description": "js常用工具类",
   "keywords": [
     "js工具类",
@@ -22,7 +22,7 @@
   "bugs": {
     "url": "https://github.com/vensst/js-toolkit/issues"
   },
-  "homepage": "https://github.com/vensst/js-toolkit#readme",
+  "homepage": "https://huyafei.github.io/yfhu-blog/js-toolkit/",
   "devDependencies": {
     "@babel/core": "^7.17.10",
     "@babel/preset-env": "^7.17.10",

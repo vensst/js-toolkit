@@ -86,3 +86,51 @@ export const min = function (arr) {
   return Math.min.apply(null, arr);
 }
 
+/**
+ * 向上取整
+ * @param num {number} 数字 默认：0
+ * @param precision {number} 精度 默认：0
+ * @return {number} 向上取整后的数字
+ */
+export const ceil = function (num = 0, precision = 0) {
+  return math.format(math.ceil(math.bignumber(num), precision));
+  // let multiplier = Math.pow(10, precision || 0);
+  // return Math.ceil(num * multiplier) / multiplier;
+}
+
+/**
+ * 向下取整
+ * @param num {number} 数字 默认：0
+ * @param precision {number} 精度 默认：0
+ * @return {number} 向下取整后的数字
+ */
+export const floor = function (num = 0, precision = 0) {
+  return math.format(math.floor(math.bignumber(num), precision));
+  // let multiplier = Math.pow(10, precision || 0);
+  // return Math.floor(num * multiplier) / multiplier;
+}
+
+
+/**
+ * 保留小数点后几位，不考虑四舍五入
+ * @param num {number} 数字 默认：0
+ * @param precision {number} 精度 默认：0
+ * @return {number} 保留小数点后几位的数字
+ */
+export const decimal = function (num = 0, precision = 0) {
+  const _num = num.toString();
+  let _newNum = 0;
+  if (_num.indexOf(".") > -1) {
+    let _numArr = _num.split(".")
+    if (_numArr[1].length > precision) {
+      if (precision) {
+        _newNum = _numArr[0] + "." + _numArr[1].substring(0, precision)
+      } else {
+        _newNum = _numArr[0]
+      }
+    } else {
+      _newNum = _num
+    }
+  } else _newNum = _num
+  return Number(_newNum)
+}
