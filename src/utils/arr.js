@@ -165,11 +165,52 @@ export const arrMerge = function (a, b) {
  * @returns {*}
  */
 export const arrIntersect = function (a, b) {
-  let _this = this;
-  a = this.arrRemoveRepeat(a);
-  return this.map(a, function (o) {
-    return _this.arrContains(b, o) ? o : null;
+  a = arrRemoveRepeat(a);
+  return map(a, function (o) {
+    return arrContains(b, o) ? o : null;
   });
+}
+
+/**
+ * 获取两个对象数组的交集
+ * @param arr1 {Object[]} 数组1
+ * @param arr2 {Object[]} 数组2
+ * @param attrName {string} 指定属性名称 例如：'a'
+ * @return {*[]} 返回交集数组
+ */
+export const getIntersectOfObjArr = function (arr1, arr2, attrName) {
+  let arr = []
+  arr1.forEach(item => {
+    if (arr2.some((cItem) => cItem[attrName] === item[attrName])) {
+      arr.push(item)
+    }
+  })
+  return arr
+}
+
+
+/**
+ * 获取多个对象数组的交集
+ * @param arr {Array<Array<Object>>} 数组，例如：[[{a:1},{a:2}],[{a:1},{a:3}]]
+ * @param attrName {string} 指定属性名称 例如：'a'
+ * @return {*[]} 返回交集数组
+ */
+export const getIntersectOfMultiObjArr = function (arr, attrName) {
+  let _arr = []
+  if (arr.length === 1) {
+    _arr = arr[0]
+  } else {
+    arr.forEach(async (item, index) => {
+      if (index) {
+        if (index !== arr.length - 1) {
+          _arr = getIntersectOfObjArr(_arr, arr[index + 1], attrName)
+        }
+      } else {
+        _arr = getIntersectOfObjArr(arr[index], arr[index + 1], attrName)
+      }
+    })
+  }
+  return _arr
 }
 
 /**

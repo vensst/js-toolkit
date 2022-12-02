@@ -1,0 +1,115 @@
+<!--
+ * @name: arr
+ * @description: arr.html
+ * @date: 2022/12/2 9:37
+ * @author: yfhu
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+	<title>Title</title>
+	<script src="../lib/index.js"></script>
+	<!--<script src="../src/index.js"></script>-->
+	<style>
+    /* global styles */
+    * {
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 62.5%;
+      /*font-family: Microsoft YaHei, Arial, sans-serif;*/
+      /*阻止旋转屏幕时自动调整字体大小*/
+      -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+      /* 解决IOS默认滑动很卡的情况 */
+      -webkit-overflow-scrolling: touch;
+    }
+
+    html,
+    body {
+      /*width: 100%;*/
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-size: 14px;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue",
+      sans-serif;
+      color: var(--color-black-text);
+      background-color: var(--color-white-background);
+      line-height: 1.15;
+    }
+	</style>
+</head>
+<body>
+<script type="module">
+  import {arrIntersect,getIntersectOfMultiObjArr, getIntersectOfObjArr} from '../src/utils/arr.js'
+
+  const arr1 = [
+    {
+      id: 1,
+      name: "a"
+    },
+    {
+      id: 2,
+      name: "b"
+    },
+    {
+      id: 3,
+      name: "c"
+    }
+  ]
+  const arr2 = [
+    {
+      id: 1,
+      name: "a"
+    },
+    {
+      id: 3,
+      name: "c"
+    }
+  ]
+  const arr3 = [
+    {
+      id: 1,
+      name: "a"
+    },
+    {
+      id: 2,
+      name: "b"
+    },
+    {
+      id: 3,
+      name: "c"
+    }
+  ]
+  const arr4 = [
+    {
+      id: 2,
+      name: "b"
+    },
+    {
+      id: 3,
+      name: "c"
+    }
+  ]
+  const arr = [arr1, arr2, arr3, arr4]
+  // console.log('jstk',jstk)
+  console.log('--原数组--', arr)
+  const arr5 = getIntersectOfMultiObjArr(arr, 'id')
+  console.log('--arr5--',arr5)
+  const arr6 = getIntersectOfObjArr(arr1, arr2, 'id')
+  console.log('--arr6--',arr6)
+  console.log(77,arrIntersect([1,2,3],[2,3]))
+</script>
+</body>
+</html>
