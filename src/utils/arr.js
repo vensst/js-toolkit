@@ -288,25 +288,25 @@ export const addTagToObjectArrayDuplicateData = function (arr, attrName, tagAttr
  * @param keywords {string}
  * @returns {*[]}
  */
-export const filterOfTreeData = function (data = [], keywords) {
-  let arr = []
-  data.forEach((item) => {
-    if (item["children"]?.length) {
-      let children = filterOfTreeData(item["children"])
-      let obj = {
-        ...item,
-        children
-      }
-      if (children?.length) {
-        arr.push(obj)
-      } else if (item.name.indexOf(keywords) > -1) {
-        arr.push({...item})
-      }
-    } else {
-      if (item.name.indexOf(keywords) > -1) {
-        arr.push(item)
-      }
-    }
-  })
-  return arr
-}
+// export const filterOfTreeData = function (data = [], keywords) {
+//   let arr = []
+//   data.forEach((item) => {
+//     if (item["children"]?.length) {
+//       let children = filterOfTreeData(item["children"])
+//       let obj = {
+//         ...item,
+//         children
+//       }
+//       if (children?.length) {
+//         arr.push(obj)
+//       } else if (item.name.indexOf(keywords) > -1) {
+//         arr.push({...item})
+//       }
+//     } else {
+//       if (item.name.indexOf(keywords) > -1) {
+//         arr.push(item)
+//       }
+//     }
+//   })
+//   return arr
+// }
