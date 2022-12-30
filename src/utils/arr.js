@@ -259,9 +259,33 @@ export const arrRemoveEle = function (arr, ele) {
 export const arrEleCount = (arr, val) => arr.reduce((a, v) => (v === val ? a + 1 : a), 0);
 
 /**
+ * 对象数组重复数据添加标记
+ * @param arr {Object[]} 对象数组
+ * @param attrName {string} 指定属性名称 例如：'a'
+ * @param tagAttrName {string} 标记属性名称 默认：'_xh' 值从1开始
+ * @returns {Object[]} 返回新的对象数组
+ */
+export const addTagToObjectArrayDuplicateData = function (arr, attrName, tagAttrName='_xh') {
+  const _arr = JSON.parse(JSON.stringify(arr))
+  const onceArr = [];
+  _arr.forEach(item=>{
+    const i = onceArr.findIndex(cItem=>cItem[attrName] === item[attrName])
+    if (i === -1) {
+      item[tagAttrName] = 1
+      onceArr.push(item)
+    } else {
+      item[tagAttrName] = onceArr[i][tagAttrName] + 1
+      onceArr.splice(i, 1, item)
+    }
+  })
+  return _arr
+}
+
+
+/**
  * 树形数据过滤
  * @param data
- * @param keywords
+ * @param keywords {string}
  * @returns {*[]}
  */
 export const filterOfTreeData = function (data = [], keywords) {

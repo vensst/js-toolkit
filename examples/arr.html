@@ -52,7 +52,12 @@
 </head>
 <body>
 <script type="module">
-  import {arrIntersect,getIntersectOfMultiObjArr, getIntersectOfObjArr} from '../src/utils/arr.js'
+  import {
+    arrIntersect,
+    getIntersectOfMultiObjArr,
+    getIntersectOfObjArr,
+    addTagToObjectArrayDuplicateData
+  } from '../src/utils/arr.js'
 
   const arr1 = [
     {
@@ -106,10 +111,31 @@
   // console.log('jstk',jstk)
   console.log('--原数组--', arr)
   const arr5 = getIntersectOfMultiObjArr(arr, 'id')
-  console.log('--arr5--',arr5)
+  console.log('--arr5--', arr5)
   const arr6 = getIntersectOfObjArr(arr1, arr2, 'id')
-  console.log('--arr6--',arr6)
-  console.log(77,arrIntersect([1,2,3],[2,3]))
+  console.log('--arr6--', arr6)
+  console.log(77, arrIntersect([1, 2, 3], [2, 3]))
+
+  const arr7 = [
+    {
+      "nodeStr": "div"
+    }, {
+      "nodeStr": "span"
+    }, {
+      "nodeStr": "p"
+    }, {
+      "nodeStr": "div"
+    }, {
+      "nodeStr": "div"
+    }, {
+      "nodeStr": "p"
+    }, {
+      "nodeStr": "span"
+    }, {
+      "nodeStr": "span"
+    }]
+  console.log(addTagToObjectArrayDuplicateData(arr7, 'nodeStr','axh'))
+
 </script>
 </body>
 </html>
