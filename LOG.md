@@ -1,4 +1,8 @@
 # 更新日志
+## 1.1.0-beta.3 (2023-3-7)
+### Bug Fixes
+* 修复nuxt使用报错：self is not defined
+
 ## 1.1.0-beta.2 (2022-12-29)
 ### Features
 * 新增 arr function - 对象数组重复数据添加标记 addTagToObjectArrayDuplicateData

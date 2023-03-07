@@ -8,6 +8,7 @@ module.exports = {
     // publicPath: '/',
     filename: 'index.js',
     path: resolve(__dirname, '../lib'),
+    globalObject: 'this',
     // 向外暴露的对象名称，用于通过对象调用的方式调用封装的函数,说明：https://webpack.docschina.org/configuration/output/#outputlibrary
     library: {
       name: 'jstk',
