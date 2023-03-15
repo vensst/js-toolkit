@@ -75,7 +75,7 @@ export const setCursorPosition = function (dom, val, posLen) {
   if (dom.selectionStart) {
     cursorPosition = dom.selectionStart;
   }
-  this.insertAtCursor(dom, val);
+  insertAtCursor(dom, val);
   dom.focus();
   dom.setSelectionRange(dom.value.length, cursorPosition + (posLen || val.length));
 }

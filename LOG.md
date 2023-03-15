@@ -1,4 +1,8 @@
 # 更新日志
+## 1.1.0-beta.4 (2023-3-15)
+### Bug Fixes
+* 修复部分函数使用报错问题
+
 ## 1.1.0-beta.3 (2023-3-7)
 ### Bug Fixes
 * 修复nuxt使用报错：self is not defined

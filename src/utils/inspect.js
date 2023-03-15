@@ -150,7 +150,7 @@ export const isFalse = function (o) {
  * @returns {boolean}
  */
 export const isTrue = function (o) {
-  return !this.isFalse(o)
+  return !isFalse(o)
 }
 
 /**

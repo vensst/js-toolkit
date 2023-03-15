@@ -155,7 +155,7 @@ export const formArray = function (arr) {
  */
 export const arrMerge = function (a, b) {
   let newArr = a.concat(b);
-  return this.arrRemoveRepeat(newArr);
+  return arrRemoveRepeat(newArr);
 }
 
 /**

@@ -34,7 +34,7 @@ export const hasClass = function (ele, name) {
  * @param name {string} 类名
  */
 export const addClass = function (ele, name) {
-  if (!this.hasClass(ele, name)) ele.className += " " + name;
+  if (!hasClass(ele, name)) ele.className += " " + name;
 }
 
 /**
@@ -43,7 +43,7 @@ export const addClass = function (ele, name) {
  * @param name {string} 类名
  */
 export const removeClass = function (ele, name) {
-  if (this.hasClass(ele, name)) {
+  if (hasClass(ele, name)) {
     let reg = new RegExp('(\\s|^)' + name + '(\\s|$)');
     ele.className = ele.className.replace(reg, '');
   }
@@ -56,8 +56,8 @@ export const removeClass = function (ele, name) {
  * @param oldName {string} 旧类名
  */
 export const replaceClass = function (ele, newName, oldName) {
-  this.removeClass(ele, oldName);
-  this.addClass(ele, newName);
+  removeClass(ele, oldName);
+  addClass(ele, newName);
 }
 
 /**

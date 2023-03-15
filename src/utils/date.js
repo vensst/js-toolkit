@@ -151,8 +151,8 @@ export const getMonthOfDays = function (year, month) {
  * @returns {number} 天数
  */
 export const getYearOfDays = function (time) {
-  let firstDayYear = this.getFirstDayOfYear(time);
-  let lastDayYear = this.getLastDayOfYear(time);
+  let firstDayYear = getFirstOrLastDayOfYear(time,-1);
+  let lastDayYear = getFirstOrLastDayOfYear(time,1);
   let numSecond = (new Date(lastDayYear).getTime() - new Date(firstDayYear).getTime()) / 1000;
   return Math.ceil(numSecond / (24 * 3600));
 }
@@ -225,7 +225,7 @@ export const getQuarterStartMonth = function (date) {
  * @returns {number}
  */
 export const getDayOfYear = function (time) {
-  let firstDayYear = this.getFirstDayOfYear(time);
+  let firstDayYear = getFirstOrLastDayOfYear(time);
   let numSecond = (new Date(time).getTime() - new Date(firstDayYear).getTime()) / 1000;
   return Math.ceil(numSecond / (24 * 3600));
 }
@@ -236,7 +236,7 @@ export const getDayOfYear = function (time) {
  * @returns {number}
  */
 export const getDayOfYearWeek = function (time) {
-  let numdays = this.getDayOfYear(time);
+  let numdays = getDayOfYear(time);
   return Math.ceil(numdays / 7);
 }
 
@@ -431,7 +431,7 @@ export const getFirstOrLastDayOfYear = function (year, type = -1) {
     return year + "-01-01";
   }
   if (type === 1) {
-    let endDay = this.getMonthOfDays(year, 12);
+    let endDay = getMonthOfDays(year, 12);
     return year + "-12-" + endDay;
   }
 }
