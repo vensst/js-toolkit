@@ -17,21 +17,29 @@
 
 </head>
 <body>
-<!--<script>-->
-<!--	const date = new Date();-->
-<!--  const y = jstk.formatDate(date, 'YYYY')-->
-<!--  	console.log(y);-->
-<!--  const yfd=jstk.getFirstOrLastDayOfYear(+y,-1)-->
-<!--  	console.log(yfd);-->
-<!--</script>-->
-<script type="module" >
-  import {formatDate, getFirstOrLastDayOfYear} from '../lib/index.js'
-
-  const date = new Date();
-  const y = formatDate(date, 'YYYY')
-  console.log(y)
-  const yfd = getFirstOrLastDayOfYear(+y, -1)
-  console.log(yfd)
+<script>
+	// console.log(window.jstk)
+  // const date = new Date();
+  // const y = jstk.formatDate(date, 'YYYY')
+  // console.log(y);
+  // const yfd = jstk.getFirstOrLastDayOfYear(+y, -1)
+  // console.log(yfd);
 </script>
+<!--<script>-->
+<!--	const jstk = require('../lib/index.js')-->
+<!--	console.log(jstk)-->
+<!--</script>-->
+<script type="module" src="../lib/index.js">
+  // import {formatDate, getFirstOrLastDayOfYear} from '../lib/index.js'
+  // import{formatDate} from '../lib/index.js'
+
+  console.log(formatDate)
+  // const date = new Date();
+  // const y = formatDate(date, 'YYYY')
+  // console.log(y)
+  // const yfd = getFirstOrLastDayOfYear(+y, -1)
+  // console.log(yfd)
+</script>
+
 </body>
 </html>
