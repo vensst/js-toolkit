@@ -1,0 +1,25 @@
+<!--
+ * @Name: test
+ * @Description: test.html
+ * @Date: 2023/3/15 12:45
+ * @Author: yf_hu
+ * @LastEditors: yf_hu
+ * @LastEditTime: 2023/3/15 12:45
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+	<title>Title</title>
+
+</head>
+<body>
+<script>
+  const modules = require.context('.',true,/\.js$/)
+  console.log(1111)
+  console.log(modules.keys())
+</script>
+</body>
+</html>
