@@ -1,156 +1,154 @@
 /**
  * 类型判断
- * @param type {string} 类型 String,Number,Boolean,Object,Array,Function,Date,RegExp,Error,Symbol
- * @param val {any} 值
+ * @param {string} type  类型 String,Number,Boolean,Object,Array,Function,Date,RegExp,Error,Symbol
+ * @param {any} val 值
  * @return {boolean} 是否符合类型
  */
-export const isType = function (type, val) {
+const isType = function (type, val) {
   return Object.prototype.toString.call(val) === `[object ${type}]`;
 };
 
 /**
  * 判断是否字符串
- * @param o {any} 任意类型
+ * @param {any} o 任意类型
  * @returns {boolean}
  */
-export const isString = function (o) {
+const isString = function (o) {
   return Object.prototype.toString.call(o).slice(8, -1) === "String";
 };
 
 /**
  * 判断是否数字
- * @param o {any} 任意类型
+ * @param {any} o 任意类型
  * @returns {boolean}
  */
-export const isNumber = function (o) {
+const isNumber = function (o) {
   return Object.prototype.toString.call(o).slice(8, -1) === "Number";
 };
 
 /**
  * 判断是否 boolean
- * @param o {any} 任意类型
+ * @param {any} o 任意类型
  * @returns {boolean}
  */
-export const isBoolean = function (o) {
+const isBoolean = function (o) {
   return Object.prototype.toString.call(o).slice(8, -1) === "Boolean";
 };
 
 /**
  * 判断是否函数
- * @param o {any} 任意类型
+ * @param {any} o 任意类型
  * @returns {boolean}
  */
-export const isFunction = function (o) {
+const isFunction = function (o) {
   return Object.prototype.toString.call(o).slice(8, -1) === "Function";
 };
 
 /**
  * 判断是否为 null
- * @param o {any} 任意类型
+ * @param {any} o 任意类型
  * @returns {boolean}
  */
-export const isNull = function (o) {
+const isNull = function (o) {
   return Object.prototype.toString.call(o).slice(8, -1) === "Null";
 };
 
 /**
  * 判断是否 undefined
- * @param o {any} 任意类型
+ * @param {any} o 任意类型
  * @returns {boolean}
  */
-export const isUndefined = function (o) {
+const isUndefined = function (o) {
   return Object.prototype.toString.call(o).slice(8, -1) === "Undefined";
 };
 
 /**
  * 判断是否对象
- * @param o {any} 任意类型
+ * @param {any} o 任意类型
  * @returns {boolean}
  */
-export const isObject = function (o) {
+const isObject = function (o) {
   return Object.prototype.toString.call(o).slice(8, -1) === "Object";
 };
 
 /**
  * 判断是否数组
- * @param o {any} 任意类型
+ * @param {any} o 任意类型
  * @returns {boolean}
  */
-export const isArray = function (o) {
+const isArray = function (o) {
   return Object.prototype.toString.call(o).slice(8, -1) === "Array";
 };
 
 /**
  * 判断是否时间
- * @param o {any} 任意类型
+ * @param {any} o 任意类型
  * @returns {boolean}
  */
-export const isDate = function (o) {
+const isDate = function (o) {
   return Object.prototype.toString.call(o).slice(8, -1) === "Date";
 };
 
 /**
  * 判断是否正则
- * @param o {any} 任意类型
+ * @param {any} o 任意类型
  * @returns {boolean}
  */
-export const isRegExp = function (o) {
+const isRegExp = function (o) {
   return Object.prototype.toString.call(o).slice(8, -1) === "RegExp";
 };
 
 /**
- * 判断是否错误对象
- * @param o {any} 任意类型
+ * 判断是否 Error 对象
+ * @param {any} o 任意类型
  * @returns {boolean}
  */
-export const isError = function (o) {
+const isError = function (o) {
   return Object.prototype.toString.call(o).slice(8, -1) === "Error";
 };
 
 /**
  * 判断是否 Symbol 函数
- * @param o {any} 任意类型
+ * @param {any} o 任意类型
  * @returns {boolean}
  */
-export const isSymbol = function (o) {
+const isSymbol = function (o) {
   return Object.prototype.toString.call(o).slice(8, -1) === "Symbol";
 };
 
 /**
  * 判断是否 Promise 对象
- * @param o {any} 任意类型
+ * @param {any} o 任意类型
  * @returns {boolean}
  */
-export const isPromise = function (o) {
+const isPromise = function (o) {
   return Object.prototype.toString.call(o).slice(8, -1) === "Promise";
 };
 
 /**
  * 判断是否 Set 对象
- * @param o {any} 任意类型
+ * @param {any} o 任意类型
  * @returns {boolean}
  */
-export const isSet = function (o) {
+const isSet = function (o) {
   return Object.prototype.toString.call(o).slice(8, -1) === "Set";
 };
 
 /**
  * 判断是否为 false
- * @param o {any} 任意类型
+ * @param {any} o 任意类型
  * @returns {boolean}
  */
-export const isFalse = function (o) {
-  if (!o || o === "null" || o === "undefined" || o === "false" || o === "NaN")
-    return true;
-  return false;
+const isFalse = function (o) {
+  return !o || o === "null" || o === "undefined" || o === "false" || o === "NaN";
 };
 
 /**
  * 判断是否为 true
- * @param o {any} 任意类型
+ * @param {any} o 任意类型
  * @returns {boolean}
  */
-export const isTrue = function (o) {
+const isTrue = function (o) {
   return !isFalse(o);
 };
 
@@ -158,7 +156,7 @@ export const isTrue = function (o) {
  * 判断当前环境是否为ios苹果手机
  * @returns {boolean}
  */
-export const isIos = function () {
+const isIos = function () {
   let u = navigator.userAgent;
   if (u.indexOf("Android") > -1 || u.indexOf("Linux") > -1) {
     //安卓手机
@@ -183,9 +181,9 @@ export const isIos = function () {
 
 /**
  * 获取当前属于哪种类型手机运行环境
- * @returns {string|boolean}
+ * @returns {string|boolean} 是手机环境返回运行环境，不是手机运行环境 false
  */
-export const getMobileEnv = function () {
+const getMobileEnv = function () {
   let u = navigator.userAgent;
   if (u.indexOf("Android") > -1 || u.indexOf("Linux") > -1) {
     //安卓手机
@@ -208,7 +206,7 @@ export const getMobileEnv = function () {
  * 判断当前环境是否为 PC 端
  * @returns {boolean}
  */
-export const isPC = function () {
+const isPC = function () {
   let userAgentInfo = navigator.userAgent;
   let Agents = [
     "Android",
@@ -232,7 +230,7 @@ export const isPC = function () {
  * 获取浏览器类型
  * @returns {string}
  */
-export const getBrowserType = function () {
+const getBrowserType = function () {
   let userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
   let isOpera = userAgent.indexOf("Opera") > -1; //判断是否Opera浏览器
   let isIE =
@@ -268,10 +266,10 @@ export const getBrowserType = function () {
 
 /**
  * 检测密码强度
- * @param str {string}
+ * @param {string} str 需要检测密码
  * @returns {number}
  */
-export const checkPwdLv = function (str) {
+const checkPwdLv = function (str) {
   let Lv = 0;
   if (str.length < 6) {
     return Lv;
@@ -293,11 +291,11 @@ export const checkPwdLv = function (str) {
 
 /**
  * 检查手机号码，座机号码，身份证，密码，邮政编码，QQ号，邮箱，金额(小数点2位)，网址，IP，日期时间，数字，英文，中文，小写，大写，HTML标记格式是否正确
- * @param str {string} 检查的字符串
- * @param type {string} 类型 phone, tel, card, pwd, postal, QQ, email, money, URL, IP, date, number, english, chinese, lower, upper, HTML
+ * @param {string} str 检查的字符串
+ * @param {string} type 类型 phone, tel, card, pwd, postal, QQ, email, money, URL, IP, date, number, english, chinese, lower, upper, HTML
  * @returns {boolean}
  */
-export const verifyFormatIsCorrect = function (str, type) {
+const verifyFormatIsCorrect = function (str, type) {
   switch (type) {
     case "phone": //手机号码
       return /^1[3|4|5|6|7|8|9][0-9]{9}$/.test(str);
@@ -348,10 +346,10 @@ export const verifyFormatIsCorrect = function (str, type) {
 
 /**
  * 严格的身份证校验
- * @param sId {string} 身份证号码
+ * @param {string} sId 身份证号码
  * @returns {boolean}
  */
-export const isCardID = function (sId) {
+const isCardID = function (sId) {
   if (!/(^\d{15}$)|(^\d{17}(\d|X|x)$)/.test(sId)) {
     console.error("你输入的身份证长度或格式错误");
     return false;
@@ -434,11 +432,10 @@ export const isCardID = function (sId) {
 
 /**
  * 判断是否是PC浏览器
- * @return {boolean} 是否是PC浏览器
+ * @returns {boolean} 是否是PC浏览器
  */
-export const isPCBroswer = function () {
+const isPCBroswer = function () {
   let userAgentInfo = navigator.userAgent;
-  console.log(userAgentInfo);
   let Agents = [
     "Android",
     "iPhone",
@@ -456,3 +453,30 @@ export const isPCBroswer = function () {
   }
   return flag;
 };
+export {
+  isType,
+  isString,
+  isNumber,
+  isBoolean,
+  isFunction,
+  isNull,
+  isUndefined,
+  isObject,
+  isArray,
+  isDate,
+  isRegExp,
+  isError,
+  isSymbol,
+  isPromise,
+  isSet,
+  isFalse,
+  isTrue,
+  isIos,
+  getMobileEnv,
+  isPC,
+  getBrowserType,
+  checkPwdLv,
+  verifyFormatIsCorrect,
+  isCardID,
+  isPCBroswer,
+}

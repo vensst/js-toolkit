@@ -1,0 +1,82 @@
+<!--
+ * @Name: function
+ * @Description: function.html
+ * @Date: 2023/4/12 15:40
+ * @Author: yf_hu
+ * @LastEditors: yf_hu
+ * @LastEditTime: 2023/4/12 15:40
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+	<title>Title</title>
+	<style>
+    /* global styles */
+    * {
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 62.5%;
+      /*font-family: Microsoft YaHei, Arial, sans-serif;*/
+      /*阻止旋转屏幕时自动调整字体大小*/
+      -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+      /* 解决IOS默认滑动很卡的情况 */
+      -webkit-overflow-scrolling: touch;
+    }
+
+    html,
+    body {
+      /*width: 100%;*/
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-size: 14px;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue",
+      sans-serif;
+
+      line-height: 1.15;
+    }
+    .page--style {
+	    width: 200px;
+	    height: 2000px;
+	    background: bisque;
+    }
+	</style>
+
+</head>
+<body>
+<!--<script src="../src/utils/function.js" type="module"></script>-->
+<script type="module">
+  import {$} from '../src/utils/dom.js'
+  import {debounce, throttle} from '../src/utils/function.js'
+
+  let buttonEl = $('#button');
+
+  let a = 1
+
+  buttonEl.onclick = debounce(() => {
+    a += 1;
+    console.log('--debounce--',a);
+  }, 1000);
+  $("body").onscroll = throttle(() => {
+		console.log('--throttle--');
+	}, 1000)
+</script>
+<button id="button" type="button" onclick="add()">单击</button>
+
+<div id="app" class="page--style">
+	我是一个div
+</div>
+</body>
+</html>

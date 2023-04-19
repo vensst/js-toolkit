@@ -1,15 +1,11 @@
-/*
-  oArr：表示 Object[]类型数组 例如：[{name:"xxx"}]
-  arr： 表示普通数组 例如：[1,2]
-*/
 /**
  * 查找对象数组是否存在某元素 返回 -1或下标，可使用 findIndex() 代替
- * @param arr {Array<Object>}
- * @param attrName {string} 查找的元素属性名
- * @param attrVal {*} 查找的元素属性的值
+ * @param {Array<Object>} arr 对象数组
+ * @param {string} attrName 查找的元素属性名
+ * @param {*} attrVal  查找的元素属性的值
  * @returns {number} 下标或-1
  */
-export const oArrFindEle = function (arr, attrName, attrVal) {
+const findEleOfObjArr = function (arr, attrName, attrVal) {
   for (let i = 0; i < arr.length; i++) {
     if (arr[i][attrName] === attrVal) {
       return i;
@@ -19,39 +15,49 @@ export const oArrFindEle = function (arr, attrName, attrVal) {
 };
 
 /**
- * 对象数组去重
- * @param arr {Array<Object>}
- * @param attrName {string} 需要匹配去重的对象里属性名
- * @returns {*}
+ * 数组去重
+ * @param {Array<any>} arr 数组（普通数组或对象数组都可以）
+ * @returns {Array} 去重后的数组
  */
-export const oArrRemoveRepeat = function (arr, attrName) {
+const uniqueArr = function (arr) {
+  const set = new Set(arr.map(JSON.stringify));
+  return Array.from(set).map(JSON.parse);
+}
+
+/**
+ * 对象数组根据指定属性名称去重
+ * @param {Array<Object>} arr 对象数组
+ * @param {string} attrName 需要匹配去重的对象里属性名
+ * @returns {Array} 去重后的数组
+ */
+const uniqueObjArr = function (arr, attrName) {
   let hash = {};
   return arr.reduce(function (item, next) {
-    hash[next[attrName]]
-      ? ""
-      : (hash[next[attrName]] = true && item.push(next));
+    if (!hash[next[attrName]]) {
+      hash[next[attrName]] = item.push(next)
+    }
     return item;
   }, []);
 };
 
 /**
  * 对象数组根据指定属性名称值返回逗号隔开字符串
- * @param arr {Object[]}
- * @param attrName {string}
- * @param sym {string}  符号 默认 ','
- * @returns {string}
+ * @param {Object[]} arr 对象数组
+ * @param {string} attrName 属性名
+ * @param {string} sym 符号 默认 ','
+ * @returns {string} 符号拼接的字符串
  */
-export const findEleTurnSymDelStrByOArr = function (arr, attrName, sym = ",") {
+const joinEleOfObjArr = function (arr, attrName, sym = ",") {
   let newArr = arr.map((item) => item[attrName]);
   return newArr.join(sym);
 };
 
 /**
  * 普通数组去重
- * @param arr {Array<string|number>} 数组
- * @returns {any[]|*[]|*}
+ * @param {Array<string|number>} arr 普通数组
+ * @returns {(string|number)[]} 去重后的数组
  */
-export const arrRemoveRepeat = function (arr) {
+const arrRemoveRepeat = function (arr) {
   if (Array.hasOwnProperty("from")) {
     return Array.from(new Set(arr));
   } else {
@@ -73,21 +79,20 @@ export const arrRemoveRepeat = function (arr) {
 
 /**
  * 判断一个元素是否在数组中
- * @param arr {any[]}
- * @param val {any}
- * @returns {boolean}
+ * @param {(string|number)[]} arr 普通数组
+ * @param {string|number} val 要查找的指定元素
+ * @returns {boolean} 布尔值
  */
-export const arrContains = function (arr, val) {
+const arrContains = function (arr, val) {
   return arr.includes(val);
 };
 
 /**
  * 自定义 each 函数
- * @param  {any[]}
- * @param  {Function} 回调函数
- * @return {undefined}
+ * @param {any[]} arr 数组
+ * @param {Function} fn 回调函数
  */
-export const each = function (arr, fn) {
+const each = function (arr, fn) {
   fn = fn || Function;
   let a = [];
   let args = Array.prototype.slice.call(arguments, 1);
@@ -98,13 +103,13 @@ export const each = function (arr, fn) {
 };
 
 /**
- * 自定义 map
- * @param arr {any[]}
- * @param fn {Function} 回调函数
- * @param thisObj
+ * 自定义 map 函数
+ * @param {any[]} arr 数组
+ * @param {Function} fn 回调函数
+ * @param {Object} thisObj this指向
  * @returns {*[]}
  */
-export const map = function (arr, fn, thisObj) {
+const map = function (arr, fn, thisObj) {
   let scope = thisObj || window;
   let a = [];
   for (let i = 0, j = arr.length; i < j; ++i) {
@@ -116,11 +121,11 @@ export const map = function (arr, fn, thisObj) {
 
 /**
  * 排序
- * @param arr {number[]} 数组
- * @param type {number} 排序类型 1：从小到大 2：从大到小 3：随机
- * @returns {*}
+ * @param {number[]} arr number类型数组
+ * @param {number} type 排序类型 1：从小到大 2：从大到小 3：随机，默认：1
+ * @returns {number[]} 排序后的数组
  */
-export const sort = function (arr, type = 1) {
+const sort = function (arr, type = 1) {
   return arr.sort((a, b) => {
     switch (type) {
       case 1:
@@ -137,10 +142,10 @@ export const sort = function (arr, type = 1) {
 
 /**
  * 将类数组转换为数组的方法
- * @param arr {any[]}
- * @returns {*}
+ * @param {any[]} arr 类数组
+ * @returns {Array} 数组
  */
-export const formArray = function (arr) {
+const formArray = function (arr) {
   let _arr = [];
   if (Array.isArray(arr)) {
     _arr = arr;
@@ -152,22 +157,22 @@ export const formArray = function (arr) {
 
 /**
  * 数组合并，求两个数组(集合)的并集
- * @param a {any[]}
- * @param b {any[]}
- * @returns {*[]|*}
+ * @param {number[]} a 数组1
+ * @param {number[]} b 数组2
+ * @returns {number[]} 返回并集数组
  */
-export const arrMerge = function (a, b) {
+const arrMerge = function (a, b) {
   let newArr = a.concat(b);
   return arrRemoveRepeat(newArr);
 };
 
 /**
  * 获取两个数组相同元素，求两个数组(集合)的交集
- * @param a {any[]}
- * @param b {any[]}
- * @returns {*}
+ * @param {number[]} a 数组1
+ * @param {number[]} b 数组2
+ * @returns {number[]} 返回交集数组
  */
-export const arrIntersect = function (a, b) {
+const arrIntersect = function (a, b) {
   a = arrRemoveRepeat(a);
   return map(a, function (o) {
     return arrContains(b, o) ? o : null;
@@ -175,13 +180,13 @@ export const arrIntersect = function (a, b) {
 };
 
 /**
- * 获取两个对象数组的交集
- * @param arr1 {Object[]} 数组1
- * @param arr2 {Object[]} 数组2
- * @param attrName {string} 指定属性名称 例如：'a'
- * @return {*[]} 返回交集数组
+ * 根据指定属性名获取两个对象数组的交集
+ * @param {Object[]} arr1  数组1
+ * @param {Object[]} arr2  数组2
+ * @param {string} attrName  指定属性名称 例如：'a'
+ * @returns {Object[]} 返回交集数组
  */
-export const getIntersectOfObjArr = function (arr1, arr2, attrName) {
+const getIntersectOfObjArr = function (arr1, arr2, attrName) {
   let arr = [];
   arr1.forEach((item) => {
     if (arr2.some((cItem) => cItem[attrName] === item[attrName])) {
@@ -192,12 +197,12 @@ export const getIntersectOfObjArr = function (arr1, arr2, attrName) {
 };
 
 /**
- * 获取多个对象数组的交集
- * @param arr {Array<Array<Object>>} 数组，例如：[[{a:1},{a:2}],[{a:1},{a:3}]]
- * @param attrName {string} 指定属性名称 例如：'a'
- * @return {*[]} 返回交集数组
+ * 根据指定属性名获取多个对象数组的交集
+ * @param {Array<Array<Object>>} arr  数组，例如：[[{a:1},{a:2}],[{a:1},{a:3}]]
+ * @param {string} attrName  指定属性名称 例如：'a'
+ * @returns {Object[]} 返回交集数组
  */
-export const getIntersectOfMultiObjArr = function (arr, attrName) {
+const getIntersectOfMultiObjArr = function (arr, attrName) {
   let _arr = [];
   if (arr.length === 1) {
     _arr = arr[0];
@@ -217,11 +222,11 @@ export const getIntersectOfMultiObjArr = function (arr, attrName) {
 
 /**
  * 删除数组其中一个元素
- * @param arr {Array<any>}
- * @param ele {any}
- * @returns {Array<any>}
+ * @param {Array<any>} arr 数组
+ * @param ele {any} 要删除的元素
+ * @returns {Array<any>} 返回删除后的数组
  */
-export const arrRemoveEle = function (arr, ele) {
+const arrRemoveEle = function (arr, ele) {
   let index = arr.indexOf(ele);
   if (index > -1) {
     arr.splice(index, 1);
@@ -253,22 +258,24 @@ export const arrRemoveEle = function (arr, ele) {
  * */
 
 /**
- * 数组检测数值出现次数
- * @param arr {any[]}
- * @param val {any}
- * @returns {number}
+ * 检测数组中指定元素出现的次数
+ * @param {any[]} arr 数组
+ * @param {any} val 元素
+ * @returns {number} 返回出现次数
  */
-export const arrEleCount = (arr, val) =>
-  arr.reduce((a, v) => (v === val ? a + 1 : a), 0);
+const arrEleCount = function (arr, val) {
+  return arr.reduce((a, v) => (v === val ? a + 1 : a), 0);
+}
+
 
 /**
  * 对象数组重复数据添加标记
- * @param arr {Object[]} 对象数组
- * @param attrName {string} 指定属性名称 例如：'a'
- * @param tagAttrName {string} 标记属性名称 默认：'_xh' 值从1开始
+ * @param {Object[]} arr 对象数组
+ * @param {string} attrName 指定属性名称 例如：'a'
+ * @param {string} tagAttrName  标记属性名称 默认：'_xh' 值从1开始
  * @returns {Object[]} 返回新的对象数组
  */
-export const addTagToObjectArrayDuplicateData = function (
+const addTagToObjectArrayDuplicateData = function (
   arr,
   attrName,
   tagAttrName = "_xh"
@@ -316,3 +323,23 @@ export const addTagToObjectArrayDuplicateData = function (
 //   })
 //   return arr
 // }
+
+export {
+  findEleOfObjArr,
+  uniqueArr,
+  uniqueObjArr,
+  joinEleOfObjArr,
+  arrRemoveRepeat,
+  arrContains,
+  each,
+  map,
+  sort,
+  formArray,
+  arrMerge,
+  arrIntersect,
+  getIntersectOfObjArr,
+  getIntersectOfMultiObjArr,
+  arrRemoveEle,
+  arrEleCount,
+  addTagToObjectArrayDuplicateData
+}

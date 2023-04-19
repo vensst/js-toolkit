@@ -1,16 +1,13 @@
+import {arrRemoveRepeat} from "./arr.js";
+
 /**
  * 格式化日期
- * @param time {Date|string|number}  时间戳或日期对象
- * @param format {string}  格式
- * @returns {string} 格式 'Y-M-D h:m:s' (default)
- * @examples formatTime('2018-1-29', 'Y/M/D h:m:s') // -> 2018/01/29 00:00:00
+ * @param {Date|string|number} time 时间戳或日期对象
+ * @param {string} format 格式，年(YYYY) 月(MM) 日(DD) 时(hh) 分(mm) 秒(ss) 星期(WW), 默认: YYYY-MM-DD hh:mm:ss
+ * @returns {string|null} 格式化后的日期
+ * @example formatDate('2020-9-9','YYYY/M/D h:m:s WW') // -> 2020/9/9 0:0:0 星期三
  */
-import { arrRemoveRepeat } from "./arr";
-
-export const formatDate = function (time, format = "Y-M-D h:m:s") {
-  if (arguments.length === 0 || !time) {
-    return null;
-  }
+const formatDate = function (time = new Date(), format = "YYYY-MM-DD hh:mm:ss") {
   let date;
   if (typeof time === "object") {
     date = time;
@@ -31,19 +28,31 @@ export const formatDate = function (time, format = "Y-M-D h:m:s") {
     }
     date = new Date(time);
   }
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  const hour = date.getHours();
+  const minute = date.getMinutes();
+  const second = date.getSeconds();
+  const week = date.getDay();
   const formatObj = {
-    Y: date.getFullYear(),
-    M: date.getMonth() + 1,
-    D: date.getDate(),
-    h: date.getHours(),
-    m: date.getMinutes(),
-    s: date.getSeconds(),
-    w: date.getDay(),
+    YYYY: year,
+    M: month,
+    MM: month.toString().padStart(2, "0"),
+    D: day,
+    DD: day.toString().padStart(2, "0"),
+    h: hour,
+    hh: hour.toString().padStart(2, "0"),
+    m: minute,
+    mm: minute.toString().padStart(2, "0"),
+    s: second,
+    ss: second.toString().padStart(2, "0"),
+    WW: week,
   };
-  const time_str = format.replace(/([YMDhmsw])+/g, (result, key) => {
+  return format.replace(/(YYYY|MM|M|DD|D|hh|h|mm|m|ss|s|WW)+/g, (result, key) => {
     const value = formatObj[key];
     // Note: getDay() returns 0 on Sunday
-    if (key === "w") {
+    if (key === "WW") {
       return [
         "星期日",
         "星期一",
@@ -54,17 +63,17 @@ export const formatDate = function (time, format = "Y-M-D h:m:s") {
         "星期六",
       ][value];
     }
-    return value.toString().padStart(2, "0"); //M、D、h、m、s不足2位补0
+    return value
   });
-  return time_str;
 };
 
 /**
  * 根据步长获取时间间隔
- * @param step {number} 间隔 单位分钟
- * @returns {*[]} 时间间隔数组
+ * @param {number} step 间隔 单位：分钟
+ * @returns {string[]} 时间间隔数组
+ * @example getTimeSlot(30) // -> ["00:00", "00:30", "01:00", "01:30", ...]
  */
-export const getTimeSlot = function (step) {
+const getTimeSlot = function (step = 30) {
   //  step = 间隔的分钟
   let date = new Date();
   date.setHours(0o0); // 时分秒设置从零点开始
@@ -91,12 +100,12 @@ export const getTimeSlot = function (step) {
 };
 
 /**
- * 秒 转 时分秒
- * @param s {number} 秒数
- * @param format {Array} 格式 ["h", "m", "s"]
- * @returns {string}
+ * 秒转时分秒
+ * @param {number} s 秒数
+ * @param {Array<string>} format 格式 默认：["时", "分", "秒"]，可以自定义例如：["h", "m "s"]
+ * @returns {string} x时x分x秒
  */
-export const formatHMS = function (s, format = ["h", "m", "s"]) {
+const formatHMS = function (s = 0, format = ["时", "分", "秒"]) {
   let str = "";
   if (s > 3600) {
     str =
@@ -115,13 +124,13 @@ export const formatHMS = function (s, format = ["h", "m", "s"]) {
 };
 
 /**
- * 获取指定长度的天数集合
- * @param time {Date|string} 时间
- * @param len {number} 长度
- * @param dir  方向 1: 前几天;  2: 后几天;  3:前后几天 (默认)
- * @returns {*[]|string[]}
+ * 根据指定时间获取指定长度的天数集合
+ * @param {Date|string} time 时间
+ * @param {number} len 长度
+ * @param {number} dir  方向 1: 前几天;  2: 后几天;  3:前后几天 (默认)
+ * @returns {string[]} 日期集合
  */
-export const getDays = function (time, len, dir) {
+const getDays = function (time = new Date(), len = 2, dir = 3) {
   let tt = new Date(time),
     getDay = function (day) {
       let t = new Date(time);
@@ -149,37 +158,38 @@ export const getDays = function (time, len, dir) {
   }
   return dir === 1
     ? arr.concat([
-        tt.getFullYear() + "-" + (tt.getMonth() + 1) + "-" + tt.getDate(),
-      ])
+      tt.getFullYear() + "-" + (tt.getMonth() + 1) + "-" + tt.getDate(),
+    ])
     : dir === 2
-    ? [
+      ? [
         tt.getFullYear() + "-" + (tt.getMonth() + 1) + "-" + tt.getDate(),
       ].concat(arr)
-    : arr;
+      : arr;
 };
 
 /**
- * 获得某月天数
- * @param year {number} 年份
- * @param month {number} 月份
+ * 获得某年某月天数
+ * @param {number} year 年份
+ * @param {number} month 月份
  * @returns {number} 天数
  */
-export const getMonthOfDays = function (year, month) {
+const getMonthOfDays = function (year, month) {
   let day;
   if (year && month) {
     day = new Date(year, month, 0); // 0 上个月的最后一天
   } else {
-    day = new Date();
+    const date = new Date();
+    day = new Date(date.getFullYear(), date.getMonth() + 1, 0);
   }
   return day.getDate();
 };
 
 /**
  * 获取某年天数
- * @param time {number|string|Date} 年份或new Date()格式
+ * @param {number|string|Date}  time 年份或new Date()格式
  * @returns {number} 天数
  */
-export const getYearOfDays = function (time) {
+const getYearOfDays = function (time) {
   let firstDayYear = getFirstOrLastDayOfYear(time, -1);
   let lastDayYear = getFirstOrLastDayOfYear(time, 1);
   let numSecond =
@@ -188,89 +198,93 @@ export const getYearOfDays = function (time) {
 };
 
 /**
- * 获取指定长度的月份集合
- * @param time {Date|string|number} 时间
- * @param len {number}  长度
- * @param dir {number}  1: 前几个月;  2: 后几个月;  3:前后几个月 (默认)
- * @returns {string[]|[]|any[]|*[]}
+ * 根据指定时间获取指定长度的月份集合
+ * @param {Date|string|number} time 时间
+ * @param {number} len 长度
+ * @param {number} dir 1: 前几个月;  2: 后几个月;  3:前后几个月 (默认)
+ * @returns {string[]} 月份集合
  */
-export const getMonths = function (time, len, dir = 3) {
+const getMonths = function (time = new Date(), len = 2, dir = 3) {
   let yy = new Date(time).getFullYear();
   let mm = new Date(time).getMonth();
-
   let arr = [];
-  const monthPre = function () {
-    let index = mm + 1;
-    for (let i = 1; i <= len; i++) {
-      index--;
-      if (index < 0) {
-        index = 11;
-        yy--;
+  if (dir === 1) {
+    for (let i = 0; i <= len; i++) {
+      if (mm - i < 0) {
+        arr.unshift(yy - 1 + "-" + (12 + mm - i + 1));
+      } else {
+        arr.unshift(yy + "-" + (mm - i + 1));
       }
-      arr.unshift(yy + "-" + (index + 1));
     }
-  };
-  const monthNext = function () {
-    let index = mm - 1;
-    for (let i = 1; i <= len; i++) {
-      index++;
-      if (index > 11) {
-        index = 0;
-        yy++;
+  } else if (dir === 2) {
+    for (let i = 0; i <= len; i++) {
+      if (mm + i > 11) {
+        arr.push(yy + 1 + "-" + (mm + i + 1 - 12));
+      } else {
+        arr.push(yy + "-" + (mm + i + 1));
       }
-      arr.push(yy + "-" + (index + 1));
     }
-  };
-  dir === 1
-    ? monthPre()
-    : dir === 2
-    ? monthNext()
-    : (monthPre(), monthNext(), (arr = arrRemoveRepeat(arr)));
+  } else {
+    for (let i = 1; i <= len; i++) {
+      if (mm - i < 0) {
+        arr.unshift(yy - 1 + "-" + (12 + mm - i + 1));
+      } else {
+        arr.unshift(yy + "-" + (mm - i + 1));
+      }
+    }
+    arr.push(yy + "-" + (mm + 1));
+    for (let i = 1; i <= len; i++) {
+      if (mm + i > 11) {
+        arr.push(yy + 1 + "-" + (mm + i + 1 - 12));
+      } else {
+        arr.push(yy + "-" + (mm + i + 1));
+      }
+    }
+  }
+
   return arr;
 };
 
 /**
- * 获得本季度的开始月份
- * @returns {number}
+ * 根据指定时间获得该季度的开始月份
+ * @param {Date|string|number} date 时间 Date|‘2022-12-20’| 时间戳
+ * @returns {number} 月份
  */
-export const getQuarterStartMonth = function (date) {
-  let nowDate = date ? new Date(date) : new Date(); //当前日期
-  let nowMonth = nowDate.getMonth() + 1; //当前月
-
-  let quarterStartMonth = 0;
-  if (nowMonth < 4) {
-    quarterStartMonth = 1;
-  }
-  if (4 <= nowMonth && nowMonth < 7) {
-    quarterStartMonth = 4;
-  }
-  if (7 <= nowMonth && nowMonth < 10) {
-    quarterStartMonth = 7;
-  }
-  if (nowMonth >= 10) {
-    quarterStartMonth = 10;
-  }
-  return quarterStartMonth;
+const getQuarterStartMonth = function (date = new Date()) {
+  date = new Date(date);
+  let month = date.getMonth();
+  let quarter = Math.floor(month / 3) * 3; // 计算所在季度
+  let d = new Date(date.getFullYear(), quarter, 1); // 返回开始月份
+  return d.getMonth() + 1
 };
 
 /**
  * 获取某个日期是当年中的第几天
- * @param time {Date|String} 时间
- * @returns {number}
+ * @param {Date|String} date  时间,默认当前时间
+ * @returns {number} 天数
  */
-export const getDayOfYear = function (time) {
-  let firstDayYear = getFirstOrLastDayOfYear(time);
-  let numSecond =
-    (new Date(time).getTime() - new Date(firstDayYear).getTime()) / 1000;
-  return Math.ceil(numSecond / (24 * 3600));
+const getDayOfYear = function (date = new Date()) {
+  if (typeof date === 'string') {
+    date = new Date(date);
+  }
+  let year = date.getFullYear();
+  let month = date.getMonth();
+  let day = date.getDate();
+  let days = [31, new Date(year, 1, 29).getDate() === 29 ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+  let sum = 0;
+  for (let i = 0; i < month; i++) {
+    sum += days[i];
+  }
+  sum += day;
+  return sum;
 };
 
 /**
  * 获取某个日期在这一年的第几周
- * @param time {Date|String} 时间
- * @returns {number}
+ * @param {Date|String} time 时间,默认当前时间
+ * @returns {number} 周数
  */
-export const getDayOfYearWeek = function (time) {
+const getDayOfYearWeek = function (time = new Date()) {
   let numdays = getDayOfYear(time);
   return Math.ceil(numdays / 7);
 };
@@ -306,7 +320,7 @@ class VenDate {
     }
     timestamp = 1000 * 60 * 60 * 24 * days;
     nowDate.setTime(nowDate.getTime() + timestamp);
-    return formatDate(nowDate, "Y-M-D");
+    return formatDate(nowDate, "YYYY-MM-DD");
   }
 
   //获得本周、上周、下周的结束日期
@@ -325,7 +339,7 @@ class VenDate {
     }
     timestamp = 1000 * 60 * 60 * 24 * days;
     nowDate.setTime(nowDate.getTime() + timestamp);
-    return formatDate(nowDate, "Y-M-D");
+    return formatDate(nowDate, "YYYY-MM-DD");
   }
 
   // 获得本月的开始日期
@@ -339,7 +353,7 @@ class VenDate {
       month = this.month;
     }
     monthStartDate = new Date(year, month, 1);
-    return formatDate(monthStartDate, "Y-M-D");
+    return formatDate(monthStartDate, "YYYY-MM-DD");
   }
 
   // 获得本月的结束日期
@@ -353,7 +367,7 @@ class VenDate {
       month = this.month;
     }
     monthEndDate = new Date(year, month, getMonthOfDays(year, month + 1));
-    return formatDate(monthEndDate, "Y-M-D");
+    return formatDate(monthEndDate, "YYYY-MM-DD");
   }
 
   // 获得本季度的开始日期
@@ -361,7 +375,7 @@ class VenDate {
     // 季度开始月份
     let quarterStartMonth = getQuarterStartMonth();
     let date = new Date(this.year, quarterStartMonth - 1, 1);
-    return formatDate(date, "Y-M-D");
+    return formatDate(date, "YYYY-MM-DD");
   }
 
   // 获得本季度的结束日期
@@ -372,13 +386,13 @@ class VenDate {
       quarterStartMonth + 1,
       getMonthOfDays(this.year, this.month + 1)
     );
-    return formatDate(date, "Y-M-D");
+    return formatDate(date, "YYYY-MM-DD");
   }
 
   // 获得本年的开始日期
   getYearStartDate() {
     let currentYearFirstDate = new Date(this.year, 0, 1);
-    return formatDate(currentYearFirstDate, "Y-M-D");
+    return formatDate(currentYearFirstDate, "YYYY-MM-DD");
   }
 
   // 获得本年的开始日期
@@ -388,86 +402,87 @@ class VenDate {
       11,
       getMonthOfDays(this.year, 12)
     );
-    return formatDate(currentYearFirstDate, "Y-M-D");
+    return formatDate(currentYearFirstDate, "YYYY-MM-DD");
   }
 }
 
 /**
  * 获得本周、上周、下周的开始日期
- * @param type type {number} -1:上周  0:本周(默认)  1:下周
- * @returns {string}
+ * @param {number} type 类型 -1:上周  0:本周(默认)  1:下周
+ * @returns {string} 日期
  */
-export const getWeekStartDate = function (type = 0) {
+const getWeekStartDate = function (type = 0) {
   return new VenDate().getWeekStartDate(type);
 };
 
 /**
  * 获得本周、上周、下周的结束日期
- * @param type {number} -1:上周  0:本周(default)  1:下周
+ * @param {number} type -1:上周  0:本周(default)  1:下周
+ * @returns {string} 日期
  */
-export const getWeekEndDate = function (type = 0) {
+const getWeekEndDate = function (type = 0) {
   return new VenDate().getWeekEndDate(type);
 };
 
 /**
  * 获得本月或指定月份的开始日期
- * @param y {string|number} 年
- * @param m {string|number} 月
- * @returns {string}
+ * @param {string|number} y 年
+ * @param {string|number} m 月
+ * @returns {string} 日期
  */
-export const getMonthStartDate = function (y, m) {
+const getMonthStartDate = function (y, m) {
   return new VenDate().getMonthStartDate(y, m);
 };
 
 /**
  * 获得本月或指定月份的结束日期
- * @param y {string|number} 年
- * @param m {string|number} 月
- * @returns {string}
+ * @param {string|number} y 年
+ * @param {string|number} m 月
+ * @returns {string} 日期
  */
-export const getMonthEndDate = function (y, m) {
+const getMonthEndDate = function (y, m) {
   return new VenDate().getMonthEndDate(y, m);
 };
 
 /**
  * 获得本季度的开始日期
- * @returns {string}
+ * @returns {string} 日期
  */
-export const getQuarterStartDate = function () {
+const getQuarterStartDate = function () {
   return new VenDate().getQuarterStartDate();
 };
 
 /**
  * 获得本季度的结束日期
- * @returns {string}
+ * @returns {string} 日期
  */
-export const getQuarterEndDate = function () {
+const getQuarterEndDate = function () {
   return new VenDate().getQuarterEndDate();
 };
 
 /**
  * 获得本年的开始日期
- * @returns {string}
+ * @returns {string} 日期
  */
-export const getYearStartDate = function () {
+const getYearStartDate = function () {
   return new VenDate().getYearStartDate();
 };
 
 /**
  * 获得本年的结束日期
- * @returns {string}
+ * @returns {string} 日期
  */
-export const getYearEndDate = function () {
+const getYearEndDate = function () {
   return new VenDate().getYearEndDate();
 };
 
 /**
- *
- * @param year {string|number} 年份
- * @param type {number} 类型 -1：第一天,1：最后一天
- * @returns {string}
+ * 获取指定年份的第一天或最后一天
+ * @param {string|number} year 年份
+ * @param {number} type 类型 -1：第一天,1：最后一天，默认：-1
+ * @returns {string} 日期
  */
-export const getFirstOrLastDayOfYear = function (year, type = -1) {
+const getFirstOrLastDayOfYear = function (year, type = -1) {
   year = year || new Date().getFullYear();
   if (type === -1) {
     return year + "-01-01";
@@ -480,10 +495,10 @@ export const getFirstOrLastDayOfYear = function (year, type = -1) {
 
 /**
  * 月份补零
- * @param month {string|number}
- * @returns {string}
+ * @param {string|number} month 月份
+ * @returns {string} 月份
  */
-export const doHandleMonth = function (month) {
+const doHandleMonth = function (month) {
   let m = month;
   if (month.toString().length === 1) {
     m = "0" + month;
@@ -493,10 +508,10 @@ export const doHandleMonth = function (month) {
 
 /**
  * 获取近三天、近一周、近一个月日期（包含当天）
- * @param len {number} 天数 1：当天 默认 3：近三天 7：近7天，30：近30天
- * @returns {string} 2022-02-22
+ * @param {number} len 天数, 1：当天 默认 3：近三天 7：近7天，30：近30天
+ * @returns {string} 日期
  */
-export function getBeforeDate(len = 1) {
+const getBeforeDate = function (len = 1) {
   let today = new Date();
   let year = today.getFullYear();
   let month = today.getMonth() + 1; //0-11表示1-12月
@@ -520,4 +535,28 @@ export function getBeforeDate(len = 1) {
   tMonth = doHandleMonth(tMonth + 1);
   tDay = doHandleMonth(tDay);
   return tYear + "-" + tMonth + "-" + tDay;
+}
+
+export {
+  formatDate,
+  getTimeSlot,
+  formatHMS,
+  getDays,
+  getMonthOfDays,
+  getYearOfDays,
+  getMonths,
+  getQuarterStartMonth,
+  getDayOfYear,
+  getDayOfYearWeek,
+  getWeekStartDate,
+  getWeekEndDate,
+  getMonthStartDate,
+  getMonthEndDate,
+  getQuarterStartDate,
+  getQuarterEndDate,
+  getYearStartDate,
+  getYearEndDate,
+  getFirstOrLastDayOfYear,
+  doHandleMonth,
+  getBeforeDate,
 }

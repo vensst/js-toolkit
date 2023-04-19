@@ -1,20 +1,20 @@
 /**
- * 根据区间，获取随机整数(包含最大值、最大值)
- * @param min {number} 最小值 默认：0
- * @param max {number} 最大值 默认：1
+ * 根据区间获取随机整数(包含最大值、最大值)
+ * @param {number} min 最小值 默认：0
+ * @param {number} max 最大值 默认：1
  * @returns {number}
  */
-export const randomNum = function (min = 0, max = 1) {
+const randomNum = function (min = 0, max = 1) {
   let random = Math.floor(min + Math.random() * (max + 1 - min));
   return random;
 };
 
 /**
  * 将阿拉伯数字翻译成中文大写数字
- * @param num {number|string} 数字
+ * @param {number|string} num 数字
  * @returns {string}
  */
-export const numberToChinese = function (num) {
+const numberToChinese = function (num) {
   if (!/^\d*(\.\d*)?$/.test(num)) {
     return "期望是一个 number/string 类型的阿拉伯数字";
   }
@@ -56,10 +56,10 @@ export const numberToChinese = function (num) {
 
 /**
  * 将阿拉伯数字数字金额转为中文大写金额
- * @param num {number|string} 数字金额
+ * @param {number|string} num 数字金额
  * @returns {string}
  */
-export const numberCurrencyToChinese = function (num) {
+const numberCurrencyToChinese = function (num) {
   //判断如果传递进来的不是字符的话转换为字符
   if (typeof num == "number") {
     num = String(num);
@@ -210,18 +210,25 @@ export const numberCurrencyToChinese = function (num) {
 
 /**
  * @desc 将数字千分位分割
- * @param num {number|string} 数字
+ * @param {number|string} num 数字
  * @returns {*|string}
  */
-export function thousandSeparator(num) {
+const thousandSeparator = function (num) {
   return (
     num &&
     (num.toString().indexOf(".") !== -1
       ? num.toString().replace(/(\d)(?=(\d{3})+\.)/g, function ($1, $2) {
-          return $2 + ",";
-        })
+        return $2 + ",";
+      })
       : num.toString().replace(/(\d)(?=(\d{3})+\b)/g, function ($1, $2) {
-          return $2 + ",";
-        }))
+        return $2 + ",";
+      }))
   );
+}
+
+export {
+  randomNum,
+  numberToChinese,
+  numberCurrencyToChinese,
+  thousandSeparator
 }

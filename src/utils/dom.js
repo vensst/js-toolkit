@@ -1,76 +1,110 @@
 /**
  * 查找dom元素
- * @param selector {string} 选择器
- * @returns {HTMLElement|NodeListOf<*>|HTMLCollectionOf<Element>|*}
+ * @param {string|Element} selector 选择器
+ * @returns {Element|NodeListOf<Element>|null} 返回元素或元素集合
  */
-export const $ = function (selector) {
-  let type = selector.substring(0, 1);
-  if (type === "#") {
-    if (document.querySelecotor) return document.querySelector(selector);
-    return document.getElementById(selector.substring(1));
-  } else if (type === ".") {
-    if (document.querySelecotorAll) return document.querySelectorAll(selector);
-    return document.getElementsByClassName(selector.substring(1));
+const $ = function (selector) {
+  if (!selector) return null;
+  if (typeof selector === "string") {
+    const nodeList = document.querySelectorAll(selector)
+    return nodeList.length === 1 ? nodeList[0] : nodeList
+  } else if (selector instanceof Element) {
+    return selector;
   } else {
-    return document[
-      "querySelectorAll" ? "querySelectorAll" : "getElementsByTagName"
-    ](selector);
+    return null;
   }
 };
 
 /**
  * 检测类名，校验指定元素的类名是否包含指定的类名
- * @param ele {Dom} 元素
- * @param name {string} 类名
- * @returns {RegExpMatchArray}
+ * @param {Element} ele dom元素
+ * @param {string} name 类名
+ * @returns {boolean} true/false
  */
-export const hasClass = function (ele, name) {
-  // return ele.classList.contains(name);
-  return ele.className.match(new RegExp("(\\s|^)" + name + "(\\s|$)"));
+const hasClass = function (ele, name) {
+  if (ele && name) {
+    return ele.classList?.contains(name) || false;
+  } else return false;
+  // return ele.className.match(new RegExp("(\\s|^)" + name + "(\\s|$)"));
 };
 
 /**
  * 添加类名
- * @param ele {Dom} 元素
- * @param name {string} 类名
+ * @param {Element|NodeList} ele 元素
+ * @param {string} name 类名
  */
-export const addClass = function (ele, name) {
-  if (!hasClass(ele, name)) ele.className += " " + name;
-};
-
-/**
- * 删除类名
- * @param ele {Dom} 元素
- * @param name {string} 类名
- */
-export const removeClass = function (ele, name) {
-  if (hasClass(ele, name)) {
-    let reg = new RegExp("(\\s|^)" + name + "(\\s|$)");
-    ele.className = ele.className.replace(reg, "");
+const addClass = function (ele, name) {
+  const ac = function (ele, name) {
+    if (!hasClass(ele, name)) {
+      ele.className += " " + name;
+    }
+  }
+  try {
+    if (ele instanceof Element) {
+      ac(ele, name)
+    } else if (ele instanceof NodeList) {
+      ele.forEach(item => {
+        ac(item, name)
+      })
+    }
+  } catch (e) {
   }
 };
 
 /**
- * 替换类名
- * @param ele {Dom} 元素
- * @param newName {string} 新类名
- * @param oldName {string} 旧类名
+ * 删除类名
+ * @param {Element|NodeList} ele 元素
+ * @param {string} name 类名
  */
-export const replaceClass = function (ele, newName, oldName) {
+const removeClass = function (ele, name) {
+  let reg = new RegExp("(\\s|^)" + name + "(\\s|$)");
+  const rc = function (ele, name) {
+    if (hasClass(ele, name)) {
+      ele.className = ele.className.replace(reg, "");
+    }
+  }
+  try {
+    if (ele instanceof Element) {
+      rc(ele, name)
+    } else if (ele instanceof NodeList) {
+      ele.forEach(item => {
+        rc(item, name)
+      })
+    }
+  } catch (e) {
+  }
+
+};
+
+/**
+ * 替换类名
+ * @param {Element|NodeList} ele 元素
+ * @param {string} newName  新类名
+ * @param {string} oldName  旧类名
+ */
+const replaceClass = function (ele, newName, oldName) {
   removeClass(ele, oldName);
   addClass(ele, newName);
 };
 
 /**
  * 获取兄弟节点
- * @param ele {Dom} 元素
- * @returns {*[]}  兄弟节点数组
+ * @param {Element} ele dom元素
+ * @returns {*[]} 兄弟节点数组
  */
-export const siblings = function (ele) {
-  let chid = ele.parentNode.children,
+const siblings = function (ele) {
+  if (!ele) return [];
+  let _ele;
+  if (ele instanceof Element) {
+    _ele = ele
+  }
+  if (ele instanceof NodeList) {
+    _ele = ele[0]
+  }
+  let chid = _ele.parentNode.children,
     eleMatch = [];
   for (let i = 0, len = chid.length; i < len; i++) {
-    if (chid[i] !== ele) {
+    if (chid[i] !== _ele) {
       eleMatch.push(chid[i]);
     }
   }
@@ -79,30 +113,51 @@ export const siblings = function (ele) {
 
 /**
  * 获取行间样式属性
- * @param ele {Dom} 元素
- * @param name {string} 属性名
+ * @param {Element} ele 元素
+ * @param {string} name 属性名
  * @returns {*} 属性值
  */
-export const getByStyle = function (ele, name) {
-  if (ele.currentStyle) {
-    return ele.currentStyle[name];
-  } else {
-    return getComputedStyle(ele, false)[name];
+const getByStyle = function (ele, name) {
+  if(ele instanceof Element){
+    if (ele.style) {
+      return ele.style[name];
+    } else {
+      return getComputedStyle(ele, null)[name];
+    }
   }
 };
 
 /**
  * 在指定元素之后插入新元素
- * @param el {Dom} 元素
- * @param htmlString {string} 插入元素
+ * @param {Element} el 元素
+ * @param {string} htmlString 插入的元素
  */
-export const elInsertAfter = (el, htmlString) =>
-  el.insertAdjacentHTML("afterend", htmlString);
+const elInsertAfter = function (el, htmlString) {
+  if(el&&htmlString){
+    el.insertAdjacentHTML("afterend", htmlString)
+  }
+}
 
 /**
  * 在指定元素之前插入新元素
- * @param el {Dom} 当前元素
- * @param htmlString {string} 插入元素
+ * @param {Element} el 当前元素
+ * @param {string} htmlString 插入元素
  */
-export const elInsertBefore = (el, htmlString) =>
-  el.insertAdjacentHTML("beforebegin", htmlString);
+const elInsertBefore = function (el, htmlString) {
+  if(el&&htmlString){
+    el.insertAdjacentHTML("beforebegin", htmlString);
+  }
+}
+
+export {
+  $,
+  hasClass,
+  addClass,
+  removeClass,
+  replaceClass,
+  siblings,
+  getByStyle,
+  elInsertAfter,
+  elInsertBefore
+}
+

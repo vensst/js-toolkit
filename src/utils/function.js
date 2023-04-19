@@ -58,12 +58,12 @@
 
 /**
  * 函数防抖
- * @param fun {Function} 需要被防抖的函数
- * @param wait {number} 防抖的时间（毫秒） 默认：500
- * @param immediate {boolean} 是否立即执行 默认：true
- * @returns {function(...[*]): *} 返回一个新的函数
+ * @param {Function} fun 需要被防抖的函数
+ * @param {number} wait  防抖的时间（毫秒） 默认：500
+ * @param {boolean} immediate  是否立即执行 默认：true
+ * @returns {Function} 返回新的 debounced（防抖动）函数
  */
-export const debounce = function (fun, wait = 500, immediate = true) {
+const debounce = function (fun, wait = 500, immediate = true) {
   let timeout, args, context, timestamp, result;
   const later = function () {
     // 据上一次触发时间间隔
@@ -76,7 +76,7 @@ export const debounce = function (fun, wait = 500, immediate = true) {
       timeout = null;
       // 如果设定为immediate===true，因为开始边界已经调用过了此处无需调用
       if (!immediate) {
-        result = func.apply(context, args);
+        result = fun.apply(context, args);
         if (!timeout) context = args = null;
       }
     }
@@ -88,7 +88,7 @@ export const debounce = function (fun, wait = 500, immediate = true) {
     // 如果延时不存在，重新设定延时
     if (!timeout) timeout = setTimeout(later, wait);
     if (callNow) {
-      result = func.apply(context, args);
+      result = fun.apply(context, args);
       context = args = null;
     }
 
@@ -162,11 +162,11 @@ export const debounce = function (fun, wait = 500, immediate = true) {
 
 /**
  * 函数节流
- * @param fun {Function} 需要被节流的函数
- * @param wait {number} 节流的时间（毫秒） 默认：500
- * @returns {(function(): void)|*} 返回一个新的函数
+ * @param {Function} fun 需要被节流的函数
+ * @param {number} wait 节流的时间（毫秒） 默认：500
+ * @returns {Function} 返回一个新的函数
  */
-export const throttle = (fun, wait = 500) => {
+const throttle = function (fun, wait = 500) {
   let last, timer;
   return function () {
     let args = arguments;
@@ -182,4 +182,9 @@ export const throttle = (fun, wait = 500) => {
       fun.apply(this, args);
     }
   };
+};
+
+export {
+  debounce,
+  throttle
 };

@@ -2,50 +2,50 @@ import * as math from "mathjs";
 
 /**
  * 两个数相加
- * @param a {number} 第一个数
- * @param b {number} 第二个数
- * @return {*} 相加后的数字
+ * @param {number} a 第一个数
+ * @param {number} b 第二个数
+ * @returns {*} 相加后的数字
  */
-export const add = (a, b) => {
+const add = function (a, b) {
   return math.format(math.add(math.bignumber(a), math.bignumber(b)));
 };
 
 /**
  * 两个数相减
- * @param a {number} 第一个数
- * @param b {number} 第二个数
- * @return {*} 相减后的数字
+ * @param {number} a 第一个数
+ * @param {number} b 第二个数
+ * @returns {*} 相减后的数字
  */
-export const subtract = (a, b) => {
+const subtract = function (a, b) {
   return math.format(math.subtract(math.bignumber(a), math.bignumber(b)));
 };
 
 /**
  * 两个数相乘
- * @param a {number} 第一个数
- * @param b {number} 第二个数
- * @return {*} 相乘后的数字
+ * @param {number} a 第一个数
+ * @param {number} b 第二个数
+ * @returns {*} 相乘后的数字
  */
-export const multiply = (a, b) => {
+const multiply = function (a, b) {
   return math.format(math.multiply(math.bignumber(a), math.bignumber(b)));
 };
 
 /**
  * 两个相除
- * @param a {number} 第一个数
- * @param b {number} 第二个数
- * @return {*} 相除后的数字
+ * @param {number} a 第一个数
+ * @param {number} b 第二个数
+ * @returns {*} 相除后的数字
  */
-export const divide = (a, b) => {
+const divide = function (a, b) {
   return math.format(math.divide(math.bignumber(a), math.bignumber(b)));
 };
 
 /**
  * 数组求和
- * @param arr {number[]}
- * @returns {number}
+ * @param {number[]} arr 数组
+ * @returns {number} 和
  */
-export const sum = function (arr) {
+const sum = function (arr) {
   return arr.reduce(function (prev, cur) {
     return add(prev, cur);
   }, 0);
@@ -53,19 +53,19 @@ export const sum = function (arr) {
 
 /**
  * 求数组中数值平均值
- * @param arr {number[]}
- * @returns {number}
+ * @param {number[]} arr 数组
+ * @returns {number} 平均值
  */
-export const average = function (arr) {
+const average = function (arr) {
   return sum(arr) / arr.length;
 };
 
 /**
  * 获取数组中最大值
- * @param arr {number[]}
- * @returns {number}
+ * @param {number[]} arr 数组
+ * @returns {number} 最大值
  */
-export const max = function (arr) {
+const max = function (arr) {
   //1.
   // return Math.max(...arr)
   //2.
@@ -79,20 +79,20 @@ export const max = function (arr) {
 
 /**
  * 获取数组中取最小值
- * @param arr {number[]}
- * @returns {number}
+ * @param {number[]} arr 数组
+ * @returns {number} 最小值
  */
-export const min = function (arr) {
+const min = function (arr) {
   return Math.min.apply(null, arr);
 };
 
 /**
  * 向上取整
- * @param num {number} 数字 默认：0
- * @param precision {number} 精度 默认：0
- * @return {number} 向上取整后的数字
+ * @param {number} num 数字 默认：0
+ * @param {number} precision 精度 默认：0
+ * @returns {number} 向上取整后的数字
  */
-export const ceil = function (num = 0, precision = 0) {
+const ceil = function (num = 0, precision = 0) {
   return math.format(math.ceil(math.bignumber(num), precision));
   // let multiplier = Math.pow(10, precision || 0);
   // return Math.ceil(num * multiplier) / multiplier;
@@ -100,11 +100,11 @@ export const ceil = function (num = 0, precision = 0) {
 
 /**
  * 向下取整
- * @param num {number} 数字 默认：0
- * @param precision {number} 精度 默认：0
- * @return {number} 向下取整后的数字
+ * @param {number} num 数字 默认：0
+ * @param {number} precision 精度 默认：0
+ * @returns {number} 向下取整后的数字
  */
-export const floor = function (num = 0, precision = 0) {
+const floor = function (num = 0, precision = 0) {
   return math.format(math.floor(math.bignumber(num), precision));
   // let multiplier = Math.pow(10, precision || 0);
   // return Math.floor(num * multiplier) / multiplier;
@@ -112,11 +112,11 @@ export const floor = function (num = 0, precision = 0) {
 
 /**
  * 保留小数点后几位，不考虑四舍五入
- * @param num {number} 数字 默认：0
- * @param precision {number} 精度 默认：0
- * @return {number} 保留小数点后几位的数字
+ * @param {number} num 数值 默认：0
+ * @param {number} precision 精度 默认：0
+ * @returns {number} 保留小数点后几位的数字
  */
-export const decimal = function (num = 0, precision = 0) {
+const decimal = function (num = 0, precision = 0) {
   const _num = num.toString();
   let _newNum = 0;
   if (_num.indexOf(".") > -1) {
@@ -133,3 +133,27 @@ export const decimal = function (num = 0, precision = 0) {
   } else _newNum = _num;
   return Number(_newNum);
 };
+
+/**
+ * 保留小数点后几位，四舍五入
+ * @param {number|string} num 数值
+ * @param {number} precision 保留小数位数，默认保留3位小数
+ * @returns {number} 保留小数点后几位的数字
+ */
+const round = function (num = 0, precision = 0) {
+  return math.round(num, precision)
+}
+export {
+  add,
+  subtract,
+  multiply,
+  divide,
+  sum,
+  average,
+  max,
+  min,
+  ceil,
+  floor,
+  decimal,
+  round
+}

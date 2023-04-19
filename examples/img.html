@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<title>Document</title>
+</head>
+<body>
+<script type="module">
+  import {
+    scaleImg,
+    imgLoadAll
+  } from "../src/utils/img.js";
+
+  console.log('--scaleImg--', scaleImg(200, 200, 600, 400))
+  const arr = [
+    '//fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
+    '//fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
+  ]
+  imgLoadAll(arr, function () {
+    console.log("--imgLoadAll--", "加载完成")
+  })
+</script>
+</body>
+</html>

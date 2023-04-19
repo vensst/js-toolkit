@@ -1,11 +1,11 @@
-import { $ } from "./dom";
+import {$} from "./dom.js";
 
 /**
  * 深克隆
- * @param data {*} 要克隆的数据
+ * @param {*} data 要克隆的数据
  * @return {*} 返回克隆后的数据
  */
-export const deepClone = function (data) {
+const deepClone = function (data) {
   if (data === null) return data;
   if (data instanceof Date) return new Date(data);
   if (data instanceof RegExp) return new RegExp(data);
@@ -19,11 +19,12 @@ export const deepClone = function (data) {
   }
   return newData;
 };
+
 /**
  * 获取十六进制随机颜色
- * @returns {string}
+ * @returns {string} 颜色值
  */
-export const getRandomColor = function () {
+const getRandomColor = function () {
   // let n = (Math.random() * 0xfffff * 1000000).toString(16);
   // return '#' + n.slice(0, 6);
   return (
@@ -36,10 +37,10 @@ export const getRandomColor = function () {
 
 /**
  * 音频加载
- * @param src
- * @param callback
+ * @param {string} src 音频地址
+ * @param {Function} callback 回调函数
  */
-export const loadAudio = function (src, callback) {
+const loadAudio = function (src, callback) {
   let audio = new Audio(src);
   audio.onloadedmetadata = callback;
   audio.src = src;
@@ -47,10 +48,10 @@ export const loadAudio = function (src, callback) {
 
 /**
  * DOM转字符串
- * @param htmlDOM
+ * @param {Element} htmlDOM DOM
  * @returns {string}
  */
-export const domToStirng = function (htmlDOM) {
+const domToString = function (htmlDOM) {
   let div = document.createElement("div");
   div.appendChild(htmlDOM);
   return div.innerHTML;
@@ -61,7 +62,7 @@ export const domToStirng = function (htmlDOM) {
  * @param htmlString
  * @returns {Element}
  */
-export const stringToDom = function (htmlString) {
+const stringToDom = function (htmlString) {
   let div = document.createElement("div");
   div.innerHTML = htmlString;
   return div.children[0];
@@ -69,11 +70,11 @@ export const stringToDom = function (htmlString) {
 
 /**
  * 光标所在位置插入字符，并设置光标位置
- * @param dom 输入框
- * @param val 插入的值
- * @param posLen 光标位置处在 插入的值的哪个位置
+ * @param {Element} dom 输入框
+ * @param {string} val 插入的值
+ * @param {number} posLen 光标位置处在 插入的值的哪个位置
  */
-export const setCursorPosition = function (dom, val, posLen) {
+const setCursorPosition = function (dom, val, posLen) {
   let cursorPosition = 0;
   if (dom.selectionStart) {
     cursorPosition = dom.selectionStart;
@@ -88,10 +89,10 @@ export const setCursorPosition = function (dom, val, posLen) {
 
 /**
  * 光标所在位置插入字符
- * @param dom
- * @param val
+ * @param {Element} dom
+ * @param {string} val
  */
-export const insertAtCursor = function (dom, val) {
+const insertAtCursor = function (dom, val) {
   let sel;
   if (document.selection) {
     dom.focus();
@@ -119,12 +120,12 @@ export const insertAtCursor = function (dom, val) {
 };
 
 /**
- * 转义`HTML
- * @param str
+ * 转义 HTML
+ * @param {string} str
  * @returns {*}
  */
-export const escapeHTML = (str) =>
-  str.replace(
+const escapeHTML = function (str) {
+  return str.replace(
     /[&<>'"]/g,
     (tag) =>
       ({
@@ -135,28 +136,34 @@ export const escapeHTML = (str) =>
         '"': "&quot;",
       }[tag] || tag)
   );
+}
+
 
 /**
- * 返回当前的滚动位置
- * @param el {String} el 元素 默认window
+ * 获取当前的滚动位置
+ * @param {string} el 元素 默认window
  * @returns {{x: (number|number), y: (number|*)}} {Object} 对象  ex：{x: 0, y: 200}
  */
-export const getScrollPosition = (el = window) => ({
-  x: el.scrollLeft,
-  y: el.scrollTop,
-});
+const getScrollPosition = function (el = window) {
+  return {
+    x: el.scrollLeft,
+    y: el.scrollTop,
+  }
+};
 
 /**
  * 滚动到指定元素区域
- * @param element {string}
+ * @param {string} element
  */
-export const smoothScroll = (element) =>
-  document.querySelector(element).scrollIntoView({ behavior: "smooth" });
+const smoothScroll = function (element) {
+  return document.querySelector(element).scrollIntoView({behavior: "smooth"});
+}
+
 
 /**
  * 平滑滚动至顶部
  */
-export const scrollToTop = () => {
+const scrollToTop = function () {
   const c = document.documentElement.scrollTop || document.body.scrollTop;
   if (c > 0) {
     window.requestAnimationFrame(scrollToTop);
@@ -166,10 +173,10 @@ export const scrollToTop = () => {
 
 /**
  * 加入收藏夹
- * @param sURL {string} 网址
- * @param sTitle {string} 标题
+ * @param  {string} sURL 网址
+ * @param {string} sTitle 标题
  */
-export const addFavorite = function (sURL, sTitle) {
+const addFavorite = function (sURL, sTitle) {
   try {
     window.external.addFavorite(sURL, sTitle);
   } catch (e) {
@@ -183,12 +190,12 @@ export const addFavorite = function (sURL, sTitle) {
 
 /**
  * 动态加载脚本文件
- * @param src {string} 地址
- * @param text {string} 文本
- * @param reload {string} 是否重新加载
- * @param charset {string} 编码
+ * @param {string} src 地址
+ * @param {string} text 文本
+ * @param {string} reload 是否重新加载
+ * @param {string} charset 编码
  */
-export const appendScript = function (src, text, reload, charset) {
+const appendScript = function (src, text, reload, charset) {
   let id = hash(src + text);
   if (!reload && in_array(id, evalscripts)) return;
   if (reload && $(id)) {
@@ -202,8 +209,8 @@ export const appendScript = function (src, text, reload, charset) {
   scriptNode.charset = charset
     ? charset
     : BROWSER.firefox
-    ? document.characterSet
-    : document.charset;
+      ? document.characterSet
+      : document.charset;
   try {
     if (src) {
       scriptNode.src = src;
@@ -226,15 +233,37 @@ export const appendScript = function (src, text, reload, charset) {
       scriptNode.text = text;
     }
     document.getElementsByTagName("head")[0].appendChild(scriptNode);
-  } catch (e) {}
+  } catch (e) {
+  }
 };
+
+/**
+ * 简单base64编码
+ * @param {string} str 需要编码的字符串
+ * @returns {string} 返回编码后的字符串
+ * @version 1.1.0-beta.7
+ */
+const btoa = function (str) {
+  return window.btoa(encodeURIComponent(str));
+}
+
+/**
+ * 简单base64解码
+ * @param {string} str 通过btoa编码后的字符串
+ * @returns {string} 解码后的字符串
+ * @version 1.1.0-beta.7
+ */
+const atob = function (str) {
+  return decodeURIComponent(window.atob(str));
+}
+
 
 /**
  * 实现 base64 解码
  * @param data {string} 地址
  * @returns {string|*}
  */
-export const base64_decode = function (data) {
+const base64_decode = function (data) {
   let b64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
   let o1,
     o2,
@@ -279,7 +308,7 @@ export const base64_decode = function (data) {
  * @param str_data
  * @returns {string}
  */
-export const utf8_decode = function (str_data) {
+const utf8_decode = function (str_data) {
   let tmp_arr = [],
     i = 0,
     ac = 0,
@@ -310,11 +339,11 @@ export const utf8_decode = function (str_data) {
 
 /**
  * 版本对比
- * @param v1
- * @param v2
+ * @param {string} v1 版本号
+ * @param  {string}  v2 版本号
  * @returns {number}
  */
-export const compareVersion = function (v1, v2) {
+const compareVersion = function (v1, v2) {
   v1 = v1.split(".");
   v2 = v2.split(".");
 
@@ -343,11 +372,11 @@ export const compareVersion = function (v1, v2) {
 
 /**
  * 根据窗口大小自适应字体大小 用于大屏图表中的文案字体大小计算
- * @param val {number} 初始字体大小 默认：16
- * @param initWidth {number} 初始宽度 默认：1920
+ * @param {number} val 初始字体大小 默认：16
+ * @param {number} initWidth 初始宽度 默认：1920
  * @returns {number} 返回计算后字体大小
  */
-export const resizeFontSize = function (val = 16, initWidth = 1920) {
+const resizeFontSize = function (val = 16, initWidth = 1920) {
   let nowClientWidth = document.documentElement.clientWidth;
   // 换算方法
   return val * (nowClientWidth / initWidth);
@@ -357,9 +386,9 @@ export const resizeFontSize = function (val = 16, initWidth = 1920) {
  * 浏览器窗口变化页面缩放（数据可视化大屏用）
  * 注意：需要在页面中添加<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
  *
- * @param options {object} 参数 {id: 元素id, width : 标准/设计稿/实际宽度 默认：1920, height : 标准/设计稿/实际高度  默认：1080,mode: 缩放模式(scaleToFill：拉满全屏缩放 默认, aspectFit：等比缩放)}
+ * @param {object} options 参数 {id: 元素id, width : 标准/设计稿/实际宽度 默认：1920, height : 标准/设计稿/实际高度  默认：1080,mode: 缩放模式(scaleToFill：拉满全屏缩放 默认, aspectFit：等比缩放)}
  */
-export const resizeViewScale = function (options) {
+const resizeViewScale = function (options) {
   if (!options.id) return;
   let opt = {
     id: options.id,
@@ -384,7 +413,7 @@ export const resizeViewScale = function (options) {
   // $("body").css({'overflow':'hidden'})
 };
 
-// export const resize2 = function () {
+// const resize2 = function () {
 //   var fn = function() {
 //     var w = document.documentElement
 //         ? document.documentElement.clientWidth
@@ -409,3 +438,25 @@ export const resizeViewScale = function (options) {
 //   }
 //   fn();
 // }
+export {
+  deepClone,
+  getRandomColor,
+  loadAudio,
+  domToString,
+  stringToDom,
+  setCursorPosition,
+  insertAtCursor,
+  escapeHTML,
+  getScrollPosition,
+  smoothScroll,
+  scrollToTop,
+  addFavorite,
+  appendScript,
+  btoa,
+  atob,
+  base64_decode,
+  utf8_decode,
+  compareVersion,
+  resizeFontSize,
+  resizeViewScale
+}

@@ -4,14 +4,18 @@
 	<meta charset="UTF-8">
 	<title>Title</title>
 	<link rel="stylesheet" href="./index.css">
-	<script src="../lib/index.js"></script>
-
 </head>
-<body >
+<body>
 
+<script src="../lib/index.js"></script>
 <script>
-  console.log(jstk.Cookies.set( "name", "张三" ))
-  console.log(jstk.Cookies.get("name"))
+  const {Cookies} = window.jstk
+  console.log(jstk)
+  Cookies.set("name", "张三")
+  console.log(Cookies.get("name"))
+
+  Cookies.setJSON("userInfo", {name: "张三", age: 18},{expires: 7, path: '', domain: '*'} )
+  console.log(Cookies.getJSON("userInfo"))
 </script>
 </body>
 </html>

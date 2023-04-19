@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+
+</head>
+<body>
+
+<script src="../lib/index.js"></script>
+<script >
+  const {
+    add,
+    subtract,
+    multiply,
+    divide,
+    sum,
+    average,
+    max,
+    min,
+    ceil,
+    floor,
+    decimal,
+    round
+  } = window.jstk
+
+  // import {
+  //   add,
+  //   subtract,
+  //   multiply,
+  //   divide,
+  //   sum,
+  //   average,
+  //   max,
+  //   min,
+  //   ceil,
+  //   floor,
+  //   decimal,
+  //   round
+  // } from '../src/utils/math.js'
+
+
+  console.log('--add--', add(0.4, 0.1))
+  console.log('--subtract--', subtract(0.4, 0.1))
+  console.log('--multiply--', multiply(0.4, 0.1))
+  console.log('--divide--', divide(0.4, 0.1))
+  console.log('--sum--', sum([8, 2]))
+  console.log('--average--', average([8, 2]))
+  console.log('--max--', max([8, 2]))
+  console.log('--min--', min([8, 2]))
+
+  console.log('--ceil--', ceil(3.1415926, 2))
+  console.log('--floor--', floor(3.1415926, 2))
+  console.log('--decimal--', decimal(3.1415926, 2), decimal(3.1415926, 3))
+  console.log('--round--', round(3.1415926), round(3.1415926, 3))
+
+
+</script>
+</body>
+</html>

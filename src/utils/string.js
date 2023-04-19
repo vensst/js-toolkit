@@ -1,12 +1,11 @@
 /**
  * 字符串脱敏
- * @param str {string}  需要脱敏字符串
- * @param startIndex {number}  脱敏起始位置
- * @param endIndex {number}  脱敏结束位置
- * @returns {string} 已脱敏字符串 / ''
+ * @param {string} str 需要脱敏字符串
+ * @param {number} startIndex  脱敏起始位置
+ * @param {number} endIndex  脱敏结束位置
+ * @returns {string} 已脱敏字符串
  */
-
-export const strHideCode = function (str, startIndex, endIndex) {
+const strHideCode = function (str, startIndex, endIndex) {
   if (str) {
     const len = str.length;
     const leftStr = str.substring(0, startIndex);
@@ -26,11 +25,11 @@ export const strHideCode = function (str, startIndex, endIndex) {
 
 /**
  * 字符串去除空格
- * @param str {string} 需要去除空格的字符串
- * @param type {number} 类型, 1:所有空格  2:前后空格 (默认)  3:前空格 4:后空格
- * @returns {*} 已去除的字符串
+ * @param {string} str 需要去除空格的字符串
+ * @param {number} type 类型, 1:所有空格  2:前后空格 (默认)  3:前空格 4:后空格
+ * @returns {string} 已去除的字符串
  */
-export const strTrim = function (str, type = 2) {
+const strTrim = function (str, type = 2) {
   switch (type) {
     case 1:
       return str.replace(/\s+/g, "");
@@ -47,11 +46,11 @@ export const strTrim = function (str, type = 2) {
 
 /**
  * 英文字母大小写转换
- * @param str {string}  需要转换的英文字符串
- * @param type {number} 类型, 1:首字母大写 (默认) 2:首页母小写  3:大小写转换  4:全部大写  5:全部小写
- * @returns {string|*}  已转换的英文字符串
+ * @param {string} str 需要转换的英文字符串
+ * @param {number} type 类型, 1:首字母大写 (默认) 2:首页母小写  3:大小写转换  4:全部大写  5:全部小写
+ * @returns {string|*} 已转换的英文字符串
  */
-export const strEnChangeCase = function (str, type = 1) {
+const strEnChangeCase = function (str, type = 1) {
   switch (type) {
     case 1:
       return str.replace(/\b\w+\b/g, function (word) {
@@ -87,10 +86,10 @@ export const strEnChangeCase = function (str, type = 1) {
 
 /**
  * 过滤 html代码(把 <、> 和 & 转换)
- * @param str {string}
+ * @param {string} str html字符串
  * @returns {*}
  */
-export const strFilterHtmlTag = function (str) {
+const strFilterHtmlTag = function (str) {
   str = str?.replace(/&/gi, "&amp;");
   str = str?.replace(/</gi, "&lt;");
   str = str?.replace(/>/gi, "&gt;");
@@ -99,15 +98,15 @@ export const strFilterHtmlTag = function (str) {
 };
 
 /**
- * 生成随机码（创建随机验证码）
- * @param length {number} 随机码长度
- * @param checkCode {string|number} 当前随机码（防止重复）
+ * 生成随机验证码
+ * @param {number} length 随机验证码的长度，默认4位
+ * @param {string|number} checkCode 当前随机码（防止重复）
  * @returns {string}
  */
-export function createCode(length = 4, checkCode) {
+const randomCode = function (length = 4, checkCode) {
   let code = "";
   const codeLength = parseInt(length);
-  const codeChars = [
+  const charset = [
     0,
     1,
     2,
@@ -174,13 +173,21 @@ export function createCode(length = 4, checkCode) {
   // 循环组成验证码的字符串
   for (let i = 0; i < codeLength; i++) {
     // 获取随机验证码下标
-    const charNum = Math.floor(Math.random() * codeChars.length);
+    const randomIndex = Math.floor(Math.random() * charset.length);
     // 组合成指定字符验证码
-    code += codeChars[charNum];
+    code += charset[randomIndex];
   }
   if (checkCode && checkCode === code) {
-    createCode(length, checkCode);
+    randomCode(length, checkCode);
   } else {
     return code;
   }
+}
+
+export {
+  strHideCode,
+  strTrim,
+  strEnChangeCase,
+  strFilterHtmlTag,
+  randomCode,
 }

@@ -10,21 +10,39 @@ export * from "./dom.js";
 export * from "./http.js";
 export * from "./file.js";
 export * from "./storage.js";
-// export * from "./img.js"
+export * from "./img.js"
 export * from "./other.js";
 
 /* 第三方库 */
 // js-cookie
-import * as Cookies from "js-cookie";
-export { Cookies };
+import Cookies from "js-cookie";
+
+Cookies.setJSON = function (key, value,options={}) {
+  try {
+    Cookies.set(key, JSON.stringify(value), options)
+  } catch (e) {
+    console.log(e)
+  }
+}
+Cookies.getJSON = function (key) {
+  try {
+    return JSON.parse(Cookies.get(key))
+  } catch (e) {
+    console.log(e)
+    return null
+  }
+}
+export {Cookies};
 
 // dayjs
 import dayjs from "dayjs";
-export { dayjs };
+
+export {dayjs};
 
 // mathjs
 import * as math from "mathjs";
-export { math };
+
+export {math};
 
 const Utils = {
   Cookies,

@@ -1,16 +1,9 @@
 /**
- * @name: url
- * @description：url.js
- * @date: 2022/5/26 18:44
- * @author: yf_hu
- */
-
-/**
- * 正则表达式获取 url 地址栏参数
- * @param name {string} 参数名
+ * 获取当前url地址栏指定参数
+ * @param {string} name 参数名
  * @returns {string|null}
  */
-export const getUrlParam = function (name) {
+const getUrlParam = function (name) {
   let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
   let r = decodeURI(window.location.search).substring(1).match(reg);
   if (r != null) return r[2];
@@ -18,38 +11,12 @@ export const getUrlParam = function (name) {
 };
 
 /**
- *
- * @param url {string|null} url地址
- * @returns {Object} 参数对象
+ * 删除指定url地址上指定参数
+ * @param {string} url url地址
+ * @param {string} name 参数名
+ * @returns {string|*} 返回新的url地址
  */
-export const getUrlAllParams = function (url) {
-  url = url == null ? window.location.href : url;
-  const search = url.substring(url.lastIndexOf("?") + 1);
-  const obj = {};
-  const reg = /([^?&=]+)=([^?&=]*)/g;
-  search.replace(reg, (rs, $1, $2) => {
-    const name = window.decodeURIComponent($1);
-    let val = window.decodeURIComponent($2);
-    val = String(val);
-    obj[name] = val;
-    return rs;
-  });
-  return obj;
-};
-
-/**
- * 删除 url 指定参数，返回url
- * @param url {string} url地址
- * @param name  {string} 参数名
- * @returns {string|*} 返回url
- */
-/**
- *
- * @param url {string} url地址
- * @param name {string} 参数名
- * @returns {string|*} 返回url
- */
-export const delParamsUrl = function (url, name) {
+const delUrlParam = function (url, name) {
   let baseUrl = url.split("?")[0] + "?";
   let query = url.split("?")[1];
   if (query.indexOf(name) > -1) {
@@ -71,3 +38,29 @@ export const delParamsUrl = function (url, name) {
     return url;
   }
 };
+
+/**
+ * 获取指定url地址上所有参数
+ * @param {string|null} url url地址
+ * @returns {Object} 参数对象
+ */
+const getAllParamsOfUrl = function (url) {
+  url = url == null ? window.location.href : url;
+  const search = url.substring(url.lastIndexOf("?") + 1);
+  const obj = {};
+  const reg = /([^?&=]+)=([^?&=]*)/g;
+  search.replace(reg, (rs, $1, $2) => {
+    const name = window.decodeURIComponent($1);
+    let val = window.decodeURIComponent($2);
+    val = String(val);
+    obj[name] = val;
+    return rs;
+  });
+  return obj;
+};
+
+export {
+  getUrlParam,
+  delUrlParam,
+  getAllParamsOfUrl
+}

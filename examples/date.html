@@ -13,32 +13,56 @@
 	<meta http-equiv="x-ua-compatible" content="IE=edge"/>
 	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
 	<title>Title</title>
-	<!--<script src="../lib/index.js"></script>-->
-
 </head>
 <body>
-<script>
-	// console.log(window.jstk)
-  // const date = new Date();
-  // const y = jstk.formatDate(date, 'YYYY')
-  // console.log(y);
-  // const yfd = jstk.getFirstOrLastDayOfYear(+y, -1)
-  // console.log(yfd);
-</script>
-<!--<script>-->
-<!--	const jstk = require('../lib/index.js')-->
-<!--	console.log(jstk)-->
-<!--</script>-->
-<script type="module" src="../lib/index.js">
-  // import {formatDate, getFirstOrLastDayOfYear} from '../lib/index.js'
-  // import{formatDate} from '../lib/index.js'
 
-  console.log(formatDate)
-  // const date = new Date();
-  // const y = formatDate(date, 'YYYY')
-  // console.log(y)
-  // const yfd = getFirstOrLastDayOfYear(+y, -1)
-  // console.log(yfd)
+<script type="module">
+  import {
+    formatDate,
+    getTimeSlot,
+    formatHMS,
+    getDays,
+    getMonthOfDays,
+    getYearOfDays,
+    getMonths,
+    getQuarterStartMonth,
+    getDayOfYear,
+    getDayOfYearWeek,
+    getWeekStartDate,
+    getWeekEndDate,
+    getMonthStartDate,
+    getMonthEndDate,
+    getQuarterStartDate,
+    getQuarterEndDate,
+    getYearStartDate,
+    getYearEndDate,
+    getFirstOrLastDayOfYear,
+    doHandleMonth,
+    getBeforeDate,
+  } from '../src/utils/date.js'
+
+  console.log('--formatDate--', formatDate(), formatDate('2020-9-9', 'YYYY/M/D h:m:s WW'))
+  console.log('--getTimeSlot--', getTimeSlot(), getTimeSlot(60))
+  console.log('--formatHMS--', formatHMS(), formatHMS(7200), formatHMS(7200, ["h", "m", "s"]))
+  console.log('--getDays--', getDays(), getDays('2023-1-1', 2, 3))
+  console.log('--getMonthOfDays--', getMonthOfDays(), getMonthOfDays(2022, 1))
+  console.log('--getYearOfDays--', getYearOfDays(),getYearOfDays(1992))
+  console.log('--getMonths--', getMonths(),getMonths(new Date('2022-1'), 2, 3))
+  console.log('--getQuarterStartMonth--', getQuarterStartMonth(),getQuarterStartMonth('2022-2'))
+  console.log('--getDayOfYear--', getDayOfYear(),getDayOfYear('2022-2-1'))
+  console.log('--getDayOfYearWeek--', getDayOfYearWeek(),getDayOfYearWeek('2022-2-1'))
+  console.log('--getWeekStartDate--', getWeekStartDate(),getWeekStartDate(-1),getWeekStartDate(1))
+  console.log('--getWeekEndDate--', getWeekEndDate(),getWeekEndDate(-1),getWeekEndDate(1))
+  console.log('--getMonthStartDate--', getMonthStartDate(),getMonthStartDate(2023,5))
+  console.log('--getMonthEndDate--', getMonthEndDate(),getMonthEndDate(2023,5))
+  console.log('--getQuarterStartDate--', getQuarterStartDate())
+  console.log('--getQuarterEndDate--', getQuarterEndDate())
+  console.log('--getYearStartDate--', getYearStartDate())
+  console.log('--getYearEndDate--', getYearEndDate())
+  console.log('--getFirstOrLastDayOfYear--', getFirstOrLastDayOfYear(),getFirstOrLastDayOfYear(2022,1))
+  console.log('--doHandleMonth--', doHandleMonth(4))
+  console.log('--getBeforeDate--', getBeforeDate(),getBeforeDate(3),getBeforeDate(7),getBeforeDate(30))
+
 </script>
 
 </body>

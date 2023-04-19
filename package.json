@@ -1,6 +1,6 @@
 {
   "name": "@vensst/js-toolkit",
-  "version": "1.1.0-beta.6",
+  "version": "1.1.0-beta.7",
   "description": "js常用工具类",
   "keywords": [
     "js工具类",
@@ -30,6 +30,7 @@
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.7.1",
     "html-webpack-plugin": "^5.5.0",
+    "jsdoc": "^4.0.2",
     "style-loader": "^3.3.1",
     "webpack": "^5.72.0",
     "webpack-cli": "^4.9.2",

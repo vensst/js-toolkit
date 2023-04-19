@@ -3,8 +3,6 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Title</title>
-	<link rel="stylesheet" href="./index.css">
-	<script src="../lib/index.js"></script>
 	<style>
     #app-main {
       height: 100%;
@@ -48,7 +46,8 @@
 		右侧
 	</div>
 </div>
-<script>
+<script type="module">
+  import {resizeViewScale} from "../src/utils/other.js"
 	let initResize = function () {
     let opt = {
       id: '#app-main',
@@ -56,9 +55,9 @@
       height: 1080,
       mode: "aspectFit"
     }
-    jstk.resizeViewScale(opt)
+    resizeViewScale(opt)
     window.onresize = function () {
-      jstk.resizeViewScale(opt)
+      resizeViewScale(opt)
     }
 
 	}

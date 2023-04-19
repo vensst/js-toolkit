@@ -4,15 +4,14 @@
 	<meta charset="UTF-8">
 	<title>Title</title>
 	<link rel="stylesheet" href="./index.css">
-	<script src="../lib/index.js"></script>
-
 </head>
 <body >
 
+<script src="../lib/index.js"></script>
 <script>
-	console.log(jstk.dayjs().format("YYYY-MM-DD HH:mm:ss"))
-	console.log(jstk.Cookies.set( "name", "张三" ))
-	console.log(jstk.Cookies.get("name"))
+  const {Cookies} = window.jstk
+  console.log(jstk)
+	console.log(dayjs().format("YYYY-MM-DD HH:mm:ss"))
 </script>
 </body>
 </html>

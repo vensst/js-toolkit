@@ -1,0 +1,89 @@
+<!--
+ * @Name: dom
+ * @Description: dom.html
+ * @Date: 2023/4/14 9:09
+ * @Author: yf_hu
+ * @LastEditors: yf_hu
+ * @LastEditTime: 2023/4/14 9:09
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+	<title>Title</title>
+	<style>
+    /* global styles */
+    :root {
+      --color-black-text: #333;
+      --color-white-background: #fff
+    }
+
+    * {
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 62.5%;
+      /*font-family: Microsoft YaHei, Arial, sans-serif;*/
+      /*阻止旋转屏幕时自动调整字体大小*/
+      -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+      /* 解决IOS默认滑动很卡的情况 */
+      -webkit-overflow-scrolling: touch;
+    }
+
+    html,
+    body {
+      /*width: 100%;*/
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-size: 14px;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue",
+      sans-serif;
+      color: var(--color-black-text);
+      background-color: var(--color-white-background);
+      line-height: 1.15;
+    }
+	</style>
+</head>
+<body>
+<div id="app" class="page">
+	这是一段内容 <br>
+	<span class="s1 s--style">我是span标签</span> <br>
+	<span class="s2 s--style">我是span标签2</span> <br>
+	<span class="s3 s--style" style="color: #e4393c;font-size: 18px">我是span标签3</span>
+</div>
+<script type="module">
+  import {
+    $,
+    hasClass,
+    addClass,
+    removeClass,
+    replaceClass,
+    siblings,
+    getByStyle,
+    elInsertAfter,
+    elInsertBefore
+  } from "../src/utils/dom.js"
+
+  console.log('--$--', $(), $("#app span"), $(".page .s1"), $(".page span"))
+  console.log('--hasClass--', hasClass(), hasClass($("#app"), "page"),hasClass($(".page span"), "page"))
+  console.log('--addClass--', addClass(), addClass($("#app"),'page--style'),addClass($(".page span"),'span--style'))
+  console.log('--removeClass--', removeClass(), removeClass($("#app"),'page--style'),removeClass($(".page span"),'span--style'))
+  console.log('--replaceClass--', replaceClass(),replaceClass($("#app"),'page--style1','page--style'),replaceClass($(".page span"),'s--style1','s--style') )
+  console.log('--siblings--', siblings(),siblings($("#app")),siblings($(".page span")))
+  console.log('--getByStyle--', getByStyle(),getByStyle($("#app .s3"),'color'),getByStyle($("#app .s3"),'font-size'))
+	console.log('--elInsertAfter--',elInsertAfter(),elInsertAfter($("#app .s1"),"<div>s1之后插入div</div>"))
+	console.log('--elInsertBefore--',elInsertBefore(),elInsertBefore($("#app .s1"),"<div>s1之前插入div</div>"))
+</script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!--
+ * @Name: other
+ * @Description: other.html
+ * @Date: 2023/4/17 13:45
+ * @Author: yf_hu
+ * @LastEditors: yf_hu
+ * @LastEditTime: 2023/4/17 13:45
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+	<title>Title</title>
+	<style>
+    /* global styles */
+    :root {
+      --color-black-text: #333;
+      --color-white-background: #fff
+    }
+
+    * {
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 62.5%;
+      /*font-family: Microsoft YaHei, Arial, sans-serif;*/
+      /*阻止旋转屏幕时自动调整字体大小*/
+      -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+      /* 解决IOS默认滑动很卡的情况 */
+      -webkit-overflow-scrolling: touch;
+    }
+
+    html,
+    body {
+      /*width: 100%;*/
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-size: 14px;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue",
+      sans-serif;
+      color: var(--color-black-text);
+      background-color: var(--color-white-background);
+      line-height: 1.15;
+    }
+	</style>
+</head>
+<body>
+<div id="app" class="page">
+	这是一段内容 <br>
+	<span class="s1 s--style">我是span标签</span> <br>
+	<span class="s2 s--style">我是span标签2</span> <br>
+	<span class="s3 s--style" style="color: #e4393c;font-size: 18px">我是span标签3</span>
+
+	<input type="text" value="value" >
+</div>
+<script type="module">
+	import {$} from "../src/utils/dom.js"
+  import {
+    deepClone,
+    getRandomColor,
+    loadAudio,
+    domToString,
+    stringToDom,
+    setCursorPosition,
+    insertAtCursor,
+    escapeHTML,
+    getScrollPosition,
+    smoothScroll,
+    scrollToTop,
+    addFavorite,
+    appendScript,
+    btoa,
+    atob,
+    base64_decode,
+    utf8_decode,
+    compareVersion,
+    resizeFontSize,
+    resizeViewScale
+  } from "../src/utils/other.js"
+
+  const obj = {
+    name: "zs",
+    id: 18,
+    children: [
+      {
+        name: "zs",
+        id: 18,
+      }
+    ]
+  }
+  console.log("--deepClone--", deepClone(obj), obj === deepClone(obj))
+  console.log("--getRandomColor--", getRandomColor())
+  // console.log("--loadAudio--")
+  console.log("--domToString--", domToString($('#app>.s3')))
+  console.log("--stringToDom--", stringToDom("<div>abc</div>"))
+  // console.log("--setCursorPosition--")
+  // console.log("--insertAtCursor--")
+  // console.log("--escapeHTML--")
+  // console.log("--getScrollPosition--")
+  // console.log("--smoothScroll--")
+  // console.log("--scrollToTop--")
+  // console.log("--addFavorite--")
+  // console.log("--appendScript--")
+  console.log("--btoa--",btoa('www.baidu.com?a=1&b=2'))
+  console.log("--atob--",atob(btoa('www.baidu.com?a=1&b=2')))
+  // console.log("--base64_decode--")
+  // console.log("--utf8_decode--")
+  // console.log("--compareVersion--")
+  console.log("--resizeFontSize--",resizeFontSize())
+  // console.log("--resizeViewScale--")
+</script>
+</body>
+</html>
