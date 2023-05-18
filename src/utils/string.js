@@ -45,7 +45,18 @@ const strTrim = function (str, type = 2) {
 };
 
 /**
- * 英文字母大小写转换
+ * 英文字母大写转换
+ * @param {string} str
+ * @returns {string}
+ * @version 1.1.0-beta.8
+ */
+const uppercaseFirst = function (str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+
+/**
+ * 英文字母大小写转换，如果是驼峰命名也会转换
  * @param {string} str 需要转换的英文字符串
  * @param {number} type 类型, 1:首字母大写 (默认) 2:首页母小写  3:大小写转换  4:全部大写  5:全部小写
  * @returns {string|*} 已转换的英文字符串
@@ -187,6 +198,7 @@ const randomCode = function (length = 4, checkCode) {
 export {
   strHideCode,
   strTrim,
+  uppercaseFirst,
   strEnChangeCase,
   strFilterHtmlTag,
   randomCode,

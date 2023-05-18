@@ -1,10 +1,10 @@
 <!--
- * @Name: string
- * @Description: string.html
- * @Date: 2023/4/17 14:46
+ * @Name: mathjs
+ * @Description: mathjs.html
+ * @Date: 2023/4/18 12:54
  * @Author: yf_hu
  * @LastEditors: yf_hu
- * @LastEditTime: 2023/4/17 14:46
+ * @LastEditTime: 2023/4/18 12:54
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -56,23 +56,45 @@
 	</style>
 </head>
 <body>
-<script type="module">
-  import {
-    strHideCode,
-    strTrim,
-    uppercaseFirst,
-    strEnChangeCase,
-    strFilterHtmlTag,
-    randomCode,
-  } from "../src/utils/string.js"
 
-  const str = " abc de fg "
-  console.log("--strHideCode--", strHideCode(str,5,7))
-  console.log("--strTrim--", strTrim(str,1))
-  console.log("--uppercaseFirst--", uppercaseFirst(str,1))
-  console.log("--strEnChangeCase--", strEnChangeCase(str),strEnChangeCase(str,4),'userName转'+strEnChangeCase('userName'))
-  // console.log("--strFilterHtmlTag--")
-  console.log("--randomCode--",randomCode())
+<script src="../lib/index.js"></script>
+<script>
+	const {math} = window.jstk
+  // 加
+  function add(num1,num2){
+    return math.format(math.add(math.bignumber(num1),math.bignumber(num2)));
+  }
+  // 减
+  function subtract(num1,num2){
+    return math.format(math.subtract(math.bignumber(num1),math.bignumber(num2)));
+  }
+  // 乘
+  function multiply(num1,num2){
+    return math.format(math.multiply(math.bignumber(num1),math.bignumber(num2)));
+  }
+  // 除
+  function divide(num1,num2){
+    return math.format(math.divide(math.bignumber(num1),math.bignumber(num2)));
+  }
+
+  console.log("-----------------------------------------------------")
+  console.log(math.add(0.1,0.3))
+  console.log(math.subtract(0.3,0.1))
+  console.log(math.multiply(2,3))
+  console.log(math.divide(8,2))
+
+
+  console.log("-----------------------------------------------------")
+  console.log(add(0.1,0.3))
+  console.log(subtract(0.3,0.1))
+  console.log(multiply(2,3))
+  console.log(divide(8,2))
+
+  console.log("-----------------------------------------------------")
+  console.log(math.bignumber(0.4))
+  console.log(math.format(math.bignumber(0.4)))
+  console.log(math.evaluate('0.1 + 0.2'))
+
 </script>
 </body>
 </html>

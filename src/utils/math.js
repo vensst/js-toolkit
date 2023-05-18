@@ -4,7 +4,7 @@ import * as math from "mathjs";
  * 两个数相加
  * @param {number} a 第一个数
  * @param {number} b 第二个数
- * @returns {*} 相加后的数字
+ * @returns {string} 相加后的数字
  */
 const add = function (a, b) {
   return math.format(math.add(math.bignumber(a), math.bignumber(b)));
@@ -14,7 +14,7 @@ const add = function (a, b) {
  * 两个数相减
  * @param {number} a 第一个数
  * @param {number} b 第二个数
- * @returns {*} 相减后的数字
+ * @returns {string} 相减后的数字
  */
 const subtract = function (a, b) {
   return math.format(math.subtract(math.bignumber(a), math.bignumber(b)));
@@ -24,7 +24,7 @@ const subtract = function (a, b) {
  * 两个数相乘
  * @param {number} a 第一个数
  * @param {number} b 第二个数
- * @returns {*} 相乘后的数字
+ * @returns {string} 相乘后的数字
  */
 const multiply = function (a, b) {
   return math.format(math.multiply(math.bignumber(a), math.bignumber(b)));
@@ -34,7 +34,7 @@ const multiply = function (a, b) {
  * 两个相除
  * @param {number} a 第一个数
  * @param {number} b 第二个数
- * @returns {*} 相除后的数字
+ * @returns {string} 相除后的数字
  */
 const divide = function (a, b) {
   return math.format(math.divide(math.bignumber(a), math.bignumber(b)));
@@ -43,7 +43,7 @@ const divide = function (a, b) {
 /**
  * 数组求和
  * @param {number[]} arr 数组
- * @returns {number} 和
+ * @returns {string} 和
  */
 const sum = function (arr) {
   return arr.reduce(function (prev, cur) {
@@ -90,7 +90,7 @@ const min = function (arr) {
  * 向上取整
  * @param {number} num 数字 默认：0
  * @param {number} precision 精度 默认：0
- * @returns {number} 向上取整后的数字
+ * @returns {string} 向上取整后的数字
  */
 const ceil = function (num = 0, precision = 0) {
   return math.format(math.ceil(math.bignumber(num), precision));
@@ -102,7 +102,7 @@ const ceil = function (num = 0, precision = 0) {
  * 向下取整
  * @param {number} num 数字 默认：0
  * @param {number} precision 精度 默认：0
- * @returns {number} 向下取整后的数字
+ * @returns {string} 向下取整后的数字
  */
 const floor = function (num = 0, precision = 0) {
   return math.format(math.floor(math.bignumber(num), precision));

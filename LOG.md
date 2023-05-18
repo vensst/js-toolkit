@@ -1,4 +1,8 @@
 # 更新日志
+## 1.1.0-beta.8 (2023-5-18)
+### Features
+* 新增 uppercaseFirst、numberFormatter、timeAgo
+
 ## 1.1.0-beta.7 (2023-4-12)
 ### Bug Fixes
 * 修复防抖函数使用报错问题

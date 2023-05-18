@@ -61,13 +61,17 @@
     randomNum,
     numberToChinese,
     numberCurrencyToChinese,
-    thousandSeparator
+    thousandSeparator,
+    numberFormatter,
+	  timeAgo
   } from "../src/utils/number.js"
 
   console.log("--randomNum--", randomNum(1, 100))
   console.log("--numberToChinese--", numberToChinese(31415926))
   console.log("--numberCurrencyToChinese--", numberCurrencyToChinese(31415926))
-  console.log("--thousandSeparator--", thousandSeparator(31415926))
+  console.log("--thousandSeparator--", thousandSeparator(31415926), thousandSeparator(31415926.12233655))
+  console.log("--numberFormatter--", numberFormatter(31415926))
+  console.log("--timeAgo--", timeAgo(new Date('2023-5-17')))
 </script>
 </body>
 </html>

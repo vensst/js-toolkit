@@ -226,9 +226,72 @@ const thousandSeparator = function (num) {
   );
 }
 
+/**
+ * 数字格式化
+ * @param {number} num 数字
+ * @param {number} digits 保留小数位数
+ * @returns {string}
+ * @version 1.1.0-beta.8
+ */
+const numberFormatter = function (num, digits) {
+  const si = [
+    {value: 1e18, symbol: "E"},
+    {value: 1e15, symbol: "P"},
+    {value: 1e12, symbol: "T"},
+    {value: 1e9, symbol: "G"},
+    {value: 1e6, symbol: "M"},
+    {value: 1e3, symbol: "k"}
+  ];
+  for (let i = 0; i < si.length; i++) {
+    if (num >= si[i].value) {
+      return (
+        (num / si[i].value)
+          .toFixed(digits)
+          .replace(/\.0+$|(\.[0-9]*[1-9])0+$/, "$1") + si[i].symbol
+      );
+    }
+  }
+  return num.toString();
+}
+
+/**
+ * 如果时间是复数，则显示复数标签
+ * @param {number} time
+ * @param {string} label
+ * @return {string}
+ * @version 1.1.0-beta.8
+ */
+const pluralize = function pluralize(time, label) {
+  if (time === 1) {
+    return time + label;
+  }
+  return time + label + "s";
+}
+
+
+/**
+ * 以前时间距离当前时间的时间差
+ * @param {Date|number} time 时间对象或时间戳
+ * @param {Object} opt 选项配置，可选 默认值：{d: 'day', h: 'hour', m: 'minute'}
+ * @returns {string}
+ * @version 1.1.0-beta.8
+ */
+const timeAgo = function (time, opt = {d: 'day', h: 'hour', m: 'minute'}) {
+  const between = (Date.now() - Number(time)) / 1000;
+  if (between < 3600) {
+    return pluralize(~~(between / 60), opt.m);
+  } else if (between < 86400) {
+    return pluralize(~~(between / 3600), opt.h);
+  } else {
+    return pluralize(~~(between / 86400), opt.d);
+  }
+}
+
 export {
   randomNum,
   numberToChinese,
   numberCurrencyToChinese,
-  thousandSeparator
+  thousandSeparator,
+  numberFormatter,
+  timeAgo
 }
