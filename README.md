@@ -1,17 +1,24 @@
-### 
+###  
+
 #### 安装
+
 ```
 # npm
-npm install js-toolkit --save
+npm install @vensst/js-toolkit --save
 
 ```
+
 #### 引用
-```
-import * as jstk "js-toolkit"
 
 ```
+import jstk "@vensst/js-toolkit"
+// import {randomNum} "@vensst/js-toolkit"
+
+```
+
 ### 使用
+
 ```js
-jstk.randomNum(1,100)
+jstk.randomNum(1, 100)
 
 ```
