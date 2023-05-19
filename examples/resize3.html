@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>resizeViewScale-aspectFit</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>重写resizeViewScale方法</title>
 	<link rel="stylesheet" href="./index.css">
 	<style>
     #app-main {
@@ -52,21 +53,13 @@
 	</div>
 </div>
 <script type="module">
-  import {resizeViewScale} from "../src/utils/other.js"
-	let initResize = function () {
-    let opt = {
-      id: '#app-main',
-      width: 1920,
-      height: 1080,
-      mode: "aspectFit"
-    }
-    resizeViewScale(opt)
-    window.onresize = function () {
-      resizeViewScale(opt)
-    }
+  import {initDataView} from "../src/utils/other.js"
 
-	}
-  initResize()
+  const myDataView = initDataView(document.getElementById('app-main'))
+  window.onresize = function () {
+    myDataView.resize()
+  }
+
 </script>
 </body>
 </html>

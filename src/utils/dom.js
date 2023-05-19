@@ -118,7 +118,7 @@ const siblings = function (ele) {
  * @returns {*} 属性值
  */
 const getByStyle = function (ele, name) {
-  if(ele instanceof Element){
+  if (ele instanceof Element) {
     if (ele.style) {
       return ele.style[name];
     } else {
@@ -133,7 +133,7 @@ const getByStyle = function (ele, name) {
  * @param {string} htmlString 插入的元素
  */
 const elInsertAfter = function (el, htmlString) {
-  if(el&&htmlString){
+  if (el && htmlString) {
     el.insertAdjacentHTML("afterend", htmlString)
   }
 }
@@ -144,11 +144,24 @@ const elInsertAfter = function (el, htmlString) {
  * @param {string} htmlString 插入元素
  */
 const elInsertBefore = function (el, htmlString) {
-  if(el&&htmlString){
+  if (el && htmlString) {
     el.insertAdjacentHTML("beforebegin", htmlString);
   }
 }
 
+/**
+ * 元素添加style样式
+ * @param {HTMLElement} el 元素
+ * @param {Object} style 样式对象
+ * @version 1.1.0-beta.8
+ */
+const addStyle = function (el, style) {
+  if (el && style) {
+    Object.keys(style).forEach(key => {
+      el.style[key] = style[key];
+    })
+  }
+}
 export {
   $,
   hasClass,
@@ -158,6 +171,7 @@ export {
   siblings,
   getByStyle,
   elInsertAfter,
-  elInsertBefore
+  elInsertBefore,
+  addStyle
 }
 

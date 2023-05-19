@@ -2,9 +2,13 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Title</title>
+	<title>resizeViewScale-scaleToFill</title>
 	<link rel="stylesheet" href="./index.css">
 	<style>
+    body {
+      /*height: auto;*/
+    }
+
     #app-main {
       height: 100%;
       width: 100%;
@@ -35,8 +39,8 @@
     }
 	</style>
 </head>
-<body >
-<div id="app-main" style="position:absolute;left:0;top:0;right:0;bottom:0;width: 1920px;height:1080px;">
+<body>
+<div id="app-main">
 	<div class="top">
 		头部
 	</div>
@@ -48,20 +52,15 @@
 	</div>
 </div>
 <script type="module">
-	import {resizeViewScale} from "../src/utils/other.js"
-  let initResize = function () {
-    let opt = {
-      id: '#app-main',
-      width: 1920,
-      height: 1080,
-      mode: "scaleToFill"
-    }
-    window.onresize = function () {
-      resizeViewScale(opt)
-    }
+  import {resizeViewScale} from "../src/utils/other.js"
+  // let initResize = function () {
+  let opt = {id: '#app-main'}
+  resizeViewScale(opt)
+  window.onresize = function () {
     resizeViewScale(opt)
   }
-  initResize()
+  // }
+  // initResize()
 </script>
 </body>
 </html>
