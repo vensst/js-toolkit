@@ -20,14 +20,10 @@ jobs:
       - name: Checkout
         # 选择要作为作业中步骤的一部分运行的操作 在这里查：https://github.com/marketplace?type=actions&query=checkout+
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v2
         with:
           node-version: 14
           registry-url: https://registry.npmjs.org/
-
-      - name: Build
-        run: npm run build
-
       # npm ERR! 402 Payment Required - PUT https://registry.npmjs.org/@vensst/js-tookit - You must sign up for private packages
       # @xxx/xxxx   npm会认为要发布私包，私包需要收费，需将发布命令改成： npm publish --access public
       - run: npm publish --access public
