@@ -20,7 +20,7 @@ jobs:
       - name: Checkout
         # 选择要作为作业中步骤的一部分运行的操作 在这里查：https://github.com/marketplace?type=actions&query=checkout+
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v1
         with:
           node-version: 14
           registry-url: https://registry.npmjs.org/
