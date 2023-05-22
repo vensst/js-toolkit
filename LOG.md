@@ -1,4 +1,8 @@
 # 更新日志
+## 1.1.0-beta.9 (2023-5-22)
+### Bug Fixes
+* uppercaseFirst、numberFormatter、timeAgo、addStyle、initDataView函数无法使用问题
+
 ## 1.1.0-beta.8 (2023-5-18)
 ### Features
 * 新增 uppercaseFirst、numberFormatter、timeAgo、addStyle、initDataView函数
