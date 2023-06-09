@@ -1,4 +1,4 @@
-import {arrRemoveRepeat} from "./arr.js";
+import dayjs from "dayjs";
 
 /**
  * 格式化日期
@@ -537,6 +537,25 @@ const getBeforeDate = function (len = 1) {
   return tYear + "-" + tMonth + "-" + tDay;
 }
 
+/**
+ * 获取两个日期之间的所有日期
+ * @param {*} startDate 开始日期
+ * @param {*} endDate 结束日期
+ * @returns {*[]} 日期数组
+ * @version 1.1.0-beta.10
+ */
+const getDatesBetween = function (startDate, endDate) {
+  let dates = []
+  let currentDate = dayjs(startDate)
+  let stopDate = dayjs(endDate)
+  while (currentDate <= stopDate) {
+    dates.push(dayjs(currentDate).format('YYYY-MM-DD'))
+    currentDate = dayjs(currentDate).add(1, 'days')
+  }
+  return dates
+}
+
+
 export {
   formatDate,
   getTimeSlot,
@@ -559,4 +578,5 @@ export {
   getFirstOrLastDayOfYear,
   doHandleMonth,
   getBeforeDate,
+  getDatesBetween
 }

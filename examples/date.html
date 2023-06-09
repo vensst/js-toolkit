@@ -15,9 +15,9 @@
 	<title>Title</title>
 </head>
 <body>
-
+<script src="../lib/index.js"></script>
 <script type="module">
-  import {
+  const {
     formatDate,
     getTimeSlot,
     formatHMS,
@@ -39,29 +39,32 @@
     getFirstOrLastDayOfYear,
     doHandleMonth,
     getBeforeDate,
-  } from '../src/utils/date.js'
+    getDatesBetween
+  } = jstk
 
   console.log('--formatDate--', formatDate(), formatDate('2020-9-9', 'YYYY/M/D h:m:s WW'))
   console.log('--getTimeSlot--', getTimeSlot(), getTimeSlot(60))
   console.log('--formatHMS--', formatHMS(), formatHMS(7200), formatHMS(7200, ["h", "m", "s"]))
   console.log('--getDays--', getDays(), getDays('2023-1-1', 2, 3))
   console.log('--getMonthOfDays--', getMonthOfDays(), getMonthOfDays(2022, 1))
-  console.log('--getYearOfDays--', getYearOfDays(),getYearOfDays(1992))
-  console.log('--getMonths--', getMonths(),getMonths(new Date('2022-1'), 2, 3))
-  console.log('--getQuarterStartMonth--', getQuarterStartMonth(),getQuarterStartMonth('2022-2'))
-  console.log('--getDayOfYear--', getDayOfYear(),getDayOfYear('2022-2-1'))
-  console.log('--getDayOfYearWeek--', getDayOfYearWeek(),getDayOfYearWeek('2022-2-1'))
-  console.log('--getWeekStartDate--', getWeekStartDate(),getWeekStartDate(-1),getWeekStartDate(1))
-  console.log('--getWeekEndDate--', getWeekEndDate(),getWeekEndDate(-1),getWeekEndDate(1))
-  console.log('--getMonthStartDate--', getMonthStartDate(),getMonthStartDate(2023,5))
-  console.log('--getMonthEndDate--', getMonthEndDate(),getMonthEndDate(2023,5))
+  console.log('--getYearOfDays--', getYearOfDays(), getYearOfDays(1992))
+  console.log('--getMonths--', getMonths(), getMonths(new Date('2022-1'), 2, 3))
+  console.log('--getQuarterStartMonth--', getQuarterStartMonth(), getQuarterStartMonth('2022-2'))
+  console.log('--getDayOfYear--', getDayOfYear(), getDayOfYear('2022-2-1'))
+  console.log('--getDayOfYearWeek--', getDayOfYearWeek(), getDayOfYearWeek('2022-2-1'))
+  console.log('--getWeekStartDate--', getWeekStartDate(), getWeekStartDate(-1), getWeekStartDate(1))
+  console.log('--getWeekEndDate--', getWeekEndDate(), getWeekEndDate(-1), getWeekEndDate(1))
+  console.log('--getMonthStartDate--', getMonthStartDate(), getMonthStartDate(2023, 5))
+  console.log('--getMonthEndDate--', getMonthEndDate(), getMonthEndDate(2023, 5))
   console.log('--getQuarterStartDate--', getQuarterStartDate())
   console.log('--getQuarterEndDate--', getQuarterEndDate())
   console.log('--getYearStartDate--', getYearStartDate())
   console.log('--getYearEndDate--', getYearEndDate())
-  console.log('--getFirstOrLastDayOfYear--', getFirstOrLastDayOfYear(),getFirstOrLastDayOfYear(2022,1))
+  console.log('--getFirstOrLastDayOfYear--', getFirstOrLastDayOfYear(), getFirstOrLastDayOfYear(2022, 1))
   console.log('--doHandleMonth--', doHandleMonth(4))
-  console.log('--getBeforeDate--', getBeforeDate(),getBeforeDate(3),getBeforeDate(7),getBeforeDate(30))
+  console.log('--getBeforeDate--', getBeforeDate(), getBeforeDate(3), getBeforeDate(7), getBeforeDate(30))
+
+  console.log('--getDatesBetween--', getDatesBetween('2022-1-1', '2022-1-5'))
 
 </script>
 

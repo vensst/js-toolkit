@@ -1,13 +1,13 @@
 const {resolve} = require('path')
 module.exports = {
   entry: {
-    index: './src/utils/index.js'
+    main: './src/main.js'
   },
   output: {
-    //资源发布地址，注意：这个配置直接影响页面404,
+    // 资源发布地址，注意：这个配置直接影响页面404,
     // publicPath: '/',
-    filename: 'index.js',
-    path: resolve(__dirname, '../lib'),
+    filename: 'index.js', // 打包后的文件名称
+    path: resolve(__dirname, '../lib'), // 打包后的目录，必须是绝对路径
     globalObject: 'this',
     // 向外暴露的对象名称，用于通过对象调用的方式调用封装的函数,说明：https://webpack.docschina.org/configuration/output/#outputlibrary
     library: {
@@ -15,7 +15,7 @@ module.exports = {
       type: 'umd',
     },
     clean: true,// 每次打包先清除 lib 文件
-    //assetModuleFilename: "img/[name].[hash:8].[ext]",
+    // assetModuleFilename: "img/[name].[hash:8].[ext]",
   },
   // 优化
   // optimization: {
@@ -24,7 +24,10 @@ module.exports = {
   //配置模块解析
   resolve: {
     // 别名
-    alias: {}
+    alias: {
+      '@': resolve(__dirname, '../src'),
+      '@examples': resolve(__dirname, '../examples'),
+    }
   },
   // 模块
   module: {
@@ -36,7 +39,7 @@ module.exports = {
         use: {
           loader: 'babel-loader', // 使用加载器-处理
           options: {
-            presets: ['@babel/preset-env'] // 预设:转码规则(用bable开发环境本来预设的)
+            presets: ['@babel/preset-env'] // 预设:转码规则(用babel开发环境本来预设的)
           }
         }
       }

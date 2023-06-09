@@ -1,5 +1,10 @@
 # 更新日志
 
+## 1.1.0-beta.10 (2023-5-26)
+### Features
+* 新增 getDatesBetween函数
+
+
 ## 1.1.0-beta.9 (2023-5-22)
 
 ### Bug Fixes
