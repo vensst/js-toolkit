@@ -1,9 +1,14 @@
 # 更新日志
 
-## 1.1.0-beta.10 (2023-5-26)
+## 1.1.0-beta.10 (2023-6-29)
+
 ### Features
+
 * 新增 getDatesBetween函数
 
+### Bug Fixes
+
+* storage下的set、get函数使用问题
 
 ## 1.1.0-beta.9 (2023-5-22)
 

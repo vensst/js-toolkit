@@ -66,6 +66,7 @@ module.exports = function(env, argv) {
         title:"@vensst/js-toolkit示例",
         filename: 'index.html',
         template: path.resolve(__dirname, '../examples/index.html'),
+        // chunks:['main']
       })
     ]
   });

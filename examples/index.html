@@ -57,13 +57,45 @@
 </head>
 <body>
 <div>
-
+  <button onclick="addScript()">插入script</button>
 </div>
 <script>
   console.log(window)
   if (window.jstk) {
     console.log(window.jstk)
   }
+
+  function addScript() {
+    const h = document.getElementsByTagName("head")
+    console.dir(h[0])
+
+    const script = document.createElement("script")
+    script.src = "./vue.js"
+    h[0].appendChild(script)
+  }
+
+  async function getHtmlScriptSrc() {
+    const html = await fetch(window.location.protocol).then(res => res.text())
+    let el = document.createElement('html')
+    el.innerHTML = html
+    return el.getElementsByTagName('script')[0].src.split('/').slice(-1)[0]
+  }
+
+
+  let newScriptSrc;
+  setInterval(async () => {
+    if (newScriptSrc) {
+      let _newScriptSrc = await getHtmlScriptSrc()
+      if (newScriptSrc !== _newScriptSrc) {
+        console.log("请更新页面")
+      } else {
+        console.log("没有更新")
+      }
+    } else {
+      newScriptSrc = await getHtmlScriptSrc()
+    }
+  }, 5000)
+
 </script>
 </body>
 </html>

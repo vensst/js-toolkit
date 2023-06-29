@@ -74,19 +74,19 @@
   const userInfo = {id: 1, age: 18, rules: [{name: 'r1'}, {name: 'r2'}]}
   setLocal("name", "tom")
   setLocal("userInfo", userInfo)
-  console.log('--getLocal--', getLocal("name", "tom"), getLocal('userInfo'))
+  console.log('--getLocal--', getLocal("name"), getLocal('userInfo'))
   removeLocal("name")
   clearLocal()
 
   setSession("name", "tom")
   setSession("userInfo", userInfo)
-  console.log('--getSession--', getSession("name", "tom"), getSession('userInfo'))
+  console.log('--getSession--', getSession("name"), getSession('userInfo'))
   removeSession("name")
   clearSession()
-
+  //
   setCookie("name", "tom")
   setCookie("userInfo", userInfo)
-  console.log('--getCookie--', getCookie("name", "tom"), getCookie('userInfo'))
+  console.log('--getCookie--', getCookie("name"), getCookie('userInfo'))
   removeCookie("name")
   removeCookie("userInfo")
 </script>
