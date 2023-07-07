@@ -7,191 +7,194 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="x-ua-compatible" content="IE=edge"/>
-	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
-	<title>Title</title>
-	<style>
-    /* global styles */
-    * {
-      -webkit-box-sizing: border-box;
-      -moz-box-sizing: border-box;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+    <title>Title</title>
+    <style>
+        /* global styles */
+        * {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
 
-    html {
-      font-size: 62.5%;
-      /*font-family: Microsoft YaHei, Arial, sans-serif;*/
-      /*阻止旋转屏幕时自动调整字体大小*/
-      -webkit-text-size-adjust: 100%;
-      -ms-text-size-adjust: 100%;
-      /* 解决IOS默认滑动很卡的情况 */
-      -webkit-overflow-scrolling: touch;
-    }
+        html {
+            font-size: 62.5%;
+            /*font-family: Microsoft YaHei, Arial, sans-serif;*/
+            /*阻止旋转屏幕时自动调整字体大小*/
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+            /* 解决IOS默认滑动很卡的情况 */
+            -webkit-overflow-scrolling: touch;
+        }
 
-    html,
-    body {
-      /*width: 100%;*/
-      height: 100%;
-      margin: 0;
-      padding: 0;
-    }
+        html,
+        body {
+            /*width: 100%;*/
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
 
-    body {
-      font-size: 14px;
-      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-      Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue",
-      sans-serif;
-      color: var(--color-black-text);
-      background-color: var(--color-white-background);
-      line-height: 1.15;
-    }
-	</style>
+        body {
+            font-size: 14px;
+            font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+            Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue",
+            sans-serif;
+            color: var(--color-black-text);
+            background-color: var(--color-white-background);
+            line-height: 1.15;
+        }
+    </style>
 </head>
 <body>
 <script type="module">
-  import {
-    findEleOfObjArr,
-    uniqueArr,
-    uniqueObjArr,
-    joinEleOfObjArr,
-    arrRemoveRepeat,
-    arrContains,
-    each,
-    map,
-    sort,
-    formArray,
-    arrMerge,
-    arrIntersect,
-    getIntersectOfObjArr,
-    getIntersectOfMultiObjArr,
-    arrRemoveEle,
-    arrEleCount,
-    addTagToObjectArrayDuplicateData
-  } from '../src/utils/arr.js'
+    import {
+        find,
+        findIndex,
+        findEleOfObjArr,
+        uniq,
+        uniqueObjArr,
+        joinEleOfObjArr,
+        arrRemoveRepeat,
+        arrContains,
+        each,
+        map,
+        sort,
+        formArray,
+        arrMerge,
+        arrIntersect,
+        getIntersectOfObjArr,
+        getIntersectOfMultiObjArr,
+        arrRemoveEle,
+        arrEleCount,
+        addTagToObjectArrayDuplicateData
+    } from '../src/utils/arr.js'
 
-  const arr1 = [
-    {
-      id: 1,
-      name: "a"
-    },
-    {
-      id: 2,
-      name: "b"
-    },
-    {
-      id: 3,
-      name: "c"
-    },
-    {
-      id: 4,
-      name: "c"
-    },
-    {
-      id: 3,
-      name: "c"
-    },
-    {
-      id: 4,
-      name: "c",
-      age: 28
-    },
-  ]
-  const arr2 = [
-    {
-      id: 1,
-      name: "a"
-    },
-    {
-      id: 3,
-      name: "c"
-    }
-  ]
-  const arr3 = [
-    {
-      id: 1,
-      name: "a"
-    },
-    {
-      id: 2,
-      name: "b"
-    },
-    {
-      id: 3,
-      name: "c"
-    }
-  ]
-  const arr4 = [
-    {
-      id: 2,
-      name: "b"
-    },
-    {
-      id: 3,
-      name: "c"
-    }
-  ]
-  const arr = [arr1, arr2, arr3, arr4]
-  console.log('--findEleOfObjArr--', findEleOfObjArr(arr1, 'id', 2))
-  console.log('--uniqueArr--', uniqueArr(arr1))
-  console.log('--uniqueObjArr--', uniqueObjArr(arr1, 'id'))
-  console.log('--joinEleOfObjArr--', joinEleOfObjArr(arr1, 'id'))
-  console.log('--arrRemoveRepeat--', arrRemoveRepeat([1, 2, 3, 2, 3, 4]))
-  console.log('--arrContains--', arrContains([1, 2, 3, 2, 3, 4]))
-  //
-  each(arr1, (item, index) => {
-    console.log('--each--', item, index)
-  })
-
-  const _arr1 = map(arr1, (item, index) => {
-    return {id: item.id, name: item.name}
-  })
-  console.log('--map--', _arr1)
-
-  const _sortArrr = sort([1, 2, 3, 2, 3, 4])
-  console.log('--sort--', _sortArrr)
-
-  const fun = function (a, b) {
-    console.log('--formArray--', formArray(arguments))
-  }
-  fun(1, 2)
-
-  {
-    const arr1 = [1, 2, 3,];
-    const arr2 = [3, 4, 5, 6]
-    console.log('--arrMerge--', arrMerge(arr1, arr2))
-    console.log('--arrIntersect--', arrIntersect(arr1, arr2))
-  }
-  {
-    console.log('--getIntersectOfObjArr--', getIntersectOfObjArr(arr1, arr2,'id'))
-    console.log('--getIntersectOfMultiObjArr--', getIntersectOfMultiObjArr(arr, 'id'))
-
-  }
-	{
-		const arr1 = [1, 2, 3, 2, 3, 4]
-		console.log('--arrRemoveEle--', arrRemoveEle(arr1, 2))
-		console.log('--arrEleCount--', arrEleCount([1, 2, 3, 2, 3, 4], 2))
-	}
-
-  const arr7 = [
-    {
-      "nodeStr": "div"
-    }, {
-      "nodeStr": "span"
-    }, {
-      "nodeStr": "p"
-    }, {
-      "nodeStr": "div"
-    }, {
-      "nodeStr": "div"
-    }, {
-      "nodeStr": "p"
-    }, {
-      "nodeStr": "span"
-    }, {
-      "nodeStr": "span"
-    }]
-  console.log('--addTagToObjectArrayDuplicateData--',addTagToObjectArrayDuplicateData(arr7, 'nodeStr', 'axh'))
+    const arr1 = [
+        {
+            id: 1,
+            name: "a"
+        },
+        {
+            id: 2,
+            name: "b"
+        },
+        {
+            id: 3,
+            name: "c"
+        },
+        {
+            id: 4,
+            name: "c"
+        },
+        {
+            id: 3,
+            name: "c"
+        },
+        {
+            id: 4,
+            name: "c",
+            age: 28
+        },
+    ]
+    const arr2 = [
+        {
+            id: 1,
+            name: "a"
+        },
+        {
+            id: 3,
+            name: "c"
+        }
+    ]
+    const arr3 = [
+        {
+            id: 1,
+            name: "a"
+        },
+        {
+            id: 2,
+            name: "b"
+        },
+        {
+            id: 3,
+            name: "c"
+        }
+    ]
+    const arr4 = [
+        {
+            id: 2,
+            name: "b"
+        },
+        {
+            id: 3,
+            name: "c"
+        }
+    ]
+    const arr = [arr1, arr2, arr3, arr4]
+    console.log('--find--', find(arr1,item=>item.name==='a'))
+    console.log('--findIndex--', findIndex(arr1))
+    // console.log('--uniq--', uniq(arr1))
+    // console.log('--uniqueObjArr--', uniqueObjArr(arr1, 'id'))
+    // console.log('--joinEleOfObjArr--', joinEleOfObjArr(arr1, 'id'))
+    // console.log('--arrRemoveRepeat--', arrRemoveRepeat([1, 2, 3, 2, 3, 4]))
+    // console.log('--arrContains--', arrContains([1, 2, 3, 2, 3, 4]))
+    //
+    // each(arr1, (item, index) => {
+    //     console.log('--each--', item, index)
+    // })
+    //
+    // const _arr1 = map(arr1, (item, index) => {
+    //     return {id: item.id, name: item.name}
+    // })
+    // console.log('--map--', _arr1)
+    //
+    // const _sortArrr = sort([1, 2, 3, 2, 3, 4])
+    // console.log('--sort--', _sortArrr)
+    //
+    // const fun = function (a, b) {
+    //     console.log('--formArray--', formArray(arguments))
+    // }
+    // fun(1, 2)
+    //
+    // {
+    //     const arr1 = [1, 2, 3,];
+    //     const arr2 = [3, 4, 5, 6]
+    //     console.log('--arrMerge--', arrMerge(arr1, arr2))
+    //     console.log('--arrIntersect--', arrIntersect(arr1, arr2))
+    // }
+    // {
+    //     console.log('--getIntersectOfObjArr--', getIntersectOfObjArr(arr1, arr2, 'id'))
+    //     console.log('--getIntersectOfMultiObjArr--', getIntersectOfMultiObjArr(arr, 'id'))
+    //
+    // }
+    // {
+    //     const arr1 = [1, 2, 3, 2, 3, 4]
+    //     console.log('--arrRemoveEle--', arrRemoveEle(arr1, 2))
+    //     console.log('--arrEleCount--', arrEleCount([1, 2, 3, 2, 3, 4], 2))
+    // }
+    //
+    // const arr7 = [
+    //     {
+    //         "nodeStr": "div"
+    //     }, {
+    //         "nodeStr": "span"
+    //     }, {
+    //         "nodeStr": "p"
+    //     }, {
+    //         "nodeStr": "div"
+    //     }, {
+    //         "nodeStr": "div"
+    //     }, {
+    //         "nodeStr": "p"
+    //     }, {
+    //         "nodeStr": "span"
+    //     }, {
+    //         "nodeStr": "span"
+    //     }]
+    // console.log('--addTagToObjectArrayDuplicateData--', addTagToObjectArrayDuplicateData(arr7, 'nodeStr', 'axh'))
 
 </script>
 </body>

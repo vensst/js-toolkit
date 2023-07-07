@@ -1,6 +1,36 @@
 import dayjs from "dayjs";
 
 /**
+ * 如果时间是复数，则显示复数标签
+ * @param {number} time
+ * @param {string} label
+ * @return {string}
+ * @version 1.1.0-beta.8
+ */
+const pluralize = function pluralize(time, label) {
+  if (time === 1) {
+    return time + label;
+  }
+  return time + label + "s";
+}
+/**
+ * 以前时间距离当前时间的时间差
+ * @param {Date|number} time 时间对象或时间戳
+ * @param {Object} opt 选项配置，可选 默认值：{d: 'day', h: 'hour', m: 'minute'}
+ * @returns {string}
+ * @version 1.1.0-beta.8
+ */
+const timeAgo = function (time, opt = {d: 'day', h: 'hour', m: 'minute'}) {
+  const between = (Date.now() - Number(time)) / 1000;
+  if (between < 3600) {
+    return pluralize(~~(between / 60), opt.m);
+  } else if (between < 86400) {
+    return pluralize(~~(between / 3600), opt.h);
+  } else {
+    return pluralize(~~(between / 86400), opt.d);
+  }
+}
+/**
  * 格式化日期
  * @param {Date|string|number} time 时间戳或日期对象
  * @param {string} format 格式，年(YYYY) 月(MM) 日(DD) 时(hh) 分(mm) 秒(ss) 星期(WW), 默认: YYYY-MM-DD hh:mm:ss
@@ -557,6 +587,7 @@ const getDatesBetween = function (startDate, endDate) {
 
 
 export {
+  timeAgo,
   formatDate,
   getTimeSlot,
   formatHMS,

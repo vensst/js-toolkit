@@ -27,6 +27,15 @@ const isNumber = function (o) {
 };
 
 /**
+ * 判断是否数字
+ * @param {*} value 任意类型
+ * @returns {boolean}
+ * @version 2.0.0-beta.1
+ */
+const isNumeric = function (value)  {
+  return  typeof  value  ===  "number"  ||  typeof  value  ===  "string"  &&  !isNaN(value);
+}
+/**
  * 判断是否 boolean
  * @param {any} o 任意类型
  * @returns {boolean}
@@ -457,6 +466,7 @@ export {
   isType,
   isString,
   isNumber,
+  isNumeric,
   isBoolean,
   isFunction,
   isNull,

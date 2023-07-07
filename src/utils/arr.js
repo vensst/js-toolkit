@@ -1,17 +1,57 @@
 /**
- * 查找对象数组是否存在某元素 返回 -1或下标，可使用 findIndex() 代替
+ * 返回数组中满足提供的函数的判断条件的第一个元素的值
+ * @param {Array} arr 数组
+ * @param {Function} callback 回调函数
+ * @param {number} [fromIndex=0] 从该索引处开始查找
+ * @returns {undefined|*} 满足条件的元素值
+ * @version 2.0.0-beta.1
+ */
+const find = function (arr, callback, fromIndex = 0) {
+    if(typeof callback !== 'function'){
+        throw new Error('find方法的第二个参数必须是函数');
+    }
+    for (let i = fromIndex; i < arr.length; i++) {
+        if (callback(arr[i], i)) {
+            return arr[i];
+        }
+    }
+    return undefined;
+}
+
+/**
+ * 返回数组中满足提供的函数的判断条件的第一个元素的下标,未找到返回-1
+ * @param {Array} arr 数组
+ * @param {Function} callback 回调函数
+ * @param {number} fromIndex 从该索引处开始查找
+ * @returns {number} 满足条件的元素下标或-1
+ * @version 2.0.0-beta.1
+ */
+const findIndex = function (arr, callback, fromIndex = 0) {
+    if(typeof callback !== 'function'){
+        throw new Error('findIndex方法的第二个参数必须是函数');
+    }
+    for (let i = fromIndex; i < arr.length; i++) {
+        if (callback(arr[i], i)) {
+            return i;
+        }
+    }
+    return -1;
+};
+
+/**
+ * 查找对象数组是否存在某元素（废弃）
  * @param {Array<Object>} arr 对象数组
  * @param {string} attrName 查找的元素属性名
  * @param {*} attrVal  查找的元素属性的值
  * @returns {number} 下标或-1
  */
 const findEleOfObjArr = function (arr, attrName, attrVal) {
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i][attrName] === attrVal) {
-      return i;
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i][attrName] === attrVal) {
+            return i;
+        }
     }
-  }
-  return -1;
+    return -1;
 };
 
 /**
@@ -19,10 +59,21 @@ const findEleOfObjArr = function (arr, attrName, attrVal) {
  * @param {Array<any>} arr 数组（普通数组或对象数组都可以）
  * @returns {Array} 去重后的数组
  */
-const uniqueArr = function (arr) {
-  const set = new Set(arr.map(JSON.stringify));
-  return Array.from(set).map(JSON.parse);
+const uniq = function (arr) {
+    if (!Array.isArray(arr)) {
+        return arr;
+    }
+    return arr.filter((item, index) => {
+        if (Array.isArray(item)) {
+            return index === arr.findIndex(arrItem => JSON.stringify(arrItem) === JSON.stringify(item));
+        } else if (typeof item === 'object') {
+            return index === arr.findIndex(arrItem => JSON.stringify(arrItem) === JSON.stringify(item));
+        } else {
+            return index === arr.indexOf(item);
+        }
+    });
 }
+
 
 /**
  * 对象数组根据指定属性名称去重
@@ -31,13 +82,13 @@ const uniqueArr = function (arr) {
  * @returns {Array} 去重后的数组
  */
 const uniqueObjArr = function (arr, attrName) {
-  let hash = {};
-  return arr.reduce(function (item, next) {
-    if (!hash[next[attrName]]) {
-      hash[next[attrName]] = item.push(next)
-    }
-    return item;
-  }, []);
+    let hash = {};
+    return arr.reduce(function (item, next) {
+        if (!hash[next[attrName]]) {
+            hash[next[attrName]] = item.push(next)
+        }
+        return item;
+    }, []);
 };
 
 /**
@@ -48,8 +99,8 @@ const uniqueObjArr = function (arr, attrName) {
  * @returns {string} 符号拼接的字符串
  */
 const joinEleOfObjArr = function (arr, attrName, sym = ",") {
-  let newArr = arr.map((item) => item[attrName]);
-  return newArr.join(sym);
+    let newArr = arr.map((item) => item[attrName]);
+    return newArr.join(sym);
 };
 
 /**
@@ -58,23 +109,23 @@ const joinEleOfObjArr = function (arr, attrName, sym = ",") {
  * @returns {(string|number)[]} 去重后的数组
  */
 const arrRemoveRepeat = function (arr) {
-  if (Array.hasOwnProperty("from")) {
-    return Array.from(new Set(arr));
-  } else {
-    let r = [],
-      NaNBol = true;
-    for (let i = 0; i < arr.length; i++) {
-      if (arr[i] !== arr[i]) {
-        if (NaNBol && r.indexOf(arr[i]) === -1) {
-          r.push(arr[i]);
-          NaNBol = false;
+    if (Array.hasOwnProperty("from")) {
+        return Array.from(new Set(arr));
+    } else {
+        let r = [],
+            NaNBol = true;
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i] !== arr[i]) {
+                if (NaNBol && r.indexOf(arr[i]) === -1) {
+                    r.push(arr[i]);
+                    NaNBol = false;
+                }
+            } else {
+                if (r.indexOf(arr[i]) === -1) r.push(arr[i]);
+            }
         }
-      } else {
-        if (r.indexOf(arr[i]) === -1) r.push(arr[i]);
-      }
+        return r;
     }
-    return r;
-  }
 };
 
 /**
@@ -84,7 +135,7 @@ const arrRemoveRepeat = function (arr) {
  * @returns {boolean} 布尔值
  */
 const arrContains = function (arr, val) {
-  return arr.includes(val);
+    return arr.includes(val);
 };
 
 /**
@@ -93,13 +144,13 @@ const arrContains = function (arr, val) {
  * @param {Function} fn 回调函数
  */
 const each = function (arr, fn) {
-  fn = fn || Function;
-  let a = [];
-  let args = Array.prototype.slice.call(arguments, 1);
-  for (let i = 0; i < arr.length; i++) {
-    let res = fn.apply(arr, [arr[i], i].concat(args));
-    if (res != null) a.push(res);
-  }
+    fn = fn || Function;
+    let a = [];
+    let args = Array.prototype.slice.call(arguments, 1);
+    for (let i = 0; i < arr.length; i++) {
+        let res = fn.apply(arr, [arr[i], i].concat(args));
+        if (res != null) a.push(res);
+    }
 };
 
 /**
@@ -110,13 +161,13 @@ const each = function (arr, fn) {
  * @returns {*[]}
  */
 const map = function (arr, fn, thisObj) {
-  let scope = thisObj || window;
-  let a = [];
-  for (let i = 0, j = arr.length; i < j; ++i) {
-    let res = fn.call(scope, arr[i], i, this);
-    if (res != null) a.push(res);
-  }
-  return a;
+    let scope = thisObj || window;
+    let a = [];
+    for (let i = 0, j = arr.length; i < j; ++i) {
+        let res = fn.call(scope, arr[i], i, this);
+        if (res != null) a.push(res);
+    }
+    return a;
 };
 
 /**
@@ -126,18 +177,18 @@ const map = function (arr, fn, thisObj) {
  * @returns {number[]} 排序后的数组
  */
 const sort = function (arr, type = 1) {
-  return arr.sort((a, b) => {
-    switch (type) {
-      case 1:
-        return a - b;
-      case 2:
-        return b - a;
-      case 3:
-        return Math.random() - 0.5;
-      default:
-        return arr;
-    }
-  });
+    return arr.sort((a, b) => {
+        switch (type) {
+            case 1:
+                return a - b;
+            case 2:
+                return b - a;
+            case 3:
+                return Math.random() - 0.5;
+            default:
+                return arr;
+        }
+    });
 };
 
 /**
@@ -146,13 +197,13 @@ const sort = function (arr, type = 1) {
  * @returns {Array} 数组
  */
 const formArray = function (arr) {
-  let _arr = [];
-  if (Array.isArray(arr)) {
-    _arr = arr;
-  } else {
-    _arr = Array.prototype.slice.call(arr);
-  }
-  return _arr;
+    let _arr = [];
+    if (Array.isArray(arr)) {
+        _arr = arr;
+    } else {
+        _arr = Array.prototype.slice.call(arr);
+    }
+    return _arr;
 };
 
 /**
@@ -162,8 +213,8 @@ const formArray = function (arr) {
  * @returns {number[]} 返回并集数组
  */
 const arrMerge = function (a, b) {
-  let newArr = a.concat(b);
-  return arrRemoveRepeat(newArr);
+    let newArr = a.concat(b);
+    return arrRemoveRepeat(newArr);
 };
 
 /**
@@ -173,10 +224,10 @@ const arrMerge = function (a, b) {
  * @returns {number[]} 返回交集数组
  */
 const arrIntersect = function (a, b) {
-  a = arrRemoveRepeat(a);
-  return map(a, function (o) {
-    return arrContains(b, o) ? o : null;
-  });
+    a = arrRemoveRepeat(a);
+    return map(a, function (o) {
+        return arrContains(b, o) ? o : null;
+    });
 };
 
 /**
@@ -187,13 +238,13 @@ const arrIntersect = function (a, b) {
  * @returns {Object[]} 返回交集数组
  */
 const getIntersectOfObjArr = function (arr1, arr2, attrName) {
-  let arr = [];
-  arr1.forEach((item) => {
-    if (arr2.some((cItem) => cItem[attrName] === item[attrName])) {
-      arr.push(item);
-    }
-  });
-  return arr;
+    let arr = [];
+    arr1.forEach((item) => {
+        if (arr2.some((cItem) => cItem[attrName] === item[attrName])) {
+            arr.push(item);
+        }
+    });
+    return arr;
 };
 
 /**
@@ -203,21 +254,21 @@ const getIntersectOfObjArr = function (arr1, arr2, attrName) {
  * @returns {Object[]} 返回交集数组
  */
 const getIntersectOfMultiObjArr = function (arr, attrName) {
-  let _arr = [];
-  if (arr.length === 1) {
-    _arr = arr[0];
-  } else {
-    arr.forEach(async (item, index) => {
-      if (index) {
-        if (index !== arr.length - 1) {
-          _arr = getIntersectOfObjArr(_arr, arr[index + 1], attrName);
-        }
-      } else {
-        _arr = getIntersectOfObjArr(arr[index], arr[index + 1], attrName);
-      }
-    });
-  }
-  return _arr;
+    let _arr = [];
+    if (arr.length === 1) {
+        _arr = arr[0];
+    } else {
+        arr.forEach(async (item, index) => {
+            if (index) {
+                if (index !== arr.length - 1) {
+                    _arr = getIntersectOfObjArr(_arr, arr[index + 1], attrName);
+                }
+            } else {
+                _arr = getIntersectOfObjArr(arr[index], arr[index + 1], attrName);
+            }
+        });
+    }
+    return _arr;
 };
 
 /**
@@ -227,11 +278,11 @@ const getIntersectOfMultiObjArr = function (arr, attrName) {
  * @returns {Array<any>} 返回删除后的数组
  */
 const arrRemoveEle = function (arr, ele) {
-  let index = arr.indexOf(ele);
-  if (index > -1) {
-    arr.splice(index, 1);
-  }
-  return arr;
+    let index = arr.indexOf(ele);
+    if (index > -1) {
+        arr.splice(index, 1);
+    }
+    return arr;
 };
 
 /*
@@ -264,7 +315,7 @@ const arrRemoveEle = function (arr, ele) {
  * @returns {number} 返回出现次数
  */
 const arrEleCount = function (arr, val) {
-  return arr.reduce((a, v) => (v === val ? a + 1 : a), 0);
+    return arr.reduce((a, v) => (v === val ? a + 1 : a), 0);
 }
 
 
@@ -276,23 +327,23 @@ const arrEleCount = function (arr, val) {
  * @returns {Object[]} 返回新的对象数组
  */
 const addTagToObjectArrayDuplicateData = function (
-  arr,
-  attrName,
-  tagAttrName = "_xh"
+    arr,
+    attrName,
+    tagAttrName = "_xh"
 ) {
-  const _arr = JSON.parse(JSON.stringify(arr));
-  const onceArr = [];
-  _arr.forEach((item) => {
-    const i = onceArr.findIndex((cItem) => cItem[attrName] === item[attrName]);
-    if (i === -1) {
-      item[tagAttrName] = 1;
-      onceArr.push(item);
-    } else {
-      item[tagAttrName] = onceArr[i][tagAttrName] + 1;
-      onceArr.splice(i, 1, item);
-    }
-  });
-  return _arr;
+    const _arr = JSON.parse(JSON.stringify(arr));
+    const onceArr = [];
+    _arr.forEach((item) => {
+        const i = onceArr.findIndex((cItem) => cItem[attrName] === item[attrName]);
+        if (i === -1) {
+            item[tagAttrName] = 1;
+            onceArr.push(item);
+        } else {
+            item[tagAttrName] = onceArr[i][tagAttrName] + 1;
+            onceArr.splice(i, 1, item);
+        }
+    });
+    return _arr;
 };
 
 /**
@@ -325,21 +376,23 @@ const addTagToObjectArrayDuplicateData = function (
 // }
 
 export {
-  findEleOfObjArr,
-  uniqueArr,
-  uniqueObjArr,
-  joinEleOfObjArr,
-  arrRemoveRepeat,
-  arrContains,
-  each,
-  map,
-  sort,
-  formArray,
-  arrMerge,
-  arrIntersect,
-  getIntersectOfObjArr,
-  getIntersectOfMultiObjArr,
-  arrRemoveEle,
-  arrEleCount,
-  addTagToObjectArrayDuplicateData
+    find,
+    findIndex,
+    findEleOfObjArr,
+    uniq,
+    uniqueObjArr,
+    joinEleOfObjArr,
+    arrRemoveRepeat,
+    arrContains,
+    each,
+    map,
+    sort,
+    formArray,
+    arrMerge,
+    arrIntersect,
+    getIntersectOfObjArr,
+    getIntersectOfMultiObjArr,
+    arrRemoveEle,
+    arrEleCount,
+    addTagToObjectArrayDuplicateData
 }
