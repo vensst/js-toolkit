@@ -87,9 +87,9 @@ const blobTypeList = [
 ];
 
 /**
- * 根据文件名称（有文件类型） 查询对应blob type
- * @param {string} name 名称
- * @returns {string|null} 对应 blob 类型
+ * 根据文件类型查询对应 blob type类型
+ * @param {string} name 文件类型（例如："a.png"，"b.jpg"，或者 ".xls"）
+ * @returns {(string|null)} 对应 blob type类型
  */
 const getBlobType = function (name) {
   if (!name) return null
@@ -104,7 +104,7 @@ const getBlobType = function (name) {
  * @returns {boolean} 是否下载成功
  */
 const downloadFile = function (blobFile, fileName) {
-  if (!blobFile&&!fileName) return false;
+  if (!blobFile && !fileName) return false;
   const link = document.createElement("a");
   let blob = new Blob([blobFile], {
     type: getBlobType(fileName),

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<link rel="stylesheet" href="../index.css">
+</head>
+<body>
+<a href="https://github.com/js-cookie/js-cookie" target="_blank">js-cookie文档</a>
+<script src="../../lib/index.js"></script>
+<script>
+	console.log(window)
+	console.log(jstk)
+  const {Cookies} = window.jstk
+  Cookies.set("name", "张三")
+  console.log(Cookies.get("name"))
+
+  // Cookies.setJSON("userInfo", {name: "张三", age: 18})
+  Cookies.setJSON("userInfo", {name: "张三", age: 18},{expires: 7,  domain: '*'} )
+  console.log(Cookies.getJSON("userInfo"))
+</script>
+</body>
+</html>

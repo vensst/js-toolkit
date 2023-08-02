@@ -65,6 +65,9 @@
         toLowerCase,
         filterHtmlTag,
         randomCode,
+        findCharCount,
+        padStart,
+        padEnd
     } from "../src/utils/string.js"
 
     const str = " my name is lilei-lei fromChina "
@@ -76,6 +79,7 @@
     console.log("--toLowerCase--", toLowerCase(str2), toLowerCase(str2, 2), toLowerCase(str2, 3))
     console.log("--filterHtmlTag--")
     console.log("--randomCode--", randomCode())
+    console.log("--charCount--", findCharCount(str,'i'))
 </script>
 </body>
 </html>

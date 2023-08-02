@@ -53,10 +53,12 @@
 	</div>
 </div>
 <script type="module">
-  import {initDataView} from "../src/utils/other.js"
+  import {resizeFontSize,initDataView} from "../src/utils/window.js"
+	console.log('--resizeFontSize--', resizeFontSize())
 
   const myDataView = initDataView(document.getElementById('app-main'))
   window.onresize = function () {
+		console.log('--resizeFontSize--', resizeFontSize())
     myDataView.resize()
   }
 

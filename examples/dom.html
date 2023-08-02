@@ -9,11 +9,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="x-ua-compatible" content="IE=edge"/>
-	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
-	<title>Title</title>
-	<style>
+  <meta charset="UTF-8">
+  <meta http-equiv="x-ua-compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+  <title>Title</title>
+  <style>
     /* global styles */
     :root {
       --color-black-text: #333;
@@ -53,14 +53,14 @@
       background-color: var(--color-white-background);
       line-height: 1.15;
     }
-	</style>
+  </style>
 </head>
 <body>
 <div id="app" class="page">
-	这是一段内容 <br>
-	<span class="s1 s--style">我是span标签</span> <br>
-	<span class="s2 s--style">我是span标签2</span> <br>
-	<span class="s3 s--style" style="color: #e4393c;font-size: 18px">我是span标签3</span>
+  这是一段内容 <br>
+  <span class="s1 s--style">我是span标签</span> <br>
+  <span class="s2 s--style">我是span标签2</span> <br>
+  <span class="s3 s--style" style="color: #e4393c;font-size: 18px">我是span标签3</span>
 </div>
 <script type="module">
   import {
@@ -75,15 +75,34 @@
     elInsertBefore
   } from "../src/utils/dom.js"
 
-  console.log('--$--', $(), $("#app span"), $(".page .s1"), $(".page span"))
-  console.log('--hasClass--', hasClass(), hasClass($("#app"), "page"),hasClass($(".page span"), "page"))
-  console.log('--addClass--', addClass(), addClass($("#app"),'page--style'),addClass($(".page span"),'span--style'))
-  console.log('--removeClass--', removeClass(), removeClass($("#app"),'page--style'),removeClass($(".page span"),'span--style'))
-  console.log('--replaceClass--', replaceClass(),replaceClass($("#app"),'page--style1','page--style'),replaceClass($(".page span"),'s--style1','s--style') )
-  console.log('--siblings--', siblings(),siblings($("#app")),siblings($(".page span")))
-  console.log('--getByStyle--', getByStyle(),getByStyle($("#app .s3"),'color'),getByStyle($("#app .s3"),'font-size'))
-	console.log('--elInsertAfter--',elInsertAfter(),elInsertAfter($("#app .s1"),"<div>s1之后插入div</div>"))
-	console.log('--elInsertBefore--',elInsertBefore(),elInsertBefore($("#app .s1"),"<div>s1之前插入div</div>"))
+  {
+    console.log('--$--', $(), $("#app span"), $(".page .s1"), $(".page span"))
+  }
+  {
+    console.log('--hasClass--', hasClass(), hasClass($("#app"), "page"), hasClass($(".page span"), "page"))
+
+  }
+  {
+    console.log('--addClass--', addClass(), addClass($("#app"), 'page--style'), addClass($(".page span"), 'span--style'))
+  }
+  {
+    console.log('--removeClass--', removeClass(), removeClass($("#app"), 'page--style'), removeClass($(".page span"), 'span--style'))
+  }
+  {
+    console.log('--replaceClass--', replaceClass(), replaceClass($("#app"), 'page--style1', 'page--style'), replaceClass($(".page span"), 's--style1', 's--style'))
+  }
+  {
+    console.log('--siblings--', siblings(), siblings($("#app")), siblings($(".page span")))
+  }
+  {
+    console.log('--getByStyle--', getByStyle(), getByStyle($("#app .s3"), 'color'), getByStyle($("#app .s3"), 'font-size'))
+  }
+  {
+    console.log('--elInsertAfter--', elInsertAfter(), elInsertAfter($("#app .s1"), "<div>s1之后插入div</div>"))
+  }
+  {
+    console.log('--elInsertBefore--', elInsertBefore(), elInsertBefore($("#app .s1"), "<div>s1之前插入div</div>"))
+  }
 </script>
 </body>
 </html>

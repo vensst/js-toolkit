@@ -6,7 +6,7 @@ import {isNumeric, isString} from "./inspect.js";
  * @param {(number|string)} [max=1] 最大值（不包含）
  * @param {boolean} [floating=true] 是否返回浮点数
  * @returns {number} 随机数
- * @version 2.0.0-beta.1
+ * @version 1.1.0-beta.11
  */
 const random = function (min = 0, max = 1, floating = true) {
     if (isNumeric(min) && isNumeric(max)) {
@@ -23,13 +23,13 @@ const random = function (min = 0, max = 1, floating = true) {
 /**
  * 判断数字是否在区间内
  * @param {number} num 数字
- * @param {number} min 最小值（包含）
- * @param {number} max 最大值（包含）
+ * @param {number} min 最小值（不包含）
+ * @param {number} max 最大值（不包含）
  * @returns {boolean} 是否在区间内
- * @version 2.0.0-beta.1
+ * @version 1.1.0-beta.11
  */
 const inRange = function (num, min, max) {
-    return num >= min && num < max
+    return num > min && num < max
 }
 
 /**
@@ -82,7 +82,7 @@ const toChinese = function (num) {
  * 将数字金额转为中文大写金额
  * @param {(number|string)} num 数字金额
  * @returns {string} 中文大写金额
- * @version 2.0.0-beta.1
+ * @version 1.1.0-beta.11
  */
 const toCny = function (num) {
     if (!/^\d*(\.\d*)?$/.test(num)) {

@@ -58,14 +58,16 @@
 <body>
 <script type="module">
   import {
-    getUrlParam,
-    delUrlParam,
-    getAllParamsOfUrl
+		getUrlParam,
+		getUrlParams,
+		delUrlParam,
+		objToUrlParams,
   } from "../src/utils/url.js"
 
   console.log('--getUrlParam--', getUrlParam('_ijt'))
   console.log('--delUrlParam--', delUrlParam('www.baidu.com?a=1&b=2', 'b'))
-  console.log('--getAllParamsOfUrl--', getAllParamsOfUrl('www.baidu.com?a=1&b=2'))
+  console.log('--getUrlParams--', getUrlParams('www.baidu.com?a=1&b=2'))
+  console.log('--objToUrlParams--', objToUrlParams({a: 1, b: 2}))
 </script>
 </body>
 </html>

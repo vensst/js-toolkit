@@ -60,6 +60,7 @@
 <script type="module">
     import {
         random,
+        inRange,
         toChinese,
         toCny,
         thousandSeparator,
@@ -71,6 +72,7 @@
         console.log('--无小数--',random(0, 2,false),random('z', '2',false))
     }
     console.log("--random--", random(0, 2), random(0, 2,false),)
+    console.log("--inRange--", inRange(3, 2, 4))
     console.log("--toChinese--", toChinese(3141592654),toChinese(31415926.54),toChinese('abc'))
     console.log("--toCny--", toCny(3141592654),toCny('31415926.54321'))
     console.log("--thousandSeparator--", thousandSeparator(3141592654), thousandSeparator(31415926.12233655))

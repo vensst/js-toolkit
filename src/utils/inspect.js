@@ -30,7 +30,7 @@ const isNumber = function (o) {
  * 判断是否数字
  * @param {*} value 任意类型
  * @returns {boolean}
- * @version 2.0.0-beta.1
+ * @version 1.1.0-beta.11
  */
 const isNumeric = function (value)  {
   return  typeof  value  ===  "number"  ||  typeof  value  ===  "string"  &&  !isNaN(value);
@@ -251,7 +251,7 @@ const getBrowserType = function () {
   let isEdge = userAgent.indexOf("Edge") > -1 && !isIE; //判断是否IE的Edge浏览器
   let isFF = userAgent.indexOf("Firefox") > -1; //判断是否Firefox浏览器
   let isSafari =
-    userAgent.indexOf("Safari") > -1 && userAgent.indexOf("Chrome") == -1; //判断是否Safari浏览器
+    userAgent.indexOf("Safari") > -1 && userAgent.indexOf("Chrome") === -1; //判断是否Safari浏览器
   let isChrome =
     userAgent.indexOf("Chrome") > -1 && userAgent.indexOf("Safari") > -1; //判断Chrome浏览器
 

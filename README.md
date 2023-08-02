@@ -18,12 +18,12 @@ npm install @vensst/js-toolkit --save
 // 全部引用
 import jstk from "@vensst/js-toolkit"
 
-jstk.randomNum(1, 100)
+jstk.random(1, 100)
 
 // 指定功能引入
-import {randomNum} from "@vensst/js-toolkit"
+import {random} from "@vensst/js-toolkit"
 
-randomNum(1, 100)
+random(1, 100)
 ```
 
 ## 使用script引用

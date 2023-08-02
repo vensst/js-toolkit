@@ -1,9 +1,9 @@
 /**
  * 查找dom元素
- * @param {string|Element} selector 选择器
- * @returns {Element|NodeListOf<Element>|null} 返回元素或元素集合
+ * @param {(string|Element)} selector 选择器
+ * @returns {(Element|NodeListOf<Element>|null)} 返回元素或元素集合
  */
-const $ = function (selector) {
+const $ = function (selector = 'html') {
   if (!selector) return null;
   if (typeof selector === "string") {
     const nodeList = document.querySelectorAll(selector)
@@ -30,7 +30,7 @@ const hasClass = function (ele, name) {
 
 /**
  * 添加类名
- * @param {Element|NodeList} ele 元素
+ * @param {(Element|NodeList)} ele 元素
  * @param {string} name 类名
  */
 const addClass = function (ele, name) {
@@ -101,11 +101,11 @@ const siblings = function (ele) {
   if (ele instanceof NodeList) {
     _ele = ele[0]
   }
-  let chid = _ele.parentNode.children,
-    eleMatch = [];
-  for (let i = 0, len = chid.length; i < len; i++) {
-    if (chid[i] !== _ele) {
-      eleMatch.push(chid[i]);
+  let child = _ele.parentNode.children,
+      eleMatch = [];
+  for (let i = 0, len = child.length; i < len; i++) {
+    if (child[i] !== _ele) {
+      eleMatch.push(child[i]);
     }
   }
   return eleMatch;
@@ -162,6 +162,7 @@ const addStyle = function (el, style) {
     })
   }
 }
+
 export {
   $,
   hasClass,
