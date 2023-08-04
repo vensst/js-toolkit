@@ -1,6 +1,6 @@
 /**
  * 获取当前的滚动位置
- * @param {(Window|Element|string)} el 元素或选择器 默认：window
+ * @param {(Window|Element|string)} [el=window] 元素或选择器 默认：window
  * @returns {Object} 滚动位置 {x,y}
  */
 const getScrollPosition = function (el = window) {
@@ -28,7 +28,7 @@ const smoothScroll = function (el) {
 
 /**
  * 平滑滚动至顶部
- * @param {(Window|Element|string)} el 元素或选择器 默认：window
+ * @param {(Window|Element|string)} [el=window] 元素或选择器 默认：window
  * @param {Object} [options={behavior: 'smooth'}] 参数
  */
 const scrollToTop = function (el = window, options = {behavior: 'smooth'}) {
@@ -90,6 +90,7 @@ class ScrollView {
  * @param {string} options.attrName 属性名
  * @param {Function} options.callback 回调函数
  * @returns {ScrollView} 返回ScrollView实例对象
+ * @version 1.1.0-beta.11
  */
 const initScrollView = function (options={}) {
   return new ScrollView(options);

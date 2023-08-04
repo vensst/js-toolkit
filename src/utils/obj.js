@@ -10,7 +10,7 @@
 /**
  * 链式获取对象属性
  * @param {Object} obj 检索对象
- * @param {string} chain 属性链（例如：a.b.c）
+ * @param {string} chain 属性链（例如：a.b.c
  * @param {*} [defaultValue=undefined] 默认值
  * @returns {*}
  * @version 1.1.0-beta.11

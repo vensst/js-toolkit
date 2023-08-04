@@ -12,7 +12,7 @@ const getUrlParam = function (name) {
 
 /**
  * 获取指定url地址上所有参数
- * @param {string|null} url url地址
+ * @param {(string|null)} url url地址
  * @returns {Object} 参数对象
  */
 const getUrlParams = function (url) {

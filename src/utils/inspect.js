@@ -32,8 +32,8 @@ const isNumber = function (o) {
  * @returns {boolean}
  * @version 1.1.0-beta.11
  */
-const isNumeric = function (value)  {
-  return  typeof  value  ===  "number"  ||  typeof  value  ===  "string"  &&  !isNaN(value);
+const isNumeric = function (value) {
+  return typeof value === "number" || typeof value === "string" && !isNaN(value);
 }
 /**
  * 判断是否 boolean
@@ -162,198 +162,6 @@ const isTrue = function (o) {
 };
 
 /**
- * 判断当前环境是否为ios苹果手机
- * @returns {boolean}
- */
-const isIos = function () {
-  let u = navigator.userAgent;
-  if (u.indexOf("Android") > -1 || u.indexOf("Linux") > -1) {
-    //安卓手机
-    // return "Android";
-    return false;
-  } else if (u.indexOf("iPhone") > -1) {
-    //苹果手机
-    // return "iPhone";
-    return true;
-  } else if (u.indexOf("iPad") > -1) {
-    //iPad
-    // return "iPad";
-    return false;
-  } else if (u.indexOf("Windows Phone") > -1) {
-    //winphone手机
-    // return "Windows Phone";
-    return false;
-  } else {
-    return false;
-  }
-};
-
-/**
- * 获取当前属于哪种类型手机运行环境
- * @returns {string|boolean} 是手机环境返回运行环境，不是手机运行环境 false
- */
-const getMobileEnv = function () {
-  let u = navigator.userAgent;
-  if (u.indexOf("Android") > -1 || u.indexOf("Linux") > -1) {
-    //安卓手机
-    return "Android";
-  } else if (u.indexOf("iPhone") > -1) {
-    //苹果手机
-    return "iPhone";
-  } else if (u.indexOf("iPad") > -1) {
-    //iPad
-    return "iPad";
-  } else if (u.indexOf("Windows Phone") > -1) {
-    //winphone手机
-    return "Windows Phone";
-  } else {
-    return false;
-  }
-};
-
-/**
- * 判断当前环境是否为 PC 端
- * @returns {boolean}
- */
-const isPC = function () {
-  let userAgentInfo = navigator.userAgent;
-  let Agents = [
-    "Android",
-    "iPhone",
-    "SymbianOS",
-    "Windows Phone",
-    "iPad",
-    "iPod",
-  ];
-  let flag = true;
-  for (let i = 0; i < Agents.length; i++) {
-    if (userAgentInfo.indexOf(Agents[i]) > 0) {
-      flag = false;
-      break;
-    }
-  }
-  return flag;
-};
-
-/**
- * 获取浏览器类型
- * @returns {string}
- */
-const getBrowserType = function () {
-  let userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
-  let isOpera = userAgent.indexOf("Opera") > -1; //判断是否Opera浏览器
-  let isIE =
-    userAgent.indexOf("compatible") > -1 &&
-    userAgent.indexOf("MSIE") > -1 &&
-    !isOpera; //判断是否IE浏览器
-  let isIE11 =
-    userAgent.indexOf("Trident") > -1 && userAgent.indexOf("rv:11.0") > -1;
-  let isEdge = userAgent.indexOf("Edge") > -1 && !isIE; //判断是否IE的Edge浏览器
-  let isFF = userAgent.indexOf("Firefox") > -1; //判断是否Firefox浏览器
-  let isSafari =
-    userAgent.indexOf("Safari") > -1 && userAgent.indexOf("Chrome") === -1; //判断是否Safari浏览器
-  let isChrome =
-    userAgent.indexOf("Chrome") > -1 && userAgent.indexOf("Safari") > -1; //判断Chrome浏览器
-
-  if (isIE) {
-    let reIE = new RegExp("MSIE (\\d+\\.\\d+);");
-    reIE.test(userAgent);
-    let fIEVersion = parseFloat(RegExp["$1"]);
-    if (fIEVersion === 7) return "IE7";
-    else if (fIEVersion === 8) return "IE8";
-    else if (fIEVersion === 9) return "IE9";
-    else if (fIEVersion === 10) return "IE10";
-    else return "IE7以下"; //IE版本过低
-  }
-  if (isIE11) return "IE11";
-  if (isEdge) return "Edge";
-  if (isFF) return "FF";
-  if (isOpera) return "Opera";
-  if (isSafari) return "Safari";
-  if (isChrome) return "Chrome";
-};
-
-/**
- * 检测密码强度
- * @param {string} str 需要检测密码
- * @returns {number}
- */
-const checkPwdLv = function (str) {
-  let Lv = 0;
-  if (str.length < 6) {
-    return Lv;
-  }
-  if (/[0-9]/.test(str)) {
-    Lv++;
-  }
-  if (/[a-z]/.test(str)) {
-    Lv++;
-  }
-  if (/[A-Z]/.test(str)) {
-    Lv++;
-  }
-  if (/[\.|-|_]/.test(str)) {
-    Lv++;
-  }
-  return Lv;
-};
-
-/**
- * 检查手机号码，座机号码，身份证，密码，邮政编码，QQ号，邮箱，金额(小数点2位)，网址，IP，日期时间，数字，英文，中文，小写，大写，HTML标记格式是否正确
- * @param {string} str 检查的字符串
- * @param {string} type 类型 phone, tel, card, pwd, postal, QQ, email, money, URL, IP, date, number, english, chinese, lower, upper, HTML
- * @returns {boolean}
- */
-const verifyFormatIsCorrect = function (str, type) {
-  switch (type) {
-    case "phone": //手机号码
-      return /^1[3|4|5|6|7|8|9][0-9]{9}$/.test(str);
-    case "tel": //座机
-      return /^(0\d{2,3}-\d{7,8})(-\d{1,4})?$/.test(str);
-    case "card": //身份证
-      return /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/.test(str);
-    case "pwd": //密码以字母开头，长度在6~18之间，只能包含字母、数字和下划线
-      return /^[a-zA-Z]\w{5,17}$/.test(str);
-    case "postal": //邮政编码
-      return /[1-9]\d{5}(?!\d)/.test(str);
-    case "QQ": //QQ号
-      return /^[1-9][0-9]{4,9}$/.test(str);
-    case "email": //邮箱
-      return /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/.test(str);
-    case "money": //金额(小数点2位)
-      return /^\d*(?:\.\d{0,2})?$/.test(str);
-    case "URL": //网址
-      return /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?/.test(
-        str
-      );
-    case "IP": //IP
-      return /((?:(?:25[0-5]|2[0-4]\\d|[01]?\\d?\\d)\\.){3}(?:25[0-5]|2[0-4]\\d|[01]?\\d?\\d))/.test(
-        str
-      );
-    case "date": //日期时间
-      return (
-        /^(\d{4})\-(\d{2})\-(\d{2}) (\d{2})(?:\:\d{2}|:(\d{2}):(\d{2}))$/.test(
-          str
-        ) || /^(\d{4})\-(\d{2})\-(\d{2})$/.test(str)
-      );
-    case "number": //数字
-      return /^[0-9]$/.test(str);
-    case "english": //英文
-      return /^[a-zA-Z]+$/.test(str);
-    case "chinese": //中文
-      return /^[\u4E00-\u9FA5]+$/.test(str);
-    case "lower": //小写
-      return /^[a-z]+$/.test(str);
-    case "upper": //大写
-      return /^[A-Z]+$/.test(str);
-    case "HTML": //HTML标记
-      return /<("[^"]*"|'[^']*'|[^'">])*>/.test(str);
-    default:
-      return true;
-  }
-};
-
-/**
  * 严格的身份证校验
  * @param {string} sId 身份证号码
  * @returns {boolean}
@@ -408,16 +216,16 @@ const isCardID = function (sId) {
 
   // 出生日期验证
   let sBirthday = (
-      sId.substr(6, 4) +
-      "-" +
-      Number(sId.substr(10, 2)) +
-      "-" +
-      Number(sId.substr(12, 2))
-    ).replace(/-/g, "/"),
-    d = new Date(sBirthday);
+          sId.substr(6, 4) +
+          "-" +
+          Number(sId.substr(10, 2)) +
+          "-" +
+          Number(sId.substr(12, 2))
+      ).replace(/-/g, "/"),
+      d = new Date(sBirthday);
   if (
-    sBirthday !==
-    d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate()
+      sBirthday !==
+      d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate()
   ) {
     console.error("身份证上的出生日期非法");
     return false;
@@ -425,8 +233,8 @@ const isCardID = function (sId) {
 
   // 身份证号码校验
   let sum = 0,
-    weights = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2],
-    codes = "10X98765432";
+      weights = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2],
+      codes = "10X98765432";
   for (let i = 0; i < sId.length - 1; i++) {
     sum += sId[i] * weights[i];
   }
@@ -440,28 +248,204 @@ const isCardID = function (sId) {
 };
 
 /**
+ * 判断当前环境是否为移动端
+ * @returns {boolean} 是否为移动端
+ */
+const isMobile = function () {
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
+/**
+ * 判断当前环境是否为ios苹果手机
+ * @returns {boolean}
+ */
+const isIos = function () {
+  return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+};
+
+/**
+ * 判断当前环境是否为 PC 端
+ * @returns {boolean}
+ */
+const isPC = function () {
+  return !isMobile();
+};
+
+/**
  * 判断是否是PC浏览器
  * @returns {boolean} 是否是PC浏览器
  */
-const isPCBroswer = function () {
-  let userAgentInfo = navigator.userAgent;
-  let Agents = [
+const isPcBrowser = function () {
+  const userAgent = navigator.userAgent;
+  const mobileKeywords = [
     "Android",
+    "webOS",
     "iPhone",
-    "SymbianOS",
-    "Windows Phone",
     "iPad",
     "iPod",
-  ];
-  let flag = true;
-  for (let v = 0; v < Agents.length; v++) {
-    if (userAgentInfo.indexOf(Agents[v]) > 0) {
-      flag = false;
-      break;
+    "BlackBerry",
+    "IEMobile",
+    "Opera Mini",
+    "SymbianOS",
+    "Windows Phone",];
+  for (let i = 0; i < mobileKeywords.length; i++) {
+    if (userAgent.indexOf(mobileKeywords[i]) !== -1) {
+      return false;
     }
   }
-  return flag;
+  return true;
+}
+
+/**
+ * 获取当前属于哪种类型手机运行环境
+ * @returns {string} 是手机环境返回运行环境，不是手机运行环境 Unknown
+ */
+const getMobileEnv = function () {
+  var userAgent = navigator.userAgent;
+  if (/Android/i.test(userAgent)) {
+    return "Android";
+  } else if (/iPhone|iPad|iPod/i.test(userAgent)) {
+    return "ios";
+  } else if (/Windows Phone|IEMobile|WPDesktop/i.test(userAgent)) {
+    return "Windows Phone";
+  } else if (/BlackBerry/i.test(userAgent)) {
+    return "BlackBerry";
+  } else {
+    return "Unknown";
+  }
 };
+
+/**
+ * 获取浏览器类型
+ * @returns {string}
+ */
+const getBrowserType = function () {
+  let userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
+  let isOpera = userAgent.indexOf("Opera") > -1; //判断是否Opera浏览器
+  let isIE =
+      userAgent.indexOf("compatible") > -1 &&
+      userAgent.indexOf("MSIE") > -1 &&
+      !isOpera; //判断是否IE浏览器
+  let isIE11 =
+      userAgent.indexOf("Trident") > -1 && userAgent.indexOf("rv:11.0") > -1;
+  let isEdge = userAgent.indexOf("Edge") > -1 && !isIE; //判断是否IE的Edge浏览器
+  let isFF = userAgent.indexOf("Firefox") > -1; //判断是否Firefox浏览器
+  let isSafari =
+      userAgent.indexOf("Safari") > -1 && userAgent.indexOf("Chrome") === -1; //判断是否Safari浏览器
+  let isChrome =
+      userAgent.indexOf("Chrome") > -1 && userAgent.indexOf("Safari") > -1; //判断Chrome浏览器
+
+  if (isIE) {
+    let reIE = new RegExp("MSIE (\\d+\\.\\d+);");
+    reIE.test(userAgent);
+    let fIEVersion = parseFloat(RegExp["$1"]);
+    if (fIEVersion === 7) return "IE7";
+    else if (fIEVersion === 8) return "IE8";
+    else if (fIEVersion === 9) return "IE9";
+    else if (fIEVersion === 10) return "IE10";
+    else return "IE7以下"; //IE版本过低
+  }
+  if (isIE11) return "IE11";
+  if (isEdge) return "Edge";
+  if (isFF) return "FF";
+  if (isOpera) return "Opera";
+  if (isSafari) return "Safari";
+  if (isChrome) return "Chrome";
+};
+
+/**
+ * 检测密码强度
+ * @param {string} password 需要检测密码
+ * @returns {number}
+ */
+const checkPasswordLevel = function (password) {
+  let level = 0;
+  if (password.length < 6) {
+    return level;
+  }
+  let rules = [
+    /\d/, // 包含数字
+    /[a-z]/, // 包含小写字母
+    /[A-Z]/, // 包含大写字母
+    /[!@#$%^&*.\-_]/, // 包含特殊字符
+    // /.{8,}/ // 长度至少为8位
+  ];
+  for (let i = 0; i < rules.length; i++) {
+    if (rules[i].test(password)) {
+      level++;
+    }
+  }
+
+  return level;
+};
+
+/**
+ * 检查手机号码，座机号码，身份证，密码，邮政编码，QQ号，邮箱，金额(小数点2位)，网址，IP，日期时间，数字，英文，中文，小写，大写，HTML标记格式是否正确
+ * @param {string} str 检查的字符串
+ * @param {string} type 类型 phone, tel, card, pwd, postal, QQ, email, money, URL, IP, date, number, english, chinese, lower, upper, HTML
+ * @returns {boolean}
+ */
+const checkFormat = function (str, type) {
+  let regExp;
+  switch (type) {
+    case 'phone': // 手机号码
+      regExp = /^1[3456789]\d{9}$/;
+      break;
+    case 'tel': // 座机号码
+      regExp = /^(\(\d{3,4}\)|\d{3,4}-)?\d{7,8}$/;
+      break;
+    case 'card': // 身份证
+      regExp = /(^\d{15}$)|(^\d{17}(\d|X|x)$)/;
+      break;
+    case 'pwd': // 密码
+      regExp = /^[a-zA-Z\d_]{6,16}$/;
+      break;
+    case 'postal': // 邮政编码
+      regExp = /^[1-9]\d{5}$/;
+      break;
+    case 'QQ': // QQ号
+      regExp = /^[1-9][0-9]{4,}$/;
+      break;
+    case 'email': // 邮箱
+      regExp = /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/;
+      break;
+    case 'money': // 金额(小数点2位)
+      regExp = /^\d+(\.\d{1,2})?$/;
+      break;
+    case 'URL': // 网址
+      regExp = /^((https?|ftp|file):\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w.-]*)*\/?$/;
+      break;
+    case 'IP': // IP地址
+      regExp = /^((\d{1,2}|1\d{2}|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d{2}|2[0-4]\d|25[0-5])$/;
+      break;
+    case 'date': // 日期时间
+      regExp = /^\d{4}-\d{2}-\d{2}(\s\d{2}:\d{2}:\d{2})?$/;
+      break;
+    case 'number': // 数字
+      regExp = /^[0-9]*$/;
+      break;
+    case 'english': // 英文
+      regExp = /^[a-zA-Z]+$/;
+      break;
+    case 'chinese': // 中文
+      regExp = /^[\u4E00-\u9FA5]+$/;
+      break;
+    case 'lower': // 小写
+      regExp = /^[a-z]+$/;
+      break;
+    case 'upper': // 大写
+      regExp = /^[A-Z]+$/;
+      break;
+    case 'HTML': // HTML标记格式
+      regExp = /<("[^"]*"|'[^']*'|[^'">])*>/;
+      break;
+    default:
+      return false;
+  }
+  return regExp.test(str);
+}
+
+
 export {
   isType,
   isString,
@@ -481,12 +465,14 @@ export {
   isSet,
   isFalse,
   isTrue,
-  isIos,
-  getMobileEnv,
-  isPC,
-  getBrowserType,
-  checkPwdLv,
-  verifyFormatIsCorrect,
   isCardID,
-  isPCBroswer,
+  isMobile,
+  isIos,
+  isPC,
+  isPcBrowser,
+  getMobileEnv,
+  getBrowserType,
+  checkPasswordLevel,
+  checkFormat,
+
 }

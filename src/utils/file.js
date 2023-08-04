@@ -98,7 +98,7 @@ const getBlobType = function (name) {
 };
 
 /**
- * 二进制数据流下载文件
+ * 根据二进制数据流和文件名称（带类型名称）下载文件
  * @param {Blob} blobFile 二进制数据流
  * @param {string} fileName 文件名称
  * @returns {boolean} 是否下载成功

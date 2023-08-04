@@ -1,6 +1,6 @@
 /**
  * ajax 请求
- * @param {Object} setting  配置
+ * @param {Object} setting 配置
  * @param {String} setting.method 请求方式
  * @param {String} setting.url 请求地址
  * @param {Boolean} setting.async 是否异步

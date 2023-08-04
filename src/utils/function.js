@@ -1,8 +1,8 @@
 /**
  * 函数防抖
  * @param {Function} fun 需要被防抖的函数
- * @param {number} [wait=500]  防抖的时间（毫秒） 默认：500
- * @param {boolean} [immediate=true]  是否立即执行 默认：true
+ * @param {number} [wait=500] 防抖的时间（毫秒）
+ * @param {boolean} [immediate=true] 是否立即执行
  * @returns {Function} 返回新的 debounced（防抖动）函数
  */
 const debounce = function (fun, wait = 500, immediate = true) {
@@ -46,7 +46,7 @@ const debounce = function (fun, wait = 500, immediate = true) {
 /**
  * 函数节流
  * @param {Function} fun 需要被节流的函数
- * @param {number} [wait=500] 节流的时间（毫秒） 默认：500
+ * @param {number} [wait=500] 节流的时间（毫秒）
  * @returns {Function} 返回一个新的函数
  */
 const throttle = function (fun, wait = 500) {

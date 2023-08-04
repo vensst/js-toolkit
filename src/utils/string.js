@@ -60,7 +60,7 @@ const trim = function (str = "", type = 2) {
  * 字符串首字母转大写
  * @param {string} str 要转换的英文字符串
  * @returns {string} 已转换的英文字符串
- * @version 1.1.0-beta.8
+ * @version 1.1.0-beta.11
  */
 const toUpperCaseFirst = function (str = "") {
   str = str.toString();
@@ -121,6 +121,7 @@ const toLowerCase = function (str = "", type = 1) {
  * 过滤 html代码(把 <、> 和 & 转换)
  * @param {string} str html字符串
  * @returns {*}
+ * @version 1.1.0-beta.11
  */
 const filterHtmlTag = function (str) {
   str = str?.replace(/&/gi, "&amp;");
@@ -134,7 +135,7 @@ const filterHtmlTag = function (str) {
  * 生成随机验证码
  * @param {number} [length=4] 随机验证码的长度，默认4位
  * @param {(string|number)} checkCode 当前随机码（防止重复）
- * @returns {string}
+ * @returns {string} 随机验证码
  */
 const randomCode = function (length = 4, checkCode='') {
   let code = "";
@@ -236,10 +237,11 @@ const findCharCount = function (str, key) {
 
 /**
  * 字符串补全（开头）
- * @param {string} str 字符串
+ * @param {(string|number)} str 字符串
  * @param {number} targetLength 目标长度
  * @param {string} padString 补全字符
  * @returns {string} 补全后的字符串
+ * @version 1.1.0-beta.11
  */
 const padStart = function (str, targetLength, padString = '') {
   if (!isString(str)) {
@@ -250,10 +252,11 @@ const padStart = function (str, targetLength, padString = '') {
 
 /**
  * 字符串补全（尾部）
- * @param {string} str 字符串
+ * @param {(string|number)} str 字符串
  * @param {number} targetLength 目标长度
  * @param {string} padString 补全字符
  * @returns {string} 补全后的字符串
+ * @version 1.1.0-beta.11
  */
 const padEnd = function (str, targetLength, padString = '') {
   if (!isString(str)) {

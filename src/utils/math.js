@@ -88,8 +88,8 @@ const min = function (arr) {
 
 /**
  * 向上取整
- * @param {number} num 数字 默认：0
- * @param {number} precision 精度 默认：0
+ * @param {number} [num=0] 数字
+ * @param {number} [precision=0] 精度
  * @returns {number} 向上取整后的数字
  */
 const ceil = function (num = 0, precision = 0) {
@@ -98,8 +98,8 @@ const ceil = function (num = 0, precision = 0) {
 
 /**
  * 向下取整
- * @param {number} num 数字 默认：0
- * @param {number} precision 精度 默认：0
+ * @param {number} [num=0] 数字
+ * @param {number} [precision=0] 精度
  * @returns {number} 向下取整后的数字
  */
 const floor = function (num = 0, precision = 0) {
@@ -110,8 +110,8 @@ const floor = function (num = 0, precision = 0) {
 
 /**
  * 保留小数点后几位，不考虑四舍五入
- * @param {number} [num=0] 数值 默认：0
- * @param {number} [precision=0] 精度 默认：0
+ * @param {number} [num=0] 数值
+ * @param {number} [precision=0] 精度
  * @returns {number} 保留小数点后几位的数字
  */
 const decimal = function (num = 0, precision = 0) {
@@ -141,6 +141,7 @@ const decimal = function (num = 0, precision = 0) {
 const round = function (num = 0, precision = 0) {
   return math.round(num, precision)
 }
+
 export {
   add,
   subtract,

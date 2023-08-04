@@ -262,7 +262,7 @@ const thousandSeparator = function (num) {
 /**
  * 数字格式化
  * @param {number} num 数字
- * @param {number} digits 保留小数位数
+ * @param {number} [digits] 保留小数位数
  * @returns {string} 格式化后的字符串
  * @version 1.1.0-beta.8
  */

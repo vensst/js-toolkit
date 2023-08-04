@@ -4,7 +4,8 @@
  * @param {number} imgHeight  图片高度
  * @param {number} containerWidth 容器宽度
  * @param {number} containerHeight 容器高度
- * @returns {{width: number, scale: number, height: number}} 缩放后图片宽、高、缩放比例
+ * @returns {Object} 缩放后图片宽、高、缩放比例 {width: number, scale: number, height: number}
+ * @version 1.1.0-beta.11
  */
 const scaleImg = function (
     imgWidth = 0,
@@ -31,6 +32,7 @@ const scaleImg = function (
  * @param {Function} callback  回调函数
  * @returns {Promise}
  * @example imgLoadAll(['1.jpg', '2.jpg'])
+ * @version 1.1.0-beta.11
  */
 const imgLoadAll = function (arr, callback) {
   let arrImg = [];
@@ -50,6 +52,7 @@ const imgLoadAll = function (arr, callback) {
  * 图片arrayBuffer转base64
  * @param {Uint8Array} buffer 格式为 responseType:arraybuffer 的返回值
  * @returns {Object} 返回图片的base64和base64Url
+ * @version 1.1.0-beta.11
  */
 const arrayBufferToBase64 = function (buffer) {
   let binary = ''

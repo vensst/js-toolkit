@@ -13,7 +13,7 @@
       name="viewport"
       content="width=device-width,initial-scale=1,user-scalable=no"
   />
-  <title>Title</title>
+  <title>arr</title>
   <style>
     /* global styles */
     * {
@@ -197,20 +197,20 @@
 
   {
     const arr1 = [1, 2, 3, 4, 3];
-    const arr2 = [3, 4, 5, 3, 6, 6]
+    const arr2 = [3, 4, 5, 3, 6, 6];
     const arr3 = [
       {id: 1},
       {id: 2},
       {id: 3, name: 'a'},
       {id: 3},
 
-    ]
+    ];
     const arr4 = [
       {id: 3},
       {id: 4},
       {id: 4},
       {id: 5},
-    ]
+    ];
     console.log('--union--', union(arr1, arr2), union(arr3, arr4), union(arr3, arr4, 'id'))
     console.log('--intersect--', intersect(arr1, arr2), intersect(arr3, arr4), intersect(arr3, arr4, 'id'))
   }
@@ -280,7 +280,10 @@
     console.log('--groupByAttr--', groupByAttr(arr8, 'nodeStr'))
     console.log('--groupBySize--', groupBySize(arr8, 4))
   }
-
+  const fun = function (a, b) {
+    console.log('--toArray--', toArray(arguments))
+  }
+  fun(1, 2)
 </script>
 </body>
 </html>

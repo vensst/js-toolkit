@@ -9,77 +9,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="x-ua-compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
-    <title>Title</title>
-    <style>
-        /* global styles */
-        :root {
-            --color-black-text: #333;
-            --color-white-background: #fff
-        }
+  <meta charset="UTF-8">
+  <meta http-equiv="x-ua-compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+  <title>Title</title>
+  <style>
+    /* global styles */
+    :root {
+      --color-black-text: #333;
+      --color-white-background: #fff
+    }
 
-        * {
-            -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            box-sizing: border-box;
-        }
+    * {
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+    }
 
-        html {
-            font-size: 62.5%;
-            /*font-family: Microsoft YaHei, Arial, sans-serif;*/
-            /*阻止旋转屏幕时自动调整字体大小*/
-            -webkit-text-size-adjust: 100%;
-            -ms-text-size-adjust: 100%;
-            /* 解决IOS默认滑动很卡的情况 */
-            -webkit-overflow-scrolling: touch;
-        }
+    html {
+      font-size: 62.5%;
+      /*font-family: Microsoft YaHei, Arial, sans-serif;*/
+      /*阻止旋转屏幕时自动调整字体大小*/
+      -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+      /* 解决IOS默认滑动很卡的情况 */
+      -webkit-overflow-scrolling: touch;
+    }
 
-        html,
-        body {
-            /*width: 100%;*/
-            height: 100%;
-            margin: 0;
-            padding: 0;
-        }
+    html,
+    body {
+      /*width: 100%;*/
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
 
-        body {
-            font-size: 14px;
-            font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-            Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue",
-            sans-serif;
-            color: var(--color-black-text);
-            background-color: var(--color-white-background);
-            line-height: 1.15;
-        }
-    </style>
+    body {
+      font-size: 14px;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue",
+      sans-serif;
+      color: var(--color-black-text);
+      background-color: var(--color-white-background);
+      line-height: 1.15;
+    }
+  </style>
 </head>
 <body>
 <script type="module">
-    import {
-        desensitization,
-        trim,
-        toUpperCaseFirst,
-        toUpperCase,
-        toLowerCase,
-        filterHtmlTag,
-        randomCode,
-        findCharCount,
-        padStart,
-        padEnd
-    } from "../src/utils/string.js"
+  import {
+    desensitization,
+    trim,
+    toUpperCaseFirst,
+    toUpperCase,
+    toLowerCase,
+    filterHtmlTag,
+    randomCode,
+    findCharCount,
+    padStart,
+    padEnd
+  } from "../src/utils/string.js"
 
-    const str = " my name is lilei-lei fromChina "
-    const str2 = " MY NAME IS LILIEI-LEI FROMcHINA "
-    console.log("--desensitization--", desensitization(str, 5, 7), desensitization(15063946854, 3, 7, 'x'))
-    console.log("--trim--", trim(str, 1),trim(str, 2),trim(str, 3),trim(str, 4))
-    console.log("--toUpperCaseFirst--", toUpperCaseFirst(str, 1))
-    console.log("--toUpperCase--", toUpperCase(str), toUpperCase(str, 2), toUpperCase(str, 3),)
-    console.log("--toLowerCase--", toLowerCase(str2), toLowerCase(str2, 2), toLowerCase(str2, 3))
-    console.log("--filterHtmlTag--")
-    console.log("--randomCode--", randomCode())
-    console.log("--charCount--", findCharCount(str,'i'))
+  const str = " my name is lilei-lei fromChina "
+  const str2 = " MY NAME IS LILIEI-LEI FROMcHINA "
+  const str3 = "<div>这是一段文字</div>";
+  const str4 = "my name is lilei-lei fromChina "
+  console.log("--desensitization--", desensitization(str, 5, 7), desensitization(15063946854, 3, 7, 'x'))
+  console.log("--trim--", trim(str, 1), trim(str, 2), trim(str, 3), trim(str, 4))
+  console.log("--toUpperCaseFirst--", toUpperCaseFirst(str4))
+  console.log("--toUpperCase--", toUpperCase(str), toUpperCase(str, 2), toUpperCase(str, 3),)
+  console.log("--toLowerCase--", toLowerCase(str2), toLowerCase(str2, 2), toLowerCase(str2, 3))
+  console.log("--filterHtmlTag--", filterHtmlTag(str3))
+  console.log("--randomCode--", randomCode())
+  console.log("--charCount--", findCharCount(str, 'i'))
+  console.log("--padStart--", padStart(9, 2, '0'))
+  console.log("--padEnd--", padEnd(150, 11, '*'))
 </script>
 </body>
 </html>

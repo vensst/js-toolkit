@@ -18,12 +18,12 @@ const $ = function (selector = 'html') {
 /**
  * 检测类名，校验指定元素的类名是否包含指定的类名
  * @param {Element} ele dom元素
- * @param {string} name 类名
+ * @param {string} className 类名
  * @returns {boolean} true/false
  */
-const hasClass = function (ele, name) {
-  if (ele && name) {
-    return ele.classList?.contains(name) || false;
+const hasClass = function (ele, className) {
+  if (ele && className) {
+    return ele.classList?.contains(className) || false;
   } else return false;
   // return ele.className.match(new RegExp("(\\s|^)" + name + "(\\s|$)"));
 };
@@ -31,20 +31,20 @@ const hasClass = function (ele, name) {
 /**
  * 添加类名
  * @param {(Element|NodeList)} ele 元素
- * @param {string} name 类名
+ * @param {string} className 类名
  */
-const addClass = function (ele, name) {
-  const ac = function (ele, name) {
-    if (!hasClass(ele, name)) {
-      ele.className += " " + name;
+const addClass = function (ele, className) {
+  const ac = function (ele, className) {
+    if (!hasClass(ele, className)) {
+      ele.className += " " + className;
     }
   }
   try {
     if (ele instanceof Element) {
-      ac(ele, name)
+      ac(ele, className)
     } else if (ele instanceof NodeList) {
       ele.forEach(item => {
-        ac(item, name)
+        ac(item, className)
       })
     }
   } catch (e) {
@@ -53,22 +53,22 @@ const addClass = function (ele, name) {
 
 /**
  * 删除类名
- * @param {Element|NodeList} ele 元素
- * @param {string} name 类名
+ * @param {(Element|NodeList)} ele 元素
+ * @param {string} className 类名
  */
-const removeClass = function (ele, name) {
-  let reg = new RegExp("(\\s|^)" + name + "(\\s|$)");
-  const rc = function (ele, name) {
-    if (hasClass(ele, name)) {
+const removeClass = function (ele, className) {
+  let reg = new RegExp("(\\s|^)" + className + "(\\s|$)");
+  const rc = function (ele, className) {
+    if (hasClass(ele, className)) {
       ele.className = ele.className.replace(reg, "");
     }
   }
   try {
     if (ele instanceof Element) {
-      rc(ele, name)
+      rc(ele, className)
     } else if (ele instanceof NodeList) {
       ele.forEach(item => {
-        rc(item, name)
+        rc(item, className)
       })
     }
   } catch (e) {
@@ -78,13 +78,13 @@ const removeClass = function (ele, name) {
 
 /**
  * 替换类名
- * @param {Element|NodeList} ele 元素
- * @param {string} newName  新类名
- * @param {string} oldName  旧类名
+ * @param {(Element|NodeList)} ele 元素
+ * @param {string} newClassName  新类名
+ * @param {string} oldClassName   旧类名
  */
-const replaceClass = function (ele, newName, oldName) {
-  removeClass(ele, oldName);
-  addClass(ele, newName);
+const replaceClass = function (ele, newClassName, oldClassName) {
+  removeClass(ele, oldClassName);
+  addClass(ele, newClassName);
 };
 
 /**
@@ -114,15 +114,15 @@ const siblings = function (ele) {
 /**
  * 获取行间样式属性
  * @param {Element} ele 元素
- * @param {string} name 属性名
+ * @param {string} attrName 属性名
  * @returns {*} 属性值
  */
-const getByStyle = function (ele, name) {
+const getByStyle = function (ele, attrName) {
   if (ele instanceof Element) {
     if (ele.style) {
-      return ele.style[name];
+      return ele.style[attrName];
     } else {
-      return getComputedStyle(ele, null)[name];
+      return getComputedStyle(ele, null)[attrName];
     }
   }
 };

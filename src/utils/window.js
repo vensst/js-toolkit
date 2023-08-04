@@ -2,14 +2,14 @@ import {addStyle} from "./dom.js";
 
 /**
  * 根据窗口大小自适应字体大小
- * @param {number} val 初始字体大小 默认：16
- * @param {number} initWidth 初始宽度 默认：1920
+ * @param {number} [fontSize=16] 初始字体大小
+ * @param {number} [initWidth=1920] 初始宽度
  * @returns {number} 返回计算后字体大小
  */
-const resizeFontSize = function (val = 16, initWidth = 1920) {
+const resizeFontSize = function (fontSize = 16, initWidth = 1920) {
   let nowClientWidth = document.documentElement.clientWidth;
   // 换算方法
-  return val * (nowClientWidth / initWidth);
+  return fontSize * (nowClientWidth / initWidth);
 };
 
 class DataView {
@@ -57,9 +57,9 @@ class DataView {
  * 初始化数据可视化容器（用于数据可视化大屏）
  * @param {HTMLElement} el 元素
  * @param {Object} options 参数 {width, height,mode}
- * @param {number} options.width 标准/设计稿/实际宽度 默认：1920
- * @param {number} options.height 标准/设计稿/实际高度  默认：1080
- * @param {string} options.mode 缩放模式(scaleToFill：拉满全屏缩放 默认, aspectFit：等比缩放)
+ * @param {number} options.width 标准/设计稿/实际宽度
+ * @param {number} options.height 标准/设计稿/实际高度
+ * @param {string} options.mode 缩放模式(scaleToFill：拉满全屏缩放(默认), aspectFit：等比缩放)
  * @returns {DataView} 返回DataView实例对象
  * @version 1.1.0-beta.8
  */

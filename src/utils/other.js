@@ -42,10 +42,12 @@ const isScriptAdded = function (src) {
   }
   return false;
 }
+
 /**
  * 动态加载脚本文件
  * @param {string} src 地址
  * @param {Boolean} isAsync 是否异步加载
+ * @version 1.1.0-beta.11
  */
 const addScript = function (src, isAsync = true) {
   if (isScriptAdded(src)) return
@@ -60,6 +62,7 @@ const addScript = function (src, isAsync = true) {
  * 根据url下载
  * @param {string} url 链接地址
  * @returns {boolean} 返回是否下载成功
+ * @version 1.1.0-beta.11
  */
 const downloadByUrl = (url) => {
   let isChrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
@@ -104,11 +107,10 @@ const atob = function (str) {
   return decodeURIComponent(window.atob(str));
 }
 
-
 /**
- * 实现 base64 解码
- * @param data {string} 地址
- * @returns {string|*}
+ * base64 解码
+ * @param {string} data 需要解码的数据
+ * @returns {string} 返回解码后的数据
  */
 const base64_decode = function (data) {
   let b64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
@@ -151,30 +153,30 @@ const base64_decode = function (data) {
 };
 
 /**
- * 实现 utf8 解码
- * @param str_data
+ * utf8 解码
+ * @param {string} data 需要解码的数据
  * @returns {string}
  */
-const utf8_decode = function (str_data) {
+const utf8_decode = function (data) {
   let tmp_arr = [],
       i = 0,
       ac = 0,
       c1 = 0,
       c2 = 0,
       c3 = 0;
-  str_data += "";
-  while (i < str_data.length) {
-    c1 = str_data.charCodeAt(i);
+  data += "";
+  while (i < data.length) {
+    c1 = data.charCodeAt(i);
     if (c1 < 128) {
       tmp_arr[ac++] = String.fromCharCode(c1);
       i++;
     } else if (c1 > 191 && c1 < 224) {
-      c2 = str_data.charCodeAt(i + 1);
+      c2 = data.charCodeAt(i + 1);
       tmp_arr[ac++] = String.fromCharCode(((c1 & 31) << 6) | (c2 & 63));
       i += 2;
     } else {
-      c2 = str_data.charCodeAt(i + 1);
-      c3 = str_data.charCodeAt(i + 2);
+      c2 = data.charCodeAt(i + 1);
+      c3 = data.charCodeAt(i + 2);
       tmp_arr[ac++] = String.fromCharCode(
           ((c1 & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63)
       );
@@ -208,7 +210,7 @@ const domToString = function (htmlDOM) {
 
 /**
  * 字符串转DOM
- * @param htmlString
+ * @param {string} htmlString
  * @returns {Element}
  */
 const stringToDom = function (htmlString) {
@@ -288,31 +290,15 @@ const escapeHTML = function (str) {
 }
 
 /**
- * 加入收藏夹
- * @param  {string} sURL 网址
- * @param {string} sTitle 标题
- */
-const addFavorite = function (sURL, sTitle) {
-  try {
-    window.external.addFavorite(sURL, sTitle);
-  } catch (e) {
-    try {
-      window.sidebar.addPanel(sTitle, sURL, "");
-    } catch (e) {
-      alert("加入收藏失败，请使用Ctrl+D进行添加");
-    }
-  }
-};
-
-/**
  * 版本对比
- * @param {string} v1 版本号
- * @param  {string}  v2 版本号
- * @returns {number}
+ * @param {string} version1 版本号
+ * @param  {string}  version2 版本号
+ * @returns {number} 1: version1 > version2, -1: version1 < version2, 0: version1 = version2
+ * @version 1.1.0-beta.11
  */
-const compareVersion = function (v1, v2) {
-  v1 = v1.split(".");
-  v2 = v2.split(".");
+const compareVersion = function (version1, version2) {
+  const v1 = version1.split(".");
+  const v2 = version2.split(".");
 
   let len = Math.max(v1.length, v2.length);
 
@@ -354,6 +340,5 @@ export {
   setCursorPosition,
   insertAtCursor,
   escapeHTML,
-  addFavorite,
   compareVersion,
 }

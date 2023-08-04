@@ -131,7 +131,7 @@ class VenStorage {
 /**
  * 获取 localStorage
  * @param {string} key key值
- * @returns {any}
+ * @returns {any} val value值
  */
 const getLocal = function (key) {
   return new VenStorage().getLocal(key);

@@ -6,10 +6,9 @@
 
 ### 安装
 
-```
+```shell
 # npm
 npm install @vensst/js-toolkit --save
-
 ```
 
 ### 引用
@@ -29,6 +28,5 @@ random(1, 100)
 ## 使用script引用
 
 ```html
-
 <script src="https://unpkg.com/@vensst/js-toolkit"></script>
 ```

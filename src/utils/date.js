@@ -81,12 +81,12 @@ const pluralize = function pluralize(time, label) {
 
 /**
  * 以前时间距离当前时间的时间差
- * @param {(Date|number)} date 时间对象或时间戳
+ * @param {(Date|string|number)} date 时间对象或时间戳
  * @param {Object} [opt={d: 'day', h: 'hour', m: 'minute'}] 选项配置
  * @param {string} [opt.d='day'] 天的单位
  * @param {string} [opt.h='hour'] 小时的单位
  * @param {string} [opt.m='minute'] 分钟的单位
- * @returns {string}
+ * @returns {string} 时间差
  * @version 1.1.0-beta.8
  */
 const timeAgo = function (date = new Date(), opt = {d: 'day', h: 'hour', m: 'minute'}) {
@@ -161,7 +161,7 @@ const sToHms = function (s = 0, valueFormat = ["时", "分", "秒"]) {
 
 /**
  * 根据指定日期获取指定长度的天数集合
- * @param {Date|string} [date=new Date()] 时间
+ * @param {(Date|string)} [date=new Date()] 时间
  * @param {number} [len=2] 长度
  * @param {number} [dir=-1]  方向 -1: 前几天(默认)，0:前后几天，1: 后几天;
  * @param {string} [valueFormat="YYYY-MM-DD"] 日期格式
@@ -190,7 +190,7 @@ const getDaysFromDate = function (date = new Date(), len = 2, dir = -1, valueFor
 
 /**
  * 获取指定日期的所在月份的总天数
- * @param {(Date|string)} [date=new Date()]
+ * @param {(Date|string|number)} [date=new Date()] 日期对象或日期格式字符串
  * @returns {number} 天数
  */
 const getDaysInMonth = function (date = new Date()) {
@@ -221,9 +221,9 @@ const getDaysInYear = function (year = new Date()) {
 
 /**
  * 根据指定时间获取指定长度的月份集合
- * @param {Date|string|number} [date=new Date()] 时间
+ * @param {(Date|string|number)} [date=new Date()] 日期对象或日期格式字符串
  * @param {number} [length=2] 长度
- * @param {number} [direction=1] -1: 前几个月(默认)，0:前后几个月，2: 后几个月，
+ * @param {number} [direction=1] -1: 前几个月(默认)，0:前后几个月，2: 后几个月
  * @param {string} [valueFormat='YYYY-MM'] 返回格式
  * @returns {string[]} 月份集合
  */
@@ -253,7 +253,7 @@ const getMonthsFromDate = function (date = new Date(), length = 2, direction = -
 
 /**
  * 根据指定时间获得该季度的开始月份
- * @param {(Date|string|number)} [date=new Date()] 时间 Date|‘2022-12-20’| 时间戳
+ * @param {(Date|string|number)} [date=new Date()] 日期对象或日期格式字符串
  * @param {string} [valueFormat='YYYY-MM'] 返回值格式
  * @returns {string} 月份
  */
@@ -270,7 +270,7 @@ const getStartMonthOfQuarter = function (date = new Date(), valueFormat = 'YYYY-
 // --------------------------------------------
 /**
  * 获取某个日期是当年中的第几天
- * @param {(Date|String)} [date=new Date()]  时间,默认当前时间
+ * @param {(Date|string|number)} [date=new Date()]  日期对象或日期格式字符串
  * @returns {number} 返回第几天
  */
 const getDayOfYear = function (date = new Date()) {
@@ -285,7 +285,7 @@ const getDayOfYear = function (date = new Date()) {
 
 /**
  * 获取某个日期在这一年的第几周
- * @param {(Date|String)} [date=new Date()] 时间,默认当前时间
+ * @param {(Date|string|number)} [date=new Date()] 日期对象或日期格式字符串
  * @returns {number} 返回第几周
  */
 const getWeekOfYear = function (date = new Date()) {
@@ -496,7 +496,7 @@ class VenDate {
 
 /**
  * 根据日期获取本周、上周、下周的开始日期
- * @param {(Date|String)} [date=new Date()] 日期对象或日期格式字符串
+ * @param {(Date|string|number)} [date=new Date()] 日期对象或日期格式字符串
  * @param {number} [type=0] 类型 -1:上周  0:本周(默认)  1:下周
  * @param {string} [valueFormat="YYYY-MM-DD"] 返回的日期格式
  * @returns {string} 周开始日期
@@ -510,7 +510,7 @@ const getStartOfWeek = function (date = new Date(), type = 0, valueFormat = "YYY
 
 /**
  * 根据日期获得本周、上周、下周的结束日期
- * @param {(Date|String)} [date=new Date()] 日期对象或日期格式字符串
+ * @param {(Date|string|number)} [date=new Date()] 日期对象或日期格式字符串
  * @param {number} [type=0] -1:上周  0:本周(默认)  1:下周
  * @param {string} [valueFormat="YYYY-MM-DD"] 返回的日期格式
  * @returns {string} 周结束日期
@@ -524,7 +524,7 @@ const getEndOfWeek = function (date = new Date(), type = 0, valueFormat = "YYYY-
 
 /**
  * 根据日期获得本月、上月、下月开始日期
- * @param {(Date|String)} [date=new Date()] 时间,默认当前时间
+ * @param {(Date|string|number)} [date=new Date()] 日期对象或日期格式字符串
  * @param {number} [type=0] -1:上月  0:本月(默认)  1:下月
  * @param {string} [valueFormat="YYYY-MM-DD"] 返回的日期格式
  * @returns {string} 月开始日期
@@ -538,7 +538,7 @@ const getStartOfMonth = function (date = new Date(), type = 0, valueFormat = "YY
 
 /**
  * 根据日期获得本月、上月、下月结束日期
- * @param {(Date|String)} [date=new Date()] 时间,默认当前时间
+ * @param {(Date|string|number)} [date=new Date()] 日期对象或日期格式字符串
  * @param {number} [type=0] -1:上月  0:本月(默认)  1:下月
  * @param {string} [valueFormat="YYYY-MM-DD"] 返回的日期格式
  * @returns {string} 月结束日期
@@ -552,10 +552,10 @@ const getEndOfMonth = function (date = new Date(), type = 0, valueFormat = "YYYY
 
 /**
  * 根据日期获取本季度、上季度、下季度的开始日期
- * @param {Date} [date=new Date()] 时间,默认当前时间
+ * @param {(Date|string|number)} [date=new Date()] 日期对象或日期格式字符串
  * @param {number} [type=0] -1:上季度  0:本季度(默认)  1:下季度
  * @param {string} [valueFormat="YYYY-MM-DD"] 返回的日期格式
- * @returns {string} 日期
+ * @returns {string} 季度开始日期
  */
 const getStartOfQuarter = function (date = new Date(), type = 0, valueFormat = "YYYY-MM-DD") {
   if (!isDate(date)) {
@@ -566,10 +566,10 @@ const getStartOfQuarter = function (date = new Date(), type = 0, valueFormat = "
 
 /**
  * 根据日期获取本季度、上季度、下季度的结束日期
- * @param {Date} [date=new Date()] 时间,默认当前时间
+ * @param {(Date|string|number)} [date=new Date()] 日期对象或日期格式字符串
  * @param {number} [type=0] -1:上季度  0:本季度(默认)  1:下季度
  * @param {string} [valueFormat="YYYY-MM-DD"] 返回的日期格式
- * @returns {string} 日期
+ * @returns {string} 季度结束日期
  */
 const getEndOfQuarter = function (date = new Date(), type = 0, valueFormat = "YYYY-MM-DD") {
   if (!isDate(date)) {
@@ -580,10 +580,10 @@ const getEndOfQuarter = function (date = new Date(), type = 0, valueFormat = "YY
 
 /**
  * 根据日期获取本年、上年、下年的开始日期
- * @param {Date} [date=new Date()] 时间,默认当前时间
+ * @param {(Date|string|number)} [date=new Date()] 日期对象或日期格式字符串
  * @param {number} [type=0] -1:上年  0:本年(默认)  1:下年
  * @param {string} [valueFormat="YYYY-MM-DD"] 返回的日期格式
- * @returns {string} 日期
+ * @returns {string} 年开始日期
  */
 const getStartOfYear = function (date = new Date(), type = 0, valueFormat = "YYYY-MM-DD") {
   if (!isDate(date)) {
@@ -594,10 +594,10 @@ const getStartOfYear = function (date = new Date(), type = 0, valueFormat = "YYY
 
 /**
  * 根据日期获取本年、上年、下年的结束日期
- * @param {Date} [date=new Date()] 时间,默认当前时间
+ * @param {(Date|string|number)} [date=new Date()] 日期对象或日期格式字符串
  * @param {number} [type=0] -1:上年  0:本年(默认)  1:下年
  * @param {string} [valueFormat="YYYY-MM-DD"] 返回的日期格式
- * @returns {string} 日期
+ * @returns {string} 年结束日期
  */
 const getEndOfYear = function (date = new Date(), type = 0, valueFormat = "YYYY-MM-DD") {
   if (!isDate(date)) {
@@ -608,9 +608,9 @@ const getEndOfYear = function (date = new Date(), type = 0, valueFormat = "YYYY-
 
 
 /**
- * 获取指定日期的前几天或者后几天
- * @param {Date} [date=new Date()] 时间,默认当前时间
- * @param {number} [len=1] 天数长度, 1：近一天(默认) 3：近三天 7：近7天，30：近30天
+ * 获取指定日期的前几天
+ * @param {(Date|string|number)} [date=new Date()] 日期对象或日期格式字符串
+ * @param {number} [len=1] 要获取的天数长度, 1：近一天(默认) 3：近三天 7：近7天，30：近30天
  * @param {string} [valueFormat="YYYY-MM-DD"] 返回的日期格式
  * @returns {string} 日期
  */
@@ -625,10 +625,10 @@ const getBeforeDate = function (date = new Date(), len = 1, valueFormat = "YYYY-
 
 /**
  * 获取两个日期之间的所有日期
- * @param {*} startDate 开始日期
- * @param {*} endDate 结束日期
- * @param valueFormat
- * @returns {*[]} 日期数组
+ * @param {(Date|string|number)} startDate 开始日期
+ * @param {(Date|string|number)} endDate 结束日期
+ * @param {string} [valueFormat="YYYY-MM-DD"] 返回的日期格式
+ * @returns {string[]} 日期数组
  * @version 1.1.0-beta.10
  */
 const getDatesBetween = function (startDate = new Date(), endDate = new Date(), valueFormat = "YYYY-MM-DD") {

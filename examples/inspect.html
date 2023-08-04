@@ -76,14 +76,15 @@
         isSet,
         isFalse,
         isTrue,
-        isIos,
-        getMobileEnv,
-        isPC,
-        getBrowserType,
-        checkPwdLv,
-        verifyFormatIsCorrect,
         isCardID,
-        isPCBroswer,
+        isMobile,
+        isIos,
+        isPC,
+        isPcBrowser,
+        getMobileEnv,
+        getBrowserType,
+        checkPasswordLevel,
+        checkFormat,
     } from "../src/utils/inspect.js"
 
     console.log('--isType--', isType('Array', []), isType('Date', new Date()));
@@ -108,14 +109,15 @@
     console.log('--isSet--', isSet(new Set()));
     console.log('--isFalse--', isFalse(null), isFalse(undefined), isFalse(false));
     console.log('--isTrue--', isTrue(1));
-    console.log('--isIos--', isIos());
-    console.log('--getMobileEnv--', getMobileEnv());
-    console.log('--isPC--', isPC());
-    console.log('--getBrowserType--', getBrowserType());
-    console.log('--checkPwdLv--', checkPwdLv('admin123'));
-    console.log('--verifyFormatIsCorrect--', verifyFormatIsCorrect('15061750952', 'phone'));
     console.log('--isCardID--', isCardID('321323198910013031'));
-    console.log('--isPCBroswer--', isPCBroswer());
+    console.log('--isMobile--', isMobile());
+    console.log('--isIos--', isIos());
+    console.log('--isPC--', isPC());
+    console.log('--isPcBrowser--', isPcBrowser());
+    console.log('--getMobileEnv--', getMobileEnv());
+    console.log('--getBrowserType--', getBrowserType());
+    console.log('--checkPasswordLevel--', checkPasswordLevel('admin123'));
+    console.log('--checkFormat--', checkFormat('15061750952', 'phone'));
 </script>
 
 </body>

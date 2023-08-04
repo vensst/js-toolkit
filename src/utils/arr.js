@@ -63,6 +63,7 @@ async function forEachAsync(arr, callback, thisObj) {
  * @param {any[]} arr 数组
  * @param {Function} callback 回调函数
  * @param {Object} [thisObj] this指向
+ * @version 1.1.0-beta.11
  */
 const forEach = function (arr, callback, thisObj) {
   callback = callback || Function;
@@ -75,7 +76,7 @@ const forEach = function (arr, callback, thisObj) {
 };
 
 /**
- * 自定义 map 函数
+ * 自定义map函数
  * @param {any[]} arr 数组
  * @param {Function} callback 回调函数
  * @param {Object} [thisObj] this指向
@@ -94,8 +95,9 @@ const map = function (arr, callback, thisObj) {
  * 对象数组中根据指定属性名以及拼接字符，返回拼接的属性名的值的字符串（普通或对象数组）
  * @param {Object[]|string} arr 对象数组
  * @param {string} char 符号
- * @param {string} [attrName] 属性名(对象数组必传)
+ * @param {string} [attrName] 属性名，该参数有值是arr必须是对象数组
  * @returns {string} 符号拼接的字符串
+ * @version 1.1.0-beta.11
  */
 const join = function (arr, char, attrName) {
   if (typeof arr === "string") {
@@ -137,6 +139,7 @@ const sort = function (arr = [], type = 1) {
  * @param {Array<any>} arr 数组
  * @param {string} [attrName] 指定属性名称 (如果传这个值，就是对象数组去重，arr参数必须是对象数组)
  * @returns {Array} 去重后的数组
+ * @version 1.1.0-beta.11
  */
 const unique = function (arr, attrName) {
   if (!isArray(arr)) {
@@ -274,6 +277,7 @@ const duplicateDataTag = function (
  * @param {Object[]} arr 对象数组
  * @param {string} attrName 指定属性名称
  * @returns {Object} 返回分组后的对象
+ * @version 1.1.0-beta.11
  */
 const groupByAttr = function (arr, attrName) {
   return arr.reduce((preResult, curItem) => {
@@ -291,6 +295,7 @@ const groupByAttr = function (arr, attrName) {
  * @param {any[]} arr 数组
  * @param {number} size 指定长度
  * @returns {any[][]} 返回分组后的二维数组
+ * @version 1.1.0-beta.11
  */
 const groupBySize = function (arr, size) {
   return arr.reduce((preResult, curItem, currentIndex) => {
