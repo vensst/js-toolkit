@@ -137,7 +137,7 @@ const filterHtmlTag = function (str) {
  * @param {(string|number)} checkCode 当前随机码（防止重复）
  * @returns {string} 随机验证码
  */
-const randomCode = function (length = 4, checkCode='') {
+const randomCode = function (length = 4, checkCode = '') {
   let code = "";
   const codeLength = parseInt(length);
   const charset = [
@@ -265,6 +265,29 @@ const padEnd = function (str, targetLength, padString = '') {
   return str.padEnd(targetLength || str.length, padString)
 }
 
+/**
+ * 判断字符串是否包含单位
+ * @param {string} str 字符串
+ * @returns {boolean} 是否包含单位
+ * @version 1.1.0-beta.12
+ */
+const hasUnit = function (str) {
+  if(typeof str !== 'string') return false;
+  const unitPattern = /[a-zA-Z]+$/; // 匹配以字母组成的单位
+  return unitPattern.test(str);
+}
+
+/**
+ * 去除字符串单位
+ * @param {string} str 字符串
+ * @returns {string} 去除单位后的字符串
+ * @version 1.1.0-beta.12
+ */
+const removeUnit = function (str) {
+  if (typeof str !== "string" || !hasUnit(str)) return str;
+  return str.replace(/[a-zA-Z]+$/, '');
+}
+
 export {
   desensitization,
   trim,
@@ -275,5 +298,7 @@ export {
   randomCode,
   findCharCount,
   padStart,
-  padEnd
+  padEnd,
+  hasUnit,
+  removeUnit
 };

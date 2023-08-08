@@ -474,5 +474,4 @@ export {
   getBrowserType,
   checkPasswordLevel,
   checkFormat,
-
 }

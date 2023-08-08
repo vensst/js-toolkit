@@ -1,5 +1,11 @@
 # 更新日志
 
+## 1.1.0-beta.12 (2023-8-8)
+
+### Features
+
+* 增加了hasUnit、removeUnit函数
+
 ## 1.1.0-beta.11 (2023-8-2)
 
 ### Refactor

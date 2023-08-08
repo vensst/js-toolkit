@@ -14,7 +14,7 @@
  * @param {Function} setting.success 请求成功回调
  * @param {Function} setting.error 请求失败回调
  */
-const _ajax = function (setting) {
+const ajax = function (setting) {
   //设置参数的初始值
   let opts = {
     method: (setting.method || "GET").toUpperCase(), //请求方式
@@ -102,7 +102,7 @@ const _ajax = function (setting) {
  * @param {string} setting.cache 可以设置 default, reload, no-cache
  * @returns {Promise<unknown>} 返回 Promise 对象
  */
-const _fetch = function (url, setting) {
+const fetch = function (url, setting) {
   //设置参数的初始值
   let opts = {
     method: (setting.method || "GET").toUpperCase(), //请求方式
@@ -147,6 +147,6 @@ const _fetch = function (url, setting) {
 };
 
 export {
-  _ajax,
-  _fetch
+  ajax,
+  fetch
 }

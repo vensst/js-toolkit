@@ -37,7 +37,6 @@ Cookies.getJSON = function (key) {
     throw new Error(e)
   }
 }
-export {Cookies};
 
 /**
  * dayjs 用于处理时间
@@ -45,22 +44,17 @@ export {Cookies};
  */
 import dayjs from "dayjs";
 
-export {dayjs};
-
 /**
  * mathjs 用于处理数学运算
  * https://mathjs.org/docs/index.html
  */
 import * as math from "mathjs";
 
-export {math};
-
 /**
  * CryptoJS 用于加密解密
  * https://cryptojs.gitbook.io/docs/
  */
 import CryptoJS from "crypto-js";
-export {CryptoJS};
 
 /**
  * uuid 用于生成唯一标识符
@@ -68,14 +62,20 @@ export {CryptoJS};
  * @version
  */
 import * as uuid from "uuid";
-export {uuid};
+
+import packageJson from "../package.json";
+
+const _version = packageJson.version;
+
+export {Cookies, dayjs, math, CryptoJS, uuid, _version};
 
 const Utils = {
   Cookies,
   dayjs,
   math,
   CryptoJS,
-  uuid
+  uuid,
+  _version
 };
 
 // require.context(检索目录, 是否检索子目录, 检索规则) 读取当前目录下的所有js文件
