@@ -293,6 +293,7 @@ const removeUnit = function (str) {
  * @param {string} str 字符串
  * @param {string} [separator='-'] 分隔符
  * @returns {*}
+ * @version 1.1.0-beta.13
  */
 const camelToKebab = function (str, separator = '-') {
   if(!str) return str;
@@ -307,6 +308,7 @@ const camelToKebab = function (str, separator = '-') {
  * @param {string} str 字符串
  * @param {string} [separator='-'] 分隔符
  * @returns {*}
+ * @version 1.1.0-beta.13
  */
 const kebabToCamel = function (str,separator = '-') {
   if(!str) return str;
