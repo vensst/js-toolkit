@@ -67,7 +67,9 @@
     randomCode,
     findCharCount,
     padStart,
-    padEnd
+    padEnd,
+    camelToKebab,
+    kebabToCamel,
   } from "../src/utils/string.js"
 
   const str = " my name is lilei-lei fromChina "
@@ -84,6 +86,8 @@
   console.log("--charCount--", findCharCount(str, 'i'))
   console.log("--padStart--", padStart(9, 2, '0'))
   console.log("--padEnd--", padEnd(150, 11, '*'))
+  console.log("--camelToKebab--", camelToKebab('myName'),camelToKebab('myName','_'))
+  console.log("--kebabToCamel--", kebabToCamel('my-name'),kebabToCamel('my_name','_'))
 </script>
 </body>
 </html>

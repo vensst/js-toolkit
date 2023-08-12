@@ -11,7 +11,7 @@ module.exports = {
     globalObject: 'this',
     // 向外暴露的对象名称，用于通过对象调用的方式调用封装的函数,说明：https://webpack.docschina.org/configuration/output/#outputlibrary
     library: {
-      name: 'jstk',
+      name: 'jsToolkit',
       type: 'umd',
     },
     clean: true,// 每次打包先清除 lib 文件

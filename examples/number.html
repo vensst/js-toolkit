@@ -68,8 +68,9 @@
     } from "../src/utils/number.js"
     const buttonEl = document.getElementById("button")
     buttonEl.onclick = function (){
-        console.log('--有小数--',random(0, 2))
-        console.log('--无小数--',random(0, 2,false),random('z', '2',false))
+        console.log('--有小数--',random(),random(0, 2))
+        console.log('--无小数--',random(1, 1,false),random(0, 2,false))
+        console.log('--错误--',random('z', '2',false))
     }
     console.log("--random--", random(0, 2), random(0, 2,false),)
     console.log("--inRange--", inRange(3, 2, 4))

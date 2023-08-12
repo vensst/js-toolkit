@@ -1,5 +1,16 @@
 # 更新日志
 
+## 1.1.0-beta.13 (2023-8-12)
+
+### Bug Fixes
+
+* 修复了对象相关函数无法按需引入问题
+
+### Features
+
+* 增加了camelToKebab、kebabToCamel函数
+* 暴露的对象名称jstk修改为jsToolkit
+
 ## 1.1.0-beta.12 (2023-8-8)
 
 ### Features

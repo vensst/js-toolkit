@@ -272,7 +272,7 @@ const padEnd = function (str, targetLength, padString = '') {
  * @version 1.1.0-beta.12
  */
 const hasUnit = function (str) {
-  if(typeof str !== 'string') return false;
+  if (typeof str !== 'string') return false;
   const unitPattern = /[a-zA-Z]+$/; // 匹配以字母组成的单位
   return unitPattern.test(str);
 }
@@ -288,6 +288,35 @@ const removeUnit = function (str) {
   return str.replace(/[a-zA-Z]+$/, '');
 }
 
+/**
+ * 驼峰命名转短横线命名
+ * @param {string} str 字符串
+ * @param {string} [separator='-'] 分隔符
+ * @returns {*}
+ */
+const camelToKebab = function (str, separator = '-') {
+  if(!str) return str;
+  if(typeof str !== 'string') {
+    str = String(str);
+  }
+  return str.replace(/([a-z])([A-Z])/g, `$1${separator}$2`).toLowerCase();
+}
+
+/**
+ * 短横线命名转驼峰命名
+ * @param {string} str 字符串
+ * @param {string} [separator='-'] 分隔符
+ * @returns {*}
+ */
+const kebabToCamel = function (str,separator = '-') {
+  if(!str) return str;
+  if(typeof str !== 'string') {
+    str = String(str);
+  }
+  const reg = new RegExp(`${separator}(.)`, 'g');
+  return str.replace(reg, (match, p1) => p1.toUpperCase());
+}
+
 export {
   desensitization,
   trim,
@@ -300,5 +329,7 @@ export {
   padStart,
   padEnd,
   hasUnit,
-  removeUnit
+  removeUnit,
+  camelToKebab,
+  kebabToCamel,
 };

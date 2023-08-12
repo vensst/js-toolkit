@@ -2,24 +2,23 @@
 
 @vensst/js-toolkit 是个人常用的js工具库
 
-## 使用node安装
+## 安装
 
 ### 安装
 
 ```shell
-# npm
-npm install @vensst/js-toolkit --save
+npm install @vensst/js-toolkit -S
 ```
 
-### 引用
+### 使用
 
 ```js
 // 全部引用
-import jstk from "@vensst/js-toolkit"
+import jsToolkit from "@vensst/js-toolkit"
 
-jstk.random(1, 100)
+jsToolkit.random(1, 100)
 
-// 指定功能引入
+// 按需引入
 import {random} from "@vensst/js-toolkit"
 
 random(1, 100)

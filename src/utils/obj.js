@@ -16,6 +16,8 @@
  * @version 1.1.0-beta.11
  */
 const chainGet = function (obj, chain, defaultValue = undefined) {
+  if (!obj) return defaultValue;
+  if(!chain) return obj;
   const properties = chain.split('.');
   let current = obj;
   for (let i = 0; i < properties.length; i++) {
