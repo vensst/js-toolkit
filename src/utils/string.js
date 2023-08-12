@@ -292,7 +292,7 @@ const removeUnit = function (str) {
  * 驼峰命名转短横线命名
  * @param {string} str 字符串
  * @param {string} [separator='-'] 分隔符
- * @returns {*}
+ * @returns {string} 转换后的字符串
  * @version 1.1.0-beta.13
  */
 const camelToKebab = function (str, separator = '-') {
@@ -307,7 +307,7 @@ const camelToKebab = function (str, separator = '-') {
  * 短横线命名转驼峰命名
  * @param {string} str 字符串
  * @param {string} [separator='-'] 分隔符
- * @returns {*}
+ * @returns {string} 转换后的字符串
  * @version 1.1.0-beta.13
  */
 const kebabToCamel = function (str,separator = '-') {
