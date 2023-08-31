@@ -1,12 +1,13 @@
 const {resolve} = require('path')
 module.exports = {
   entry: {
-    main: './src/main.js'
+    main: './src/main.js', // 包含第三方插件
+    index: "./src/index.js" // 不包含第三方插件
   },
   output: {
     // 资源发布地址，注意：这个配置直接影响页面404,
     // publicPath: '/',
-    filename: 'index.js', // 打包后的文件名称
+    filename: '[name].js', // 打包后的文件名称
     path: resolve(__dirname, '../lib'), // 打包后的目录，必须是绝对路径
     globalObject: 'this',
     // 向外暴露的对象名称，用于通过对象调用的方式调用封装的函数,说明：https://webpack.docschina.org/configuration/output/#outputlibrary

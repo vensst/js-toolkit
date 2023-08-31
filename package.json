@@ -1,13 +1,13 @@
 {
   "name": "@vensst/js-toolkit",
-  "version": "1.1.0-beta.13",
+  "version": "1.1.0-beta.14",
   "description": "js常用工具类",
   "keywords": [
     "js工具类",
     "js常用函数",
     "js-toolkit"
   ],
-  "main": "lib/index.js",
+  "main": "lib/main.js",
   "scripts": {
     "serve": "webpack serve --config build/webpack.dev.conf.js",
     "build": "webpack --config build/webpack.prod.conf.js",
@@ -41,7 +41,7 @@
     "dayjs": "^1.11.2",
     "js-cookie": "^3.0.1",
     "mathjs": "^10.6.1",
-    "uuid": "^9.0.0"
+    "nanoid": "^4.0.2"
   },
   "browserslist": [
     "> 1%",

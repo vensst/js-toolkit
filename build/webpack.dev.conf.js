@@ -19,7 +19,7 @@ module.exports = function(env, argv) {
       },
       // host: "0.0.0.0",
       open: false, //自动打开浏览器
-      port: 9000,
+      port: 9001,
       hot: false,// 热更新 默认true
       liveReload: true, //重新加载或刷新页面
       //客户端配置
@@ -66,7 +66,7 @@ module.exports = function(env, argv) {
         title:"@vensst/js-toolkit示例",
         filename: 'index.html',
         template: path.resolve(__dirname, '../examples/index.html'),
-        // chunks:['main']
+        // chunks:['index'] // 默认加载 main.js，这个项目的第一 output 的 bundle ,
       })
     ]
   });

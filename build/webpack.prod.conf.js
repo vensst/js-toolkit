@@ -21,7 +21,7 @@ module.exports = function (env, argv) {
       new CleanWebpackPlugin(),
     ],
     optimization: {
-      // minimize: true,
+      minimize: true,
       minimizer: [
         new TerserWebpackPlugin({
           extractComments: false

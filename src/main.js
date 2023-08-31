@@ -1,22 +1,5 @@
-export * from "./utils/number.js";
-export * from "./utils/string.js";
-export * from "./utils/arr.js";
-export * from "./utils/obj.js";
-export * from "./utils/date.js";
-export * from "./utils/function.js";
-export * from "./utils/dom.js";
-export * from "./utils/inspect.js";
-export * from "./utils/math.js";
-export * from "./utils/storage.js";
-export * from "./utils/url.js";
-export * from "./utils/file.js";
-export * from "./utils/img.js";
-export * from "./utils/http.js";
-export * from "./utils/scroll.js";
-export * from "./utils/window.js";
-export * from "./utils/other.js";
-
-/* 第三方库 */
+export * from "./index.js"
+import jsToolkit from "./index.js";
 
 /**
  * js-cookie 用于处理浏览器cookie
@@ -58,30 +41,32 @@ import * as math from "mathjs";
 import CryptoJS from "crypto-js";
 
 /**
- * uuid 用于生成唯一标识符
- * https://github.com/uuidjs/uuid#readme
+ * nanoid 用于生成唯一标识符
+ * https://github.com/ai/nanoid/blob/HEAD/README.zh-CN.md
  * @version
  */
-import * as uuid from "uuid";
+import * as nanoid from 'nanoid'
 
 import packageJson from "../package.json";
-
 const _version = packageJson.version;
 
-export {Cookies, dayjs, math, CryptoJS, uuid, _version};
+export {Cookies, dayjs, math, CryptoJS, nanoid, _version};
 
 const Utils = {
+  ...jsToolkit,
   Cookies,
   dayjs,
   math,
   CryptoJS,
-  uuid,
+  nanoid,
   _version
 };
 
+
 // require.context(检索目录, 是否检索子目录, 检索规则) 读取当前目录下的所有js文件
-const modulesFiles = require.context("./utils", false, /\.js$/);
-modulesFiles.keys().forEach((modulePath) => {
-  Object.assign(Utils, modulesFiles(modulePath));
-});
+// const modulesFiles = require.context("./utils", false, /\.js$/);
+// modulesFiles.keys().forEach((modulePath) => {
+//   Object.assign(Utils, modulesFiles(modulePath));
+// });
+
 export default Utils;

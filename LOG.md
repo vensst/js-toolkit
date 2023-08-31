@@ -1,4 +1,10 @@
 # 更新日志
+## 1.1.0-beta.14 (2023-8-31)
+
+### Features
+
+* 将第三方依赖 uuid 依赖改为 nanoid
+* 增加不含第三方插件库，引入方式为 `import jsToolkit from @vensst/js-toolkit/lib/index.js`
 
 ## 1.1.0-beta.13 (2023-8-12)
 
