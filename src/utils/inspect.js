@@ -445,6 +445,19 @@ const checkFormat = function (str, type) {
   return regExp.test(str);
 }
 
+/**
+ * 判断是否是全屏
+ * @returns {Element|*}
+ * @version 1.1.0-beta.15
+ */
+const isFullScreen = function () {
+  return (
+      document.fullscreenElement ||
+      document.mozFullScreenElement ||
+      document.webkitFullscreenElement ||
+      document.msFullscreenElement
+  );
+}
 
 export {
   isType,
@@ -474,4 +487,5 @@ export {
   getBrowserType,
   checkPasswordLevel,
   checkFormat,
+  isFullScreen
 }

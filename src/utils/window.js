@@ -1,6 +1,42 @@
 import {addStyle} from "./dom.js";
 
 /**
+ * 进入全屏
+ * @param {Element} [element=document.documentElement] 进入全屏的元素
+ * @version 1.1.0-beta.15
+ */
+const enterFullscreen = function (element) {
+  if (!(element instanceof Element)) {
+    element = document.documentElement;
+  }
+  if (element.requestFullscreen) {
+    element.requestFullscreen();
+  } else if (element.mozRequestFullScreen) {
+    element.mozRequestFullScreen();
+  } else if (element.webkitRequestFullscreen) {
+    element.webkitRequestFullscreen();
+  } else if (element.msRequestFullscreen) {
+    element.msRequestFullscreen();
+  }
+}
+
+/**
+ * 退出全屏
+ * @version 1.1.0-beta.15
+ */
+const exitFullscreen = function () {
+  if (document.exitFullscreen) {
+    document.exitFullscreen();
+  } else if (document.mozCancelFullScreen) {
+    document.mozCancelFullScreen();
+  } else if (document.webkitExitFullscreen) {
+    document.webkitExitFullscreen();
+  } else if (document.msExitFullscreen) {
+    document.msExitFullscreen();
+  }
+}
+
+/**
  * 根据窗口大小自适应字体大小
  * @param {number} [fontSize=16] 初始字体大小
  * @param {number} [initWidth=1920] 初始宽度
@@ -69,8 +105,9 @@ const initDataView = function (el, options = {}) {
 }
 
 export {
+  enterFullscreen,
+  exitFullscreen,
   resizeFontSize,
-
   DataView,
   initDataView
 }

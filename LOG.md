@@ -1,4 +1,10 @@
 # 更新日志
+## 1.1.0-beta.15 (2023-10-19)
+
+### Features
+
+* 增加isFullScreen、enterFullscreen、exitFullscreen函数
+
 ## 1.1.0-beta.14 (2023-8-31)
 
 ### Features
