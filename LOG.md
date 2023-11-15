@@ -1,4 +1,15 @@
 # 更新日志
+
+## 1.1.0-beta.16 (2023-10-30)
+
+### Features
+
+* 增加copyToClipboard、wait、arrayToTree、treeToArray、max、min函数
+
+### Refactor
+
+* 重新封装XML、fetch请求并分别命名为_ajax、_fetch
+
 ## 1.1.0-beta.15 (2023-10-19)
 
 ### Features

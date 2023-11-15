@@ -1,9 +1,10 @@
 <!--
- * @name: arr
- * @description: arr.html
- * @date: 2022/12/2 9:37
- * @author: yfhu
--->
+ * @Author: yfhu
+ * @Date: 2023-11-06 14:57:28
+ * @LastEditors: yfhu
+ * @LastEditTime: 2023-11-15 11:28:44
+ * @Description:
+ -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -69,7 +70,12 @@
     duplicateDataTag,
     groupByAttr,
     groupBySize,
-    toArray
+    toArray,
+
+    arrayToTree,
+    treeToArray,
+      max,
+      min
   } from "../src/utils/arr.js";
 
   const arr1 = [
@@ -284,6 +290,61 @@
     console.log('--toArray--', toArray(arguments))
   }
   fun(1, 2)
+
+  {
+
+    const flatArray = [
+      {code: 1, parentCode: null, name: "节点1"},
+      {code: 2, parentCode: 1, name: "节点1.1"},
+      {code: 3, parentCode: 1, name: "节点1.2"},
+      {code: 4, parentCode: 2, name: "节点1.1.1"},
+      {code: 5, parentCode: 2, name: "节点1.1.2"},
+      {code: 6, parentCode: null, name: "节点2"},
+      {code: 7, parentCode: 6, name: "节点2.1"},
+      {code: 8, parentCode: 6, name: "节点2.2"}
+    ];
+
+    const tree = arrayToTree(flatArray, {id: 'code', parentId: 'parentCode', children: "sons"});
+    console.log("buildTree", tree);
+  }
+  {
+
+    // 示例树形结构数组
+    const tree = [
+      {
+        id: 1,
+        name: "节点1",
+        children: [
+          {
+            id: 2,
+            name: "节点1.1",
+            children: [
+              {id: 4, name: "节点1.1.1", children: []},
+              {id: 5, name: "节点1.1.2", children: []}
+            ]
+          },
+          {id: 3, name: "节点1.2", children: []}
+        ]
+      },
+      {
+        id: 6,
+        name: "节点2",
+        children: [
+          {id: 7, name: "节点2.1", children: []},
+          {id: 8, name: "节点2.2", children: []}
+        ]
+      }
+    ];
+
+    const flatArray = treeToArray(tree);
+    console.log('treeToArray', flatArray);
+  }
+
+  {
+    const arr=[9,3,25,64,2,3,45,7]
+    console.log('max',max(arr),max(arr1,'id'))
+    console.log('min',min(arr),min(arr1,'id'))
+  }
 </script>
 </body>
 </html>

@@ -1,3 +1,10 @@
+/*
+ * @Author: yfhu
+ * @Date: 2023-11-07 17:07:28
+ * @LastEditors: yfhu
+ * @LastEditTime: 2023-11-07 17:09:08
+ * @Description:
+ */
 /**
  * 获取当前url地址栏指定参数
  * @param {string} name 参数名
@@ -64,11 +71,13 @@ const delUrlParam = function (url, name) {
  * @version 1.1.0-beta.11
  */
 const objToUrlParams = function (obj) {
-  let str = '';
-  for (let key in obj) {
-    str += `${key}=${obj[key]}&`
+  let params = []
+  if (obj) {
+    for (let key in obj) {
+      params.push(`${key}=${obj[key]}`)
+    }
   }
-  return str.slice(0, -1)
+  return params.length ? params.join("&") : ''
 }
 
 export {

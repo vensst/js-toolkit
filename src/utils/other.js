@@ -1,3 +1,10 @@
+/*
+ * @Author: yfhu
+ * @Date: 2023-10-30 13:29:06
+ * @LastEditors: yfhu
+ * @LastEditTime: 2023-10-30 14:09:46
+ * @Description:
+ */
 /**
  * 深克隆
  * @param {*} data 要克隆的数据
@@ -323,6 +330,48 @@ const compareVersion = function (version1, version2) {
   return 0;
 };
 
+/**
+ * 复制到剪切板
+ * @param {String} text 文本
+ * @returns {boolean|void}
+ * @version 1.1.0-beta.16
+ */
+const copyToClipboard = function (text) {
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text)
+  } else {
+    if (window.clipboardData && window.clipboardData.setData) {
+      // IE specific code path to prevent textarea being shown while dialog is visible.
+      return window.clipboardData.setData("Text", text);
+
+    } else if (document.queryCommandSupported && document.queryCommandSupported("copy")) {
+      let textarea = document.createElement("textarea");
+      textarea.textContent = text;
+      textarea.style.position = "fixed";  // Prevent scrolling to bottom of page in MS Edge.
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        return document.execCommand("copy");  // Security exception may be thrown by some browsers.
+      } catch (ex) {
+        console.warn("Copy to clipboard failed.", ex);
+        return false;
+      } finally {
+        document.body.removeChild(textarea);
+      }
+    }
+  }
+}
+
+/**
+ * 等待函数
+ * @param {number} [delay=2000] 等待时间
+ * @returns {Promise<unknown>} Promise
+ * @version 1.1.0-beta.16
+ */
+const wait = function (delay = 2000) {
+  return new Promise((resolve) => setTimeout(resolve, delay))
+}
+
 export {
   deepClone,
   getRandomColor,
@@ -341,4 +390,7 @@ export {
   insertAtCursor,
   escapeHTML,
   compareVersion,
+
+  copyToClipboard,
+  wait
 }

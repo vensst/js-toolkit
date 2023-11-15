@@ -3,17 +3,17 @@
  * @Description: http.html
  * @Date: 2023/4/14 13:59
  * @Author: yf_hu
- * @LastEditors: yf_hu
- * @LastEditTime: 2023/4/14 13:59
+ * @LastEditors: yfhu
+ * @LastEditTime: 2023-11-13 16:15:39
 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="x-ua-compatible" content="IE=edge"/>
-	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
-	<title>Title</title>
-	<style>
+  <meta charset="UTF-8">
+  <meta http-equiv="x-ua-compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+  <title>Title</title>
+  <style>
     /* global styles */
     :root {
       --color-black-text: #333;
@@ -53,66 +53,116 @@
       background-color: var(--color-white-background);
       line-height: 1.15;
     }
-	</style>
+  </style>
 </head>
 <body>
+<button id="btn1">发送请求</button>
+<button id="btn2">取消请求</button>
 <script type="module">
-  import {ajax, fetch} from '../src/utils/http.js';
+  import {_ajax, _fetch} from '../src/utils/http.js';
 
-  ajax({
-    url: 'http://localhost:5000/api/getUserList',
-    method: 'GET',
-    params: {
-      name: 'yf_hu',
-      age: 18
-    },
-    success: function (res) {
-      console.log(res);
-    },
-    error: function (err) {
+  const getUserList = function () {
+    _ajax({
+      url: 'http://localhost:5001/api/getUserList',
+      method: 'GET',
+      params: {
+        name: 'yf_hu',
+        age: 18
+      },
+    }).then(res => {
+      console.log(res)
+    }).catch(err => {
       console.log(err);
-    }
-  })
-
-  ajax({
-    url: 'http://localhost:5000/api/EHRData/GetTjContent',
-    method: 'post',
-    data: {
-      name: 'yf_hu',
-      age: 18
-    },
-    success: function (res) {
+    })
+  }
+  const getUserDetail = function () {
+    _ajax({
+      url: 'http://localhost:5001/api/getUserDetail',
+      method: 'post',
+      data: {
+        name: 'yf_hu',
+        age: 18
+      },
+    }).then(res => {
+      console.log(res)
+    }).catch(err => {
+      console.log(err)
+    })
+  }
+  getUserList()
+  // getUserDetail()
+  const getUserList2 = function () {
+    _fetch("http://localhost:5001/api/getUserList", {
+      method: 'GET',
+      params: {
+        name: 'yf_hu',
+        age: 18
+      },
+    }).then(res => {
       console.log(res);
-    },
-    error: function (err) {
+    }).catch(err => {
       console.log(err);
-    }
-  })
+    })
+  }
+  const getUserDetail2 = function () {
+    _fetch('http://localhost:5001/api/getUserDetail', {
+      method: 'post',
+      data: {
+        name: 'yf_hu',
+        age: 18,
+
+      },
+    }).then(res => {
+      console.log(res);
+    }).catch(err => {
+      console.log(err);
+    })
+  }
+  getUserList2()
+  // getUserDetail2()
+
+  const bt1 = document.getElementById("btn1");
+  const bt2 = document.getElementById("btn2");
+
+  let cancelToken = new _ajax.CancelToken();
+  const cancelToken2 = new _fetch.CancelToken()
+  bt1.onclick = function () {
+    _ajax({
+      url: 'http://localhost:5001/api/getUserDetail',
+      method: 'post',
+      data: {
+        name: 'yf_hu',
+        age: 18
+      },
+      cancelToken: cancelToken
+    }).then(res => {
+      console.log(res)
+    }).catch(err => {
+      console.log(err)
+    })
+
+    _fetch('http://localhost:5001/api/getUserDetail', {
+      method: 'post',
+      data: {
+        name: 'yf_hu',
+        age: 18,
+
+      },
+      cancelToken: cancelToken2
+    }).then(res => {
+      console.log(res);
+    }).catch(err => {
+      console.log(err);
+    })
+  }
 
 
-  fetch("http://localhost:5000/api/getUserList", {
-    method: 'GET',
-    params: {
-      name: 'yf_hu',
-      age: 18
-    },
-  }).then(res => {
-		console.log(res);
-	}).catch(err => {
-		console.log(err);
-	})
+  bt2.onclick = function () {
+    cancelToken.cancel("请求取消")
+    cancelToken2.cancel("请求取消")
+  }
 
-  _fetch('http://localhost:5000/api/EHRData/GetTjContent', {
-    method: 'post',
-    data: {
-      name: 'yf_hu',
-      age: 18
-    }
-  }).then(res => {
-    console.log(res);
-  }).catch(err => {
-    console.log(err);
-  })
+
 </script>
 </body>
 </html>

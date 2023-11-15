@@ -1,3 +1,10 @@
+/*
+ * @Author: yfhu
+ * @Date: 2023-11-06 15:03:15
+ * @LastEditors: yfhu
+ * @LastEditTime: 2023-11-15 13:05:13
+ * @Description:
+ */
 import {isArray, isString, isFunction, isObject} from "./inspect.js";
 
 /**
@@ -317,6 +324,117 @@ const toArray = function (arr) {
   return Array.prototype.slice.call(arr);
 };
 
+/**
+ * 一维数组转树形结构数据
+ * @param {Array} arr 数组
+ * @param {Object} options 配置项
+ * @param {string} [options.id='id'] 唯一表示字段
+ * @param {string} [options.parentId='parentId'] 父级标识字段
+ * @param {string} [options.children='children'] 子级数据字段
+ * @returns {*[]}
+ * @version 1.1.0-beta.16
+ */
+const arrayToTree = function (arr, options = {}) {
+  options = {
+    ...{
+      id: 'id',
+      children: 'children',
+      parentId: 'parentId',
+    },
+    ...options,
+  }
+  const tree = [];
+  const map = {};
+
+  // 创建映射表
+  for (let i = 0; i < arr.length; i++) {
+    map[arr[i][options.id]] = i;
+    arr[i][options.children] = [];
+  }
+
+  for (let i = 0; i < arr.length; i++) {
+    const node = arr[i];
+    if (node[options.parentId] !== null) {
+      arr[map[node[options.parentId]]][options.children].push(node);
+    } else {
+      tree.push(node);
+    }
+  }
+  return tree;
+}
+
+/**
+ * 树形数据转一维数组
+ * @param {Array} tree 树形结构数组
+ * @param {Object} options 配置项
+ * @param {string} [options.children='children'] 子级数据字段
+ * @returns {*[]}
+ * @version 1.1.0-beta.16
+ */
+const treeToArray = function (tree, options = {}) {
+  options = {
+    ...{
+      children: 'children',
+    },
+    ...options,
+  }
+  const flatArray = [];
+
+  function flatten(node) {
+    flatArray.push(node);
+    if (node[options.children] && node[options.children].length > 0) {
+      for (let i = 0; i < node[options.children].length; i++) {
+        flatten(node[options.children][i]);
+      }
+    }
+  }
+
+  for (let i = 0; i < tree.length; i++) {
+    flatten(tree[i]);
+  }
+
+  return flatArray;
+}
+
+/**
+ * 数组最大值
+ * @param {Array<number|Object>} arr 数组
+ * @param {string} [attrName] 对象数组的属性名
+ * @returns {number|*}
+ * @version 1.1.0-beta.16
+ */
+const max = function (arr, attrName) {
+  if (!isArray(arr)) {
+    return arr
+  }
+  let _arr
+  if (attrName) {
+    _arr = arr.map(item => item[attrName])
+  } else {
+    _arr = arr
+  }
+  return Math.max.apply(null, _arr)
+}
+/**
+ * 数组最小值
+ * @param {Array<number|Object>} arr 数组
+ * @param {string} [attrName] 对象数组的属性名
+ * @returns {number|*}
+ * @version 1.1.0-beta.16
+ */
+const min = function (arr, attrName) {
+  if (!isArray(arr)) {
+    return arr
+  }
+  let _arr
+  if (attrName) {
+    _arr = arr.map(item => item[attrName])
+  } else {
+    _arr = arr
+  }
+  return Math.min.apply(null, _arr)
+}
+
 export {
   find,
   findIndex,
@@ -332,5 +450,9 @@ export {
   duplicateDataTag,
   groupByAttr,
   groupBySize,
-  toArray
+  toArray,
+  arrayToTree,
+  treeToArray,
+  max,
+  min
 };

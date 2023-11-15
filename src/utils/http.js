@@ -1,152 +1,203 @@
-/**
- * ajax 请求
- * @param {Object} setting 配置
- * @param {String} setting.method 请求方式
- * @param {String} setting.url 请求地址
- * @param {Boolean} setting.async 是否异步
- * @param {String} setting.dataType 解析方式
- * @param {Object} setting.params 参数
- * @param {Object} setting.data 参数
- * @param {Object} setting.headers 请求头设置
- * @param {Object} setting.auth 设置cookie是否一起发送 否允许携带资源凭证 include(同源跨域都允许)same-origin(同源才允许)omit都不允许
- * @param {string} setting.auth.username 用户名
- * @param {string} setting.auth.password 密码
- * @param {Function} setting.success 请求成功回调
- * @param {Function} setting.error 请求失败回调
+/*
+ * @Author: yfhu
+ * @Date: 2023-11-07 09:22:11
+ * @LastEditors: yfhu
+ * @LastEditTime: 2023-11-13 16:28:30
+ * @Description:
  */
-const ajax = function (setting) {
-  //设置参数的初始值
-  let opts = {
-    method: (setting.method || "GET").toUpperCase(), //请求方式
-    url: setting.url || "", // 请求地址
-    async: setting.async || true, // 是否异步
-    dataType: setting.dataType || "json", // 解析方式
-    params: setting.params || "", // 参数
-    data: setting.data || "", // 参数
-    headers: setting.headers || {}, // 请求头设置
-    auth: setting.auth || {username: null, password: null}, // 设置cookie是否一起发送 否允许携带资源凭证 include(同源跨域都允许)same-origin(同源才允许)omit都不允许
-    success: setting.success || function () {
-    }, // 请求成功回调
-    error: setting.error || function () {
-    }, // 请求失败回调
-  };
-
-  // 参数格式化
-  function params_format(obj) {
-    let str = "";
-    for (let i in obj) {
-      str += i + "=" + obj[i] + "&";
-    }
-    return str.split("").slice(0, -1).join("");
-  }
-
-  // 创建ajax对象
-  let xhr = new XMLHttpRequest();
-
-  // 连接服务器open(方法GET/POST，请求地址， 异步传输)
-  xhr.open(
-    opts.method,
-    opts.url + (opts.method === "GET" ? (opts.params ? "?" + params_format(opts.params) : "") : ''),
-    opts.async,
-    opts.auth.username,
-    opts.auth.password
-  );
-
-  const headers = {"Content-type": "application/json;charset=UTF-8", ...opts.headers}
-  Object.keys(headers).forEach(key => {
-    xhr.setRequestHeader(key, headers[key]);
-  })
-
-  xhr.send(opts.method === "GET" ? '' : (opts.data ? JSON.stringify(opts.data) : ""));
-  /*
-   ** 每当readyState改变时，就会触发onreadystatechange事件
-   ** readyState属性存储有XMLHttpRequest的状态信息
-   ** 0 ：请求未初始化
-   ** 1 ：服务器连接已建立
-   ** 2 ：请求已接受
-   ** 3 ：请求处理中
-   ** 4 ：请求已完成，且相应就绪
-   */
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState === 4 && (xhr.status === 200 || xhr.status === 304)) {
-      switch (opts.dataType) {
-        case "json":
-          let json = JSON.parse(xhr.responseText);
-          opts.success(json);
-          break;
-        case "xml":
-          opts.success(xhr.responseXML);
-          break;
-        default:
-          opts.success(xhr.responseText);
-          break;
-      }
-    }
-  };
-
-  xhr.onerror = function (err) {
-    opts.error(err);
-  };
-};
+import {objToUrlParams} from './url.js'
+import {isObject} from "./inspect.js";
 
 /**
- * 封装 fetch 请求
- * @param {string} url 请求地址
- * @param {Object} setting  配置
- * @param {string} setting.method 请求方式
- * @param {Object} setting.headers 请求头设置
- * @param {string} setting.credentials 设置cookie是否一起发送 否允许携带资源凭证 include(同源跨域都允许)same-origin(同源才允许)omit都不允许
- * @param {Object} setting.body 设置请求主体信息(只有post系列请求才可以设置,get系列请求会报错,格式有要求:json字符串,URLENCODED格式字符串,普通字符串,FormData格式对象,Buffer/bolb格式...不能是普通对象,并且要根据请求主体的数据格式,配置相关的请求头(Content-Type)
- * @param {string} setting.mode 可以设置 cors, no-cors, same-origin
- * @param {string} setting.redirect 可以设置 follow, error, manual
- * @param {string} setting.cache 可以设置 default, reload, no-cache
+ * 简易封装XMLHttpRequest请求
+ * @param {Object} config 配置，参考[XMLHttpRequest](https://developer.mozilla.org/zh-CN/docs/Glossary/XMLHttpRequest)
+ * @param {string} config.url 请求地址
+ * @param {string} [config.method='GET'] 请求方式
+ * @param {Object} [config.headers] 请求头设置
+ * @param {Object} [config.params] get请求数据
+ * @param {Object} [config.data] post、put、delete请求数据
+ * @param {string} [config.responseType='json'] 响应类型 json
+ * @param {boolean} [config.asycn=true] 是否异步
+ * @param {number} [config.timeout=15000] 超时时间
+ * @param {Object} [config.auth] 权限
+ * @param {string} [config.auth.username]
+ * @param {string} [config.auth.password]
+ * @param {CancelToken} [config.cancelToken] 取消请求
  * @returns {Promise<unknown>} 返回 Promise 对象
  */
-const fetch = function (url, setting) {
-  //设置参数的初始值
-  let opts = {
-    method: (setting.method || "GET").toUpperCase(), //请求方式
-    mode: setting.mode || "cors", // 可以设置 cors, no-cors, same-origin
-    cache: setting.cache || "default", // 设置 cache 模式 (default, reload, no-cache)
-    credentials: setting.credentials || "same-origin", // 设置cookie是否一起发送 否允许携带资源凭证 include(同源跨域都允许)same-origin(同源才允许)omit都不允许
-    headers: setting.headers || {}, // 请求头设置
-    redirect: setting.redirect || "follow", // follow, error, manual
-    referrerPolicy: setting.referrerPolicy || 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-  };
-  opts.headers = {"Content-type": "application/json;charset=UTF-8", ...opts.headers}
-
-  let dataType = setting.dataType || "json"; // 解析方式
-  let params = setting.params || ""; // 参数
-  let data = setting.data || ""; // 参数
-
-  // 参数格式化
-  function params_format(obj) {
-    let str = "";
-    for (let i in obj) {
-      str += `${i}=${obj[i]}&`;
+const _ajax = function (config) {
+  return new Promise(function (resolve, reject) {
+    let xhr = new XMLHttpRequest();
+    config.method = (config.method || "get").toUpperCase()
+    if (!['GET', 'POST', 'PUT', 'DELETE', 'PATCH'].includes(config.method)) {
+      config.method = "GET"
     }
-    return str.split("").slice(0, -1).join("");
-  }
 
-  if (opts.method === "GET") {
-    url = url + (params ? `?${params_format(params)}` : "");
-  } else {
-    opts.body = (data ? JSON.stringify(data) : {});
-  }
+    if (config.method === 'GET') {
+      const params = objToUrlParams(config.params)
+      config.url = config.url + (params ? '?' + params : '')
+    } else {
+      if (isObject(config.data)) {
+        config.data = JSON.stringify(config.data)
+      }
+    }
 
-  return new Promise((resolve, reject) => {
-    fetch(url, opts)
-      .then(async (res) => {
-        let data = dataType === "text" ? await res.text() : dataType === "blob" ? await res.blob() : await res.json();
-        resolve(data);
-      })
-      .catch((e) => {
-        reject(e);
-      });
+    xhr.open(config.method, config.url, config.async ?? true, config.auth?.username || '', config.auth?.password || '');
+
+    // 设置请求头
+    if (isObject(config.headers)) {
+      for (let header in config.headers) {
+        xhr.setRequestHeader(header, config.headers[header]);
+      }
+    }
+
+    // 超时处理
+    xhr.timeout = config.timeout ??= 15000
+
+    // 取消请求
+    if (config.cancelToken) {
+      config.cancelToken.cancel = function (message = '请求取消') {
+        xhr.abort();
+        reject(new Error(message))
+      }
+    }
+
+    config.responseType ??= 'json'
+    /**
+     * 每当readyState改变时，就会触发onreadystatechange事件
+     * readyState属性存储有XMLHttpRequest的状态信息
+     * 0 ：请求未初始化
+     * 1 ：服务器连接已建立
+     * 2 ：请求已接受
+     * 3 ：请求处理中
+     * 4 ：请求已完成，且相应就绪
+     */
+    xhr.onload = function () {
+      // 请求完成。在此进行处理。
+      if (xhr.readyState === 4 && (xhr.status === 200 || xhr.status === 304)) {
+        switch (config.responseType) {
+          case "json":
+            let json = JSON.parse(xhr.responseText);
+            resolve(json);
+            break;
+          case "xml":
+            resolve(xhr.responseXML);
+            break;
+          default:
+            resolve(xhr.responseText);
+            break;
+        }
+      } else {
+        reject(new Error(xhr.statusText));
+      }
+    };
+    // 处理网络错误
+    xhr.onerror = function (err) {
+      reject(new Error("网络错误"));
+    };
+
+    // 处理超时错误
+    xhr.ontimeout = function () {
+      reject(new Error("请求超时"));
+    };
+
+    // 发送请求
+    xhr.send(config.method === 'GET' ? '' : config.data);
   });
-};
+}
+_ajax.CancelToken = function () {
+}
 
+/**
+ * 简易封装fetch请求
+ * @param {string} url 请求地址
+ * @param {Object} [config]  配置
+ * @param {string} [config.method='GET'] 请求方式
+ * @param {string} [config.responseType='json'] 响应类型 json
+ * @param {Object} [config.headers] 请求头设置
+ * @param {Object} [config.params] get请求数据
+ * @param {Object} [config.data] post、put、delete请求数据
+ * @param {string} [config.credentials] 设置cookie是否一起发送 否允许携带资源凭证 include(同源跨域都允许)same-origin(同源才允许)omit都不允许
+ * @param {Object} [config.body] 设置请求主体信息(只有post系列请求才可以设置,get系列请求会报错,格式有要求:json字符串,URLENCODED格式字符串,普通字符串,FormData格式对象,Buffer/bolb格式...不能是普通对象,并且要根据请求主体的数据格式,配置相关的请求头(Content-Type)
+ * @param {string} [config.mode] 可以设置 cors, no-cors, same-origin
+ * @param {string} [config.redirect] 可以设置 follow, error, manual
+ * @param {string} [config.cache] 可以设置 default, reload, no-cache
+ * @returns {Promise<unknown>} 返回 Promise 对象
+ */
+const _fetch = function (url, config) {
+  const controller = new AbortController();
+  const {signal} = controller;
+
+  config.method = (config.method || "get").toUpperCase()
+  if (!['GET', 'POST', 'PUT', 'DELETE', 'PATCH'].includes(config.method)) {
+    config.method = "GET"
+  }
+  if (config.method === "GET") {
+    const params = objToUrlParams(config.params)
+    url = url + (params ? '?' + params : '')
+  } else {
+    // 优先取data值
+    if (isObject(config.data)) {
+      config.body = JSON.stringify(config.data)
+    } else {
+      if (config.data) {
+        config.body = config.data
+      }
+    }
+  }
+
+  // 设置超时时间
+  const timeout = config.timeout ?? 15000; // 默认超时时间为5秒
+
+  let timeoutError = null;
+  // 创建一个定时器，在超时时间后中断请求
+  const timeoutId = setTimeout(() => {
+    controller.abort();
+    timeoutError = new Error("请求超时")
+  }, timeout);
+
+  config.responseType ??= 'json'
+  return new Promise((resolve, reject) => {
+    // 取消请求
+    if (config.cancelToken) {
+      config.cancelToken.cancel = (message = '请求取消') => {
+        clearTimeout(timeoutId); // 清除定时器
+        controller.abort(); // 中断请求
+        reject(new Error(message))
+      }
+    }
+
+    fetch(url, {...config, signal})
+        .then((response) => {
+          clearTimeout(timeoutId);
+          if (response.ok) {
+            switch (config.responseType) {
+              case "json":
+                resolve(response.json());
+                break;
+              case "text":
+                resolve(response.text());
+                break;
+              case "blob":
+                resolve(response.blob());
+                break;
+              default:
+                resolve(response);
+                break;
+            }
+          } else {
+            reject(response.statusText);
+          }
+        })
+        .catch((error) => {
+          clearTimeout(timeoutId);
+          reject(timeoutError || error);
+        });
+  });
+}
+_fetch.CancelToken = function () {
+}
 export {
-  ajax,
-  fetch
+  _ajax,
+  _fetch
 }
