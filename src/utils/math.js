@@ -1,3 +1,10 @@
+/*
+ * @Author: yfhu
+ * @Date: 2023-11-16 14:15:46
+ * @LastEditors: yfhu
+ * @LastEditTime: 2023-11-16 14:22:34
+ * @Description:
+ */
 import * as math from "mathjs";
 
 /**
@@ -61,35 +68,9 @@ const average = function (arr) {
 };
 
 /**
- * 获取数组中最大值
- * @param {number[]} arr 数组
- * @returns {number} 最大值
- */
-const max = function (arr) {
-  //1.
-  // return Math.max(...arr)
-  //2.
-  // return Math.max.apply(this,arr)
-  return Math.max.apply(null, arr);
-  //3.prev:上一次的返回值 cur:当前值 curIndex:当前值索引 arr:当前数组
-  // return arr.reduce((prev, cur, curIndex, arr) => {
-  //   return Math.max(prev, cur);
-  // }, 0)
-};
-
-/**
- * 获取数组中取最小值
- * @param {number[]} arr 数组
- * @returns {number} 最小值
- */
-const min = function (arr) {
-  return Math.min.apply(null, arr);
-};
-
-/**
  * 向上取整
- * @param {number} [num=0] 数字
- * @param {number} [precision=0] 精度
+ * @param {number} num 数值
+ * @param {number} [precision=0] 保留小数位数
  * @returns {number} 向上取整后的数字
  */
 const ceil = function (num = 0, precision = 0) {
@@ -98,8 +79,8 @@ const ceil = function (num = 0, precision = 0) {
 
 /**
  * 向下取整
- * @param {number} [num=0] 数字
- * @param {number} [precision=0] 精度
+ * @param {number} num 数值
+ * @param {number} [precision=0] 保留小数位数
  * @returns {number} 向下取整后的数字
  */
 const floor = function (num = 0, precision = 0) {
@@ -110,8 +91,8 @@ const floor = function (num = 0, precision = 0) {
 
 /**
  * 保留小数点后几位，不考虑四舍五入
- * @param {number} [num=0] 数值
- * @param {number} [precision=0] 精度
+ * @param {number} num 数值
+ * @param {number} [precision=0] 保留小数位数
  * @returns {number} 保留小数点后几位的数字
  */
 const decimal = function (num = 0, precision = 0) {
@@ -134,8 +115,8 @@ const decimal = function (num = 0, precision = 0) {
 
 /**
  * 保留小数点后几位，四舍五入
- * @param {number} [num=0] 数值
- * @param {number} [precision=0] 保留小数位数，默认保留3位小数
+ * @param {number} num 数值
+ * @param {number} [precision=0] 保留小数位数
  * @returns {number} 保留小数点后几位的数字
  */
 const round = function (num = 0, precision = 0) {
@@ -149,8 +130,6 @@ export {
   divide,
   sum,
   average,
-  max,
-  min,
   ceil,
   floor,
   decimal,
