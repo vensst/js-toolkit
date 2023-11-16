@@ -7,8 +7,8 @@ on:
   push:
     tags:
       - 'v*'
-    #branches: # 此处不仅限于监听分支, 还可监听 tag
-     # - master
+      # branches: # 此处不仅限于监听分支, 还可监听 tag
+      # - master
 # 一个工作流运行由一个或多个任务组成，这些任务可以顺序地或并行地运行
 jobs:
   # 任务名称
@@ -22,12 +22,15 @@ jobs:
         # 使用的操作 actions，可以使用公共仓库，本地仓库，别人的仓库的action
         # 拉取代码
         uses: actions/checkout@v2
-      - name: setup-node
+      # 打包构建
+      - name: Build
         uses: actions/setup-node@v1
         # 参数
         with:
           node-version: 14
           registry-url: https://registry.npmjs.org/
+      - run: npm install
+      - run: npm run build
       # npm ERR! 402 Payment Required - PUT https://registry.npmjs.org/@vensst/js-tookit - You must sign up for private packages
       # @xxx/xxxx   npm会认为要发布私包，私包需要收费，需将发布命令改成： npm publish --access public
       - name: publish-npm
