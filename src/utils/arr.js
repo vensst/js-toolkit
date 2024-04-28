@@ -305,6 +305,7 @@ const groupByAttr = function (arr, attrName) {
  * @version 1.1.0-beta.11
  */
 const groupBySize = function (arr, size) {
+  if(!size) return arr;
   return arr.reduce((preResult, curItem, currentIndex) => {
     const groupIndex = Math.floor(currentIndex / size);
     if (!preResult[groupIndex]) {
