@@ -3,12 +3,11 @@
   "version": "1.1.1",
   "description": "js常用工具集",
   "keywords": [
-    "js",
-    "javascript",
-    "toolkit",
-    "js-toolkit",
     "@vensst/js-toolkit",
-    "@vensst"
+    "js-toolkit",
+    "@vensst",
+    "js",
+    "javascript"
   ],
   "main": "lib/main.js",
   "scripts": {

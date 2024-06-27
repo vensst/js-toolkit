@@ -33,7 +33,7 @@ const isNumber = function (o) {
  * @version 1.1.0-beta.11
  */
 const isNumeric = function (value) {
-  return typeof value === "number" || typeof value === "string" && !isNaN(value);
+  return typeof value === 'number' || !isNaN(parseFloat(value)) && isFinite(value);
 }
 /**
  * 判断是否 boolean
