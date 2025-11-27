@@ -1,0 +1,110 @@
+<!--
+ * @Name: dom
+ * @Description: dom.html
+ * @Date: 2023/4/14 9:09
+ * @Author: yf_hu
+ * @LastEditors: yf_hu
+ * @LastEditTime: 2023/4/14 9:09
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="x-ua-compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+  <title>Title</title>
+  <style>
+    /* global styles */
+    :root {
+      --color-black-text: #333;
+      --color-white-background: #fff
+    }
+
+    * {
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 62.5%;
+      /*font-family: Microsoft YaHei, Arial, sans-serif;*/
+      /*阻止旋转屏幕时自动调整字体大小*/
+      -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+      /* 解决IOS默认滑动很卡的情况 */
+      -webkit-overflow-scrolling: touch;
+    }
+
+    html,
+    body {
+      /*width: 100%;*/
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-size: 14px;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue",
+      sans-serif;
+      color: var(--color-black-text);
+      background-color: var(--color-white-background);
+      line-height: 1.15;
+    }
+  </style>
+</head>
+<body>
+<div id="app" class="page" style="font-size: 16px;">
+  这是一段内容 <br>
+  <span id="sp" class="s1 s--style">我是span标签1</span> <br>
+  <span id="sp" class="s2 s--style">我是span标签2</span> <br>
+  <span class="s3 s--style" style="color: #e4393c;font-size: 18px">我是span标签3</span> <br>
+  <span class="s4">我是span标签4</span><br>
+  <div>我是div标签</div>
+</div>
+<script type="module">
+
+  import {
+    queryElement,
+    addClass,
+    hasClass,
+    removeClass,
+    replaceClass,
+    getSiblings,
+    getStyle,
+    addStyle,
+    insertAfter,
+    insertBefore
+  } from "../../lib/index.esm.js"
+
+  {
+    console.log('--queryElement--', queryElement(), queryElement("#app"), queryElement("#app span"), queryElement(".page>.s1"), queryElement(".page span"))
+    console.log('--hasClass--', hasClass(), hasClass(queryElement("#app"), "page"), hasClass(queryElement(".page span"), "page"), hasClass(queryElement(".page span"), "s1"))
+    console.log('--addClass--', addClass(), addClass(queryElement("#app"), 'page--style'), addClass(queryElement(".page span"), 'span--style'))
+    console.log('--removeClass--', removeClass(), removeClass(queryElement("#app"), 'page--style'), removeClass(queryElement(".page span"), 'span--style'))
+    console.log('--replaceClass--', replaceClass(), replaceClass(queryElement("#app"), 'page', 'page1'), replaceClass(queryElement(".page1 span"), 's--style', 's--style1'))
+    console.log('--getSiblings--', getSiblings(), getSiblings(queryElement("#app")), getSiblings(queryElement(".page1 span")))
+    console.log('--getStyle--', getStyle(),
+        getStyle(queryElement("#app")),
+        getStyle(queryElement("#app"),'font-size'),
+        getStyle(queryElement("#app .s3")),
+        getStyle(queryElement("#app .s3"), 'color'),
+        getStyle(queryElement("#app .s3"), 'font-size')
+    )
+    //
+    console.log('--addStyle--',
+        addStyle(),
+        addStyle(queryElement("#app"), {'font-size': '18px', color: '#e4393c'}),
+        addStyle(queryElement("#app span"),{"backgroundColor": "#000000", "color": "#fff"}),
+        addStyle(queryElement("#app .s4"), {"backgroundColor": "#1d1fe8", "color": "#fff"})
+    )
+    //
+    console.log('--insertAfter--', insertAfter(), insertAfter(queryElement("#app .s1"), "<div>s1之后插入div</div>"))
+    console.log('--insertBefore--', insertBefore(), insertBefore(queryElement("#app .s1"), "<div>s1之前插入div</div>"))
+    console.log('--insertBefore--',insertAfter(queryElement("title"), `<script src="./vue.js"><\/script>`))
+  }
+</script>
+</body>
+</html>

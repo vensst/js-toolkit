@@ -1,0 +1,49 @@
+<!--
+ * @Author: yfhu
+ * @Date: 2023-11-16 14:17:08
+ * @LastEditors: yfhu
+ * @LastEditTime: 2023-11-16 14:17:16
+ * @Description:
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+
+</head>
+<body>
+
+<script src="../../lib/index.umd.js"></script>
+<script>
+  const {
+    add,
+    subtract,
+    multiply,
+    divide,
+    sum,
+    average,
+    ceil,
+    floor,
+    decimal,
+    round,
+  } = JsToolkit
+
+
+  console.log('--add--', add('0.2', 0.1), typeof add(0.2, 0.1))
+  console.log('--subtract--', subtract('0.4', 0.1), typeof subtract(0.4, 0.1))
+  console.log('--multiply--', multiply(0.4, '0.1'), typeof multiply(0.4, 0.1))
+  console.log('--divide--', divide(0.4, '0.1'), typeof divide(0.4, 0.1))
+
+  console.log('--sum--', sum([8, 2, '3']), typeof sum([8, 2, 3]))
+  console.log('--average--', average([8, '2', 3]), typeof average([8, 2, 3]))
+
+  console.log('--ceil--', ceil(3.1415926, 3), typeof ceil(3.1415926, 3))
+  console.log('--floor--', floor(3.1415926, 3), typeof floor(3.1415926, 3))
+  console.log('--decimal--', decimal(3.1415926, 3), typeof decimal(3.1415926, 3))
+  console.log('--round--', round(3.1415926, 3), round(3.1415926, 2), typeof round(3.1415926))
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Document</title>
+</head>
+<body>
+<div>
+  <img id="img" alt="" style="width: 200px;">
+</div>
+<script type="module">
+  import {
+    calcScaleRatio,
+    loadImages,
+    compressImage
+  } from "../../lib/index.esm.js";
+
+  console.log('--calcScaleRatio--', calcScaleRatio(500, 300, 600, 400))
+  const imgUrl = '//fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
+  const arr = [imgUrl, imgUrl]
+  loadImages(arr).then(res => {
+    console.log("--imgLoadAll--", "加载完成")
+  })
+  compressImage(imgUrl).then(res => {
+    document.getElementById('img').src = res
+    console.log('--compressImage--', res)
+  })
+
+</script>
+</body>
+</html>

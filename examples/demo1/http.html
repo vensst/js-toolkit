@@ -1,0 +1,178 @@
+<!--
+ * @Name: http
+ * @Description: http.html
+ * @Date: 2023/4/14 13:59
+ * @Author: yf_hu
+ * @LastEditors: yfhu
+ * @LastEditTime: 2023-11-13 16:15:39
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="x-ua-compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+  <title>Title</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.7.16/vue.min.js"></script>
+  <style>
+    /* global styles */
+    :root {
+      --color-black-text: #333;
+      --color-white-background: #fff
+    }
+
+    * {
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 62.5%;
+      /*font-family: Microsoft YaHei, Arial, sans-serif;*/
+      /*阻止旋转屏幕时自动调整字体大小*/
+      -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+      /* 解决IOS默认滑动很卡的情况 */
+      -webkit-overflow-scrolling: touch;
+    }
+
+    html,
+    body {
+      /*width: 100%;*/
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-size: 14px;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue",
+      sans-serif;
+      color: var(--color-black-text);
+      background-color: var(--color-white-background);
+      line-height: 1.15;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <div>
+    xhr 请求:
+    <button id="btn1" @click="xhrMockGet">get 请求</button>
+    <button id="btn2" @click="xhrMockPost">post 请求</button>
+    <button id="btn3" @click="xhrMockDelete">delete 请求</button>
+    <button id="btn4" @click="xhrMockPut">put 请求</button>
+  </div>
+  <div>
+    fetch 请求:
+    <button id="btn5" @click="fetchMockGet">get 请求</button>
+    <button id="btn6" @click="fetchMockPost">post 请求</button>
+    <button id="btn7" @click="fetchMockDelete">delete 请求</button>
+    <button id="btn8" @click="xhrMockPut">put 请求</button>
+  </div>
+  <div>
+    取消请求:
+      <button id="btn9" @click="cancelRequest">取消请求</button>
+  </div>
+</div>
+<script type="module">
+  import {request, requestFetch} from '../../lib/index.esm.js';
+  var vm = new Vue({
+    el: '#app',
+    data: {
+     cancelToken:''
+    },
+    methods: {
+      // xhr 请求
+      xhrMockGet(){
+        this.cancelToken = new request.CancelToken();
+        request({
+          url: 'http://localhost:5001/api/user/detail',
+          method: 'get',
+          params: {
+            id: 1,
+          },
+          cancelToken: this.cancelToken
+        }).then(res => {
+          console.log(res)
+        }).catch(err => {
+          console.log(err)
+        })
+      },
+      xhrMockPost(){
+        request.post('http://localhost:5001/api/user/login',{
+          username: 'admin',
+          password: 123456
+        }).then(res => {
+          console.log(res)
+        }).catch(err => {
+          console.log(err)
+        })
+
+        // request({
+        //   url: 'http://localhost:5001/api/user/login',
+        //   method: 'post',
+        //   data: {
+        //     username: 'admin',
+        //     password: 123456
+        //   },
+        //
+        // }).then(res => {
+        //   console.log(res)
+        // }).catch(err => {
+        //   console.log(err)
+        // })
+      },
+      xhrMockDelete(){},
+      xhrMockPut(){},
+      // fetch 请求
+      fetchMockGet(){
+        this.cancelToken = new requestFetch.CancelToken();
+        requestFetch({
+          url: 'http://localhost:5001/api/user/detail',
+          method: 'get',
+          params: {
+            id: 1,
+          },
+          cancelToken: this.cancelToken
+        }).then(res => {
+          console.log(res);
+        }).catch(err => {
+          console.log(err);
+        })
+      },
+      fetchMockPost(){
+        requestFetch({
+          url: 'http://localhost:5001/api/user/login',
+          method: 'post',
+          data: {
+            username: 'admin',
+            password: 123456
+          },
+
+        }).then(res => {
+          console.log(res)
+        }).catch(err => {
+          console.log(err)
+        })
+      },
+      fetchMockDelete(){},
+      fetchMockPut(){},
+      // 取消请求
+      cancelRequest(){
+        this.cancelToken&&this.cancelToken.cancel("请求取消")
+      }
+    },
+    created: function () {
+
+    },
+    mounted: function () {
+
+    },
+
+  })
+</script>
+</body>
+</html>

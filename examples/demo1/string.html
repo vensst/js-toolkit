@@ -1,0 +1,132 @@
+<!--
+ * @Name: string
+ * @Description: string.html
+ * @Date: 2023/4/17 14:46
+ * @Author: yf_hu
+ * @LastEditors: yf_hu
+ * @LastEditTime: 2023/4/17 14:46
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="x-ua-compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+  <title>Title</title>
+  <style>
+    /* global styles */
+    :root {
+      --color-black-text: #333;
+      --color-white-background: #fff
+    }
+
+    * {
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 62.5%;
+      /*font-family: Microsoft YaHei, Arial, sans-serif;*/
+      /*阻止旋转屏幕时自动调整字体大小*/
+      -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+      /* 解决IOS默认滑动很卡的情况 */
+      -webkit-overflow-scrolling: touch;
+    }
+
+    html,
+    body {
+      /*width: 100%;*/
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-size: 14px;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue",
+      sans-serif;
+      color: var(--color-black-text);
+      background-color: var(--color-white-background);
+      line-height: 1.15;
+    }
+  </style>
+</head>
+<body>
+<script type="module">
+  import {
+    desens,
+    trim,
+    trimStart,
+    trimEnd,
+    trimAll,
+    toUpperCase,
+    toUpperCaseFirst,
+    toLowerCase,
+    toLowerCaseFirst,
+
+    randomCode,
+    countInString,
+    padStart,
+    padEnd,
+
+    hasUnit,
+    removeUnit,
+
+    camelToKebab,
+    kebabToCamel,
+  } from "../../lib/index.esm.js"
+
+  {
+    const str = "01234567890"
+    console.log("--desens--", desens(), desens(str, {
+      char: "*",
+      startIndex: 5,
+      endIndex: 7,
+    }), desens(str, {
+      char: "x",
+      startIndex: 3,
+      endIndex: 7,
+    }))
+  }
+  {
+    const str = " admin 1234 "
+    const str2 = "-admin-1234-"
+    console.log("--trim     --", `[${trim(str)}]`, `[${trim(str2, '-')}]`, `[${trim(new Date())}]`)
+    console.log("--trimStart--", `[${trimStart(str)}]`, `[${trimStart(str2, '-')}]`, `[${trimStart(new Date())}]`)
+    console.log("--trimEnd  --", `[${trimEnd(str)}]`, `[${trimEnd(str2, '-')}]`, `[${trimEnd(new Date())}]`)
+    console.log("--trimAll  --", `[${trimAll(str)}]`, `[${trimAll(str2, '-')}]`, `[${trimAll(new Date())}]`)
+  }
+  {
+    const str = "footBall"
+    const str2 = "my name is li-lei and i am from china,i love footBall."
+    console.log("--toUpperCase     --", toUpperCase(str), toUpperCase(str2))
+    console.log("--toUpperCaseFirst--", toUpperCaseFirst(str), toUpperCaseFirst(str2))
+
+  }
+  {
+    const str = "FootBall"
+    const str2 = "MY NAME IS LI-LEI AND I AM FROM CHINA,I LOVE FootBall."
+
+    console.log("--toLowerCase     --", toLowerCase(str), toLowerCase(str2))
+    console.log("--toLowerCaseFirst--", toLowerCaseFirst(str), toLowerCaseFirst(str2))
+  }
+
+  const str = " My name is Li Lei and I am from China "
+
+  console.log("--randomCode--", randomCode(), randomCode(6), randomCode(6, '', '123456'))
+  console.log("--countInString--", countInString(str, 'i'))
+  console.log("--padStart--", padStart(9527, 11, '*'), `[${padStart('abc', 6,)}]`, padStart('abc', 6, '01'))
+  console.log("--padEnd--", padEnd(150, 11, '*'), `[${padEnd('abc', 6,)}]`, padEnd('abc', 6, '01'))
+
+  console.log("--hasUnit--", hasUnit('100px'), hasUnit('200'), hasUnit('300abc', ['abc']), hasUnit('400abc'), hasUnit('500m²'))
+  console.log("--removeUnit--", removeUnit('100px'), removeUnit('200'), removeUnit('300abc', ['abc']), removeUnit('400abc'), removeUnit('500m²'))
+
+  console.log("--camelToKebab--", camelToKebab(), camelToKebab('my Name'), camelToKebab('myName'), camelToKebab('__my__Name__'), camelToKebab('__my__Name__', '@'))
+  console.log("--kebabToCamel--", kebabToCamel(), kebabToCamel('my Name'), kebabToCamel('my-name'), kebabToCamel('__my_Name__'))
+</script>
+</body>
+</html>
