@@ -97,14 +97,14 @@ export const setCookie = function (name, value, options = {}) {
 /**
  * 获取 cookie
  * @param {string} name - 存储的键名
- * @returns {any|null} 返回存储的值，如果不存在返回 null
+ * @returns {any|undefined} 返回存储的值，如果不存在返回 undefined
  */
 export const getCookie = function (name) {
-  if (!name) return null;
+  if (!name) return undefined;
   const cookieStr = document.cookie
       .split('; ')
       .find(item => decodeURIComponent(item.split('=')[0]) === name);
-  if (!cookieStr) return null;
+  if (!cookieStr) return undefined;
   const val = decodeURIComponent(cookieStr.split('=').slice(1).join('='));
   try {
     return JSON.parse(val);

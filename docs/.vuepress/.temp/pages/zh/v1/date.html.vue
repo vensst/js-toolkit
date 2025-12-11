@@ -1,0 +1,579 @@
+<template><div><h1 id="日期" tabindex="-1"><a class="header-anchor" href="#日期"><span>日期</span></a></h1>
+<h2 id="format" tabindex="-1"><a class="header-anchor" href="#format"><span>format</span></a></h2>
+<ul>
+<li>
+<p>说明：</p>
+<p>格式化日期</p>
+</li>
+<li>
+<p>参数：</p>
+<ul>
+<li>{(Date|string|number)} [date=new Date()] 时间戳或日期对象</li>
+<li>{string} [valueFormat=YYYY-MM-DD hh:mm:ss] 格式，年(YYYY) 月(MM) 日(DD) 时(hh) 分(mm) 秒(ss) 星期(WW)</li>
+</ul>
+</li>
+<li>
+<p>返回值：</p>
+<p>{(string|null)} 格式化后的日期</p>
+</li>
+<li>
+<p>示例：</p>
+</li>
+</ul>
+<div class="language-javascript line-numbers-mode" data-highlighter="prismjs" data-ext="js"><pre v-pre><code class="language-javascript"><span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// 2023-08-03 10:05:18</span></span>
+<span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">'YYYY/MM/DD hh:mm:ss WW'</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// 2023/08/03 10:05:18 星期四</span></span>
+<span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span><span class="token string">'2020-9-9'</span><span class="token punctuation">,</span> <span class="token string">'YYYY/M/D'</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// 2020/9/9</span></span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="getdaysfromdate" tabindex="-1"><a class="header-anchor" href="#getdaysfromdate"><span>getDaysFromDate</span></a></h2>
+<ul>
+<li>
+<p>说明：</p>
+<p>根据指定日期获取指定长度的天数集合</p>
+</li>
+<li>
+<p>参数：</p>
+<ul>
+<li>{(Date|string)} [date=new Date()] 时间</li>
+<li>{number} [len=2] 长度</li>
+<li>{number} [dir=-1]  方向 -1: 前几天(默认)，0:前后几天，1: 后几天</li>
+<li>{string} [valueFormat=&quot;YYYY-MM-DD&quot;] 日期格式</li>
+</ul>
+</li>
+<li>
+<p>返回值：</p>
+<p>{string[]} 日期集合</p>
+</li>
+<li>
+<p>示例：</p>
+</li>
+</ul>
+<div class="language-javascript line-numbers-mode" data-highlighter="prismjs" data-ext="js"><pre v-pre><code class="language-javascript"><span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">getDaysFromDate</span><span class="token punctuation">(</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// ['2023-08-01', '2023-08-02', '2023-08-03']</span></span>
+<span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">getDaysFromDate</span><span class="token punctuation">(</span><span class="token string">'2023-1-1'</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// ['2023-01-01', '2023-01-02', '2023-01-03']</span></span>
+<span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">getDaysFromDate</span><span class="token punctuation">(</span><span class="token string">'2023-1-1'</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token string">'YYYY/MM/DD'</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">//['2022/12/30', '2022/12/31', '2023/01/01', '2023/01/02', '2023/01/03']</span></span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="getdaysinmonth" tabindex="-1"><a class="header-anchor" href="#getdaysinmonth"><span>getDaysInMonth</span></a></h2>
+<ul>
+<li>
+<p>说明：</p>
+<p>获取指定日期的所在月份的总天数</p>
+</li>
+<li>
+<p>参数：</p>
+<ul>
+<li>{(Date|string|number)} [date=new Date()] 日期对象或日期格式字符串</li>
+</ul>
+</li>
+<li>
+<p>返回值：</p>
+<p>{number} 天数</p>
+</li>
+<li>
+<p>示例：</p>
+</li>
+</ul>
+<div class="language-javascript line-numbers-mode" data-highlighter="prismjs" data-ext="js"><pre v-pre><code class="language-javascript"><span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">getDaysInMonth</span><span class="token punctuation">(</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// 31</span></span>
+<span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">getDaysInMonth</span><span class="token punctuation">(</span><span class="token string">'2023-6'</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// 30</span></span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="getdaysinyear" tabindex="-1"><a class="header-anchor" href="#getdaysinyear"><span>getDaysInYear</span></a></h2>
+<ul>
+<li>
+<p>说明：</p>
+<p>获取某年天数</p>
+</li>
+<li>
+<p>参数：</p>
+<ul>
+<li>{(Date|String|number)} year 年份</li>
+</ul>
+</li>
+<li>
+<p>返回值：</p>
+<p>{number} 天数</p>
+</li>
+<li>
+<p>示例：</p>
+</li>
+</ul>
+<div class="language-javascript line-numbers-mode" data-highlighter="prismjs" data-ext="js"><pre v-pre><code class="language-javascript"><span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">getDaysInYear</span><span class="token punctuation">(</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// 365</span></span>
+<span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">getDaysInYear</span><span class="token punctuation">(</span><span class="token number">2020</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// 366</span></span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="getmonthsfromdate" tabindex="-1"><a class="header-anchor" href="#getmonthsfromdate"><span>getMonthsFromDate</span></a></h2>
+<ul>
+<li>
+<p>说明：</p>
+<p>根据指定时间获取指定长度的月份集合</p>
+</li>
+<li>
+<p>参数：</p>
+<ul>
+<li>{(Date|string|number)} [date=new Date()] 日期对象或日期格式字符串</li>
+<li>{number} [length=2] 长度</li>
+<li>{number} [direction=1] -1: 前几个月(默认)，0:前后几个月，2: 后几个月</li>
+<li>{string} [valueFormat='YYYY-MM'] 返回格式</li>
+</ul>
+</li>
+<li>
+<p>返回值：</p>
+<p>{string[]} 月份集合</p>
+</li>
+<li>
+<p>示例：</p>
+</li>
+</ul>
+<div class="language-javascript line-numbers-mode" data-highlighter="prismjs" data-ext="js"><pre v-pre><code class="language-javascript"><span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">getMonthsFromDate</span><span class="token punctuation">(</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// ['2023-06', '2023-07', '2023-08']</span></span>
+<span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">getMonthsFromDate</span><span class="token punctuation">(</span><span class="token string">'2023-1-1'</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// ['2023-01', '2023-02', '2023-03']</span></span>
+<span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">getMonthsFromDate</span><span class="token punctuation">(</span><span class="token string">'2023-1-1'</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token string">'YYYY/MM/DD'</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// ['2022/11/01', '2022/12/01', '2023/01/01', '2023/02/01', '2023/03/01']</span></span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="getstartmonthofquarter" tabindex="-1"><a class="header-anchor" href="#getstartmonthofquarter"><span>getStartMonthOfQuarter</span></a></h2>
+<ul>
+<li>
+<p>说明：</p>
+<p>根据指定时间获得该季度的开始月份</p>
+</li>
+<li>
+<p>参数：</p>
+<ul>
+<li>{(Date|string|number)} [date=new Date()] 日期对象或日期格式字符串</li>
+<li>{string} [valueFormat='YYYY-MM'] 返回值格式</li>
+</ul>
+</li>
+<li>
+<p>返回值：</p>
+<p>{string} 月份</p>
+</li>
+<li>
+<p>示例：</p>
+</li>
+</ul>
+<div class="language-javascript line-numbers-mode" data-highlighter="prismjs" data-ext="js"><pre v-pre><code class="language-javascript"><span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">getStartMonthOfQuarter</span><span class="token punctuation">(</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// 2023-07 </span></span>
+<span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">getStartMonthOfQuarter</span><span class="token punctuation">(</span><span class="token string">'2022-2'</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// 2022-01</span></span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="getdayofyear" tabindex="-1"><a class="header-anchor" href="#getdayofyear"><span>getDayOfYear</span></a></h2>
+<ul>
+<li>
+<p>说明：</p>
+<p>获取某个日期是当年中的第几天</p>
+</li>
+<li>
+<p>参数：</p>
+<ul>
+<li>{(Date|string|number)} [date=new Date()]  日期对象或日期格式字符串</li>
+</ul>
+</li>
+<li>
+<p>返回值：</p>
+<p>{number} 返回第几天</p>
+</li>
+<li>
+<p>示例：</p>
+</li>
+</ul>
+<div class="language-javascript line-numbers-mode" data-highlighter="prismjs" data-ext="js"><pre v-pre><code class="language-javascript"><span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">getDayOfYear</span><span class="token punctuation">(</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// 215</span></span>
+<span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">getDayOfYear</span><span class="token punctuation">(</span><span class="token string">'2022-2-1'</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// 32</span></span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="getdayofyearweek" tabindex="-1"><a class="header-anchor" href="#getdayofyearweek"><span>getDayOfYearWeek</span></a></h2>
+<ul>
+<li>
+<p>说明：</p>
+<p>获取某个日期在这一年的第几周</p>
+</li>
+<li>
+<p>参数：</p>
+<ul>
+<li>{(Date|string|number)} [date=new Date()] 日期对象或日期格式字符串</li>
+</ul>
+</li>
+<li>
+<p>返回值：</p>
+<p>{number} 返回第几周</p>
+</li>
+<li>
+<p>示例：</p>
+</li>
+</ul>
+<div class="language-javascript line-numbers-mode" data-highlighter="prismjs" data-ext="js"><pre v-pre><code class="language-javascript"><span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">getWeekOfYear</span><span class="token punctuation">(</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// 31</span></span>
+<span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">getWeekOfYear</span><span class="token punctuation">(</span><span class="token string">'2022-2-1'</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// 5</span></span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="getstartofweek" tabindex="-1"><a class="header-anchor" href="#getstartofweek"><span>getStartOfWeek</span></a></h2>
+<ul>
+<li>
+<p>说明：</p>
+<p>根据日期获取本周、上周、下周的开始日期</p>
+</li>
+<li>
+<p>参数：</p>
+<ul>
+<li>{(Date|string|number)} [date=new Date()] 日期对象或日期格式字符串</li>
+<li>{number} [type=0] 类型 -1:上周  0:本周(默认)  1:下周</li>
+<li>{string} [valueFormat=&quot;YYYY-MM-DD&quot;] 返回的日期格式</li>
+</ul>
+</li>
+<li>
+<p>返回值：</p>
+<p>{string} 周开始日期</p>
+</li>
+<li>
+<p>示例：</p>
+</li>
+</ul>
+<div class="language-javascript line-numbers-mode" data-highlighter="prismjs" data-ext="js"><pre v-pre><code class="language-javascript"><span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">getStartOfWeek</span><span class="token punctuation">(</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// 2023-07-31 </span></span>
+<span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">getStartOfWeek</span><span class="token punctuation">(</span><span class="token string">'2022-01-01'</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// 2021-12-20 </span></span>
+<span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">getStartOfWeek</span><span class="token punctuation">(</span><span class="token string">'2022-01-01'</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// 2022-01-03</span></span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="getendofweek" tabindex="-1"><a class="header-anchor" href="#getendofweek"><span>getEndOfWeek</span></a></h2>
+<ul>
+<li>
+<p>说明：</p>
+<p>根据日期获得本周、上周、下周的结束日期</p>
+</li>
+<li>
+<p>参数：</p>
+<ul>
+<li>{(Date|string|number)} [date=new Date()] 日期对象或日期格式字符串</li>
+<li>{number} [type=0] -1:上周  0:本周(默认)  1:下周</li>
+<li>{string} [valueFormat=&quot;YYYY-MM-DD&quot;] 返回的日期格式</li>
+</ul>
+</li>
+<li>
+<p>返回值：</p>
+<p>{string} 周结束日期</p>
+</li>
+<li>
+<p>示例：</p>
+</li>
+</ul>
+<div class="language-javascript line-numbers-mode" data-highlighter="prismjs" data-ext="js"><pre v-pre><code class="language-javascript"><span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">getEndOfWeek</span><span class="token punctuation">(</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// 2023-08-06 </span></span>
+<span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">getEndOfWeek</span><span class="token punctuation">(</span><span class="token string">'2022-01-01'</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// 2021-12-26 </span></span>
+<span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">getEndOfWeek</span><span class="token punctuation">(</span><span class="token string">'2022-01-01'</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// 2022-01-09</span></span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="getstartofmonth" tabindex="-1"><a class="header-anchor" href="#getstartofmonth"><span>getStartOfMonth</span></a></h2>
+<ul>
+<li>
+<p>说明：</p>
+<p>根据日期获得本月、上月、下月开始日期</p>
+</li>
+<li>
+<p>参数：</p>
+<ul>
+<li>{(Date|string|number)} [date=new Date()] 日期对象或日期格式字符串</li>
+<li>{number} [type=0] -1:上月  0:本月(默认)  1:下月</li>
+<li>{string} [valueFormat=&quot;YYYY-MM-DD&quot;] 返回的日期格式</li>
+</ul>
+</li>
+<li>
+<p>返回值：</p>
+<p>{string} 月开始日期</p>
+</li>
+<li>
+<p>示例：</p>
+</li>
+</ul>
+<div class="language-javascript line-numbers-mode" data-highlighter="prismjs" data-ext="js"><pre v-pre><code class="language-javascript"><span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">getStartOfMonth</span><span class="token punctuation">(</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// 2023-08-01 </span></span>
+<span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">getStartOfMonth</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token string">'2022-01-01'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// 2021-12-01 </span></span>
+<span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">getStartOfMonth</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token string">'2022-01-01'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// 2022-02-01</span></span>
+<span class="line"></span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="getendofmonth" tabindex="-1"><a class="header-anchor" href="#getendofmonth"><span>getEndOfMonth</span></a></h2>
+<ul>
+<li>
+<p>说明：</p>
+<p>根据日期获得本月、上月、下月结束日期</p>
+</li>
+<li>
+<p>参数：</p>
+<ul>
+<li>{(Date|string|number)} [date=new Date()] 日期对象或日期格式字符串</li>
+<li>{number} [type=0] -1:上月  0:本月(默认)  1:下月</li>
+<li>{string} [valueFormat=&quot;YYYY-MM-DD&quot;] 返回的日期格式</li>
+</ul>
+</li>
+<li>
+<p>返回值：</p>
+<p>{string} 日期</p>
+</li>
+<li>
+<p>示例：</p>
+</li>
+</ul>
+<div class="language-javascript line-numbers-mode" data-highlighter="prismjs" data-ext="js"><pre v-pre><code class="language-javascript"><span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">getEndOfMonth</span><span class="token punctuation">(</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// 2023-08-31</span></span>
+<span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">getEndOfMonth</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token string">'2022-01-01'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// 2021-12-31</span></span>
+<span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">getEndOfMonth</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token string">'2022-01-01'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// 2022-02-28</span></span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="getstartofquarter" tabindex="-1"><a class="header-anchor" href="#getstartofquarter"><span>getStartOfQuarter</span></a></h2>
+<ul>
+<li>
+<p>说明：</p>
+<p>根据日期获取本季度、上季度、下季度的开始日期</p>
+</li>
+<li>
+<p>参数：</p>
+<ul>
+<li>{(Date|string|number)} [date=new Date()] 日期对象或日期格式字符串</li>
+<li>{number} [type=0] -1:上季度  0:本季度(默认)  1:下季度</li>
+<li>{string} [valueFormat=&quot;YYYY-MM-DD&quot;] 返回的日期格式</li>
+</ul>
+</li>
+<li>
+<p>返回值：</p>
+<p>{string} 季度开始日期</p>
+</li>
+<li>
+<p>示例：</p>
+</li>
+</ul>
+<div class="language-javascript line-numbers-mode" data-highlighter="prismjs" data-ext="js"><pre v-pre><code class="language-javascript"><span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">getStartOfQuarter</span><span class="token punctuation">(</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// 2023-07-01 </span></span>
+<span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">getStartOfQuarter</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token string">'2022-01-01'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// 2021-10-01 </span></span>
+<span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">getStartOfQuarter</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token string">'2022-01-01'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// 2022-04-01</span></span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="getendofquarter" tabindex="-1"><a class="header-anchor" href="#getendofquarter"><span>getEndOfQuarter</span></a></h2>
+<ul>
+<li>
+<p>说明：</p>
+<p>根据日期获取本季度、上季度、下季度的结束日期</p>
+</li>
+<li>
+<p>参数：</p>
+<ul>
+<li>{(Date|string|number)} [date=new Date()] 日期对象或日期格式字符串</li>
+<li>{number} [type=0] -1:上季度  0:本季度(默认)  1:下季度</li>
+<li>{string} [valueFormat=&quot;YYYY-MM-DD&quot;] 返回的日期格式</li>
+</ul>
+</li>
+<li>
+<p>返回值：</p>
+<p>{string} 季度结束日期</p>
+</li>
+<li>
+<p>示例：</p>
+</li>
+</ul>
+<div class="language-javascript line-numbers-mode" data-highlighter="prismjs" data-ext="js"><pre v-pre><code class="language-javascript"><span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">getEndOfQuarter</span><span class="token punctuation">(</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// 2023-07-31 </span></span>
+<span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">getEndOfQuarter</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token string">'2022-01-01'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// 2021-10-31 </span></span>
+<span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">getEndOfQuarter</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token string">'2022-01-01'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// 2022-04-30</span></span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="getstartofyear" tabindex="-1"><a class="header-anchor" href="#getstartofyear"><span>getStartOfYear</span></a></h2>
+<ul>
+<li>
+<p>说明：</p>
+<p>根据日期获取本年、上年、下年的开始日期</p>
+</li>
+<li>
+<p>参数：</p>
+<ul>
+<li>{(Date|string|number)} [date=new Date()] 日期对象或日期格式字符串</li>
+<li>{number} [type=0] -1:上年  0:本年(默认)  1:下年</li>
+<li>{string} [valueFormat=&quot;YYYY-MM-DD&quot;] 返回的日期格式</li>
+</ul>
+</li>
+<li>
+<p>返回值：</p>
+<p>{string} 年开始日期</p>
+</li>
+<li>
+<p>示例：</p>
+</li>
+</ul>
+<div class="language-javascript line-numbers-mode" data-highlighter="prismjs" data-ext="js"><pre v-pre><code class="language-javascript"><span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">getStartOfYear</span><span class="token punctuation">(</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// 2023-01-01 </span></span>
+<span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">getStartOfYear</span><span class="token punctuation">(</span><span class="token string">'2022-01-01'</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// 2022-01-01</span></span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="getendofyear" tabindex="-1"><a class="header-anchor" href="#getendofyear"><span>getEndOfYear</span></a></h2>
+<ul>
+<li>
+<p>说明：</p>
+<p>根据日期获取本年、上年、下年的结束日期</p>
+</li>
+<li>
+<p>参数：</p>
+<ul>
+<li>{(Date|string|number)} [date=new Date()] 日期对象或日期格式字符串</li>
+<li>{number} [type=0] -1:上年  0:本年(默认)  1:下年</li>
+<li>{string} [valueFormat=&quot;YYYY-MM-DD&quot;] 返回的日期格式</li>
+</ul>
+</li>
+<li>
+<p>返回值：</p>
+<p>{string} 年结束日期</p>
+</li>
+<li>
+<p>示例：</p>
+</li>
+</ul>
+<div class="language-javascript line-numbers-mode" data-highlighter="prismjs" data-ext="js"><pre v-pre><code class="language-javascript"><span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">getEndOfYear</span><span class="token punctuation">(</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// 2023-12-31 </span></span>
+<span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">getEndOfYear</span><span class="token punctuation">(</span><span class="token string">'2022-01-01'</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// 2022-12-31</span></span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="getbeforedate" tabindex="-1"><a class="header-anchor" href="#getbeforedate"><span>getBeforeDate</span></a></h2>
+<ul>
+<li>
+<p>说明：</p>
+<p>获取指定日期的前几天</p>
+</li>
+<li>
+<p>参数：</p>
+<ul>
+<li>{(Date|string|number)} [date=new Date()] 日期对象或日期格式字符串</li>
+<li>{number} [len=1] 要获取的天数长度, 1：近一天(默认) 3：近三天 7：近7天，30：近30天</li>
+<li>{string} [valueFormat=&quot;YYYY-MM-DD&quot;] 返回的日期格式</li>
+</ul>
+</li>
+<li>
+<p>返回值：</p>
+<p>{string} 日期</p>
+</li>
+<li>
+<p>示例：</p>
+</li>
+</ul>
+<div class="language-javascript line-numbers-mode" data-highlighter="prismjs" data-ext="js"><pre v-pre><code class="language-javascript"><span class="line"><span class="token comment">// 假设当前时间为 2023-8-3</span></span>
+<span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">getBeforeDate</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// 2023-08-02 </span></span>
+<span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">getBeforeDate</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// 2023-07-31 </span></span>
+<span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">getBeforeDate</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// 2023-07-27 </span></span>
+<span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">getBeforeDate</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// 2023-07-04</span></span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="getdatesbetween" tabindex="-1"><a class="header-anchor" href="#getdatesbetween"><span>getDatesBetween</span></a></h2>
+<ul>
+<li>
+<p>说明：</p>
+<p>获取两个日期之间的所有日期</p>
+</li>
+<li>
+<p>参数：</p>
+<ul>
+<li>{(Date|string|number)} startDate 开始日期</li>
+<li>{(Date|string|number)} endDate 结束日期</li>
+<li>{string} [valueFormat=&quot;YYYY-MM-DD&quot;] 返回的日期格式</li>
+</ul>
+</li>
+<li>
+<p>返回值：</p>
+<p>{string[]} 日期数组</p>
+</li>
+<li>
+<p>示例：</p>
+</li>
+</ul>
+<div class="language-javascript line-numbers-mode" data-highlighter="prismjs" data-ext="js"><pre v-pre><code class="language-javascript"><span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">getDatesBetween</span><span class="token punctuation">(</span><span class="token string">'2022-1-1'</span><span class="token punctuation">,</span> <span class="token string">'2022-1-5'</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// ['2022-01-01', '2022-01-02', '2022-01-03', '2022-01-04', '2022-01-05']</span></span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="timeago" tabindex="-1"><a class="header-anchor" href="#timeago"><span>timeAgo</span></a></h2>
+<ul>
+<li>
+<p>说明：</p>
+<p>以前时间距离当前时间的时间差</p>
+</li>
+<li>
+<p>参数：</p>
+<ul>
+<li>{(Date|string|number)} date 时间对象或时间戳</li>
+<li>{Object} [opt={d: 'day', h: 'hour', m: 'minute'}] 选项配置</li>
+<li>{string} [opt.d='day'] 天的单位</li>
+<li>{string} [opt.h='hour'] 小时的单位</li>
+<li>{string} [opt.m='minute'] 分钟的单位</li>
+</ul>
+</li>
+<li>
+<p>返回值：</p>
+<p>{string} 时间差</p>
+</li>
+<li>
+<p>示例：</p>
+</li>
+</ul>
+<div class="language-javascript line-numbers-mode" data-highlighter="prismjs" data-ext="js"><pre v-pre><code class="language-javascript"><span class="line"><span class="token comment">// 假设当前时间为 2023-5-18</span></span>
+<span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">timeAgo</span><span class="token punctuation">(</span><span class="token string">'2023-5-17'</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// 1day</span></span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="gettimeslotbystep" tabindex="-1"><a class="header-anchor" href="#gettimeslotbystep"><span>getTimeSlotByStep</span></a></h2>
+<ul>
+<li>
+<p>说明：</p>
+<p>根据步长获取时间间隔</p>
+</li>
+<li>
+<p>参数：</p>
+<ul>
+<li>{number} [step=30] 间隔 单位：分钟</li>
+</ul>
+</li>
+<li>
+<p>返回值：</p>
+<p>{string[]} 时间间隔数组</p>
+</li>
+<li>
+<p>示例：</p>
+</li>
+</ul>
+<div class="language-javascript line-numbers-mode" data-highlighter="prismjs" data-ext="js"><pre v-pre><code class="language-javascript"><span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">getTimeSlotByStep</span><span class="token punctuation">(</span><span class="token number">240</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00']</span></span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="stohms" tabindex="-1"><a class="header-anchor" href="#stohms"><span>sToHms</span></a></h2>
+<ul>
+<li>
+<p>说明：</p>
+<p>秒转时分秒</p>
+</li>
+<li>
+<p>参数：</p>
+<ul>
+<li>{number} [s=0] 秒数</li>
+<li>{Array&lt;string&gt;} format 格式 默认：[&quot;时&quot;, &quot;分&quot;, &quot;秒&quot;]，可以自定义例如：[&quot;h&quot;, &quot;m &quot;s&quot;]</li>
+</ul>
+</li>
+<li>
+<p>返回值：</p>
+<p>{string} x时x分x秒</p>
+</li>
+<li>
+<p>示例：</p>
+</li>
+</ul>
+<div class="language-javascript line-numbers-mode" data-highlighter="prismjs" data-ext="js"><pre v-pre><code class="language-javascript"><span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">sToHms</span><span class="token punctuation">(</span><span class="token number">7200</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// 2时0分0秒</span></span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div></div></div></div></template>
+
+

@@ -65,8 +65,8 @@
     unique,
     union,
     intersect,
-    intersectInMatrix,
-    countInArray,
+    intersectMatrix,
+    countBy,
     tagDuplicates,
     groupByAttr,
     groupBySize,
@@ -259,7 +259,7 @@
   }
 
   {
-    console.log('--intersectInMatrix--', intersectInMatrix(arr), intersectInMatrix(arr, 'id'))
+    console.log('--intersectMatrix--', intersectMatrix(arr), intersectMatrix(arr, 'id'))
   }
   {
     const arr1 = [1, 2, 3, 2, 3, 4]
@@ -271,10 +271,10 @@
       {id: 3},
 
     ];
-    console.log('--countInArray--',
-        countInArray(arr1, 2),
-        countInArray(arr1, item => item === 2),
-        countInArray(arr2, item => item.id === 3),
+    console.log('--countBy--',
+        countBy(arr1, 2),
+        countBy(arr1, item => item === 2),
+        countBy(arr2, item => item.id === 3),
     )
   }
 

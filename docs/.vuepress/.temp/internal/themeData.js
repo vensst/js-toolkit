@@ -1,0 +1,14 @@
+export const themeData = JSON.parse("{\"locales\":{\"/\":{\"selectLanguageText\":\"选择语言\",\"selectLanguageName\":\"简体中文\",\"navbar\":[{\"text\":\"版本\",\"children\":[{\"text\":\"v1.x\",\"link\":\"/zh/v1/\"},{\"text\":\"v2.x\",\"link\":\"/zh/v2/\"}]}],\"sidebar\":{\"/zh/v1/\":[\"README.md\",\"number.md\",\"string.md\",\"array.md\",\"object.md\",\"date.md\",\"function.md\",\"dom.md\",\"inspect.md\",\"math.md\",\"storage.md\",\"url.md\",\"file.md\",\"img.md\",\"http.md\",\"scroll.md\",\"window.md\",\"other.md\",\"thirdpart.md\"],\"/zh/v2/\":[\"README.md\",\"number.md\",\"string.md\",\"array.md\",\"object.md\",\"date.md\",\"function.md\",\"dom.md\",\"inspect.md\",\"math.md\",\"storage.md\",\"url.md\",\"file.md\",\"img.md\",\"http.md\",\"scroll.md\",\"window.md\",\"other.md\"]}},\"/zh/\":{\"selectLanguageText\":\"选择语言\",\"selectLanguageName\":\"简体中文\",\"navbar\":[{\"text\":\"版本\",\"children\":[{\"text\":\"v1.x\",\"link\":\"/zh/v1/\"},{\"text\":\"v2.x\",\"link\":\"/zh/v2/\"}]}],\"sidebar\":{\"/zh/v1/\":[\"README.md\",\"number.md\",\"string.md\",\"array.md\",\"object.md\",\"date.md\",\"function.md\",\"dom.md\",\"inspect.md\",\"math.md\",\"storage.md\",\"url.md\",\"file.md\",\"img.md\",\"http.md\",\"scroll.md\",\"window.md\",\"other.md\",\"thirdpart.md\"],\"/zh/v2/\":[\"README.md\",\"number.md\",\"string.md\",\"array.md\",\"object.md\",\"date.md\",\"function.md\",\"dom.md\",\"inspect.md\",\"math.md\",\"storage.md\",\"url.md\",\"file.md\",\"img.md\",\"http.md\",\"scroll.md\",\"window.md\",\"other.md\"]}},\"/en/\":{\"selectLanguageText\":\"Languages\",\"selectLanguageName\":\"English\",\"navbar\":[{\"text\":\"Version\",\"children\":[{\"text\":\"v1.x\",\"link\":\"/en/v1/\"},{\"text\":\"v2.x\",\"link\":\"/en/v2/\"}]}],\"sidebar\":{\"/en/v1/\":[],\"/en/v2/\":[]}}},\"home\":\"/\",\"logo\":\"/static/images/logo.png\",\"colorMode\":\"auto\",\"colorModeSwitch\":true,\"navbar\":[],\"repo\":null,\"selectLanguageText\":\"Languages\",\"selectLanguageAriaLabel\":\"Select language\",\"sidebar\":\"heading\",\"sidebarDepth\":2,\"editLink\":true,\"editLinkText\":\"Edit this page\",\"lastUpdated\":true,\"contributors\":true,\"contributorsText\":\"Contributors\",\"notFound\":[\"There's nothing here.\",\"How did we get here?\",\"That's a Four-Oh-Four.\",\"Looks like we've got some broken links.\"],\"backToHome\":\"Take me home\",\"openInNewWindow\":\"open in new window\",\"toggleColorMode\":\"toggle color mode\",\"toggleSidebar\":\"toggle sidebar\"}")
+
+if (import.meta.webpackHot) {
+  import.meta.webpackHot.accept()
+  if (__VUE_HMR_RUNTIME__.updateThemeData) {
+    __VUE_HMR_RUNTIME__.updateThemeData(themeData)
+  }
+}
+
+if (import.meta.hot) {
+  import.meta.hot.accept(({ themeData }) => {
+    __VUE_HMR_RUNTIME__.updateThemeData(themeData)
+  })
+}

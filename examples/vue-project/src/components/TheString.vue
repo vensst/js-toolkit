@@ -20,7 +20,7 @@ import {
   toLowerCaseFirst,
 
   randomCode,
-  countInString,
+  countSubstring,
   padStart,
   padEnd,
 
@@ -70,7 +70,7 @@ import {
 const str = " My name is Li Lei and I am from China "
 
 console.log("--randomCode--", randomCode(), randomCode(6), randomCode(6, '', '123456'))
-console.log("--countInString--", countInString(str, 'i'))
+console.log("--countSubstring--", countSubstring(str, 'i'))
 console.log("--padStart--", padStart(9527, 11, '*'), `[${padStart('abc', 6,)}]`, padStart('abc', 6, '01'))
 console.log("--padEnd--", padEnd(150, 11, '*'), `[${padEnd('abc', 6,)}]`, padEnd('abc', 6, '01'))
 

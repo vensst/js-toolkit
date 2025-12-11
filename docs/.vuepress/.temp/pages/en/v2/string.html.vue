@@ -1,0 +1,405 @@
+<template><div><h1 id="字符串" tabindex="-1"><a class="header-anchor" href="#字符串"><span>字符串</span></a></h1>
+<h2 id="desensitization" tabindex="-1"><a class="header-anchor" href="#desensitization"><span>desensitization</span></a></h2>
+<ul>
+<li>
+<p>说明：</p>
+<p>字符串脱敏</p>
+</li>
+<li>
+<p>添加版本：1.1.0-beta.11</p>
+</li>
+<li>
+<p>参数：</p>
+<ul>
+<li>{(string|number)} str 需要脱敏字符串</li>
+<li>{number} [startIndex=0] 脱敏起始位置</li>
+<li>{number} [endIndex=0] 脱敏结束位置</li>
+<li>{string} [char=&quot;*&quot;] 脱敏字符</li>
+</ul>
+</li>
+<li>
+<p>返回值：</p>
+<p>{string} 已脱敏字符串</p>
+</li>
+<li>
+<p>示例：</p>
+</li>
+</ul>
+<div class="language-javascript line-numbers-mode" data-highlighter="prismjs" data-ext="js"><pre v-pre><code class="language-javascript"><span class="line"><span class="token keyword">const</span> str <span class="token operator">=</span> <span class="token string">" my name is lilei-lei fromChina "</span></span>
+<span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">desensitization</span><span class="token punctuation">(</span>str<span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// my n**e is lilei-lei fromChina </span></span>
+<span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">desensitization</span><span class="token punctuation">(</span><span class="token number">15063946854</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">,</span> <span class="token string">'x'</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// 150xxxx6854</span></span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="trim" tabindex="-1"><a class="header-anchor" href="#trim"><span>trim</span></a></h2>
+<ul>
+<li>
+<p>说明：</p>
+<p>去除字符串空格</p>
+</li>
+<li>
+<p>添加版本：1.1.0-beta.11</p>
+</li>
+<li>
+<p>参数：</p>
+<ul>
+<li>{string} str 需要去除空格的字符串</li>
+<li>{number} [type=2] 类型 1:所有空格  2:前后空格(默认)  3:前空格 4:后空格</li>
+</ul>
+</li>
+<li>
+<p>返回值：</p>
+<p>{string} 已去除的字符串</p>
+</li>
+<li>
+<p>示例：</p>
+</li>
+</ul>
+<div class="language-javascript line-numbers-mode" data-highlighter="prismjs" data-ext="js"><pre v-pre><code class="language-javascript"><span class="line"><span class="token keyword">const</span> str <span class="token operator">=</span> <span class="token string">" my name is lilei-lei fromChina "</span></span>
+<span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">trim</span><span class="token punctuation">(</span>str<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// mynameislilei-leifromChina</span></span>
+<span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">trim</span><span class="token punctuation">(</span>str<span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// my name is lilei-lei fromChina</span></span>
+<span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">trim</span><span class="token punctuation">(</span>str<span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// my name is lilei-lei fromChina </span></span>
+<span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">trim</span><span class="token punctuation">(</span>str<span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">//  my name is lilei-lei fromChina</span></span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="touppercasefirst" tabindex="-1"><a class="header-anchor" href="#touppercasefirst"><span>toUpperCaseFirst</span></a></h2>
+<ul>
+<li>
+<p>说明：</p>
+<p>字符串首字母转大写</p>
+</li>
+<li>
+<p>添加版本：1.1.0-beta.11</p>
+</li>
+<li>
+<p>参数：</p>
+<ul>
+<li>{string} str 要转换的英文字符串</li>
+</ul>
+</li>
+<li>
+<p>返回值：</p>
+<p>{string} 已转换的英文字符串</p>
+</li>
+<li>
+<p>示例：</p>
+</li>
+</ul>
+<div class="language-javascript line-numbers-mode" data-highlighter="prismjs" data-ext="js"><pre v-pre><code class="language-javascript"><span class="line"><span class="token keyword">const</span> str <span class="token operator">=</span> <span class="token string">"my name is lilei-lei fromChina "</span></span>
+<span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">toUpperCaseFirst</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// My name is lilei-lei fromChina </span></span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="touppercase" tabindex="-1"><a class="header-anchor" href="#touppercase"><span>toUpperCase</span></a></h2>
+<ul>
+<li>
+<p>说明：</p>
+<p>字符串转大写</p>
+</li>
+<li>
+<p>添加版本：1.1.0-beta.11</p>
+</li>
+<li>
+<p>参数：</p>
+<ul>
+<li>{string} str 要转换的字符串</li>
+<li>{number} [type=1] 类型 1:全部大写(默认)  2:每个单词首字母大写（单词剩余部分不转） 3:每个单词首字母大写（单词剩余部分转小写）</li>
+</ul>
+</li>
+<li>
+<p>返回值：</p>
+<p>{string} 已转换的字符串</p>
+</li>
+<li>
+<p>示例：</p>
+</li>
+</ul>
+<div class="language-javascript line-numbers-mode" data-highlighter="prismjs" data-ext="js"><pre v-pre><code class="language-javascript"><span class="line"><span class="token keyword">const</span> str <span class="token operator">=</span> <span class="token string">" my name is lilei-lei fromChina "</span></span>
+<span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">toUpperCase</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">//  MY NAME IS LILEI-LEI FROMCHINA </span></span>
+<span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">toUpperCase</span><span class="token punctuation">(</span>str<span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">//  My Name Is Lilei-Lei FromChina </span></span>
+<span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">toUpperCase</span><span class="token punctuation">(</span>str<span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">//  My Name Is Lilei-Lei Fromchina </span></span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="tolowercase" tabindex="-1"><a class="header-anchor" href="#tolowercase"><span>toLowerCase</span></a></h2>
+<ul>
+<li>
+<p>说明：</p>
+<p>字符串转小写</p>
+</li>
+<li>
+<p>添加版本：1.1.0-beta.11</p>
+</li>
+<li>
+<p>参数：</p>
+<ul>
+<li>{string} str 要转换的字符串</li>
+<li>{number} [type=1] 类型 1:全部小写(默认)  2:每个单词首字母小写（剩余部分不转） 3:每个单词首字母小写（剩余部分转大写）</li>
+</ul>
+</li>
+<li>
+<p>返回值：</p>
+<p>{string} 已转换的字符串</p>
+</li>
+<li>
+<p>示例：</p>
+</li>
+</ul>
+<div class="language-javascript line-numbers-mode" data-highlighter="prismjs" data-ext="js"><pre v-pre><code class="language-javascript"><span class="line"><span class="token keyword">const</span> str <span class="token operator">=</span> <span class="token string">" MY NAME IS LILIEI-LEI FROMcHINA "</span></span>
+<span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">toLowerCase</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">//  my name is liliei-lei fromchina </span></span>
+<span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">toLowerCase</span><span class="token punctuation">(</span>str<span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">//  mY nAME iS lILIEI-lEI fROMcHINA </span></span>
+<span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">toLowerCase</span><span class="token punctuation">(</span>str<span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">//  mY nAME iS lILIEI-lEI fROMCHINA </span></span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="filterhtmltag" tabindex="-1"><a class="header-anchor" href="#filterhtmltag"><span>filterHtmlTag</span></a></h2>
+<ul>
+<li>
+<p>说明：</p>
+<p>过滤 html代码(把 &lt;、&gt; 和 &amp; 转换)</p>
+</li>
+<li>
+<p>添加版本：1.1.0-beta.11</p>
+</li>
+<li>
+<p>参数：</p>
+<ul>
+<li>{string} str html字符串</li>
+</ul>
+</li>
+<li>
+<p>返回值：</p>
+<p>{string}</p>
+</li>
+<li>
+<p>示例：</p>
+</li>
+</ul>
+<div class="language-javascript line-numbers-mode" data-highlighter="prismjs" data-ext="js"><pre v-pre><code class="language-javascript"><span class="line"><span class="token keyword">let</span> str <span class="token operator">=</span> <span class="token string">"&lt;div>这是一段文字&lt;/div>"</span><span class="token punctuation">;</span></span>
+<span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">filterHtmlTag</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// &amp;lt;div&amp;gt;这是一段文字&amp;lt;/div&amp;gt;</span></span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="randomcode" tabindex="-1"><a class="header-anchor" href="#randomcode"><span>randomCode</span></a></h2>
+<ul>
+<li>
+<p>说明：</p>
+<p>生成随机验证码</p>
+</li>
+<li>
+<p>参数：</p>
+<ul>
+<li>{number} [length=4] 随机验证码的长度，默认4位</li>
+<li>{(string|number)} checkCode 当前随机码（防止重复）</li>
+</ul>
+</li>
+<li>
+<p>返回值：</p>
+<p>{string} 随机验证码</p>
+</li>
+<li>
+<p>示例：</p>
+</li>
+</ul>
+<div class="language-javascript line-numbers-mode" data-highlighter="prismjs" data-ext="js"><pre v-pre><code class="language-javascript"><span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">randomCode</span><span class="token punctuation">(</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// F1Fo</span></span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="findcharcount" tabindex="-1"><a class="header-anchor" href="#findcharcount"><span>findCharCount</span></a></h2>
+<ul>
+<li>
+<p>说明：</p>
+<p>查找某个词或字符在字符串中出现次数</p>
+</li>
+<li>
+<p>添加版本：1.1.0-beta.11</p>
+</li>
+<li>
+<p>参数：</p>
+<ul>
+<li>{string} str 字符串</li>
+<li>{string} key 要查找的词或字符</li>
+</ul>
+</li>
+<li>
+<p>返回值：<br>
+{number} 出现次数</p>
+</li>
+<li>
+<p>示例：</p>
+</li>
+</ul>
+<div class="language-javascript line-numbers-mode" data-highlighter="prismjs" data-ext="js"><pre v-pre><code class="language-javascript"><span class="line"><span class="token keyword">const</span> str <span class="token operator">=</span> <span class="token string">" my name is lilei-lei fromChina "</span></span>
+<span class="line"><span class="token function">findCharCount</span><span class="token punctuation">(</span>str<span class="token punctuation">,</span><span class="token string">'i'</span><span class="token punctuation">)</span> <span class="token comment">// 5</span></span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="padstart" tabindex="-1"><a class="header-anchor" href="#padstart"><span>padStart</span></a></h2>
+<ul>
+<li>
+<p>说明：</p>
+<p>字符串补全（开头）</p>
+</li>
+<li>
+<p>添加版本：1.1.0-beta.11</p>
+</li>
+<li>
+<p>参数：</p>
+<ul>
+<li>{(string|number)} str 字符串</li>
+<li>{number} targetLength 目标长度</li>
+<li>{string} padString 补全字符</li>
+</ul>
+</li>
+<li>
+<p>返回值：</p>
+<p>{string} 补全后的字符串</p>
+</li>
+<li>
+<p>示例：</p>
+</li>
+</ul>
+<div class="language-javascript line-numbers-mode" data-highlighter="prismjs" data-ext="js"><pre v-pre><code class="language-javascript"><span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">padStart</span><span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token string">'0'</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// 09</span></span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="padend" tabindex="-1"><a class="header-anchor" href="#padend"><span>padEnd</span></a></h2>
+<ul>
+<li>
+<p>说明：</p>
+<p>字符串补全（尾部）</p>
+</li>
+<li>
+<p>添加版本：1.1.0-beta.11</p>
+</li>
+<li>
+<p>参数：</p>
+<ul>
+<li>{(string|number)} str 字符串</li>
+<li>{number} targetLength 目标长度</li>
+<li>{string} padString 补全字符</li>
+</ul>
+</li>
+<li>
+<p>返回值：</p>
+<p>{string} 补全后的字符串</p>
+</li>
+<li>
+<p>示例：</p>
+</li>
+</ul>
+<div class="language-javascript line-numbers-mode" data-highlighter="prismjs" data-ext="js"><pre v-pre><code class="language-javascript"><span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">padEnd</span><span class="token punctuation">(</span><span class="token number">150</span><span class="token punctuation">,</span> <span class="token number">11</span><span class="token punctuation">,</span> <span class="token string">'*'</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// 150********</span></span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="hasunit" tabindex="-1"><a class="header-anchor" href="#hasunit"><span>hasUnit</span></a></h2>
+<ul>
+<li>
+<p>说明：</p>
+<p>判断字符串是否包含单位</p>
+</li>
+<li>
+<p>参数：</p>
+<ul>
+<li>{string} str 字符串</li>
+</ul>
+</li>
+<li>
+<p>添加版本：1.1.0-beta.12</p>
+</li>
+<li>
+<p>返回值：</p>
+<p>{boolean} 是否包含单位</p>
+</li>
+<li>
+<p>示例：</p>
+</li>
+</ul>
+<div class="language-javascript line-numbers-mode" data-highlighter="prismjs" data-ext="js"><pre v-pre><code class="language-javascript"><span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">hasUnit</span><span class="token punctuation">(</span><span class="token string">"10px"</span><span class="token punctuation">)</span> <span class="token comment">// true</span></span>
+<span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">hasUnit</span><span class="token punctuation">(</span><span class="token string">"20"</span><span class="token punctuation">)</span> <span class="token comment">// false</span></span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="removeunit" tabindex="-1"><a class="header-anchor" href="#removeunit"><span>removeUnit</span></a></h2>
+<ul>
+<li>
+<p>说明：</p>
+<p>去除字符串单位</p>
+</li>
+<li>
+<p>参数：</p>
+<ul>
+<li>{string} str 字符串</li>
+</ul>
+</li>
+<li>
+<p>添加版本：1.1.0-beta.12</p>
+</li>
+<li>
+<p>返回值：</p>
+<p>{string} 去除单位后的字符串</p>
+</li>
+<li>
+<p>示例：</p>
+</li>
+</ul>
+<div class="language-javascript line-numbers-mode" data-highlighter="prismjs" data-ext="js"><pre v-pre><code class="language-javascript"><span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">removeUnit</span><span class="token punctuation">(</span><span class="token string">"10px"</span><span class="token punctuation">)</span> <span class="token comment">// 10</span></span>
+<span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">removeUnit</span><span class="token punctuation">(</span><span class="token string">"20"</span><span class="token punctuation">)</span> <span class="token comment">// 20</span></span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="cameltokebab" tabindex="-1"><a class="header-anchor" href="#cameltokebab"><span>camelToKebab</span></a></h2>
+<ul>
+<li>
+<p>说明：</p>
+<p>驼峰命名转短横线命名</p>
+</li>
+<li>
+<p>参数：</p>
+<ul>
+<li>{string} str 字符串</li>
+<li>{string} [separator='-'] 分隔符</li>
+</ul>
+</li>
+<li>
+<p>添加版本：1.1.0-beta.13</p>
+</li>
+<li>
+<p>返回值：</p>
+<p>{string} 转换后的字符串</p>
+</li>
+<li>
+<p>示例：</p>
+</li>
+</ul>
+<div class="language-javascript line-numbers-mode" data-highlighter="prismjs" data-ext="js"><pre v-pre><code class="language-javascript"><span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">camelToKebab</span><span class="token punctuation">(</span><span class="token string">'myName'</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// my-name</span></span>
+<span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">camelToKebab</span><span class="token punctuation">(</span><span class="token string">'myName'</span><span class="token punctuation">,</span><span class="token string">'_'</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// my_name</span></span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="kebabtocamel" tabindex="-1"><a class="header-anchor" href="#kebabtocamel"><span>kebabToCamel</span></a></h2>
+<ul>
+<li>
+<p>说明：</p>
+<p>短横线命名转驼峰命名</p>
+</li>
+<li>
+<p>参数：</p>
+<ul>
+<li>{string} str 字符串</li>
+<li>{string} [separator='-'] 分隔符</li>
+</ul>
+</li>
+<li>
+<p>添加版本：1.1.0-beta.13</p>
+</li>
+<li>
+<p>返回值：</p>
+<p>{string} 转换后的字符串</p>
+</li>
+<li>
+<p>示例：</p>
+</li>
+</ul>
+<div class="language-javascript line-numbers-mode" data-highlighter="prismjs" data-ext="js"><pre v-pre><code class="language-javascript"><span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">kebabToCamel</span><span class="token punctuation">(</span><span class="token string">'my-name'</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// myName </span></span>
+<span class="line">jsToolkit<span class="token punctuation">.</span><span class="token function">kebabToCamel</span><span class="token punctuation">(</span><span class="token string">'my_name'</span><span class="token punctuation">,</span><span class="token string">'_'</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token comment">// myName</span></span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div></div></template>
+
+

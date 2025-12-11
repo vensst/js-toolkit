@@ -4,7 +4,7 @@ import {isObject} from "./inspect";
  * 解析 URL 并提取查询参数
  * @param {string} [url=window.location.href] - 要解析的 URL 地址，默认为当前页面 URL
  * @param {string} [key] - 可选，要获取的特定参数名，如果不提供则返回所有参数
- * @returns {Object|string|null} 如果提供了 key 则返回对应参数值，否则返回包含所有查询参数的对象
+ * @returns {Object|string|undefined} 如果提供了 key 则返回对应参数值，否则返回包含所有查询参数的对象
  */
 export const getUrlParams = function (url, key) {
   try {
@@ -29,29 +29,8 @@ export const getUrlParams = function (url, key) {
   } catch (error) {
     // 如果 URL 格式不正确，返回适当的默认值
     console.warn('Invalid URL provided to getUrlParams:', url);
-    return null;
+    return undefined;
   }
-};
-
-/**
- * 将对象转换为 URL 查询参数字符串
- * @param {Object} obj - 包含查询参数的键值对对象
- * @returns {string} 格式化后的 URL 查询参数字符串
- * @version 1.1.0-beta.11
- */
-export const toUrlParams = function (obj) {
-  if (!isObject(obj)) {
-    return ''
-  }
-  const params = [];
-  for (const [key, value] of Object.entries(obj)) {
-    // 过滤掉 undefined 和 null 值
-    if (value !== undefined && value !== null) {
-      params.push(`${encodeURIComponent(key)}=${encodeURIComponent(value)}`);
-    }
-  }
-
-  return params.join('&');
 };
 
 /**
@@ -76,3 +55,26 @@ export const removeUrlParam = function (url, name) {
     return url;
   }
 };
+
+
+/**
+ * 将对象转换为 URL 查询参数字符串
+ * @param {Object} obj - 包含查询参数的键值对对象
+ * @returns {string} 格式化后的 URL 查询参数字符串
+ * @version 1.1.0-beta.11
+ */
+export const toUrlParams = function (obj) {
+  if (!isObject(obj)) {
+    return ''
+  }
+  const params = [];
+  for (const [key, value] of Object.entries(obj)) {
+    // 过滤掉 undefined 和 null 值
+    if (value !== undefined && value !== null) {
+      params.push(`${encodeURIComponent(key)}=${encodeURIComponent(value)}`);
+    }
+  }
+
+  return params.join('&');
+};
+

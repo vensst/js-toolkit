@@ -91,7 +91,7 @@ export function randomCode(length?: number, checkCode?: string, charset?: string
  * @param key - 要查找的子字符串
  * @returns 出现次数
  */
-export function countInString(str: string, key: string): number;
+export function countSubstring(str: string, key: string): number;
 
 /**
  * 在字符串开头填充指定字符，使字符串达到指定长度
