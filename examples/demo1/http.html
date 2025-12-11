@@ -59,139 +59,40 @@
 <body>
 <div id="app">
   <div>
-    <button  @click="login">登录</button>
-    <span>request：</span>
-    <button id="btn1" @click="addUser">增</button>
-    <button id="btn2" @click="delUser">删</button>
-    <button id="btn3" @click="putUser">改</button>
-    <button id="btn4" @click="getUser">查</button>
+    xhr 请求:
+    <button id="btn1" @click="xhrMockGet">get 请求</button>
+    <button id="btn2" @click="xhrMockPost">post 请求</button>
+    <button id="btn3" @click="xhrMockDelete">delete 请求</button>
+    <button id="btn4" @click="xhrMockPut">put 请求</button>
   </div>
   <div>
-    <span>requestFetch：</span>
-    <button id="btn1" @click="addUser2">增</button>
-    <button id="btn2" @click="delUser2">删</button>
-    <button id="btn3" @click="putUser2">改</button>
-    <button id="btn4" @click="getUser2">查</button>
+    fetch 请求:
+    <button id="btn5" @click="fetchMockGet">get 请求</button>
+    <button id="btn6" @click="fetchMockPost">post 请求</button>
+    <button id="btn7" @click="fetchMockDelete">delete 请求</button>
+    <button id="btn8" @click="xhrMockPut">put 请求</button>
   </div>
   <div>
-    取消get请求:
-    <button id="btn9" @click="cancelRequest">取消请求</button>
+    取消请求:
+      <button id="btn9" @click="cancelRequest">取消请求</button>
   </div>
 </div>
 <script type="module">
   import {request, requestFetch} from '../../lib/index.esm.js';
-
   var vm = new Vue({
     el: '#app',
     data: {
-      cancelToken: ''
+     cancelToken:''
     },
     methods: {
-      login(){
-        request({
-          method: 'post',
-          url: 'http://localhost:5001/api/user/login',
-          data: {
-            username: '1509909527',
-            password: 123456
-          },
-        }).then(res => {
-          console.log(res)
-        }).catch(err => {
-          console.log(err)
-        })
-      },
       // xhr 请求
-      addUser() {
-        // 方式一
-        request({
-          method: 'post',
-          url: 'http://localhost:5001/api/user/add',
-          data: {
-            nickname: 'evan123',
-            account: '1509909527',
-            password: 123456
-          },
-          headers: {
-            'Authorization': 'Bearer token123'
-          }
-        }).then(res => {
-          console.log(res)
-        }).catch(err => {
-          console.log(err)
-        })
-        // 方式二
-        request.post('http://localhost:5001/api/user/add', {
-          nickname: 'evan123',
-          account: '1509909527',
-          password: 123456
-        }, {
-          headers: {
-            'Authorization': 'Bearer token123'
-          }
-        }).then(res => {
-          console.log(res)
-        }).catch(err => {
-          console.log(err)
-        })
-
-      },
-      delUser() {
-        request.delete('http://localhost:5001/api/user/delete/2').then(res => {
-          console.log(res)
-        }).catch(err => {
-          console.log(err)
-        })
-
-        request.delete('http://localhost:5001/api/user/delete', {data:{ids: 3}}).then(res => {
-          console.log(res)
-        }).catch(err => {
-          console.log(err)
-        })
-      },
-      putUser() {
-        // 方式一
-        request({
-          method: 'put',
-          url: 'http://localhost:5001/api/user/update',
-          data: {
-            id: 5,
-            nickname: 'evan12345',
-            account: '1509909528',
-            password: 123456
-          },
-          headers: {
-            'Authorization': 'Bearer token123'
-          }
-        }).then(res => {
-          console.log(res)
-        }).catch(err => {
-          console.log(err)
-        })
-        // 方式二
-        request.put('http://localhost:5001/api/user/update', {
-          id: 6,
-          nickname: 'evan123456',
-          account: '1509909527',
-          password: 123456
-        }, {
-          headers: {
-            'Authorization': 'Bearer token123'
-          }
-        }).then(res => {
-          console.log(res)
-        }).catch(err => {
-          console.log(err)
-        })
-      },
-      getUser() {
+      xhrMockGet(){
         this.cancelToken = new request.CancelToken();
-        // 方式一
         request({
           url: 'http://localhost:5001/api/user/detail',
           method: 'get',
           params: {
-            id: 5,
+            id: 1,
           },
           cancelToken: this.cancelToken
         }).then(res => {
@@ -199,105 +100,41 @@
         }).catch(err => {
           console.log(err)
         })
-        // 方式二
-        request.get('http://localhost:5001/api/user/list?page=1&pageSize=10', {
-          cancelToken: this.cancelToken
+      },
+      xhrMockPost(){
+        request.post('http://localhost:5001/api/user/login',{
+          username: 'admin',
+          password: 123456
         }).then(res => {
           console.log(res)
         }).catch(err => {
           console.log(err)
         })
+
+        // request({
+        //   url: 'http://localhost:5001/api/user/login',
+        //   method: 'post',
+        //   data: {
+        //     username: 'admin',
+        //     password: 123456
+        //   },
+        //
+        // }).then(res => {
+        //   console.log(res)
+        // }).catch(err => {
+        //   console.log(err)
+        // })
       },
+      xhrMockDelete(){},
+      xhrMockPut(){},
       // fetch 请求
-      addUser2() {
-        // 方式一
-        requestFetch({
-          method: 'post',
-          url: 'http://localhost:5001/api/user/add',
-          data: {
-            nickname: 'evan123',
-            account: '1509909527',
-            password: 123456
-          },
-          headers: {
-            'Authorization': 'Bearer token123'
-          }
-        }).then(res => {
-          console.log(res)
-        }).catch(err => {
-          console.log(err)
-        })
-        // 方式二
-        requestFetch.post('http://localhost:5001/api/user/add', {
-          nickname: 'evan123',
-          account: '1509909527',
-          password: 123456
-        }, {
-          headers: {
-            'Authorization': 'Bearer token123'
-          }
-        }).then(res => {
-          console.log(res)
-        }).catch(err => {
-          console.log(err)
-        })
-
-      },
-      delUser2() {
-        requestFetch.delete('http://localhost:5001/api/user/delete/2').then(res => {
-          console.log(res)
-        }).catch(err => {
-          console.log(err)
-        })
-
-        requestFetch.delete('http://localhost:5001/api/user/delete', {data:{ids: 3}}).then(res => {
-          console.log(res)
-        }).catch(err => {
-          console.log(err)
-        })
-      },
-      putUser2() {
-        // 方式一
-        requestFetch({
-          method: 'put',
-          url: 'http://localhost:5001/api/user/update',
-          data: {
-            id: 5,
-            nickname: 'evan12345',
-            account: '1509909528',
-            password: 123456
-          },
-          headers: {
-            'Authorization': 'Bearer token123'
-          }
-        }).then(res => {
-          console.log(res)
-        }).catch(err => {
-          console.log(err)
-        })
-        // 方式二
-        requestFetch.put('http://localhost:5001/api/user/update', {
-          id: 6,
-          nickname: 'evan123456',
-          account: '1509909527',
-          password: 123456
-        }, {
-          headers: {
-            'Authorization': 'Bearer token123'
-          }
-        }).then(res => {
-          console.log(res)
-        }).catch(err => {
-          console.log(err)
-        })
-      },
-      getUser2() {
+      fetchMockGet(){
         this.cancelToken = new requestFetch.CancelToken();
         requestFetch({
           url: 'http://localhost:5001/api/user/detail',
           method: 'get',
           params: {
-            id: 5,
+            id: 1,
           },
           cancelToken: this.cancelToken
         }).then(res => {
@@ -305,18 +142,27 @@
         }).catch(err => {
           console.log(err);
         })
-        // 方式二
-        requestFetch.get('http://localhost:5001/api/user/list?page=1&pageSize=10', {
-          cancelToken: this.cancelToken
+      },
+      fetchMockPost(){
+        requestFetch({
+          url: 'http://localhost:5001/api/user/login',
+          method: 'post',
+          data: {
+            username: 'admin',
+            password: 123456
+          },
+
         }).then(res => {
           console.log(res)
         }).catch(err => {
           console.log(err)
         })
       },
+      fetchMockDelete(){},
+      fetchMockPut(){},
       // 取消请求
-      cancelRequest() {
-        this.cancelToken && this.cancelToken.cancel("请求取消")
+      cancelRequest(){
+        this.cancelToken&&this.cancelToken.cancel("请求取消")
       }
     },
     created: function () {

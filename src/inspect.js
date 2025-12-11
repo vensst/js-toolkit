@@ -1,3 +1,11 @@
+const validTypesSet = new Set([
+  "String", "Number", "Boolean", "Object", "Array", "Function", "Date",
+  "RegExp", "Error", "Symbol", "Promise", "Set", "Null", "Undefined",
+  "Blob", "Map", "WeakMap", "WeakSet", "ArrayBuffer", "DataView",
+  "Int8Array", "Uint8Array", "Uint8ClampedArray", "Int16Array",
+  "Uint16Array", "Int32Array", "Uint32Array", "Float32Array",
+  "Float64Array", "URL", "FormData", "File"
+]);
 
 /**
  * 获取值的类型
@@ -10,19 +18,16 @@ export const getType = function (o) {
 
 /**
  * 类型判断
- * @param {string} type - 类型  "String", "Number", "Boolean", "Object", "Array", "Function", "Date", "RegExp", "Error", "Symbol", "Promise", "Set", "Null", "Undefined", "Blob“...
+ * @param {string} type - 类型  "String", "Number", "Boolean", "Object", "Array", "Function", "Date", "RegExp", "Error", "Symbol", "Promise", "Set", "Null", "Undefined", "Blob
  * @param {any} val 值
  * @return {boolean} 是否符合类型
  */
-export const isType = (type, val) => {
-  if (typeof window !== "undefined") {
-    if (type === "Blob" && window.Blob) return val instanceof Blob;
-    if (type === "File" && window.File) return val instanceof File;
-    if (type === "URL" && window.URL) return val instanceof URL;
-    if (type === "FormData" && window.FormData) return val instanceof FormData;
-    if (type === "Element" && window.Element) return val instanceof Element;
-    if (type === "Node" && window.Node) return val instanceof Node;
-    if (type === "NodeList" && window.NodeList) return val instanceof NodeList;
+export const isType = function (type, val) {
+  if (!validTypesSet.has(type)) {
+    throw new Error(`Invalid type: ${type}`);
+  }
+  if (type === "Blob" && typeof Blob !== "undefined") {
+    return val instanceof Blob;
   }
   return getType(val) === type;
 };
@@ -52,10 +57,15 @@ export const isNumber = function (o) {
  * @version 1.1.0-beta.11
  */
 export const isNumeric = function (value) {
-  if (value == null) return false;
-  if (typeof value === "number") return Number.isFinite(value);
-  if (typeof value === "string") {
-    return value.trim() !== "" && Number.isFinite(Number(value));
+  if (value == null) {
+    return false;
+  }
+  if (typeof value === 'number') {
+    return isFinite(value);
+  }
+  if (typeof value === 'string') {
+    const num = Number(value);
+    return !isNaN(num) && isFinite(num) && value.trim() !== '';
   }
   return false;
 };
@@ -129,7 +139,7 @@ export const isArray = function (o) {
  * @returns {boolean}
  */
 export const isElement = function (o) {
-  return typeof Element !== "undefined" && o instanceof Element;
+  return getType(o) === "Element";
 };
 
 /**
@@ -138,16 +148,7 @@ export const isElement = function (o) {
  * @returns {boolean}
  */
 export const isNodeList = function (o) {
-  return typeof NodeList !== "undefined" && o instanceof NodeList;
-};
-
-/**
- * 检测是否为 Node
- * @param o - 任意类型
- * @returns {boolean}
- */
-export const isNode = function (o) {
-  return typeof Node !== "undefined" && o instanceof Node;
+  return getType(o) === "NodeList";
 };
 
 /**
@@ -358,44 +359,20 @@ export const isFile = function (o) {
 
 /**
  * 判断是否为 false
- * @param {any} v - 任意类型
- * @param {boolean} [isStrict=false] - 是否严格模式
+ * @param {any} o - 任意类型
  * @returns {boolean}
  */
-export const isFalse = function (v, isStrict = false) {
-  // 常见假值检查
-  const commonFalsy = (
-      v === false ||
-      v === 0 ||
-      v === "" ||
-      v === null ||
-      v === undefined ||
-      Number.isNaN(v)
-  );
-
-  if (!isStrict) {
-    return commonFalsy;
-  } else {
-    // 严格模式下额外检查字符串形式的假值
-    return (
-        commonFalsy ||
-        v === "false" ||
-        v === "0" ||
-        v === "null" ||
-        v === "undefined"
-    );
-  }
-
+export const isFalse = function (o) {
+  return !o || o === "null" || o === "undefined" || o === "false" || o === "NaN";
 };
 
 /**
  * 判断是否为 true
  * @param {any} o - 任意类型
- * @param {boolean} [isStrict=false] - 是否严格模式
  * @returns {boolean}
  */
-export const isTrue = function (o, isStrict = false) {
-  return !isFalse(o, isStrict);
+export const isTrue = function (o) {
+  return !isFalse(o);
 };
 
 
@@ -410,59 +387,66 @@ const ID_CARD_REGION_MAP = {
   65: "新疆", 71: "台湾", 81: "香港", 82: "澳门", 91: "国外"
 };
 
-const CARD_REG = /(^\d{15}$)|(^\d{17}(\d|X|x)$)/;
-
 /**
  * 严格的身份证校验
  * @param {string} sId - 身份证号码
  * @returns {boolean}
  */
-export const isCardID = (sId) => {
-  if (!CARD_REG.test(sId)) return false;
+export const isCardID = function (sId) {
+  if (!/(^\d{15}$)|(^\d{17}(\d|X|x)$)/.test(sId)) {
+    throw new Error("你输入的身份证长度或格式错误");
+  }
 
-  const region = sId.slice(0, 2);
-  if (!ID_CARD_REGION_MAP[region]) return false;
+  const regionCode = parseInt(sId.substr(0, 2));
+  if (!ID_CARD_REGION_MAP[regionCode]) {
+    throw new Error("你的身份证地区非法");
+  }
 
-  const year = +sId.slice(6, 10);
-  const month = +sId.slice(10, 12);
-  const day = +sId.slice(12, 14);
+  const year = parseInt(sId.substr(6, 4), 10);
+  const month = parseInt(sId.substr(10, 2), 10);
+  const day = parseInt(sId.substr(12, 2), 10);
 
-  const date = new Date(year, month - 1, day);
+  const birthDate = new Date(year, month - 1, day);
   if (
-      date.getFullYear() !== year ||
-      date.getMonth() + 1 !== month ||
-      date.getDate() !== day
-  ) return false;
+      birthDate.getFullYear() !== year ||
+      birthDate.getMonth() + 1 !== month ||
+      birthDate.getDate() !== day
+  ) {
+    throw new Error("身份证上的出生日期非法");
+  }
 
   const weights = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2];
   const codes = "10X98765432";
-  let sum = 0;
 
-  for (let i = 0; i < 17; i++) {
-    sum += Number(sId[i]) * weights[i];
+  let sum = 0;
+  for (let i = 0; i < sId.length - 1; i++) {
+    sum += parseInt(sId[i], 10) * weights[i];
   }
 
-  return sId[17].toUpperCase() === codes[sum % 11];
+  const lastChar = codes[sum % 11];
+  if (sId[sId.length - 1].toUpperCase() !== lastChar) {
+    throw new Error("你输入的身份证号非法");
+  }
+
+  return true;
 };
 
-const mobileKeywords = ["Android", "iPhone", "iPad", "iPod", "BlackBerry", "IEMobile", "Opera Mini"];
+const mobileKeywords = ["Android", "webOS", "iPhone", "iPad", "iPod", "BlackBerry", "IEMobile", "Opera Mini"];
 
 /**
  * 判断当前环境是否为移动端
  * @returns {boolean} 是否为移动端
  */
-export const isMobile = () => {
-  if (typeof navigator === "undefined") return false;
-  return mobileKeywords.some(k => navigator.userAgent.includes(k));
+export const isMobile = function () {
+  return mobileKeywords.some(keyword => navigator.userAgent.includes(keyword));
 };
 
 /**
  * 判断当前环境是否为ios苹果手机
  * @returns {boolean}
  */
-export const isIos = () => {
-  if (typeof navigator === "undefined") return false;
-  return /iPhone|iPad|iPod/.test(navigator.userAgent);
+export const isIos = function () {
+  return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 };
 
 /**
@@ -492,7 +476,6 @@ export const isPcBrowser = function () {
  * @returns {string} 是手机环境返回运行环境，不是手机运行环境 Unknown
  */
 export const getMobileEnv = function () {
-  if (typeof navigator === "undefined") return "Unknown";
   let userAgent = navigator.userAgent;
   if (/Android/i.test(userAgent)) {
     return "Android";
@@ -512,7 +495,6 @@ export const getMobileEnv = function () {
  * @returns {string}
  */
 export const getBrowserType = function () {
-  if (typeof navigator === "undefined") return "Unknown";
   let userAgent = navigator.userAgent;
   let isOpera = userAgent.indexOf("Opera") > -1;
   let isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1 && !isOpera;
@@ -552,8 +534,16 @@ const passwordRules = [
  * @returns {number}
  */
 export const checkPasswordLevel = function (password) {
-  if (!password || password.length < 6) return 0;
-  return passwordRules.reduce((level, rule) => level + rule.test(password), 0);
+  let level = 0;
+  if (password.length < 6) {
+    return level;
+  }
+  for (let i = 0; i < passwordRules.length; i++) {
+    if (passwordRules[i].test(password)) {
+      level++;
+    }
+  }
+  return level;
 };
 
 const regExpMap = {
@@ -596,6 +586,5 @@ export const checkFormat = function (str, type) {
  * @version 1.1.0-beta.15
  */
 export const isFullScreen = function () {
-  if (typeof document === "undefined") return false;
   return !!(document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement || document.msFullscreenElement);
 };

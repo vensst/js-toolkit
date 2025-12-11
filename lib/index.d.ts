@@ -1,351 +1,88 @@
 // inspect.d.ts
+declare const getType: (o: any) => string;
 
-/**
- * 获取值的类型
- * @param o - 任意类型
- * @returns 类型字符串
- */
-declare function getType(o: any): string;
+declare const isType: (type: string, val: any) => boolean;
 
-/**
- * 类型判断
- * @param type - 类型名称
- * @param val - 待检测值
- * @returns 是否符合指定类型
- */
-declare function isType(type: string, val: any): boolean;
+declare const isString: (o: any) => boolean;
+declare const isNumber: (o: any) => boolean;
+declare const isNumeric: (value: any) => boolean;
+declare const isBoolean: (o: any) => boolean;
+declare const isFunction: (o: any) => boolean;
+declare const isNull: (o: any) => boolean;
+declare const isUndefined: (o: any) => boolean;
+declare const isBlob: (o: any) => boolean;
+declare const isObject: (o: any) => boolean;
+declare const isArray: (o: any) => boolean;
+declare const isElement: (o: any) => boolean;
+declare const isNodeList: (o: any) => boolean;
+declare const isDate: (o: any) => boolean;
+declare const isRegExp: (o: any) => boolean;
+declare const isError: (o: any) => boolean;
+declare const isSymbol: (o: any) => boolean;
+declare const isPromise: (o: any) => boolean;
+declare const isSet: (o: any) => boolean;
+declare const isMap: (o: any) => boolean;
+declare const isWeakMap: (o: any) => boolean;
+declare const isWeakSet: (o: any) => boolean;
+declare const isArrayBuffer: (o: any) => boolean;
+declare const isDataView: (o: any) => boolean;
+declare const isInt8Array: (o: any) => boolean;
+declare const isUint8Array: (o: any) => boolean;
+declare const isUint8ClampedArray: (o: any) => boolean;
+declare const isInt16Array: (o: any) => boolean;
+declare const isUint16Array: (o: any) => boolean;
+declare const isInt32Array: (o: any) => boolean;
+declare const isUint32Array: (o: any) => boolean;
+declare const isFloat32Array: (o: any) => boolean;
+declare const isFloat64Array: (o: any) => boolean;
+declare const isURL: (o: any) => boolean;
+declare const isFormData: (o: any) => boolean;
+declare const isFile: (o: any) => boolean;
 
-/**
- * 判断是否字符串
- * @param o - 任意类型
- * @returns 是否为字符串
- */
-declare function isString(o: any): o is string;
+declare const isFalse: (o: any) => boolean;
+declare const isTrue: (o: any) => boolean;
 
-/**
- * 判断是否数字
- * @param o - 任意类型
- * @returns 是否为数字
- */
-declare function isNumber(o: any): o is number;
+declare const isCardID: (sId: string) => boolean;
 
-/**
- * 判断是否数字
- * @param value - 任意类型
- * @returns 是否为有效数字
- */
-declare function isNumeric(value: any): boolean;
+declare const isMobile: () => boolean;
+declare const isIos: () => boolean;
+declare const isPC: () => boolean;
+declare const isPcBrowser: () => boolean;
+declare const getMobileEnv: () => string;
+declare const getBrowserType: () => string;
 
-/**
- * 判断是否 boolean
- * @param o - 任意类型
- * @returns 是否为布尔值
- */
-declare function isBoolean(o: any): o is boolean;
+declare const checkPasswordLevel: (password: string) => number;
 
-/**
- * 判断是否函数
- * @param o - 任意类型
- * @returns 是否为函数
- */
-declare function isFunction(o: any): o is Function;
+declare const checkFormat: (str: string, type: string) => boolean;
 
-/**
- * 判断是否为 null
- * @param o - 任意类型
- * @returns 是否为 null
- */
-declare function isNull(o: any): o is null;
+declare const isFullScreen: () => boolean;
 
-/**
- * 判断是否 undefined
- * @param o - 任意类型
- * @returns 是否为 undefined
- */
-declare function isUndefined(o: any): o is undefined;
+// 类型常量定义
+declare const validTypesSet: Set<string>;
 
-/**
- * 检测是否为 Blob 对象
- * @param o - 任意类型
- * @returns 是否为 Blob 对象
- */
-declare function isBlob(o: any): boolean;
+// 密码规则正则表达式
+declare const passwordRules: RegExp[];
 
-/**
- * 判断是否对象
- * @param o - 任意类型
- * @returns 是否为对象
- */
-declare function isObject(o: any): o is object;
-
-/**
- * 判断是否数组
- * @param o - 任意类型
- * @returns 是否为数组
- */
-declare function isArray(o: any): o is any[];
-
-/**
- * 判断是否为 Element
- * @param o - 任意类型
- * @returns 是否为 Element
- */
-declare function isElement(o: any): boolean;
-
-/**
- * 检测是否为 NodeList
- * @param o - 任意类型
- * @returns 是否为 NodeList
- */
-declare function isNodeList(o: any): boolean;
-
-/**
- * 检测是否为 Node
- * @param o - 任意类型
- * @returns 是否为 Node
- */
-declare function isNode(o: any): boolean;
-
-/**
- * 判断是否时间
- * @param o - 任意类型
- * @returns 是否为 Date 对象
- */
-declare function isDate(o: any): o is Date;
-
-/**
- * 判断是否正则
- * @param o - 任意类型
- * @returns 是否为 RegExp 对象
- */
-declare function isRegExp(o: any): o is RegExp;
-
-/**
- * 判断是否 Error 对象
- * @param o - 任意类型
- * @returns 是否为 Error 对象
- */
-declare function isError(o: any): o is Error;
-
-/**
- * 判断是否 Symbol 函数
- * @param o - 任意类型
- * @returns 是否为 Symbol
- */
-declare function isSymbol(o: any): o is symbol;
-
-/**
- * 判断是否 Promise 对象
- * @param o - 任意类型
- * @returns 是否为 Promise 对象
- */
-declare function isPromise(o: any): o is Promise<any>;
-
-/**
- * 判断是否 Set 对象
- * @param o - 任意类型
- * @returns 是否为 Set 对象
- */
-declare function isSet(o: any): o is Set<any>;
-
-/**
- * 判断是否 Map 对象
- * @param o - 任意类型
- * @returns 是否为 Map 对象
- */
-declare function isMap(o: any): o is Map<any, any>;
-
-/**
- * 判断是否 WeakMap 对象
- * @param o - 任意类型
- * @returns 是否为 WeakMap 对象
- */
-declare function isWeakMap(o: any): o is WeakMap<object, any>;
-
-/**
- * 判断是否 WeakSet 对象
- * @param o - 任意类型
- * @returns 是否为 WeakSet 对象
- */
-declare function isWeakSet(o: any): o is WeakSet<object>;
-
-/**
- * 判断是否 ArrayBuffer 对象
- * @param o - 任意类型
- * @returns 是否为 ArrayBuffer 对象
- */
-declare function isArrayBuffer(o: any): o is ArrayBuffer;
-
-/**
- * 判断是否 DataView 对象
- * @param o - 任意类型
- * @returns 是否为 DataView 对象
- */
-declare function isDataView(o: any): o is DataView;
-
-/**
- * 判断是否 Int8Array 类型化数组
- * @param o - 任意类型
- * @returns 是否为 Int8Array
- */
-declare function isInt8Array(o: any): o is Int8Array;
-
-/**
- * 判断是否 Uint8Array 类型化数组
- * @param o - 任意类型
- * @returns 是否为 Uint8Array
- */
-declare function isUint8Array(o: any): o is Uint8Array;
-
-/**
- * 判断是否 Uint8ClampedArray 类型化数组
- * @param o - 任意类型
- * @returns 是否为 Uint8ClampedArray
- */
-declare function isUint8ClampedArray(o: any): o is Uint8ClampedArray;
-
-/**
- * 判断是否 Int16Array 类型化数组
- * @param o - 任意类型
- * @returns 是否为 Int16Array
- */
-declare function isInt16Array(o: any): o is Int16Array;
-
-/**
- * 判断是否 Uint16Array 类型化数组
- * @param o - 任意类型
- * @returns 是否为 Uint16Array
- */
-declare function isUint16Array(o: any): o is Uint16Array;
-
-/**
- * 判断是否 Int32Array 类型化数组
- * @param o - 任意类型
- * @returns 是否为 Int32Array
- */
-declare function isInt32Array(o: any): o is Int32Array;
-
-/**
- * 判断是否 Uint32Array 类型化数组
- * @param o - 任意类型
- * @returns 是否为 Uint32Array
- */
-declare function isUint32Array(o: any): o is Uint32Array;
-
-/**
- * 判断是否 Float32Array 类型化数组
- * @param o - 任意类型
- * @returns 是否为 Float32Array
- */
-declare function isFloat32Array(o: any): o is Float32Array;
-
-/**
- * 判断是否 Float64Array 类型化数组
- * @param o - 任意类型
- * @returns 是否为 Float64Array
- */
-declare function isFloat64Array(o: any): o is Float64Array;
-
-/**
- * 判断是否 URL 对象
- * @param o - 任意类型
- * @returns 是否为 URL 对象
- */
-declare function isURL(o: any): boolean;
-
-/**
- * 判断是否 FormData 对象
- * @param o - 任意类型
- * @returns 是否为 FormData 对象
- */
-declare function isFormData(o: any): boolean;
-
-/**
- * 判断是否 File 对象
- * @param o - 任意类型
- * @returns 是否为 File 对象
- */
-declare function isFile(o: any): boolean;
-
-/**
- * 判断是否为 false
- * @param v - 任意类型
- * @param isStrict - 是否严格模式
- * @returns 是否为假值
- */
-declare function isFalse(v: any, isStrict?: boolean): boolean;
-
-/**
- * 判断是否为 true
- * @param o - 任意类型
- * @param isStrict - 是否严格模式
- * @returns 是否为真值
- */
-declare function isTrue(o: any, isStrict?: boolean): boolean;
-
-/**
- * 严格的身份证校验
- * @param sId - 身份证号码
- * @returns 是否为有效的身份证号码
- */
-declare function isCardID(sId: string): boolean;
-
-/**
- * 判断当前环境是否为移动端
- * @returns 是否为移动端
- */
-declare function isMobile(): boolean;
-
-/**
- * 判断当前环境是否为ios苹果手机
- * @returns 是否为iOS设备
- */
-declare function isIos(): boolean;
-
-/**
- * 判断当前环境是否为 PC 端
- * @returns 是否为PC端
- */
-declare function isPC(): boolean;
-
-/**
- * 判断是否是PC浏览器
- * @returns 是否是PC浏览器
- */
-declare function isPcBrowser(): boolean;
-
-/**
- * 获取当前属于哪种类型手机运行环境
- * @returns 手机运行环境类型
- */
-declare function getMobileEnv(): string;
-
-/**
- * 获取浏览器类型
- * @returns 浏览器类型
- */
-declare function getBrowserType(): string;
-
-/**
- * 检测密码强度
- * @param password - 需要检测的密码
- * @returns 密码强度等级(0-4)
- */
-declare function checkPasswordLevel(password: string): number;
-
-/**
- * 检查手机号码，座机号码，身份证，密码，邮政编码，QQ号，邮箱，金额(小数点2位)，网址，IP，日期时间，数字，英文，中文，小写，大写，HTML标记格式是否正确
- * @param str - 检查的字符串
- * @param type - 类型
- * @returns 是否符合指定格式
- */
-declare function checkFormat(str: string, type: 'phone' | 'tel' | 'card' | 'pwd' | 'postal' | 'QQ' | 'email' | 'money' | 'URL' | 'IP' | 'date' | 'number' | 'english' | 'chinese' | 'lower' | 'upper' | 'HTML'): boolean;
-
-/**
- * 判断当前页面是否处于全屏状态
- * @returns 是否处于全屏状态
- */
-declare function isFullScreen(): boolean;
+// 正则表达式映射
+declare const regExpMap: {
+  phone: RegExp;
+  tel: RegExp;
+  card: RegExp;
+  pwd: RegExp;
+  postal: RegExp;
+  QQ: RegExp;
+  email: RegExp;
+  money: RegExp;
+  URL: RegExp;
+  IP: RegExp;
+  date: RegExp;
+  number: RegExp;
+  english: RegExp;
+  chinese: RegExp;
+  lower: RegExp;
+  upper: RegExp;
+  HTML: RegExp;
+};
 
 // arr.d.ts
 
@@ -478,7 +215,7 @@ declare const intersect: <T>(arr1: T[], arr2: T[], attrName?: string) => T[];
  * @param attrName - 指定属性名称，如果不传，就是普通数组，如果传了，就是对象数组
  * @returns 返回交集数组
  */
-declare const intersectMatrix: <T>(arr: T[][], attrName?: string) => T[];
+declare const intersectInMatrix: <T>(arr: T[][], attrName?: string) => T[];
 
 /**
  * 查找数组中指定元素出现的次数
@@ -487,7 +224,7 @@ declare const intersectMatrix: <T>(arr: T[][], attrName?: string) => T[];
  * @returns 返回出现次数
  * @throws {Error} 如果第一个参数不是数组
  */
-declare const countBy: <T>(
+declare const countInArray: <T>(
   arr: T[],
   predicate: T | ((element: T, index: number, array: T[]) => boolean)
 ) => number;
@@ -1759,9 +1496,9 @@ declare function setCookie(name: string, value: any, options?: CookieOptions): v
 /**
  * 获取 cookie
  * @param name - 存储的键名
- * @returns 返回存储的值，如果不存在返回 undefined
+ * @returns 返回存储的值，如果不存在返回 null
  */
-declare function getCookie(name: string): any | undefined;
+declare function getCookie(name: string): any | null;
 
 /**
  * 删除 cookie
@@ -1862,7 +1599,7 @@ declare function randomCode(length?: number, checkCode?: string, charset?: strin
  * @param key - 要查找的子字符串
  * @returns 出现次数
  */
-declare function countSubstring(str: string, key: string): number;
+declare function countInString(str: string, key: string): number;
 
 /**
  * 在字符串开头填充指定字符，使字符串达到指定长度
@@ -1925,7 +1662,7 @@ declare function kebabToCamel(str: string): string;
  * @param key - 可选，要获取的特定参数名，如果不提供则返回所有参数
  * @returns 如果提供了 key 则返回对应参数值，否则返回包含所有查询参数的对象
  */
-declare function getUrlParams(url?: string, key?: string): Record<string, string> | string | undefined;
+declare function getUrlParams(url?: string, key?: string): Record<string, string> | string | null;
 
 /**
  * 将对象转换为 URL 查询参数字符串
@@ -1970,7 +1707,7 @@ declare type ModeType = "scaleToFill" | "aspectFit"
 /**
  * 数据可视化容器类（用于数据可视化大屏）
  */
-declare class DataView$1 {
+declare class DataView {
   el: HTMLElement;
   options: {
     width: number;
@@ -1983,7 +1720,7 @@ declare class DataView$1 {
    * @param el - 元素
    * @param options - 参数 {width, height, mode}
    */
-  constructor(el: HTMLElement, options?: Partial<DataView$1['options']>);
+  constructor(el: HTMLElement, options?: Partial<DataView['options']>);
 
   /**
    * 调整尺寸
@@ -2004,7 +1741,7 @@ declare function initDataView(
     height?: number;
     mode?: ModeType;
   }
-): DataView$1;
+): DataView;
 
 declare const JsToolkit = {
   ...arr,
@@ -2026,5 +1763,5 @@ declare const JsToolkit = {
   ...window
 }
 
-export { DataView$1 as DataView, RangeDirection, ScrollView, VenDate, WebSocketUtil, add, addClass, addScript, addStyle, arrayToTree, atob, average, base64_decode, base64_encode, binaryToDataURL, btoa, calcScaleRatio, camelToKebab, ceil, chainGet, checkFormat, checkPasswordLevel, clearLocalStorage, clearSessionStorage, compareVersion, compressImage, copyToClipboard, countBy, countSubstring, createStorageHandler, createStorageMethods, debounce, decimal, deepClone, JsToolkit as default, desens, divide, domToString, download, enterFullscreen, escapeHTML, exitFullscreen, find, findIndex, findNodePath, floor, forEach, forceDownloadByUrl, formatDate, getBrowserType, getCookie, getDateOffset, getDateRange, getDatesBetween, getDayOfYear, getDaysInMonth, getDaysInYear, getDecimalLength, getEndOfMonth, getEndOfQuarter, getEndOfWeek, getEndOfYear, getLocalStorage, getMimeType, getMobileEnv, getMonthsRange, getRandomColor, getScrollPosition, getSessionStorage, getSiblings, getStartMonthOfQuarter, getStartOfMonth, getStartOfQuarter, getStartOfWeek, getStartOfYear, getStyle, getTimeSlotByStep, getType, getUrlParams, getWeekOfYear, groupByAttr, groupBySize, hasClass, hasUnit, inRange, initDataView, initScrollView, insertAfter, insertAtCursor, insertBefore, intersect, intersectMatrix, isArray, isArrayBuffer, isBlob, isBoolean, isCardID, isDataView, isDate, isElement, isError, isFalse, isFile, isFloat32Array, isFloat64Array, isFormData, isFullScreen, isFunction, isInt16Array, isInt32Array, isInt8Array, isIos, isMap, isMobile, isNode, isNodeList, isNull, isNumber, isNumeric, isObject, isPC, isPcBrowser, isPromise, isRegExp, isSet, isString, isSymbol, isTrue, isType, isURL, isUint16Array, isUint32Array, isUint8Array, isUint8ClampedArray, isUndefined, isWeakMap, isWeakSet, join, kebabToCamel, loadAudio, loadImages, map, max, mimeTypeMap, min, multiply, padEnd, padStart, queryElement, random, randomCode, removeClass, removeCookie, removeLocalStorage, removeSessionStorage, removeUnit, removeUrlParam, replaceClass, request, requestFetch, resizeFontSize, resizeObserver, round, sToHms, scientificFormatter, scrollIntoView, scrollToTop, setCookie, setCursorPosition, setLocalStorage, setSessionStorage, sort, stableStringify, stringToDom, subtract, sum, tagDuplicates, thousandSeparator, throttle, timeAgo, toArray, toChinese, toCny, toLowerCase, toLowerCaseFirst, toUpperCase, toUpperCaseFirst, toUrlParams, treeToArray, triggerDownload, trim, trimAll, trimEnd, trimStart, unescapeHTML, union, unique, utf8_decode, utf8_encode, wait };
+export { DataView, RangeDirection, ScrollView, VenDate, WebSocketUtil, add, addClass, addScript, addStyle, arrayToTree, atob, average, base64_decode, base64_encode, binaryToDataURL, btoa, calcScaleRatio, camelToKebab, ceil, chainGet, checkFormat, checkPasswordLevel, clearLocalStorage, clearSessionStorage, compareVersion, compressImage, copyToClipboard, countInArray, countInString, createStorageHandler, createStorageMethods, debounce, decimal, deepClone, JsToolkit as default, desens, divide, domToString, download, enterFullscreen, escapeHTML, exitFullscreen, find, findIndex, findNodePath, floor, forEach, forceDownloadByUrl, formatDate, getBrowserType, getCookie, getDateOffset, getDateRange, getDatesBetween, getDayOfYear, getDaysInMonth, getDaysInYear, getDecimalLength, getEndOfMonth, getEndOfQuarter, getEndOfWeek, getEndOfYear, getLocalStorage, getMimeType, getMobileEnv, getMonthsRange, getRandomColor, getScrollPosition, getSessionStorage, getSiblings, getStartMonthOfQuarter, getStartOfMonth, getStartOfQuarter, getStartOfWeek, getStartOfYear, getStyle, getTimeSlotByStep, getType, getUrlParams, getWeekOfYear, groupByAttr, groupBySize, hasClass, hasUnit, inRange, initDataView, initScrollView, insertAfter, insertAtCursor, insertBefore, intersect, intersectInMatrix, isArray, isArrayBuffer, isBlob, isBoolean, isCardID, isDataView, isDate, isElement, isError, isFalse, isFile, isFloat32Array, isFloat64Array, isFormData, isFullScreen, isFunction, isInt16Array, isInt32Array, isInt8Array, isIos, isMap, isMobile, isNodeList, isNull, isNumber, isNumeric, isObject, isPC, isPcBrowser, isPromise, isRegExp, isSet, isString, isSymbol, isTrue, isType, isURL, isUint16Array, isUint32Array, isUint8Array, isUint8ClampedArray, isUndefined, isWeakMap, isWeakSet, join, kebabToCamel, loadAudio, loadImages, map, max, mimeTypeMap, min, multiply, padEnd, padStart, passwordRules, queryElement, random, randomCode, regExpMap, removeClass, removeCookie, removeLocalStorage, removeSessionStorage, removeUnit, removeUrlParam, replaceClass, request, requestFetch, resizeFontSize, resizeObserver, round, sToHms, scientificFormatter, scrollIntoView, scrollToTop, setCookie, setCursorPosition, setLocalStorage, setSessionStorage, sort, stableStringify, stringToDom, subtract, sum, tagDuplicates, thousandSeparator, throttle, timeAgo, toArray, toChinese, toCny, toLowerCase, toLowerCaseFirst, toUpperCase, toUpperCaseFirst, toUrlParams, treeToArray, triggerDownload, trim, trimAll, trimEnd, trimStart, unescapeHTML, union, unique, utf8_decode, utf8_encode, validTypesSet, wait };
 export type { CancelToken, CancelTokenConstructor, ConfigWithoutUrlAndMethod, ConfigWithoutUrlMethodAndData, CookieOptions, DebouncedFunction, HttpMethod, Method, ModeType, Request, RequestCache, RequestConfig, RequestCredentials, RequestFetch, RequestMode, RequestRedirect, ResponseType, ScaleRatioResult, ScrollViewCallbackResult, ScrollViewOptions, StorageHandler, StorageMethods, ThrottledFunction };

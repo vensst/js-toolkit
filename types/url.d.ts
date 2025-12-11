@@ -6,7 +6,7 @@
  * @param key - 可选，要获取的特定参数名，如果不提供则返回所有参数
  * @returns 如果提供了 key 则返回对应参数值，否则返回包含所有查询参数的对象
  */
-export function getUrlParams(url?: string, key?: string): Record<string, string> | string | undefined;
+export function getUrlParams(url?: string, key?: string): Record<string, string> | string | null;
 
 /**
  * 将对象转换为 URL 查询参数字符串

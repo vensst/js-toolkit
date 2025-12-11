@@ -1,4 +1,6 @@
 import {isNumeric, isString} from "./inspect.js";
+'use strict';
+
 /**
  * 根据区间获取随机数
  * @param {(number|string)} [min=0] - 最小值（包含）

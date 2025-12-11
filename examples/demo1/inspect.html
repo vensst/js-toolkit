@@ -9,152 +9,114 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="x-ua-compatible" content="IE=edge"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
-  <title>Title</title>
-  <style>
-    /* global styles */
-    :root {
-      --color-black-text: #333;
-      --color-white-background: #fff
-    }
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+    <title>Title</title>
+    <style>
+        /* global styles */
+        :root {
+            --color-black-text: #333;
+            --color-white-background: #fff
+        }
 
-    * {
-      -webkit-box-sizing: border-box;
-      -moz-box-sizing: border-box;
-      box-sizing: border-box;
-    }
+        * {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
 
-    html {
-      font-size: 62.5%;
-      /*font-family: Microsoft YaHei, Arial, sans-serif;*/
-      /*阻止旋转屏幕时自动调整字体大小*/
-      -webkit-text-size-adjust: 100%;
-      -ms-text-size-adjust: 100%;
-      /* 解决IOS默认滑动很卡的情况 */
-      -webkit-overflow-scrolling: touch;
-    }
+        html {
+            font-size: 62.5%;
+            /*font-family: Microsoft YaHei, Arial, sans-serif;*/
+            /*阻止旋转屏幕时自动调整字体大小*/
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+            /* 解决IOS默认滑动很卡的情况 */
+            -webkit-overflow-scrolling: touch;
+        }
 
-    html,
-    body {
-      /*width: 100%;*/
-      height: 100%;
-      margin: 0;
-      padding: 0;
-    }
+        html,
+        body {
+            /*width: 100%;*/
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
 
-    body {
-      font-size: 14px;
-      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-      Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue",
-      sans-serif;
-      color: var(--color-black-text);
-      background-color: var(--color-white-background);
-      line-height: 1.15;
-    }
-  </style>
+        body {
+            font-size: 14px;
+            font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+            Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue",
+            sans-serif;
+            color: var(--color-black-text);
+            background-color: var(--color-white-background);
+            line-height: 1.15;
+        }
+    </style>
 </head>
 <body>
-<div id="app">
-  <div class="d"></div>
-  <div class="d"></div>
-</div>
 <script type="module">
-  import {
-    isType,
-    isString,
-    isNumber,
-    isNumeric,
-    isBoolean,
-    isFunction,
-    isNull,
-    isUndefined,
-    isBlob,
-    isObject,
-    isArray,
-    isElement,
-    isNode,
-    isNodeList,
-    isDate,
-    isRegExp,
-    isError,
-    isSymbol,
-    isPromise,
-    isSet,
-    isMap,
-    isURL,
-    isFormData,
-    isFile,
-    isFalse,
-    isTrue,
-    isCardID,
-    isMobile,
-    isIos,
-    isPC,
-    isPcBrowser,
-    getMobileEnv,
-    getBrowserType,
-    checkPasswordLevel,
-    checkFormat,
-  } from "../../lib/index.esm.js"
+    import {
+        isType,
+        isString,
+        isNumber,
+        isNumeric,
+        isBoolean,
+        isFunction,
+        isNull,
+        isUndefined,
+        isObject,
+        isArray,
+        isDate,
+        isRegExp,
+        isError,
+        isSymbol,
+        isPromise,
+        isSet,
+        isFalse,
+        isTrue,
+        isCardID,
+        isMobile,
+        isIos,
+        isPC,
+        isPcBrowser,
+        getMobileEnv,
+        getBrowserType,
+        checkPasswordLevel,
+        checkFormat,
+    } from "../../lib/index.esm.js"
 
-  console.log('--isType--', isType('Array', []), isType('Date', new Date()));
-  console.log('--isString--', isString('abc'), isString(11));
-  console.log('--isNumber--', isNumber(123), isNumber(true));
-  //
-  console.log('--isNumeric--', isNumeric(123), isNumeric('123'), isNumeric(3.5), isNumeric('123abc'));
-  console.log('--isBoolean--', isBoolean(true), isBoolean(false), isBoolean("true"));
-  console.log('--isFunction--', isFunction(function () {
-  }), isFunction(() => {
-  }), isFunction(11));
-  console.log('--isNull--', isNull(null), isNull(undefined));
-  console.log('--isUndefined--', isUndefined(undefined), isUndefined('undefined'));
-  console.log('--isBlob--', isBlob(new Blob()), isBlob('123'));
-  console.log('--isObject--', isObject({}));
-  console.log('--isArray--', isArray([]));
-  console.log('--isElement--', isElement(document.getElementById('app')), isElement(document.querySelectorAll('.d')));
-  console.log('--isNode--', isNode(document.querySelectorAll('.d')[0]), isNode(document.querySelectorAll('.d')));
-  console.log('--isNodeList--', isNodeList(document.getElementById('app')), isNodeList(document.querySelectorAll('.d')));
-  console.log('--isDate--', isDate(new Date()));
-  console.log('--isRegExp--', isRegExp(new RegExp()));
-  console.log('--isError--', isError(new Error()));
-  console.log('--isSymbol--', isSymbol(Symbol()));
-  console.log('--isPromise--', isPromise(new Promise((resolve, reject) => {
-    resolve()
-  })));
-  console.log('--isSet--', isSet(new Set()));
-  console.log('--isMap--', isMap(new Map()));
-  console.log('--isURL--', isURL(new URL(window.location.href)));
-  console.log('--isFormData--', isFormData(new FormData()));
-  console.log('--isFile--', isFile(new File(["foo"], "foo.txt", {
-    type: "text/plain",
-  })));
-  console.log('--isFalse--',
-      isFalse(""),
-      isFalse(false),
-      isFalse(0),
-      isFalse(null),
-      isFalse(undefined),
-      isFalse("false"),
-      isFalse("0"),
-      isFalse("null"),
-      isFalse("undefined"),
-      isFalse("false",true),
-      isFalse("0",true),
-      isFalse("null",true),
-      isFalse("undefined",true),
-  );
-  console.log('--isTrue--', isTrue(1));
-  console.log('--isCardID--', isCardID('321323198910013031'), isCardID('32132319891001303x'));
-  console.log('--isMobile--', isMobile());
-  console.log('--isIos--', isIos());
-  console.log('--isPC--', isPC());
-  console.log('--isPcBrowser--', isPcBrowser());
-  console.log('--getMobileEnv--', getMobileEnv());
-  console.log('--getBrowserType--', getBrowserType());
-  console.log('--checkPasswordLevel--', checkPasswordLevel('admin123'));
-  console.log('--checkFormat--', checkFormat('15061750952', 'phone'));
+    console.log('--isType--', isType('Array', []), isType('Date', new Date()));
+    console.log('--isString--', isString('abc'), isString(11));
+    console.log('--isNumber--', isNumber(123),isNumber(true));
+    //
+    console.log('--isNumeric--', isNumeric(123), isNumeric('123'),isNumeric(3.5), isNumeric('123abc'));
+    console.log('--isBoolean--', isBoolean(true), isBoolean(false), isBoolean("true"));
+    console.log('--isFunction--', isFunction(function () {}),isFunction(()=>{}),isFunction(11));
+    console.log('--isNull--', isNull(null), isNull(undefined));
+    console.log('--isUndefined--', isUndefined(undefined), isUndefined('undefined'));
+    console.log('--isObject--', isObject({}));
+    console.log('--isArray--', isArray([]));
+    console.log('--isDate--', isDate(new Date()));
+    console.log('--isRegExp--', isRegExp(new RegExp()));
+    console.log('--isError--', isError(new Error()));
+    console.log('--isSymbol--', isSymbol(Symbol()));
+    console.log('--isPromise--', isPromise(new Promise((resolve, reject) => {
+        resolve()
+    })));
+    console.log('--isSet--', isSet(new Set()));
+    console.log('--isFalse--', isFalse(null), isFalse("undefined"), isFalse("false"));
+    console.log('--isTrue--', isTrue(1));
+    console.log('--isCardID--', isCardID('321323198910013031'));
+    console.log('--isMobile--', isMobile());
+    console.log('--isIos--', isIos());
+    console.log('--isPC--', isPC());
+    console.log('--isPcBrowser--', isPcBrowser());
+    console.log('--getMobileEnv--', getMobileEnv());
+    console.log('--getBrowserType--', getBrowserType());
+    console.log('--checkPasswordLevel--', checkPasswordLevel('admin123'));
+    console.log('--checkFormat--', checkFormat('15061750952', 'phone'));
 </script>
 
 </body>
