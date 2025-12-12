@@ -52,17 +52,17 @@ random(1, 100)
   - elInsertAfter --> insertAfter
   - elInsertBefore --> insertBefore
 - File
+  - 新增 forceDownloadByUrl
   - getBlobType --> getMimeType
   - downloadFile --> download
-  - 新增 forceDownloadByUrl
 - Http
   - _ajax --> request
   - _fetch --> requestFetch
 - Image
+  - 新增 compressImage
   - scaleImg --> calcScaleRatio
   - imgLoadAll --> loadImages
   - arrayBufferToBase64 --> binaryToDataURL
-  - 新增 compressImage
 - inspect
   - 新增 isBlob
   - 新增 isElement
@@ -108,12 +108,12 @@ random(1, 100)
   - removeSession --> removeSessionStorage
   - clearSession --> clearSessionStorage
 - String
-  - desensitization --> desens
   - 新增 trimAll
   - 新增 trimEnd
   - 新增 trimStart
   - 新增 toLowerCaseFirst
+  - desensitization --> desens
   - findCharCount --> countSubstring
-- Url
+- URL
   - delUrlParam --> removeUrlParam
   - objToUrlParams --> toUrlParams

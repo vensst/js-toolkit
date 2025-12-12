@@ -50,9 +50,9 @@
 </li>
 <li>File
 <ul>
+<li>新增 forceDownloadByUrl</li>
 <li>getBlobType --&gt; getMimeType</li>
 <li>downloadFile --&gt; download</li>
-<li>新增 forceDownloadByUrl</li>
 </ul>
 </li>
 <li>Http
@@ -63,10 +63,10 @@
 </li>
 <li>Image
 <ul>
+<li>新增 compressImage</li>
 <li>scaleImg --&gt; calcScaleRatio</li>
 <li>imgLoadAll --&gt; loadImages</li>
 <li>arrayBufferToBase64 --&gt; binaryToDataURL</li>
-<li>新增 compressImage</li>
 </ul>
 </li>
 <li>inspect
@@ -130,15 +130,15 @@
 </li>
 <li>String
 <ul>
-<li>desensitization --&gt; desens</li>
 <li>新增 trimAll</li>
 <li>新增 trimEnd</li>
 <li>新增 trimStart</li>
 <li>新增 toLowerCaseFirst</li>
+<li>desensitization --&gt; desens</li>
 <li>findCharCount --&gt; countSubstring</li>
 </ul>
 </li>
-<li>Url
+<li>URL
 <ul>
 <li>delUrlParam --&gt; removeUrlParam</li>
 <li>objToUrlParams --&gt; toUrlParams</li>

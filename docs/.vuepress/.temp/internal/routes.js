@@ -2,10 +2,8 @@ export const redirects = JSON.parse("{}")
 
 export const routes = Object.fromEntries([
   ["/", { loader: () => import(/* webpackChunkName: "index.html" */"/Users/huyafei/workspace/my/001-github/js-toolkit/docs/.vuepress/.temp/pages/index.html.js"), meta: {"title":""} }],
-  ["/en/", { loader: () => import(/* webpackChunkName: "en_index.html" */"/Users/huyafei/workspace/my/001-github/js-toolkit/docs/.vuepress/.temp/pages/en/index.html.js"), meta: {"title":""} }],
   ["/zh/", { loader: () => import(/* webpackChunkName: "zh_index.html" */"/Users/huyafei/workspace/my/001-github/js-toolkit/docs/.vuepress/.temp/pages/zh/index.html.js"), meta: {"title":""} }],
-  ["/en/v1/", { loader: () => import(/* webpackChunkName: "en_v1_index.html" */"/Users/huyafei/workspace/my/001-github/js-toolkit/docs/.vuepress/.temp/pages/en/v1/index.html.js"), meta: {"title":"Guide"} }],
-  ["/en/v2/", { loader: () => import(/* webpackChunkName: "en_v2_index.html" */"/Users/huyafei/workspace/my/001-github/js-toolkit/docs/.vuepress/.temp/pages/en/v2/index.html.js"), meta: {"title":"Guide"} }],
+  ["/en/", { loader: () => import(/* webpackChunkName: "en_index.html" */"/Users/huyafei/workspace/my/001-github/js-toolkit/docs/.vuepress/.temp/pages/en/index.html.js"), meta: {"title":""} }],
   ["/zh/v1/", { loader: () => import(/* webpackChunkName: "zh_v1_index.html" */"/Users/huyafei/workspace/my/001-github/js-toolkit/docs/.vuepress/.temp/pages/zh/v1/index.html.js"), meta: {"title":"指南"} }],
   ["/zh/v1/array.html", { loader: () => import(/* webpackChunkName: "zh_v1_array.html" */"/Users/huyafei/workspace/my/001-github/js-toolkit/docs/.vuepress/.temp/pages/zh/v1/array.html.js"), meta: {"title":"数组"} }],
   ["/zh/v1/date.html", { loader: () => import(/* webpackChunkName: "zh_v1_date.html" */"/Users/huyafei/workspace/my/001-github/js-toolkit/docs/.vuepress/.temp/pages/zh/v1/date.html.js"), meta: {"title":"日期"} }],
@@ -25,6 +23,7 @@ export const routes = Object.fromEntries([
   ["/zh/v1/thirdpart.html", { loader: () => import(/* webpackChunkName: "zh_v1_thirdpart.html" */"/Users/huyafei/workspace/my/001-github/js-toolkit/docs/.vuepress/.temp/pages/zh/v1/thirdpart.html.js"), meta: {"title":"第三方库"} }],
   ["/zh/v1/url.html", { loader: () => import(/* webpackChunkName: "zh_v1_url.html" */"/Users/huyafei/workspace/my/001-github/js-toolkit/docs/.vuepress/.temp/pages/zh/v1/url.html.js"), meta: {"title":"Url"} }],
   ["/zh/v1/window.html", { loader: () => import(/* webpackChunkName: "zh_v1_window.html" */"/Users/huyafei/workspace/my/001-github/js-toolkit/docs/.vuepress/.temp/pages/zh/v1/window.html.js"), meta: {"title":"窗口"} }],
+  ["/en/v1/", { loader: () => import(/* webpackChunkName: "en_v1_index.html" */"/Users/huyafei/workspace/my/001-github/js-toolkit/docs/.vuepress/.temp/pages/en/v1/index.html.js"), meta: {"title":"Guide"} }],
   ["/zh/v2/", { loader: () => import(/* webpackChunkName: "zh_v2_index.html" */"/Users/huyafei/workspace/my/001-github/js-toolkit/docs/.vuepress/.temp/pages/zh/v2/index.html.js"), meta: {"title":"指南"} }],
   ["/zh/v2/array.html", { loader: () => import(/* webpackChunkName: "zh_v2_array.html" */"/Users/huyafei/workspace/my/001-github/js-toolkit/docs/.vuepress/.temp/pages/zh/v2/array.html.js"), meta: {"title":"Array"} }],
   ["/zh/v2/date.html", { loader: () => import(/* webpackChunkName: "zh_v2_date.html" */"/Users/huyafei/workspace/my/001-github/js-toolkit/docs/.vuepress/.temp/pages/zh/v2/date.html.js"), meta: {"title":"Date"} }],
@@ -43,6 +42,7 @@ export const routes = Object.fromEntries([
   ["/zh/v2/string.html", { loader: () => import(/* webpackChunkName: "zh_v2_string.html" */"/Users/huyafei/workspace/my/001-github/js-toolkit/docs/.vuepress/.temp/pages/zh/v2/string.html.js"), meta: {"title":"String"} }],
   ["/zh/v2/url.html", { loader: () => import(/* webpackChunkName: "zh_v2_url.html" */"/Users/huyafei/workspace/my/001-github/js-toolkit/docs/.vuepress/.temp/pages/zh/v2/url.html.js"), meta: {"title":"URL"} }],
   ["/zh/v2/window.html", { loader: () => import(/* webpackChunkName: "zh_v2_window.html" */"/Users/huyafei/workspace/my/001-github/js-toolkit/docs/.vuepress/.temp/pages/zh/v2/window.html.js"), meta: {"title":"Window"} }],
+  ["/en/v2/", { loader: () => import(/* webpackChunkName: "en_v2_index.html" */"/Users/huyafei/workspace/my/001-github/js-toolkit/docs/.vuepress/.temp/pages/en/v2/index.html.js"), meta: {"title":"Guide"} }],
   ["/404.html", { loader: () => import(/* webpackChunkName: "404.html" */"/Users/huyafei/workspace/my/001-github/js-toolkit/docs/.vuepress/.temp/pages/404.html.js"), meta: {"title":""} }],
 ]);
 

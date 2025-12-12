@@ -9,88 +9,14 @@ export const SEARCH_INDEX = [
   {
     "title": "",
     "headers": [],
-    "path": "/en/",
-    "pathLocale": "/en/",
-    "extraFields": []
-  },
-  {
-    "title": "",
-    "headers": [],
     "path": "/zh/",
     "pathLocale": "/zh/",
     "extraFields": []
   },
   {
-    "title": "Guide",
-    "headers": [
-      {
-        "level": 2,
-        "title": "Introduction",
-        "slug": "introduction",
-        "link": "#introduction",
-        "children": []
-      },
-      {
-        "level": 2,
-        "title": "Installation",
-        "slug": "installation",
-        "link": "#installation",
-        "children": [
-          {
-            "level": 3,
-            "title": "Using npm",
-            "slug": "using-npm",
-            "link": "#using-npm",
-            "children": []
-          },
-          {
-            "level": 3,
-            "title": "Using script tag",
-            "slug": "using-script-tag",
-            "link": "#using-script-tag",
-            "children": []
-          }
-        ]
-      }
-    ],
-    "path": "/en/v1/",
-    "pathLocale": "/en/",
-    "extraFields": []
-  },
-  {
-    "title": "Guide",
-    "headers": [
-      {
-        "level": 2,
-        "title": "Introduction",
-        "slug": "introduction",
-        "link": "#introduction",
-        "children": []
-      },
-      {
-        "level": 2,
-        "title": "Installation",
-        "slug": "installation",
-        "link": "#installation",
-        "children": [
-          {
-            "level": 3,
-            "title": "Using npm",
-            "slug": "using-npm",
-            "link": "#using-npm",
-            "children": []
-          },
-          {
-            "level": 3,
-            "title": "Using script tag",
-            "slug": "using-script-tag",
-            "link": "#using-script-tag",
-            "children": []
-          }
-        ]
-      }
-    ],
-    "path": "/en/v2/",
+    "title": "",
+    "headers": [],
+    "path": "/en/",
     "pathLocale": "/en/",
     "extraFields": []
   },
@@ -1407,6 +1333,43 @@ export const SEARCH_INDEX = [
     ],
     "path": "/zh/v1/window.html",
     "pathLocale": "/zh/",
+    "extraFields": []
+  },
+  {
+    "title": "Guide",
+    "headers": [
+      {
+        "level": 2,
+        "title": "Introduction",
+        "slug": "introduction",
+        "link": "#introduction",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "Installation",
+        "slug": "installation",
+        "link": "#installation",
+        "children": [
+          {
+            "level": 3,
+            "title": "Using npm",
+            "slug": "using-npm",
+            "link": "#using-npm",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "Using script tag",
+            "slug": "using-script-tag",
+            "link": "#using-script-tag",
+            "children": []
+          }
+        ]
+      }
+    ],
+    "path": "/en/v1/",
+    "pathLocale": "/en/",
     "extraFields": []
   },
   {
@@ -2910,6 +2873,43 @@ export const SEARCH_INDEX = [
     ],
     "path": "/zh/v2/window.html",
     "pathLocale": "/zh/",
+    "extraFields": []
+  },
+  {
+    "title": "Guide",
+    "headers": [
+      {
+        "level": 2,
+        "title": "Introduction",
+        "slug": "introduction",
+        "link": "#introduction",
+        "children": []
+      },
+      {
+        "level": 2,
+        "title": "Installation",
+        "slug": "installation",
+        "link": "#installation",
+        "children": [
+          {
+            "level": 3,
+            "title": "Using npm",
+            "slug": "using-npm",
+            "link": "#using-npm",
+            "children": []
+          },
+          {
+            "level": 3,
+            "title": "Using script tag",
+            "slug": "using-script-tag",
+            "link": "#using-script-tag",
+            "children": []
+          }
+        ]
+      }
+    ],
+    "path": "/en/v2/",
+    "pathLocale": "/en/",
     "extraFields": []
   },
   {
