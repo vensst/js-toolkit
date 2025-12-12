@@ -29,7 +29,6 @@ jobs:
         with:
           node-version: 20
           registry-url: https://registry.npmjs.org/
-          cache: npm
       - run: npm install
       - run: npm run build
       # npm ERR! 402 Payment Required - PUT https://registry.npmjs.org/@vensst/js-tookit - You must sign up for private packages
