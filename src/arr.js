@@ -443,10 +443,10 @@ export const intersect = function (arr1, arr2, attrName) {
  * @param {string} [attrName] - 指定属性名称，如果不传，就是普通数组，如果传了，就是对象数组
  * @returns {T[]} 返回交集数组
  */
-export const intersectMatrix = function (arr, attrName) {
+export const intersectInMatrix = function (arr, attrName) {
   // 参数验证
   if (!isArray(arr)) {
-    throw new Error("The first argument of the intersectMatrix function must be an array");
+    throw new Error("The first argument of the intersectInMatrix function must be an array");
   }
 
   // 处理边界情况
@@ -470,14 +470,14 @@ export const intersectMatrix = function (arr, attrName) {
  * @returns {number} 返回出现次数
  * @throws {Error} 如果第一个参数不是数组
  */
-export const countBy = function (arr, predicate) {
+export const countInArray = function (arr, predicate) {
   if (arr == null) {
     arr = []
   }
 
   // 参数验证
   if (!isArray(arr)) {
-    throw new Error("The first argument of the countBy function must be an array");
+    throw new Error("The first argument of the countInArray function must be an array");
   }
 
   // only treat null or undefined as missing predicate; allow falsy values like 0 or ''
@@ -918,7 +918,7 @@ export const max = function (arr, attrName) {
 };
 
 /**
- * 数组最小值
+ * 获取数组最小值
  * @template T
  * @param {T[]} arr - 数组
  * @param {string} [attrName] - 对象数组中用于比较的属性名

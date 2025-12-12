@@ -4,7 +4,7 @@ console.log('--JsToolkit--', JsToolkit)
 </script>
 
 <template>
-  <TheArr></TheArr>
+  <!--<TheArr></TheArr>-->
   <!--<the-date></the-date>-->
   <!--<the-dom></the-dom>-->
   <!--<the-file></the-file>-->
@@ -20,7 +20,7 @@ console.log('--JsToolkit--', JsToolkit)
   <!--<the-storage></the-storage>-->
   <!--<the-string></the-string>-->
   <!--<the-url></the-url>-->
-  <!--<the-window></the-window>-->
+  <the-window></the-window>
 
 </template>
 

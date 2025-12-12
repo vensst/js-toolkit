@@ -9,7 +9,7 @@
 <script setup lang="ts">
 import {
   arrayToTree,
-  countBy,
+  countInArray,
   find,
   findIndex,
   findNodePath,
@@ -17,7 +17,7 @@ import {
   groupByAttr,
   groupBySize,
   intersect,
-  intersectMatrix,
+  intersectInMatrix,
   join,
   map,
   max,
@@ -37,7 +37,7 @@ interface IArr {
 }
 
 
-const arr1:IArr[]= [
+const arr1 = [
   {
     id: 1,
     name: "a",
@@ -104,7 +104,7 @@ const arr4 = [
   },
 ];
 const arr = [arr1, arr2, arr3, arr4];
-const arr5: any[] = [123, "abc", {name: "张三"}, ["李四"], null, undefined]
+const arr5 = [123, "abc", {name: "张三"}, ["李四"], null, undefined]
 const myMap = new Map()
 myMap.set('name', '张三')
 myMap.set([1, 2], true)
@@ -215,7 +215,7 @@ console.log("--unique--", unique([1, 2, 3, 4, 3, 'a', 'a', 'b']), unique(arr1), 
 }
 
 {
-  console.log('--intersectMatrix--', intersectMatrix(arr), intersectMatrix(arr, 'id'))
+  console.log('--intersectInMatrix--', intersectInMatrix(arr), intersectInMatrix(arr, 'id'))
 }
 {
   const arr1 = [1, 2, 3, 2, 3, 4]
@@ -227,10 +227,10 @@ console.log("--unique--", unique([1, 2, 3, 4, 3, 'a', 'a', 'b']), unique(arr1), 
     {id: 3},
 
   ];
-  console.log('--countBy--',
-      countBy(arr1, 2),
-      countBy(arr1, item => item === 2),
-      countBy(arr2, item => item.id === 3),
+  console.log('--countInArray--',
+      countInArray(arr1, 2),
+      countInArray(arr1, item => item === 2),
+      countInArray(arr2, item => item.id === 3),
   )
 }
 

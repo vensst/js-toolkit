@@ -78,6 +78,7 @@ export const scrollIntoView = function (el, options = {}) {
  * @param {Window|Element|string} [el=window] - 元素或选择器，默认为window
  * @param {Object} [options={behavior: 'smooth'}] - 滚动选项
  * @param {number} [options.top=0] - 目标垂直位置，默认为0（顶部）
+ * @param {number} [options.left=0] - 目标水平位置，默认为0（左侧）
  * @param {string} [options.behavior='smooth'] - 滚动行为，可选值有"auto"和"smooth"
  * @returns {void}
  */

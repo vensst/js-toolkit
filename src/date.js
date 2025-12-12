@@ -158,7 +158,7 @@ export const getDateRange = function (date = new Date(), len = 2, dir = -1, valu
 /**
  * 获取指定日期所在月份的总天数
  * @param {(Date|string|number)} [date=new Date()] - 日期对象、日期字符串或时间戳
- * @returns {number} 指定月份的总天数
+ * @returns {number} 指定月份的总天数（28-31之间）
  * @example
  * getDaysInMonth(new Date('2023-02-01')) // 28 (2023年2月有28天)
  * getDaysInMonth('2020-02-01') // 29 (2020年2月有29天，闰年)

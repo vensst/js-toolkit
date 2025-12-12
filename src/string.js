@@ -237,7 +237,7 @@ export const randomCode = function (length = 4, checkCode, charset) {
  * @param {string} key - 要查找的子字符串
  * @returns {number} 出现次数
  */
-export const countSubstring = function (str, key) {
+export const countInString = function (str, key) {
   // 参数验证和边界检查
   if (!str || !key || typeof str !== 'string' || typeof key !== 'string') {
     return 0;
