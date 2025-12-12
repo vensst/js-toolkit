@@ -6,7 +6,6 @@
  * @param {number} [containerHeight=0] - 容器高度
  * @returns {undefined|{width: number, height: number, scale: number}} 如果参数无效返回 undefined，否则返回缩放后的尺寸和比例
  */
-
 export const calcScaleRatio = (width = 0, height = 0, containerWidth = 0, containerHeight = 0) => {
   if ([width, height, containerWidth, containerHeight].some(v => typeof v !== 'number' || v <= 0)) {
     return undefined;

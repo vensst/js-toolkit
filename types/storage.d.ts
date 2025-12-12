@@ -97,9 +97,9 @@ export function setCookie(name: string, value: any, options?: CookieOptions): vo
 /**
  * 获取 cookie
  * @param name - 存储的键名
- * @returns 返回存储的值，如果不存在返回 null
+ * @returns 返回存储的值，如果不存在返回 undefined
  */
-export function getCookie(name: string): any | null;
+export function getCookie(name: string): any | undefined;
 
 /**
  * 删除 cookie

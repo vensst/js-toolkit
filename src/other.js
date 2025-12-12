@@ -210,15 +210,15 @@ export const base64_decode = function (data) {
 
 /**
  * UTF-8 编码
- * @param {string} string - 需要编码的字符串
+ * @param {string} data - 需要编码的字符串
  * @returns {string} UTF-8 编码后的字符串
  */
-export const utf8_encode = function (string) {
-  string = string.replace(/\r\n/g, '\n');
+export const utf8_encode = function (data) {
+  data = data.replace(/\r\n/g, '\n');
   let utftext = '';
 
-  for (let n = 0; n < string.length; n++) {
-    const c = string.charCodeAt(n);
+  for (let n = 0; n < data.length; n++) {
+    const c = data.charCodeAt(n);
 
     if (c < 128) {
       utftext += String.fromCharCode(c);
@@ -237,27 +237,27 @@ export const utf8_encode = function (string) {
 
 /**
  * utf8 解码
- * @param {string} utftext - 需要解码的数据
+ * @param {string} data - 需要解码的数据
  * @returns {string}
  */
-export const utf8_decode = function (utftext) {
+export const utf8_decode = function (data) {
   let string = '';
   let i = 0;
   let c = 0, c2 = 0, c3 = 0;
 
-  while (i < utftext.length) {
-    c = utftext.charCodeAt(i);
+  while (i < data.length) {
+    c = data.charCodeAt(i);
 
     if (c < 128) {
       string += String.fromCharCode(c);
       i++;
     } else if ((c > 191) && (c < 224)) {
-      c2 = utftext.charCodeAt(i + 1);
+      c2 = data.charCodeAt(i + 1);
       string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));
       i += 2;
     } else {
-      c2 = utftext.charCodeAt(i + 1);
-      c3 = utftext.charCodeAt(i + 2);
+      c2 = data.charCodeAt(i + 1);
+      c3 = data.charCodeAt(i + 2);
       string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
       i += 3;
     }
@@ -265,6 +265,7 @@ export const utf8_decode = function (utftext) {
 
   return string;
 };
+
 /**
  * 加载音频文件
  * @param {string} src - 音频地址
@@ -405,7 +406,7 @@ export const escapeHTML = function (str) {
  * 将 &amp;, &lt;, &gt;, &quot;, &#x39; 转换回对应的原始字符
  * @param {string} [str=''] - 需要解转义的HTML字符串
  * @returns {string} 解转义后的原始字符串
- * @version 2.1.0
+ * @version 2.0.0-beta.1
  * @example
  * const unescaped = unescapeHTML('&lt;div&gt;Hello &amp; &quot;World&quot;&lt;/div&gt;');
  * console.log(unescaped); // <div>Hello & "World"</div>
@@ -463,7 +464,6 @@ export const compareVersion = function (version1, version2) {
  * 复制文本到剪贴板
  * @param {string} text - 要复制的文本
  * @returns {Promise<boolean>} 复制操作是否成功
- * @version 1.1.0-beta.16
  * @example
  * copyToClipboard('Hello World')
  *   .then(success => {
@@ -521,7 +521,6 @@ export const copyToClipboard = async function (text) {
  * 等待指定时间
  * @param {number} [delay=2000] - 等待时间（毫秒）
  * @returns {Promise<void>} Promise，在指定时间后 resolve
- * @version 1.1.0-beta.16
  * @example
  * async function example() {
  *   console.log('开始等待');
@@ -539,7 +538,6 @@ export const wait = function (delay = 2000) {
  * @param {HTMLElement|HTMLElement[]|NodeList} elements - 需要监听的单个元素或元素数组
  * @param {Function} callback - 尺寸变化时调用的回调函数，接收 ResizeObserverEntry 数组作为参数
  * @returns {Function} 停止监听的函数，可选择性地停止部分元素的监听
- * @version 1.1.0-beta.16
  * @example
  * // 监听单个元素
  * const stopObserving = observeResize(element, (entries) => {

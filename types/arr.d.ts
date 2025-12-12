@@ -129,7 +129,7 @@ export declare const intersect: <T>(arr1: T[], arr2: T[], attrName?: string) => 
  * @param attrName - 指定属性名称，如果不传，就是普通数组，如果传了，就是对象数组
  * @returns 返回交集数组
  */
-export declare const intersectInMatrix: <T>(arr: T[][], attrName?: string) => T[];
+export declare const intersectMatrix: <T>(arr: T[][], attrName?: string) => T[];
 
 /**
  * 查找数组中指定元素出现的次数
@@ -138,7 +138,7 @@ export declare const intersectInMatrix: <T>(arr: T[][], attrName?: string) => T[
  * @returns 返回出现次数
  * @throws {Error} 如果第一个参数不是数组
  */
-export declare const countInArray: <T>(
+export declare const countBy: <T>(
   arr: T[],
   predicate: T | ((element: T, index: number, array: T[]) => boolean)
 ) => number;

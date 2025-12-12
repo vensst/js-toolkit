@@ -10,19 +10,19 @@ import {isObject} from "./inspect.js";
 
 /**
  * 简易封装XMLHttpRequest请求
- * @param {Object} config 配置参数
- * @param {string} config.url 请求地址
- * @param {string} [config.method='GET'] 请求方式 (GET, POST, PUT, DELETE, PATCH)
- * @param {Object} [config.headers] 请求头设置
- * @param {Object} [config.params] GET请求参数
- * @param {Object} [config.data] POST/PUT/DELETE等请求的数据
- * @param {string} [config.responseType='json'] 响应类型 ('json', 'xml', 'text')
- * @param {boolean} [config.async=true] 是否异步
- * @param {number} [config.timeout=15000] 超时时间(毫秒)
- * @param {Object} [config.auth] 认证信息
- * @param {string} [config.auth.username] 用户名
- * @param {string} [config.auth.password] 密码
- * @param {Object} [config.cancelToken] 取消请求的令牌对象
+ * @param {Object} config - 配置参数，参考[XMLHttpRequest](https://developer.mozilla.org/zh-CN/docs/Glossary/XMLHttpRequest)
+ * @param {string} config.url - 请求地址
+ * @param {string} [config.method='GET'] -请求方式 (GET, POST, PUT, DELETE, PATCH)
+ * @param {Object} [config.headers] - 请求头设置
+ * @param {Object} [config.params] - GET请求参数
+ * @param {Object} [config.data] - POST/PUT/DELETE等请求的数据
+ * @param {string} [config.responseType='json'] - 响应类型 ('json', 'xml', 'text')
+ * @param {boolean} [config.async=true] - 是否异步
+ * @param {number} [config.timeout=15000] - 超时时间(毫秒)
+ * @param {Object} [config.auth] - 认证信息
+ * @param {string} [config.auth.username] - 用户名
+ * @param {string} [config.auth.password] - 密码
+ * @param {Object} [config.cancelToken] - 取消请求的令牌对象
  * @returns {Promise<any>} 返回 Promise 对象
  *
  * @example
@@ -81,6 +81,9 @@ export const request = function (config) {
     const password = config.auth?.password || '';
     xhr.open(requestMethod, requestUrl, isAsync, username, password);
 
+    if (requestMethod !== 'GET') {
+      xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+    }
     // 设置请求头
     if (isObject(config.headers)) {
       for (const header in config.headers) {
