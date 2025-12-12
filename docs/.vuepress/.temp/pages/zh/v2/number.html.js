@@ -1,16 +1,3 @@
 import comp from "/Users/huyafei/workspace/my/001-github/js-toolkit/docs/.vuepress/.temp/pages/zh/v2/number.html.vue"
 const data = JSON.parse("{\"path\":\"/zh/v2/number.html\",\"title\":\"Number\",\"lang\":\"zh-CN\",\"frontmatter\":{},\"git\":{\"updatedTime\":1765504048000,\"contributors\":[{\"name\":\"yf_hu\",\"username\":\"\",\"email\":\"879649442@qq.com\",\"commits\":4}],\"changelog\":[{\"hash\":\"29e2bf181d46ff369fb891f4bb3d6b9a04d473a8\",\"time\":1765504048000,\"email\":\"879649442@qq.com\",\"author\":\"yf_hu\",\"message\":\"2.0.0-beta.1\"},{\"hash\":\"8aaca11423fae760ca76fff0aaf7010694fac1ca\",\"time\":1765440948000,\"email\":\"879649442@qq.com\",\"author\":\"yf_hu\",\"message\":\"Revert \\\"2.0.0-beta.1\\\"\"},{\"hash\":\"06752d32ea7b15524bb6f6d8302c1cf23ac7b79f\",\"time\":1765439908000,\"email\":\"879649442@qq.com\",\"author\":\"yf_hu\",\"message\":\"2.0.0-beta.1\"},{\"hash\":\"9f3449abfa7b65c88fc32856799bd924e94242fc\",\"time\":1764226300000,\"email\":\"879649442@qq.com\",\"author\":\"yf_hu\",\"message\":\"feat(arr): 重构数组工具函数并增强功能\"}]},\"filePathRelative\":\"zh/v2/number.md\"}")
 export { comp, data }
-
-if (import.meta.webpackHot) {
-  import.meta.webpackHot.accept()
-  if (__VUE_HMR_RUNTIME__.updatePageData) {
-    __VUE_HMR_RUNTIME__.updatePageData(data)
-  }
-}
-
-if (import.meta.hot) {
-  import.meta.hot.accept(({ data }) => {
-    __VUE_HMR_RUNTIME__.updatePageData(data)
-  })
-}
