@@ -48,7 +48,7 @@
   "bugs": {
     "url": "https://github.com/vensst/js-toolkit/issues"
   },
-  "homepage": "https://huyafei.github.io/yfhu-blog/js-toolkit/",
+  "homepage": "https://vensst.github.io/js-toolkit/",
   "dependencies": {
     "js-cookie": "3.0.1",
     "vuepress-plugin-md-enhance": "^2.0.0-rc.99"
