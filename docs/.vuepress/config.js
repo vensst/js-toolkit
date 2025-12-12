@@ -8,7 +8,7 @@ import theme from "./theme";
 export default defineUserConfig({
   // public: `${sourceDir}/.vuepress/public`,
   // 站点配置（主题不配置默认） 或者使用 Frontmatter 配置
-  base: '/',
+  base: '/js-toolkit/',
   lang: 'zh-CN',
   title: '@vensst/js-toolkit 文档',
   description: '@vensst/js-toolkit 是 JavaScript 工具库，整合了前端一些常用的 js 函数',
