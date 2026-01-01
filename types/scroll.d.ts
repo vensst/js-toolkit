@@ -47,38 +47,154 @@ export declare const scrollToTop: (
   }
 ) => void;
 
+
+/**
+ * 滚动位置对象
+ */
+export interface ScrollPosition {
+  x: number;
+  y: number;
+}
+
+/**
+ * 滚动选项接口
+ */
+export interface ScrollOptions {
+  /**
+   * 滚动行为，可选值有"auto"、"smooth"和"instant"
+   * @default 'smooth'
+   */
+  behavior?: 'auto' | 'smooth' | 'instant';
+  /**
+   * 目标垂直位置，默认为0（顶部）
+   * @default 0
+   */
+  top?: number;
+  /**
+   * 目标水平位置，默认为0（左侧）
+   * @default 0
+   */
+  left?: number;
+}
+
+/**
+ * ScrollView 配置选项接口
+ */
 export interface ScrollViewOptions {
+  /**
+   * 数据列表
+   * @default []
+   */
   dataList?: any[];
+  /**
+   * 当dataList为对象数组时，指定用于匹配元素的属性名
+   * @default ''
+   */
   attrName?: string;
+  /**
+   * 用于匹配元素的属性名
+   * @default 'data-name'
+   */
   elAttrName?: string;
-  callback?: (result: ScrollViewCallbackResult) => void;
+  /**
+   * 自定义偏移量
+   * @default 0
+   */
   offsetTop?: number;
+  /**
+   * 回调函数
+   * @default () => {}
+   */
+  callback?: (params: {
+    index: number;
+    currentEl: Element | null;
+    data: any;
+  }) => void;
+  /**
+   * 滚动容器
+   * @default window
+   */
+  container?: Window | Element;
 }
 
-export interface ScrollViewCallbackResult {
-  scrollEl: EventTarget | null;
-  currentEl: Element;
-  attrName: string;
-  elAttrName: string;
+/**
+ * ScrollView 类接口
+ */
+export interface ScrollView {
+  /**
+   * 数据列表
+   */
   dataList: any[];
-  index: number;
-  value: any;
-}
-
-export class ScrollView {
-  constructor(options?: ScrollViewOptions);
-
-  dataList: any[];
+  /**
+   * 属性名
+   */
   attrName: string;
+  /**
+   * 元素属性名
+   */
   elAttrName: string;
+  /**
+   * 偏移量
+   */
   offsetTop: number;
-  callback: (result: ScrollViewCallbackResult) => void;
-  elementMap: Map<number, Element>;
+  /**
+   * 回调函数
+   */
+  callback: (params: {
+    index: number;
+    currentEl: Element | null;
+    data: any;
+  }) => void;
+  /**
+   * 滚动容器
+   */
+  container: Window | Element;
+  /**
+   * 缓存的元素列表
+   */
+  elements: Element[];
+  /**
+   * 当前激活的索引
+   */
+  activeIndex: number;
+  /**
+   * 是否正在处理滚动
+   */
+  ticking: boolean;
 
-  private _cacheElements(): void;
-  private _getScrollTop(e: Event): number;
-  handlerScroll(e: Event): void;
+  /**
+   * 滚动到指定索引的元素
+   * @param index - 要滚动到的元素索引
+   * @param smooth - 是否平滑滚动
+   */
+  scrollTo(index: number, smooth?: boolean): void;
+
+  /**
+   * 销毁 ScrollView 实例
+   */
+  destroy(): void;
 }
+
+/**
+ * 获取当前的滚动位置
+ * @param el - 元素或选择器
+ * @returns 滚动位置对象
+ */
+export declare const getScrollPosition: (el: Element | string) => ScrollPosition;
+
+/**
+ * 滚动父元素将指定元素滚动到用户可视区域
+ * @param el - 元素或选择器
+ * @param options - 滚动选项
+ */
+export declare const scrollIntoView: (el: Element | string, options?: ScrollOptions) => void;
+
+/**
+ * 滚动至顶部
+ * @param el - 元素或选择器，默认为window
+ * @param options - 滚动选项
+ */
+export declare const scrollToTop: (el?: Window | Element | string, options?: ScrollOptions) => void;
 
 /**
  * 初始化滚动监听

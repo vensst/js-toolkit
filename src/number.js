@@ -1,28 +1,35 @@
 import {isNumeric, isString} from "./inspect.js";
 /**
  * 根据区间获取随机数
- * @param {(number|string)} [min=0] - 最小值（包含）
- * @param {(number|string)} [max=1] - 最大值（不包含）
+ * @param {number} [min=0] - 最小值（包含）
+ * @param {number} [max=1] - 最大值（不包含）
  * @param {boolean} [floating=true] - 是否返回浮点数
  * @returns {number|undefined} 随机数，参数无效时返回undefined
  * @version 1.1.0-beta.11
  */
 export const random = function (min = 0, max = 1, floating = true) {
-  if (!isNumeric(min) || !isNumeric(max)) {
-    console.warn('min、max期望是Number类型或String类型的数字');
+  const nMin = Number(min);
+  const nMax = Number(max);
+
+  // 数值有效性校验
+  if (!Number.isFinite(nMin) || !Number.isFinite(nMax)) {
     return undefined;
   }
 
-  min = Number(min);
-  max = Number(max);
-
-  if (isNaN(min) || isNaN(max)) {
-    console.warn('min、max转换为数字后为NaN');
+  // 区间合法性校验
+  if (nMin >= nMax) {
     return undefined;
   }
 
-  const r = min + Math.random() * (max - min);
-  return floating ? r : Math.floor(r);
+  const r = nMin + Math.random() * (nMax - nMin);
+
+  // 浮点数
+  if (floating) {
+    return r;
+  }
+
+  // 整数随机：[min, max)
+  return Math.floor(r);
 };
 
 /**

@@ -134,7 +134,8 @@
     initScrollView,
   } = JsToolkit
 
-  const els = document.querySelectorAll('.dir > div')
+  // 点击目录滚动到对应位置
+  const els = queryElement('.dir > div')
   els.forEach(item => {
     item.onclick = function (e) {
       const id = this.getAttribute('data-id')
@@ -142,68 +143,48 @@
     }
   })
 
-  const btn = document.getElementById('back')
+  const btn = queryElement('#back')
   btn.onclick = function () {
     scrollToTop()
     // scrollToTop(window,{behavior: 'instant'})
-    console.log('--getScrollPosition--', getScrollPosition(),)
+    // console.log('--getScrollPosition--', getScrollPosition(),)
     // body为滚动元素
     // scrollToTop('body')
     // console.log('--getScrollPosition--', getScrollPosition('body'),)
   }
 
-  const arr1 = [
-    'a',
-    'b',
-    'c',
-    'd',
-    'e',
-    'f',
-    'g',
-    'h',
-  ]
-  // const arr2 = [
-  //   {
-  //     name: 'a',
-  //   },
-  //   {
-  //     name: 'b',
-  //   },
-  //   {
-  //     name: 'c',
-  //   },
-  //   {
-  //     name: 'd',
-  //   },
-  //   {
-  //     name: 'e',
-  //   },
-  //   {
-  //     name: 'f',
-  //   },
-  //   {
-  //     name: 'g',
-  //   },
-  //   {
-  //     name: 'h',
-  //   },
-  // ]
-  const scrollEl = window
-  // body为滚动元素
-  // const scrollEl = document.querySelector('body')
+  const elActive = function (id) {
+    const el = queryElement(`[data-id=${id}]`)
+
+    addClass(el, 'active')
+    getSiblings(el).forEach(item => {
+      removeClass(item, 'active')
+    })
+  }
+
+
+  const arr1 = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',]
+
   const scrollView = initScrollView({
     dataList: arr1,
-    // valueKey: 'name',
-    attrName: "id",
-    callback: function (e) {
-      const el = document.querySelector(`[data-id=${e.value}]`)
-      addClass(el, 'active')
-      siblings(el).forEach(item => {
-        removeClass(item, 'active')
-      })
-    },
+    elAttrName: 'id',
+    offsetTop: 100,
+    // container: window,
+    callback({index, currentEl, data}) {
+      console.log('当前楼层:', index);
+      elActive(data)
+    }
+  });
+
+  // 点击目录滚动到对应位置
+  const els = queryElement('.dir > div')
+  els.forEach(item => {
+    item.onclick = function (e) {
+      const id = this.getAttribute('data-id')
+      const index = arr1.findIndex(item => item === id)
+      scrollView.scrollTo(index)
+    }
   })
-  scrollEl.addEventListener('scroll', scrollView.handlerScroll.bind(scrollView))
 </script>
 </body>
 </html>
@@ -283,10 +264,11 @@
   - {string} [options.elAttrName='data-name'] - 属性名
   - {Function} [options.callback=()=>{}] - 回调函数
   - {number} [options.offsetTop=0] - 自定义偏移量
+  - {Window|Element|string} [options.container=window] - 容器元素，默认为window
 
 - 返回值：
 
-  {ScrollView} 返回ScrollView实例对象
+  {ScrollView} 返回 ScrollView 实例对象
 
 - 示例：
 

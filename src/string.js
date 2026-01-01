@@ -331,6 +331,7 @@ const DEFAULT_UNITS = [
   '$', '¥',
   'Pa', 'atm', '℃', 'A'
 ];
+
 /**
  * 判断字符串是否为"数字+单位"格式
  * 支持常见的CSS单位、度量单位等，可通过自定义单位列表扩展
@@ -338,21 +339,37 @@ const DEFAULT_UNITS = [
  * @param {Array<string>} [customUnits=[]] - 自定义单位列表
  * @returns {boolean} 是否为数字加单位格式
  */
-export const hasUnit = function (str, customUnits = []) {
-  // 处理空值和非字符串情况
-  if (str == null || typeof str !== 'string') {
+/**
+ * 判断字符串是否为 "数字 + 单位" 格式
+ * 支持常见 CSS 单位及自定义单位
+ *
+ * @param {unknown} value - 待检测的值
+ * @param {string[]} [customUnits=[]] - 自定义单位列表
+ * @returns {boolean} 是否为数字加单位格式
+ */
+export const hasUnit = function (value, customUnits = []) {
+  if (typeof value !== 'string') {
     return false;
   }
 
-  // 合并默认单位和自定义单位
-  const allUnits = [...new Set([...DEFAULT_UNITS, ...customUnits])];
+  // 过滤非法单位并转义正则特殊字符
+  const units = [...DEFAULT_UNITS, ...customUnits]
+      .filter(u => typeof u === 'string' && u)
+      .map(u => u.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
 
-  // 构建正则表达式
-  const unitsPattern = allUnits.join('|');
-  const unitPattern = new RegExp(`^-?(?:\\d+(?:\\.\\d+)?|\\.\\d+)(${unitsPattern})$`, 'i');
-  const numberPattern = /^-?(?:\d+(?:\.\d+)?|\.\d+)$/;
+  if (units.length === 0) {
+    return false;
+  }
 
-  return unitPattern.test(str) && !numberPattern.test(str);
+  const unitsPattern = units.join('|');
+
+  // 数字 + 单位（支持整数、小数、负数）
+  const pattern = new RegExp(
+      `^-?(?:\\d+(?:\\.\\d+)?|\\.\\d+)(?:${unitsPattern})$`,
+      'i'
+  );
+
+  return pattern.test(value);
 };
 
 /**

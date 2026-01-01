@@ -1,5 +1,12 @@
 # 更新日志
 
+## 2.0.0-beta.2 (2026-1-1)
+
+### Features
+
+* initScrollView options添加 container 默认 window
+* initScrollView 返回 ScrollView 实例增加  scrollTo(index:number, smooth:boolean)
+
 ## 2.0.0-beta.1 (2025-8-12)
 
 ### CI

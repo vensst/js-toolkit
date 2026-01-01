@@ -139,14 +139,7 @@
   } from "../../lib/index.esm.js";
 
 
-  // 点击目录滚动到对应位置
-  const els = queryElement('.dir > div')
-  els.forEach(item => {
-    item.onclick = function (e) {
-      const id = this.getAttribute('data-id')
-      scrollIntoView(`#${id}`)
-    }
-  })
+
 
   const btn = queryElement('#back')
   btn.onclick = function () {
@@ -158,24 +151,38 @@
     // console.log('--getScrollPosition--', getScrollPosition('body'),)
   }
 
+  const elActive = function (id) {
+    const el = queryElement(`[data-id=${id}]`)
+
+    addClass(el, 'active')
+    getSiblings(el).forEach(item => {
+      removeClass(item, 'active')
+    })
+  }
+
+
   const arr1 = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',]
-  const scrollEl = window
+
   const scrollView = initScrollView({
     dataList: arr1,
-    // attrName: 'name',
-    elAttrName: "id",
-    offsetTop: 100 ,
-    callback: function (e) {
-      const el = queryElement(`[data-id=${e.value}]`)
-      addClass(el, 'active')
-      getSiblings(el).forEach(item => {
-        removeClass(item, 'active')
-      })
-    },
+    elAttrName: 'id',
+    offsetTop: 100,
+    // container: window,
+    callback({index, currentEl, data}) {
+      console.log('当前楼层:', index);
+      elActive(data)
+    }
+  });
+
+  // 点击目录滚动到对应位置
+  const els = queryElement('.dir > div')
+  els.forEach(item => {
+    item.onclick = function (e) {
+      const id = this.getAttribute('data-id')
+      const index = arr1.findIndex(item => item === id)
+      scrollView.scrollTo(index)
+    }
   })
-  const onScroll =  scrollView.handlerScroll.bind(scrollView)
-  // onScroll({target:scrollEl})
-  scrollEl.addEventListener('scroll',onScroll)
 </script>
 </body>
 </html>

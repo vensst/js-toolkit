@@ -106,87 +106,133 @@ export const scrollToTop = function (el = window, options = {}) {
   }
 };
 
+/**
+ * 滚动视图监听类 - 监听滚动并同步导航状态
+ */
 class ScrollView {
   constructor(options = {}) {
     const {
       dataList = [],
       attrName = '',
-      elAttrName = "data-name",
+      elAttrName = 'data-name',
+      offsetTop = 0,
       callback = () => {},
-      offsetTop = 0
+      container = window
     } = options;
 
-    this.dataList = Array.isArray(dataList) ? dataList : [];
-    this.attrName = typeof attrName === 'string' ? attrName : '';
-    this.elAttrName = typeof elAttrName === 'string' ? elAttrName : 'data-name';
-    this.offsetTop = Number(offsetTop) || 0;
-    this.callback = typeof callback === 'function' ? callback : () => {};
+    this.dataList = dataList;
+    this.attrName = attrName;
+    this.elAttrName = elAttrName;
+    this.offsetTop = offsetTop;
+    this.callback = callback;
+    this.container = container;
 
-    // 缓存 DOM 元素
-    this.elementMap = new Map();
+    this.elements = [];
+    this.activeIndex = -1;
+    this.ticking = false;
+
+    this._init();
+  }
+
+  /* =============== 初始化 =============== */
+
+  _init() {
     this._cacheElements();
+    this._bind();
+    this._sync();
   }
 
   _cacheElements() {
-    this.dataList.forEach((item, index) => {
-      const selectorValue = this.attrName ? item[this.attrName] : item;
-      if (selectorValue == null) return;
+    this.elements = this.dataList
+        .map(item => {
+          const value = this.attrName ? item[this.attrName] : item;
+          return document.querySelector(`[${this.elAttrName}="${value}"]`);
+        })
+        .filter(Boolean);
+  }
 
-      const element = document.querySelector(`[${this.elAttrName}="${selectorValue}"]`);
-      if (element) {
-        this.elementMap.set(index, element);
+  /* =============== 滚动监听 =============== */
+
+  _bind() {
+    const target = this.container === window
+        ? window
+        : this.container;
+
+    target.addEventListener('scroll', this._onScroll, { passive: true });
+  }
+
+  _onScroll = () => {
+    if (this.ticking) return;
+
+    this.ticking = true;
+    requestAnimationFrame(() => {
+      this._sync();
+      this.ticking = false;
+    });
+  };
+
+  /* =============== 核心逻辑（不可能跳） =============== */
+
+  _sync() {
+    const scrollTop = this._getScrollTop();
+    let index = 0;
+
+    for (let i = 0; i < this.elements.length; i++) {
+      const elTop = this.elements[i].offsetTop;
+      if (scrollTop + this.offsetTop >= elTop) {
+        index = i;
+      } else {
+        break;
       }
+    }
+
+    if (index !== this.activeIndex) {
+      this.activeIndex = index;
+      this.callback({
+        index,
+        currentEl: this.elements[index],
+        data: this.dataList[index]
+      });
+    }
+  }
+
+  _getScrollTop() {
+    if (this.container === window) {
+      return window.pageYOffset ||
+          document.documentElement.scrollTop ||
+          document.body.scrollTop ||
+          0;
+    }
+    return this.container.scrollTop;
+  }
+
+  /* =============== 点击导航 =============== */
+
+  /**
+   * 滚动到指定索引位置
+   * @param {number} index - 目标元素索引
+   * @param {boolean} [smooth=true] - 是否平滑滚动，默认为 true
+   * @returns {void}
+   */
+  scrollTo(index, smooth = true) {
+    const el = this.elements[index];
+    if (!el) return;
+
+    const top = el.offsetTop - this.offsetTop;
+    const target = this.container === window ? window : this.container;
+
+    target.scrollTo({
+      top,
+      behavior: smooth ? 'smooth' : 'auto'
     });
   }
 
-  /**
-   * 获取滚动高度
-   * @param {Event} e - 滚动事件对象
-   * @returns {number}
-   */
-  _getScrollTop(e) {
-    const target = e.target;
-    if (target === document || target === document.body) {
-      return window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-    }
-    return target.scrollTop || 0;
-  }
+  destroy() {
+    const target = this.container === window
+        ? window
+        : this.container;
 
-  /**
-   * 处理滚动事件
-   * @param {Event} e - 滚动事件对象
-   * @returns {void}
-   */
-  handlerScroll(e) {
-    const y = this._getScrollTop(e);
-    let currentIndex = -1;
-    let currentEl = null;
-
-    for (let i = 0; i < this.dataList.length; i++) {
-      const itemEl = this.elementMap.get(i);
-      if (!itemEl) continue;
-
-      if (y >= (itemEl.offsetTop - this.offsetTop)) {
-        currentIndex = i;
-        currentEl = itemEl;
-      }
-    }
-
-    if (currentIndex !== -1 && currentEl) {
-      try {
-        this.callback({
-          scrollEl: e.target,
-          currentEl: currentEl,
-          attrName: this.attrName,
-          elAttrName: this.elAttrName,
-          dataList: this.dataList,
-          index: currentIndex,
-          value: this.attrName ? this.dataList[currentIndex][this.attrName] : this.dataList[currentIndex]
-        });
-      } catch (err) {
-        console.error('[ScrollView] Callback execution error:', err);
-      }
-    }
+    target.removeEventListener('scroll', this._onScroll);
   }
 }
 
@@ -198,7 +244,8 @@ class ScrollView {
  * @param {string} [options.elAttrName='data-name'] - 属性名
  * @param {Function} [options.callback=()=>{}] - 回调函数
  * @param {number} [options.offsetTop=0] - 自定义偏移量
- * @returns {ScrollView} 返回ScrollView实例对象
+ * @param {Window|Element|string} [options.container=window] - 容器元素，默认为window
+ * @returns {ScrollView} 返回 ScrollView 实例对象
  * @version 1.1.0-beta.11
  */
 export const initScrollView = function (options = {}) {
